@@ -1,7 +1,7 @@
-import React from 'react';
-import {Component} from 'react';
-import {Navbar, NavbarBrand} from 'reactstrap';
-import Logo from '../../Assets/Img/ecit-logo.png';
+import React from 'react'
+import {Component} from 'react'
+import {Navbar, NavbarBrand, NavbarToggler} from 'reactstrap'
+import Logo from '../../assets/Img/ecit-logo.png'
 import './Header.css'
 
 class Header extends Component {
@@ -11,11 +11,10 @@ class Header extends Component {
                 <Navbar color="dark" light expand="md">
                     <NavbarBrand><img src={Logo} alt="ECIT Dokumentpartner Logo"></img></NavbarBrand>
                 </Navbar>
-               <h1>Hello World</h1>
             </div>
             
-        );
+        )
     }
 }
 
-export default Header;
+export default Header
