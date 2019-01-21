@@ -1,7 +1,7 @@
 import React from 'react'
 import {Component} from 'react'
-import {Navbar, NavbarBrand, NavbarToggler} from 'reactstrap'
-import Logo from '../../assets/Img/ecit-logo.png'
+import {Navbar, NavbarBrand} from 'reactstrap'
+import Logo from '../../Assets/Img/ecit-logo.png'
 import './Header.css'
 
 class Header extends Component {
