@@ -6,3 +6,7 @@
     border-radius: 0;
     width: 100%;
 }
+
+.navbar .menu p {
+    color:white;
+}

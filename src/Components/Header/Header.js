@@ -1,7 +1,7 @@
 import React from 'react'
 import { Component } from 'react'
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap'
-import Logo from '../../Assets/Img/ecit-logo.png'
+import Logo from '../../assets/Img/ecit-logo.png'
 import './Header.css'
 import Menu from './../Menu/Menu'
 
