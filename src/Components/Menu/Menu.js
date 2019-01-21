@@ -1,17 +1,9 @@
 import React from 'react'
 import {Component} from 'react'
-import {Nav,NavItem,NavLink} from 'reactstrap'
-import { Link , Router} from "react-router-dom"
+import {NavItem} from 'reactstrap'
+import { Link } from "react-router-dom"
 
 class Menu extends Component {
-
-    constructor(props) {
-        super(props)
-    }
-
-    componentDidMount() {
-
-    }
 
     render() {
         return (
