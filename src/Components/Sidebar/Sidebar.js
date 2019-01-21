@@ -11,7 +11,7 @@ class Sidebar extends Component {
                     <Col xs="12" sm="3" xl="1" className="sidebar">
                         <Nav vertical>
                             <p>Jan Helgsen</p>
-                                <NavLink to="/">Link</NavLink> 
+                                <NavLink href="#">Link</NavLink> 
                                 <NavLink href="#">Link</NavLink> 
                                 <NavLink href="#">Link</NavLink> 
                             <p>Administrasjon</p>
