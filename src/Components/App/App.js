@@ -3,11 +3,11 @@ import {Component} from 'react'
 import { BrowserRouter, Route } from "react-router-dom"
 import Header from '../Header/Header'
 import Sidebar from '../Sidebar/Sidebar'
-import MainContent from '../MainContent/MainContent'
+import MainContent from '../Wrappers/MainContent/MainContent'
 
-import Home from "../Home/Home"
-import Clients from "../Clients/Clients"
-import Favourites from "../Favourites/Favourites"
+import Home from "../Pages/Home/Home"
+import Clients from "../Pages/Clients/Clients"
+import Favourites from "../Pages/Favourites/Favourites"
 
 import './App.css'
 

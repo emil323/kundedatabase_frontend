@@ -1,7 +1,6 @@
 import React from 'react'
 import { Collapse, Nav, Navbar, NavbarBrand} from 'reactstrap'
 import Hamburger from 'react-hamburger-menu'
-import Logo from '../../assets/Img/ecit-logo.png'
 import './Header.css'
 import Menu from './../Menu/Menu'
 
@@ -34,7 +33,7 @@ export default class Header extends React.Component {
                 animationDuration={0.3}
               />
             </div>
-            <NavbarBrand href="/" className="mx-auto"><img alt="Logo" src={Logo} /></NavbarBrand>
+            <NavbarBrand href="/" className="mx-auto"><img alt="Logo" src="img/ecit-logo.png" /></NavbarBrand>
           
             <Collapse isOpen={this.state.open} navbar className="hidden-lg">
               <Nav navbar className="hidden-lg hidden-md hidden-sm">
