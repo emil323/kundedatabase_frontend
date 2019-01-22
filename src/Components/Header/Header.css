@@ -1,0 +1,13 @@
+.navbar-brand img{
+    height:1.3em;
+}
+
+
+.navbar {
+    border-radius: 0;
+    width: 100%;
+}
+
+.navbar .menu p {
+    color:white;
+}
