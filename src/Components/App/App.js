@@ -3,6 +3,7 @@ import {Component} from 'react'
 import { BrowserRouter, Route } from "react-router-dom"
 import Header from '../Header/Header'
 import Sidebar from '../Sidebar/Sidebar'
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
 import MainContent from '../Wrappers/MainContent/MainContent'
 
 import Home from "../Pages/Home/Home"
@@ -20,6 +21,7 @@ class App extends Component {
                     <Header />
                     <Sidebar />
                     <MainContent>
+                    <Breadcrumbs />
                         <Route exact path="/" component={Home} />
                         <Route path="/favourites" component={Favourites} />
                         <Route path="/clients" component={Clients}/>
