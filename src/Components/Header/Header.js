@@ -5,6 +5,7 @@ import './Header.css'
 import Menu from './../Menu/Menu'
 
 export default class Header extends React.Component {
+
     constructor(props) {
       super(props);
   
@@ -42,6 +43,6 @@ export default class Header extends React.Component {
             </Collapse>
           </Navbar>
         </div>
-      );
+      )
     }
 }

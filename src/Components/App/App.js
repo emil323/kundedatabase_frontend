@@ -10,10 +10,10 @@ import Home from "../Pages/Home/Home"
 import Clients from "../Pages/Clients/Clients"
 import Favourites from "../Pages/Favourites/Favourites"
 
+
 import './App.css'
 
 class App extends Component {
- 
       render () {
         return (
             <BrowserRouter>
@@ -32,7 +32,7 @@ class App extends Component {
       }
 }
     
-export default App;
+export default App
 
 
 
