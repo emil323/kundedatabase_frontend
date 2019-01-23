@@ -9,17 +9,17 @@ import Home from "../Pages/Home/Home"
 import Clients from "../Pages/Clients/Clients"
 import Favourites from "../Pages/Favourites/Favourites"
 
+
 import './App.css'
 
 class App extends Component {
- 
       render () {
         return (
             <BrowserRouter>
                 <div>
                     <Header />
                     <Sidebar />
-                    <MainContent>
+                    <MainContent>     
                         <Route exact path="/" component={Home} />
                         <Route path="/favourites" component={Favourites} />
                         <Route path="/clients" component={Clients}/>
@@ -30,7 +30,7 @@ class App extends Component {
       }
 }
     
-export default App;
+export default App
 
 
 
