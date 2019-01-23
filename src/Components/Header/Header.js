@@ -23,7 +23,7 @@ export default class Header extends React.Component {
       return (
         <div>
           <Navbar color="dark" dark expand="md">
-            <div class="hidden-lg hidden-md hidden-sm">
+            <div className="hidden-lg hidden-md hidden-sm">
               <Hamburger
                 isOpen={this.state.open}
                 menuClicked={this.toggleHamburger}
