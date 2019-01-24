@@ -2,6 +2,7 @@ import React from 'react'
 import {Component} from 'react'
 import api from '../../../API/API'
 import ClientsTable from './ClientsTable'
+import AddClient from "./AddClient"
 import "./Clients.css"
 
 class Clients extends Component {
@@ -28,9 +29,28 @@ class Clients extends Component {
         })
     }
 
+    addClient = (client) => {
+        let id;
+        if(this.state.clients.length > 0){
+            id = this.state.clients[this.state.clients.length - 1].id + 1;
+        }else{
+            id = 0;
+        }
+
+        client.id = id;
+        let clients = [...this.state.clients, client];
+        this.setState({
+          clients: clients
+        })
+      }
+
     render() {
+   
         return (
-            <ClientsTable clients={this.state.clients} deleteClient={this.deleteClient}/>
+            <div className="todo-app container">
+                <ClientsTable clients={this.state.clients} deleteClient={this.deleteClient}/>
+                <AddClient addClient={this.addClient}/>
+            </div>
         )
     }
 }

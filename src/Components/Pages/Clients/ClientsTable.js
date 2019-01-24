@@ -3,8 +3,12 @@ import { Table } from 'reactstrap';
 
  const ClientsTable = ({clients, deleteClient}) => {
 
+        const filterClients = clients.filter((client) => {
+            return client.firmanavn.indexOf(client.firmanavn) !== -1
+        })
+
         const clientList = clients.length ? (
-            clients.map(client => {
+            filterClients.map(client => {
                 return (
                         <tbody>
                             <tr>
@@ -33,6 +37,7 @@ import { Table } from 'reactstrap';
                 </tr>
             </thead>
             {clientList}
+            <input></input>
             </Table>
         )
 }
