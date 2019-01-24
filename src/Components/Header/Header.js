@@ -1,42 +1,48 @@
 import React from 'react'
-import { Component } from 'react'
-import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap'
-import Logo from '../../Assets/Img/ecit-logo.png'
+import { Collapse, Nav, Navbar, NavbarBrand} from 'reactstrap'
+import Hamburger from 'react-hamburger-menu'
 import './Header.css'
+import Menu from './../Menu/Menu'
 
-export default class Example extends React.Component {
+export default class Header extends React.Component {
+
     constructor(props) {
       super(props);
   
-      this.toggleNavbar = this.toggleNavbar.bind(this);
+      this.toggleHamburger = this.toggleHamburger.bind(this);
       this.state = {
-        collapsed: true
+        open: false
       };
     }
   
-    toggleNavbar() {
+    toggleHamburger() {
       this.setState({
-        collapsed: !this.state.collapsed
-      });
+        open: !this.state.open
+      })
     }
     render() {
       return (
         <div>
           <Navbar color="dark" dark expand="md">
-            <NavbarBrand href="/" className="mr-auto"><img src={Logo} /></NavbarBrand>
-            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-            <Collapse isOpen={!this.state.collapsed} navbar>
-              <Nav navbar>
-                <NavItem>
-                  <NavLink href="/">Placeholder</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/">Placeholder</NavLink>
-                </NavItem>
+            <div className="hidden-lg hidden-md hidden-sm">
+              <Hamburger
+                isOpen={this.state.open}
+                menuClicked={this.toggleHamburger}
+                width={30}
+                height={20}
+                strokeWidth={3}
+                animationDuration={0.3}
+              />
+            </div>
+            <NavbarBrand href="/" className="mx-auto"><img alt="Logo" src="img/ecit-logo.png" /></NavbarBrand>
+          
+            <Collapse isOpen={this.state.open} navbar className="hidden-lg">
+              <Nav navbar className="hidden-lg hidden-md hidden-sm">
+                <Menu/>
               </Nav>
             </Collapse>
           </Navbar>
         </div>
-      );
+      )
     }
 }

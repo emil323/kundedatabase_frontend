@@ -10,7 +10,11 @@
     z-index: 999;
 }
 
-.main {
-    padding-left:2em;
-
+.sidebar .menu p {
+    color:black;
 }
+
+.sidebar .menu a {
+    /* Farge til lenker */
+}
+
