@@ -5,7 +5,7 @@ import './Breadcrumbs.css'
 export default class Breadcrumbs extends React.Component {
     render() {
         return (
-            <div>
+            <div className="px-4">
                 <Breadcrumb tag="nav" listTag="div">
                 <BreadcrumbItem tag="a" href="#">Placeholder</BreadcrumbItem>
                 <BreadcrumbItem tag="span" active>Hjem</BreadcrumbItem>

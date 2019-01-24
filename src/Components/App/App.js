@@ -21,7 +21,7 @@ class App extends Component {
                     <Header />
                     <Sidebar />
                     <MainContent>
-                    <Breadcrumbs />
+                        <Breadcrumbs />
                         <Route exact path="/" component={Home} />
                         <Route path="/favourites" component={Favourites} />
                         <Route path="/clients" component={Clients}/>
