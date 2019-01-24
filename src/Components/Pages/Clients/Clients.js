@@ -47,7 +47,7 @@ class Clients extends Component {
     render() {
    
         return (
-            <div className="todo-app container">
+            <div className="container">
                 <ClientsTable clients={this.state.clients} deleteClient={this.deleteClient}/>
                 <AddClient addClient={this.addClient}/>
             </div>
