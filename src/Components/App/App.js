@@ -9,6 +9,7 @@ import MainContent from '../Wrappers/MainContent/MainContent'
 import Home from "../Pages/Home/Home"
 import Clients from "../Pages/Clients/Clients"
 import Favourites from "../Pages/Favourites/Favourites"
+import NewFile from "../Pages/NewFile/NewFile"
 
 
 import './App.css'
@@ -25,6 +26,7 @@ class App extends Component {
                         <Route exact path="/" component={Home} />
                         <Route path="/favourites" component={Favourites} />
                         <Route path="/clients" component={Clients}/>
+                        <Route path="/newfile" component={NewFile}/>
                     </MainContent>
                 </div>
             </BrowserRouter>
