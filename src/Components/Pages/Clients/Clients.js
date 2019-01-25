@@ -79,6 +79,7 @@ class Clients extends Component {
                 }
                 </Table>
                 <AddClient addClient={this.addClient}/>
+                <label>Søk etter kunde:</label>
                 <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)}/>
             </div>
         )
