@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 
 
-class AddClient extends Component {
+class AddFile extends Component {
     constructor(){
         super();
         this.state = {
-            firmanavn: "",
-            kontaktperson: "",
+            tittel: "",
+            type: "",
             sistendret: ""
         }
 
@@ -24,11 +24,11 @@ class AddClient extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.addClient(this.state)
+        this.props.addFile(this.state)
         this.setState({
-         firmanavn: '',
-         kontaktperson: '',
-         sistendret: ''
+            tittel: '',
+            type: '',
+            sistendret: ''
         })
     }
 
@@ -36,15 +36,15 @@ class AddClient extends Component {
         return (
         <div>
             <form onSubmit={this.handleSubmit}>
-                <label>Legg til ny kunde:</label>
-                <input type="text" name="firmanavn" onChange={this.handleChange} value={this.state.firmanavn}/>
-                <input type="text" name="kontaktperson" onChange={this.handleChange} value={this.state.kontaktperson}/>
+                <label>Legg til ny fil:</label>
+                <input type="text" name="tittel" onChange={this.handleChange} value={this.state.tittel}/>
+                <input type="text" name="type" onChange={this.handleChange} value={this.state.type}/>
                 <input type="text" name="sistendret" onChange={this.handleChange} value={this.state.sistendret}/>
-                <button onClick={this.handleSubmit}>Legg til kunde:</button>
+                <button onClick={this.handleSubmit}>Legg til Fil:</button>
             </form>
         </div>
         )
     }
 }
 
-export default AddClient
+export default AddFile

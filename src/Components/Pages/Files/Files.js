@@ -1,23 +1,22 @@
 import React from 'react'
 import {Component} from 'react'
 import api from '../../../API/API'
-import ClientsTable from './ClientsTable'
-import AddClient from "./AddClient"
-import "./Clients.css"
+import FilesTable from './FilesTable'
+import AddFile from "./AddFile"
+import "./Files.css"
 import { Table } from 'reactstrap';
 
-class Clients extends Component {
+class Files extends Component {
     constructor(props){
         super(props);
         this.state = {
-            clients:[],
             files:[],
             search: ""
         }
     }
    
     componentDidMount() {
-        api.clients().list().then(res => {
+        api.files().list().then(res => {
             console.log(res)
             this.setState(res.data)
         }).catch(function(error) {
@@ -25,27 +24,27 @@ class Clients extends Component {
         })
     }
 
-    deleteClient = (id) => {
-        const clients = this.state.clients.filter(client => {
-            return client.id !== id
+    deleteFile = (id) => {
+        const files = this.state.files.filter(file => {
+            return file.id !== id
         })
         this.setState({
-            clients: clients
+            files: files
         })
     }
 
-    addClient = (client) => {
+    addFile = (file) => {
         let id;
-        if(this.state.clients.length > 0){
-            id = this.state.clients[this.state.clients.length - 1].id + 1;
+        if(this.state.files.length > 0){
+            id = this.state.files[this.state.files.length - 1].id + 1;
         }else{
             id = 0;
         }
 
-        client.id = id;
-        let clients = [...this.state.clients, client];
+        file.id = id;
+        let files = [...this.state.files, file];
         this.setState({
-          clients: clients
+            files: files
         })
     }
 
@@ -58,8 +57,8 @@ class Clients extends Component {
     
 
     render() {
-        let filteredClients = this.state.clients.filter(client => {
-            return client.firmanavn.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+        let filteredFiles = this.state.files.filter(file => {
+            return file.tittel.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
         })
         return (
             <div className="container">
@@ -67,24 +66,24 @@ class Clients extends Component {
             <thead className="thead-dark">
                         <tr>
                             <th>#</th>
-                            <th>Firmanavn</th>
-                            <th>Kontaktperson</th>
+                            <th>Tittel</th>
+                            <th>Type</th>
                             <th>Sist endret</th>
                             <th>Slett</th>
                         </tr>
                     </thead>
                 {
-                    filteredClients.map(client => {
-                        return  <ClientsTable clients={client} deleteClient={this.deleteClient} key={client.id}/>
+                    filteredFiles.map(file => {
+                        return  <FilesTable files={file} deleteFile={this.deleteFile} key={file.id}/>
                     })
                 }
                 </Table>
-                <AddClient addClient={this.addClient}/>
-                <label>Søk etter kunde:</label>
+                <AddFile addFile={this.addFile}/>
+                <label>Søk etter fil:</label>
                 <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)}/>
             </div>
         )
     }
 }
 
-export default Clients
+export default Files

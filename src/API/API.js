@@ -22,6 +22,13 @@ export default  {
             }
         }
     },
+    files: () => {
+        return {
+            list() {
+                return axios().get("/files")
+            }
+        }
+    },
     document: (documentID) => {
         return {
             get() {
