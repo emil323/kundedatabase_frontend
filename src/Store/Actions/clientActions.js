@@ -8,9 +8,6 @@ export const deleteClient = (id) => {
 export const addClient = (client) => {
     return {
         type: 'ADD_CLIENT',
-        id: client.id,
-        firmanavn: client.firmanavn,
-        kontaktperson: client.kontaktperson,
-        sistendret: client.sistendret
+        client: client
     }
 }

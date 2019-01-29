@@ -29,7 +29,7 @@ class Clients extends Component {
         }
 
         client.id = id;
-        let clients = [...this.props.clients, client];
+  
         // Usikker her...
         this.props.addClient(client)
     }
@@ -75,7 +75,7 @@ class Clients extends Component {
 // Calls on a clientsReducer that is set to the state of the component
 const mapStateToProps = (state) => {
     return {
-        clients: state.clientsReducer.clients,
+        clients: state.clientsReducer.clients
     }
 }
 
