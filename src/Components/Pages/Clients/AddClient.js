@@ -1,7 +1,10 @@
 import React, {Component} from "react";
 
 
+
 class AddClient extends Component {
+    
+    
     constructor(){
         super();
         this.state = {
@@ -12,8 +15,6 @@ class AddClient extends Component {
 
         this.handleChange = this.handleChange.bind(this);
     }
-  
- 
 
     handleChange = (e) => {
         console.log([e.target.value]);
@@ -40,11 +41,12 @@ class AddClient extends Component {
                 <input type="text" name="firmanavn" onChange={this.handleChange} value={this.state.firmanavn}/>
                 <input type="text" name="kontaktperson" onChange={this.handleChange} value={this.state.kontaktperson}/>
                 <input type="text" name="sistendret" onChange={this.handleChange} value={this.state.sistendret}/>
-                <button onClick={this.handleSubmit}>Legg til kunde:</button>
+                <button onClick={this.handleSubmit}>Legg til kunde</button>
             </form>
         </div>
         )
     }
 }
+
 
 export default AddClient

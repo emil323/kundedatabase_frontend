@@ -6,48 +6,34 @@ import AddClient from "./AddClient"
 import "./Clients.css"
 import { Table } from 'reactstrap';
 
+// Import connect, which lets us export data to the reducer
+import { connect } from "react-redux";
+import { deleteClient, addClient } from '../../../Store/Actions/clientActions'
+
 class Clients extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            clients:[],
-            files:[],
-            search: ""
-        }
+    state = {
+        search: ""
     }
-   
-    componentDidMount() {
-        api.clients().list().then(res => {
-            console.log(res)
-            this.setState(res.data)
-        }).catch(function(error) {
-            console.log(error)
-        })
-    }
+    
 
     deleteClient = (id) => {
-        const clients = this.state.clients.filter(client => {
-            return client.id !== id
-        })
-        this.setState({
-            clients: clients
-        })
+        this.props.deleteClient(id)
     }
 
     addClient = (client) => {
         let id;
-        if(this.state.clients.length > 0){
-            id = this.state.clients[this.state.clients.length - 1].id + 1;
+        if(this.props.clients.length > 0){
+            id = this.props.clients[this.props.clients.length - 1].id + 1;
         }else{
             id = 0;
         }
 
         client.id = id;
-        let clients = [...this.state.clients, client];
-        this.setState({
-          clients: clients
-        })
+        let clients = [...this.props.clients, client];
+        // Usikker her...
+        this.props.addClient(client)
     }
+
 
     updateSearch(e){
         this.setState({
@@ -55,10 +41,9 @@ class Clients extends Component {
         })
     }
 
-    
 
     render() {
-        let filteredClients = this.state.clients.filter(client => {
+        let filteredClients = this.props.clients.filter(client => {
             return client.firmanavn.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
         })
         return (
@@ -87,4 +72,19 @@ class Clients extends Component {
     }
 }
 
-export default Clients
+// Calls on a clientsReducer that is set to the state of the component
+const mapStateToProps = (state) => {
+    return {
+        clients: state.clientsReducer.clients,
+    }
+}
+
+// Create a dispatch which sends information to the reducer. In this case a client is being deleted
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteClient: (id) => { dispatch(deleteClient(id))},
+        addClient: (client) => { dispatch(addClient(client))}
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Clients)
