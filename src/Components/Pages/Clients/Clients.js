@@ -72,7 +72,7 @@ class Clients extends Component {
     }
 }
 
-// Calls on a clientsReducer that is set to the state of the component
+// Calls on a clientsReducer that bring props to the component
 const mapStateToProps = (state) => {
     return {
         clients: state.clientsReducer.clients
