@@ -1,7 +1,13 @@
 import React, {Component} from "react";
+import { connect } from "react-redux";
+import "./Files.css"
+import { addFile, fetchFilesData} from '../../../Store/Actions/filesActions'
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 
 class AddFile extends Component {
+
+
     constructor(){
         super();
         this.state = {
@@ -33,18 +39,40 @@ class AddFile extends Component {
     }
 
     render(){
+        console.log(this.props)
         return (
         <div>
-            <form onSubmit={this.handleSubmit}>
-                <label>Legg til ny fil:</label>
-                <input type="text" name="tittel" onChange={this.handleChange} value={this.state.tittel}/>
-                <input type="text" name="type" onChange={this.handleChange} value={this.state.type}/>
-                <input type="text" name="sistendret" onChange={this.handleChange} value={this.state.sistendret}/>
-                <button onClick={this.handleSubmit}>Legg til Fil:</button>
-            </form>
+            <Form onSubmit={this.handleSubmit}>
+                <Label for="tittel">Tittel:</Label>
+                <Input type="text" name="tittel" id="tittel" onChange={this.handleChange} value={this.state.tittel}/>
+                <Label for="type">Type:</Label>
+                <Input type="text" name="type" id="type" onChange={this.handleChange} value={this.state.type}/>
+                <Label for="sistendret">Sist Endret:</Label>
+                <Input type="text" name="sistendret" id="sistendret" onChange={this.handleChange} value={this.state.sistendret}/>
+                <br></br>
+                <Button color="primary" onClick={this.handleSubmit}>Legg til Fil:</Button>
+            </Form>
         </div>
         )
     }
+        //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
+        componentDidMount() {
+            this.props.fetchFilesData()
+        }
 }
 
-export default AddFile
+const mapStateToProps = (state) => {
+    return {
+        files: state.filesReducer.files
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return { 
+        addFile: (file) => { dispatch(addFile(file))},
+        fetchFilesData: () =>{ dispatch(fetchFilesData())}
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddFile)

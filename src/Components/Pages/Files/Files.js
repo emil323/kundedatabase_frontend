@@ -6,59 +6,19 @@ import AddFile from "./AddFile"
 import "./Files.css"
 import { Table } from 'reactstrap';
 
+// Import connect, which lets us export data to the reducer
+import { connect } from "react-redux";
+import { deleteFile, fetchFilesData, updateSearch} from '../../../Store/Actions/filesActions'
+
 class Files extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            files:[],
-            search: ""
-        }
-    }
-   
-    componentDidMount() {
-        api.files().list().then(res => {
-            console.log(res)
-            this.setState(res.data)
-        }).catch(function(error) {
-            console.log(error)
-        })
-    }
 
-    deleteFile = (id) => {
-        const files = this.state.files.filter(file => {
-            return file.id !== id
-        })
-        this.setState({
-            files: files
-        })
+    goToAddFile = () => {
+        this.props.history.push("/addfile")
     }
-
-    addFile = (file) => {
-        let id;
-        if(this.state.files.length > 0){
-            id = this.state.files[this.state.files.length - 1].id + 1;
-        }else{
-            id = 0;
-        }
-
-        file.id = id;
-        let files = [...this.state.files, file];
-        this.setState({
-            files: files
-        })
-    }
-
-    updateSearch(e){
-        this.setState({
-            search: e.target.value.substr(0,20)
-        })
-    }
-
-    
 
     render() {
-        let filteredFiles = this.state.files.filter(file => {
-            return file.tittel.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+        let filteredFiles = this.props.files.filter(file => {
+            return file.tittel.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
         })
         return (
             <div className="container">
@@ -66,24 +26,46 @@ class Files extends Component {
             <thead className="thead-dark">
                         <tr>
                             <th>#</th>
-                            <th>Tittel</th>
                             <th>Type</th>
+                            <th>Tittel</th>
                             <th>Sist endret</th>
                             <th>Slett</th>
                         </tr>
                     </thead>
                 {
                     filteredFiles.map(file => {
-                        return  <FilesTable files={file} deleteFile={this.deleteFile} key={file.id}/>
+                        return  <FilesTable files={file} deleteFile={this.props.deleteFile} key={file.id}/>
                     })
                 }
                 </Table>
-                <AddFile addFile={this.addFile}/>
                 <label>Søk etter fil:</label>
-                <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)}/>
+                <input type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this)}/>
+                <input type="button" value="Go to Add File" onClick={this.goToAddFile}/>
             </div>
         )
     }
+     //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
+     componentDidMount() {
+        this.props.fetchFilesData()
+    }
 }
 
-export default Files
+
+// Calls on a clientsReducer that bring props to the component
+const mapStateToProps = (state) => {
+    return {
+        files: state.filesReducer.files,
+        search: state.filesReducer.search
+    }
+}
+
+// Create a dispatch which sends information to the reducer. In this case a client is being deleted
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteFile: (id) => { dispatch(deleteFile(id))},
+        fetchFilesData: () =>{ dispatch(fetchFilesData())},
+        updateSearch:(search_key) => {dispatch(updateSearch(search_key))}}
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Files)

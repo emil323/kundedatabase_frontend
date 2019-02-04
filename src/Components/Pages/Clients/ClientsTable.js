@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom"
 import DropdownBtn from '../../DropdownBtn/DropdownBtn';
 
 
@@ -25,10 +26,11 @@ class ClientsTable extends React.Component {
                 <tr>
 
                     <th>{this.props.clients.id}</th>
-                    <td>{this.props.clients.name}</td>
+                    <Link to={"clients/" + this.props.clients.name}><td>{this.props.clients.name}</td></Link>
                     {/* <td><button key={this.props.clients.id} onClick={() => { this.props.deleteClient(this.props.clients.id) }}>DEL</button></td> */}
-                    <DropdownBtn options={this.state.btnOptions} />
+                    <td><DropdownBtn options={this.state.btnOptions} /></td>
                 </tr>
+          
             </tbody>
         )
     }

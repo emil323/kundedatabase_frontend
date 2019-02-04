@@ -1,15 +1,18 @@
 import React from 'react'
 import {Component} from 'react'
 import ClientsTable from './ClientsTable'
-import AddClient from "./AddClient"
 import "./Clients.css"
 import { Table } from 'reactstrap';
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
-import { deleteClient, addClient, fetchClientsData, updateSearch} from '../../../Store/Actions/clientActions'
+import { deleteClient, fetchClientsData, updateSearch} from '../../../Store/Actions/clientActions'
 
 class Clients extends Component {
+
+    goToAddClient = () => {
+        this.props.history.push("/addclient")
+    }
 
 
     render() {
@@ -24,7 +27,7 @@ class Clients extends Component {
                         <tr>
                             <th>#</th>
                             <th>Firmanavn</th>
-                            <th>Slett</th>
+                            <th></th>
                         </tr>
                     </thead>
                 {
@@ -33,9 +36,9 @@ class Clients extends Component {
                     })
                 }
                 </Table>
-                <AddClient addClient={this.props.addClient}/>
                 <label>Søk etter kunde:</label>
                 <input type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this)}/>
+                <input type="button" value="Go to Add Client" onClick={this.goToAddClient}/>
             </div>
         )
     }
@@ -59,7 +62,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteClient: (id) => { dispatch(deleteClient(id))},
-        addClient: (client) => { dispatch(addClient(client))},
         fetchClientsData: () =>{ dispatch(fetchClientsData())},
         updateSearch:(search_key) => {dispatch(updateSearch(search_key))}}
 }
