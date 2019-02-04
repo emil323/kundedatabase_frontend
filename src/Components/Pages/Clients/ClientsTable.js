@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from "react-router-dom"
 
  const ClientsTable = ({clients, deleteClient}) => {
 
@@ -7,12 +7,13 @@ import React from 'react'
         return(
             <tbody>
                 <tr>
-                    <th>{clients.id}</th>
-                    <td>{clients.firmanavn}</td>
+                    <td>{clients.id}</td>
+                    <Link to={"clients/" + clients.firmanavn}><td>{clients.firmanavn}</td></Link>
                     <td>{clients.kontaktperson}</td>
                     <td>{clients.sistendret}</td>
                     <td><button key={clients.id} onClick={() => {deleteClient(clients.id)}}>DEL</button></td>
                 </tr>
+          
             </tbody>
         )
 }

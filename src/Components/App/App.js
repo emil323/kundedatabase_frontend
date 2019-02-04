@@ -11,9 +11,12 @@ import Clients from "../Pages/Clients/Clients"
 import Favourites from "../Pages/Favourites/Favourites"
 import NewFile from "../Pages/NewFile/NewFile"
 import Files from "../Pages/Files/Files"
-
+import AddClient from '../Pages/Clients/AddClient';
+import AddFile from '../Pages/Files/AddFile';
 
 import './App.css'
+
+
 
 class App extends Component {
       render () {
@@ -28,7 +31,9 @@ class App extends Component {
                         <Route path="/favourites" component={Favourites} />
                         <Route path="/clients" component={Clients}/>
                         <Route path="/newfile" component={NewFile}/>
-                        <Route path="/filesPlaceholder" component={Files}/>
+                        <Route path="/addclient" component={AddClient}/>
+                        <Route path="/addfile" component={AddFile}/>
+                        <Route path="/files" component={Files}/>
                     </MainContent>
                 </div>
             </BrowserRouter>

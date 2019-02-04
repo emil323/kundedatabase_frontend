@@ -16,7 +16,7 @@ const clientsReducer = (state = initState, action) => {
             }
         case SEARCH_KEY:
             return {
-                ... state,
+                ...state,
                 search: action.search_key    
             }
         case ADD_CLIENT:
