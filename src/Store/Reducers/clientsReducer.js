@@ -1,3 +1,4 @@
+
 // A Reducer requires an initial state when running the application
 const initState = {
     clients: [
@@ -98,11 +99,11 @@ const initState = {
 const clientsReducer = (state = initState, action) => {
     switch(action.type){
         case 'ADD_CLIENT':
-        let clients = [...state.clients, action.client];
-        return {
-            ...state,
-            clients: clients
-        };
+            let clients = [...state.clients, action.client];
+            return {
+                ...state,
+                clients: clients
+            };
         case 'DELETE_CLIENT':
             let newClients = state.clients.filter(client => {
                 return action.id !== client.id
