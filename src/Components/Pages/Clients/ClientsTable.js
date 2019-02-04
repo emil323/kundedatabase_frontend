@@ -8,9 +8,7 @@ import React from 'react'
             <tbody>
                 <tr>
                     <th>{clients.id}</th>
-                    <td>{clients.firmanavn}</td>
-                    <td>{clients.kontaktperson}</td>
-                    <td>{clients.sistendret}</td>
+                    <td>{clients.name}</td>
                     <td><button key={clients.id} onClick={() => {deleteClient(clients.id)}}>DEL</button></td>
                 </tr>
             </tbody>

@@ -13,8 +13,9 @@ class Clients extends Component {
 
 
     render() {
+        console.log(this.props.clients)
         let filteredClients = this.props.clients.filter(client => {
-            return client.firmanavn.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
+            return client.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
         })
         return (
             <div className="container">
@@ -23,8 +24,6 @@ class Clients extends Component {
                         <tr>
                             <th>#</th>
                             <th>Firmanavn</th>
-                            <th>Kontaktperson</th>
-                            <th>Sist endret</th>
                             <th>Slett</th>
                         </tr>
                     </thead>
