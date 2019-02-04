@@ -4,12 +4,9 @@ import { runWithAdal } from 'react-adal';
 import { authContext } from './Auth/adalConfig';
 import App from './Components/App/App.js'
 import * as serviceWorker from './serviceWorker'
-import { createStore } from "redux"
-import { Provider } from "react-redux"
-import rootReducer from './Store/Reducers/rootReducer'
 
-// Create redux store using a rootReducer
-const store = createStore(rootReducer);
+import { Provider } from "react-redux"
+import store from './Store/store'
 
 //Set this to true to ignore authentication
 const DO_NOT_LOGIN = false;

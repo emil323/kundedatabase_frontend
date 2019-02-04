@@ -1,6 +1,5 @@
 import React from 'react'
 import {Component} from 'react'
-import api from '../../../API/API'
 import ClientsTable from './ClientsTable'
 import AddClient from "./AddClient"
 import "./Clients.css"
@@ -8,43 +7,14 @@ import { Table } from 'reactstrap';
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
-import { deleteClient, addClient } from '../../../Store/Actions/clientActions'
+import { deleteClient, addClient, fetchClientsData, updateSearch} from '../../../Store/Actions/clientActions'
 
 class Clients extends Component {
-    state = {
-        search: ""
-    }
-    
-
-    deleteClient = (id) => {
-        this.props.deleteClient(id)
-    }
-
-    addClient = (client) => {
-        let id;
-        if(this.props.clients.length > 0){
-            id = this.props.clients[this.props.clients.length - 1].id + 1;
-        }else{
-            id = 0;
-        }
-
-        client.id = id;
-  
-        // Usikker her...
-        this.props.addClient(client)
-    }
-
-
-    updateSearch(e){
-        this.setState({
-            search: e.target.value.substr(0,20)
-        })
-    }
 
 
     render() {
         let filteredClients = this.props.clients.filter(client => {
-            return client.firmanavn.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+            return client.firmanavn.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
         })
         return (
             <div className="container">
@@ -60,22 +30,29 @@ class Clients extends Component {
                     </thead>
                 {
                     filteredClients.map(client => {
-                        return  <ClientsTable clients={client} deleteClient={this.deleteClient} key={client.id}/>
+                        return  <ClientsTable clients={client} deleteClient={this.props.deleteClient} key={client.id}/>
                     })
                 }
                 </Table>
-                <AddClient addClient={this.addClient}/>
+                <AddClient addClient={this.props.addClient}/>
                 <label>Søk etter kunde:</label>
-                <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)}/>
+                <input type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this)}/>
             </div>
         )
     }
+
+    //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
+    componentDidMount() {
+        this.props.fetchClientsData()
+    }
 }
+
 
 // Calls on a clientsReducer that bring props to the component
 const mapStateToProps = (state) => {
     return {
-        clients: state.clientsReducer.clients
+        clients: state.clientsReducer.clients,
+        search: state.clientsReducer.search
     }
 }
 
@@ -83,8 +60,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteClient: (id) => { dispatch(deleteClient(id))},
-        addClient: (client) => { dispatch(addClient(client))}
-    }
+        addClient: (client) => { dispatch(addClient(client))},
+        fetchClientsData: () =>{ dispatch(fetchClientsData())},
+        updateSearch:(search_key) => {dispatch(updateSearch(search_key))}}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Clients)
