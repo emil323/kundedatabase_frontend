@@ -31,7 +31,7 @@ class Clients extends Component {
                     </thead>
                 {
                     filteredClients.map(client => {
-                        return  <ClientsTable clients={client} deleteClient={this.props.deleteClient} key={client.id}/>
+                        return  <ClientsTable client={client} deleteClient={this.props.deleteClient} key={client.id}/>
                     })
                 }
                 </Table>
