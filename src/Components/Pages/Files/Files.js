@@ -5,16 +5,13 @@ import FilesTable from './FilesTable'
 import AddFile from "./AddFile"
 import "./Files.css"
 import { Table } from 'reactstrap';
+import { Link } from "react-router-dom"
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
 import { deleteFile, fetchFilesData, updateSearch} from '../../../Store/Actions/filesActions'
 
 class Files extends Component {
-
-    goToAddFile = () => {
-        this.props.history.push("/addfile")
-    }
 
     render() {
         let filteredFiles = this.props.files.filter(file => {
@@ -40,7 +37,7 @@ class Files extends Component {
                 </Table>
                 <label>Søk etter fil:</label>
                 <input type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this)}/>
-                <input type="button" value="Go to Add File" onClick={this.goToAddFile}/>
+                <Link to={"/addfile"}><input type="button" value="Go to Add File" onClick={this.goToAddFile}/></Link>
             </div>
         )
     }
