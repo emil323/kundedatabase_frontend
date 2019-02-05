@@ -11,7 +11,7 @@ class ClientsTable extends React.Component {
             btnOptions: [
                 { tekst: 'Behandle', isHeader: 1, key: 1 },
                 { tekst: 'Vis', isHeader: 0, key: 2 },
-                { tekst: 'Slett', isHeader: 0, key: 3 },
+                { tekst: 'Slett', isHeader: 0, key: 3},
                 { tekst: 'Placeholder', isHeader: 1, key: 4 },
                 { tekst: 'Placeholder', isHeader: 0, key: 5, },
             ]
@@ -25,7 +25,7 @@ class ClientsTable extends React.Component {
             <tbody>
                 <tr>
                     <th>{this.props.clients.id}</th>
-                    <Link to={"clients/" + this.props.clients.name}><td>{this.props.clients.name}</td></Link>
+                    <Link to={"./files/" + this.props.clients.name}><td>{this.props.clients.name}</td></Link>
                     {/* <td><button key={this.props.clients.id} onClick={() => { this.props.deleteClient(this.props.clients.id) }}>DEL</button></td> */}
                     <td><DropdownBtn options={this.state.btnOptions} /></td>
                 </tr>

@@ -4,10 +4,24 @@ import pdf from "../../../Assets/Icons/pdf.png"
 import excel from "../../../Assets/Icons/excel.png"
 import textDoc from "../../../Assets/Icons/txt.png"
 
+import { Component } from 'react'
+import DropdownBtn from '../../DropdownBtn/DropdownBtn';
 
+ class FilesTable extends Component {
+     constructor(props){
+         super(props);
+         this.state = {
+            btnOptions: [
+                { tekst: 'Behandle', isHeader: 1, key: 1 },
+                { tekst: 'Vis', isHeader: 0, key: 2 },
+                { tekst: 'Slett', isHeader: 0, key: 3, function: () => { return props.deleteFile(props.file.id)}},
+                { tekst: 'Test', isHeader: 1, key: 4 },
+                { tekst: 'Placeholder', isHeader: 0, key: 5, },
+            ]
+         }
+     }
 
- const FilesTable = ({files, deleteFile, checkFileType}) => {
-
+    
     checkFileType = (type) => {
         switch(type){
             case "WORD":
@@ -20,18 +34,19 @@ import textDoc from "../../../Assets/Icons/txt.png"
                 return textDoc
         }
     }
-
-        return(
-            <tbody>
-                <tr>
-                    <td><img src={checkFileType(files.type)} alt="s"/></td>
-                    <td>{files.type}</td>
-                    <td>{files.tittel}</td>
-                    <td>{files.sistendret}</td>
-                    <td><button key={files.id} onClick={() => {deleteFile(files.id)}}>DEL</button></td>
-                </tr>
-            </tbody>
-        )
+        render(){
+            return(
+                <tbody>
+                    <tr>
+                        <td><img src={this.checkFileType(this.props.file.type)} alt="s"/></td>
+                        <td>{this.props.file.type}</td>
+                        <td>{this.props.file.tittel}</td>
+                        <td>{this.props.file.sistendret}</td>
+                        <td><DropdownBtn options={this.state.btnOptions} /></td>
+                    </tr>
+                </tbody>
+            )
+        }    
 }
 
 

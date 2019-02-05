@@ -33,7 +33,7 @@ class App extends Component {
                         <Route path="/newfile" component={NewFile}/>
                         <Route path="/addclient" component={AddClient}/>
                         <Route path="/addfile" component={AddFile}/>
-                        <Route path="/files" component={Files}/>
+                        <Route path="/files/:client_id" component={Files}/>
                     </MainContent>
                 </div>
             </BrowserRouter>

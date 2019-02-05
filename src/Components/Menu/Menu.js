@@ -28,7 +28,6 @@ class Menu extends Component {
                 <NavItem><Link to="/favourites">Favoritter</Link></NavItem>
                 <NavItem><Link to="/clients" >Kunder</Link></NavItem>
                 <NavItem><Link to="/newfile" >Legg til dokument</Link></NavItem>
-                <NavItem><Link to="/files" >files</Link></NavItem>
             </div>
             
         )
