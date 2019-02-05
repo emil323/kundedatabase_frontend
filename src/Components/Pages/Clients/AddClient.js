@@ -54,7 +54,7 @@ class AddClient extends Component {
                 </FormGroup>
             </Form>
             
-            <Link to="./clients/"><Button color="primary">Back</Button></Link>
+            <Link to="./clients"><Button color="primary">Back</Button></Link>
           
         </div>
         )

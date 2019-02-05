@@ -55,7 +55,7 @@ class AddFile extends Component {
             </Form>
             <br></br><br></br><br></br><br></br>
             <UploadFile />
-            <Link to="./clients/"><Button color="primary">Back</Button></Link>
+            <Link to="./clients"><Button color="primary">Back</Button></Link>
         </div>
         )
     }
