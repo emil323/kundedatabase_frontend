@@ -11,7 +11,6 @@ class Client extends Component {
     }
 
     render() {
-        console.log(this.props.match.params.client_id)
         return (
             <div className="container">
                 <h1>{this.props.match.params.client_id}</h1>

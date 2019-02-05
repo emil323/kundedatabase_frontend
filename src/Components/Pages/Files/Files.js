@@ -1,8 +1,7 @@
 import React from 'react'
 import {Component} from 'react'
 import api from '../../../API/API'
-import FilesTable from './FilesTable'
-import AddFile from "./AddFile"
+import FileData from './FileData'
 import "./Files.css"
 import { Table } from 'reactstrap';
 import { Link } from "react-router-dom"
@@ -31,13 +30,13 @@ class Files extends Component {
                     </thead>
                 {
                     filteredFiles.map(file => {
-                        return  <FilesTable file={file} deleteFile={this.props.deleteFile} key={file.id}/>
+                        return  <FileData file={file} deleteFile={this.props.deleteFile} key={file.id}/>
                     })
                 }
                 </Table>
                 <label>Søk etter fil:</label>
                 <input type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this)}/>
-                <Link to={"/addfile"}><input type="button" value="Go to Add File" onClick={this.goToAddFile}/></Link>
+                <Link to={"/addfile"}><input className="lol" type="button" value="Go to Add File"/></Link>
             </div>
         )
     }
