@@ -10,7 +10,7 @@ import Home from "../Pages/Home/Home"
 import Clients from "../Pages/Clients/Clients"
 import Favourites from "../Pages/Favourites/Favourites"
 import NewFile from "../Pages/NewFile/NewFile"
-import Files from "../Pages/Files/Files"
+import Client from "../Pages/Client/Client"
 import AddClient from '../Pages/Clients/AddClient';
 import AddFile from '../Pages/Files/AddFile';
 
@@ -33,7 +33,7 @@ class App extends Component {
                         <Route path="/newfile" component={NewFile}/>
                         <Route path="/addclient" component={AddClient}/>
                         <Route path="/addfile" component={AddFile}/>
-                        <Route path="/files" component={Files}/>
+                        <Route path="/client/:client_id" component={Client}/>
                     </MainContent>
                 </div>
             </BrowserRouter>
