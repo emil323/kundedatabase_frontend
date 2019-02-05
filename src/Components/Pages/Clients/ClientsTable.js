@@ -1,17 +1,18 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 import DropdownBtn from '../../DropdownBtn/DropdownBtn';
+import { deleteClient } from '../../../Store/Actions/clientActions';
 
 
 class ClientsTable extends React.Component {
     constructor(props) {
         super(props);
-
+            
         this.state = {
             btnOptions: [
                 { tekst: 'Behandle', isHeader: 1, key: 1 },
-                { tekst: 'Vis', isHeader: 0, key: 2 },
-                { tekst: 'Slett', isHeader: 0, key: 3 },
+                { tekst: 'Vis', isHeader: 0, key: 2,function: () => {}},
+                { tekst: 'Slett', isHeader: 0, key: 3, function: () => {return props.deleteClient(props.client.id)} },
                 { tekst: 'Placeholder', isHeader: 1, key: 4 },
                 { tekst: 'Placeholder', isHeader: 0, key: 5, },
             ]
@@ -24,8 +25,8 @@ class ClientsTable extends React.Component {
         return (
             <tbody>
                 <tr>
-                    <th>{this.props.clients.id}</th>
-                    <Link to={"clients/" + this.props.clients.name}><td>{this.props.clients.name}</td></Link>
+                    <th>{this.props.client.id}</th>
+                    <Link to={"clients/" + this.props.client.name}><td>{this.props.client.name}</td></Link>
                     {/* <td><button key={this.props.clients.id} onClick={() => { this.props.deleteClient(this.props.clients.id) }}>DEL</button></td> */}
                     <td><DropdownBtn options={this.state.btnOptions} /></td>
                 </tr>
