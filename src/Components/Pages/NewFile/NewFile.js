@@ -1,7 +1,12 @@
 import React from 'react'
 import {Button, Form, FormGroup, Label, Input, FormText} from 'reactstrap'
 
-export default class NewFile extends React.Component {
+class NewFile extends React.Component {
+
+    constructor(props) {
+        super(props)
+    }
+
     render() {
         return(
             <Form>
@@ -26,3 +31,5 @@ export default class NewFile extends React.Component {
         )
     }
 }
+
+export default NewFile

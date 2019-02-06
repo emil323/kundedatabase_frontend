@@ -55,10 +55,6 @@ class AddFile extends Component {
         </div>
         )
     }
-        //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
-        componentDidMount() {
-            this.props.fetchFilesData()
-        }
 }
 
 const mapStateToProps = (state) => {

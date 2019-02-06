@@ -7,8 +7,8 @@ export default  {
             get() {
                 return axios().get("/client/" + clientID)
             },
-            documents() {
-                axios().get("/client/" + clientID + "/documents")
+            files() {
+                return axios().get("/client/" + clientID + "/files")
             },
             delete() {
                 return axios().delete("/client/" + clientID + "/delete")

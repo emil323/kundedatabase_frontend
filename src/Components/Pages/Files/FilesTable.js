@@ -26,7 +26,7 @@ import DropdownBtn from '../../DropdownBtn/DropdownBtn';
         switch(type){
             case "WORD":
                 return word
-            case "PDF":
+            case "pdf":
                 return pdf
             case "EXCEL":
                 return excel
@@ -40,8 +40,8 @@ import DropdownBtn from '../../DropdownBtn/DropdownBtn';
                     <tr>
                         <td><img src={this.checkFileType(this.props.file.type)} alt="s"/></td>
                         <td>{this.props.file.type}</td>
-                        <td>{this.props.file.tittel}</td>
-                        <td>{this.props.file.sistendret}</td>
+                        <td>{this.props.file.name}</td>
+                        <td>{this.props.file.last_changed}</td>
                         <td><DropdownBtn options={this.state.btnOptions} /></td>
                     </tr>
                 </tbody>

@@ -3,6 +3,7 @@ import { Collapse, Nav, Navbar, NavbarBrand} from 'reactstrap'
 import Hamburger from 'react-hamburger-menu'
 import './Header.css'
 import Menu from './../Menu/Menu'
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
 
 export default class Header extends React.Component {
 
@@ -34,8 +35,8 @@ export default class Header extends React.Component {
                 animationDuration={0.3}
               />
             </div>
-            <NavbarBrand href="/" className="mx-auto"><img alt="Logo" src="img/ecit-logo.png" /></NavbarBrand>
-          
+            <NavbarBrand href="/" className="mx-auto"><img alt="Logo" src="/img/ecit-logo.png" /></NavbarBrand>
+            <Breadcrumbs className="hidden-xm hidden-xs"/>  
             <Collapse isOpen={this.state.open} navbar className="hidden-lg">
               <Nav navbar className="hidden-lg hidden-md hidden-sm">
                 <Menu/>

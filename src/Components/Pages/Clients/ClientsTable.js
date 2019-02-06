@@ -24,8 +24,8 @@ class ClientsTable extends React.Component {
         return (
             <tbody>
                 <tr>
+                    <Link to={"./client/" + this.props.client.id}><td>{this.props.client.name}</td></Link>
                     <th>{this.props.client.id}</th>
-                    <Link to={"./client/" + this.props.client.name}><td>{this.props.client.name}</td></Link>
                     {/* <td><button key={this.props.clients.id} onClick={() => { this.props.deleteClient(this.props.clients.id) }}>DEL</button></td> */}
                     <td><DropdownBtn options={this.state.btnOptions} /></td>
                 </tr>

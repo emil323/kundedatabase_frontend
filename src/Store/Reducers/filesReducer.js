@@ -4,6 +4,9 @@ import {ADD_FILE, DELETE_FILE, SEARCH_KEY, FETCH_FILES} from '../types'
 // A Reducer requires an initial state when running the application
 const initState = {
     files: [],
+    root_folder: '',
+    selected_folder: '',
+    client_id:'',
     search: ''
 }
 
@@ -11,8 +14,13 @@ const initState = {
 const filesReducer = (state = initState, action) => {
     switch(action.type){
         case FETCH_FILES:
-            return { ...state, 
-                files: action.files.files,
+            console.log(action)
+            return { 
+                files:action.files,
+                root_folder:action.root_folder,
+                selected_folder:action.selected_folder,
+                client_id:action.client_id,
+                search:''
             }
         case SEARCH_KEY:
             return {

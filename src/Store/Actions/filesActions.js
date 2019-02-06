@@ -23,18 +23,24 @@ export const updateSearch = (e) => {
     }
 }
 
-export const fetchFiles = (files) => {
+export const fetchFiles = (files, root_folder, selected_folder, client_id) => {
     return {
         type: FETCH_FILES,
-        files
+        files, root_folder,selected_folder,client_id
     }
 }
 
-export const fetchFilesData = () => {
+export const fetchFilesData = (client_id, selected) => {
+    
     return (dispatch) => {
-        return api.files().list()
+        return api.client(client_id).files()
             .then(response => {
-                dispatch(fetchFiles(response.data))
+
+                const files = response.data
+                const root_folder = files.find((file) => {return file.is_root}).id
+                const selected_folder = files.find((file) => {return file.id === selected && file.is_directory}) != null ? selected : root_folder
+
+                dispatch(fetchFiles(files,root_folder,selected_folder,client_id))
             })
             .catch(error => {
                 throw(error)

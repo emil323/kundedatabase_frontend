@@ -26,11 +26,10 @@ class App extends Component {
                     <Header />
                     <Sidebar />
                     <MainContent>
-                        <Breadcrumbs />
+                        <Breadcrumbs className="hidden-lg hidden-xl hidden-md hidden-sm "/>
                         <Route exact path="/" component={Home} />
                         <Route path="/favourites" component={Favourites} />
                         <Route path="/clients" component={Clients}/>
-                        <Route path="/newfile" component={NewFile}/>
                         <Route path="/addclient" component={AddClient}/>
                         <Route path="/addfile" component={AddFile}/>
                         <Route path="/client/:client_id" component={Client}/>
