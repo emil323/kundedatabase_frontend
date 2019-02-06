@@ -8,6 +8,8 @@ import * as serviceWorker from './serviceWorker'
 import { Provider } from "react-redux"
 import store from './Store/store'
 
+import './CSS/index.css';
+
 //Set this to true to ignore authentication
 const DO_NOT_LOGIN = false;
 

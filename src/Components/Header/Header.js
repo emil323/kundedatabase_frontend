@@ -23,7 +23,7 @@ export default class Header extends React.Component {
     render() {
       return (
         <div>
-          <Navbar color="dark" dark expand="md">
+          <Navbar dark expand="md">
             <div className="hidden-lg hidden-md hidden-sm">
               <Hamburger
                 isOpen={this.state.open}
@@ -32,6 +32,7 @@ export default class Header extends React.Component {
                 height={20}
                 strokeWidth={3}
                 animationDuration={0.3}
+                color='white'
               />
             </div>
             <NavbarBrand href="/" className="mx-auto"><img alt="Logo" src="img/ecit-logo.png" /></NavbarBrand>

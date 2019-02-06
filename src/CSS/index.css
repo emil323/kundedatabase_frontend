@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'Metropolis Extra Bold';
+    src: url('./Fonts/Headlines/Metropolis-ExtraBold.otf');
+}
+
+@font-face {
+    font-family: 'Metropolis Bold';
+    src: url('./Fonts/Headlines/Metropolis-Bold.otf');
+}
+
+@font-face {
+    font-family: 'Varela Round';
+    src: url('./Fonts/Body-Paragraphs/VarelaRound-Regular.ttf');
+}
+
+h1 {
+    font-family: 'Metropolis Extra Bold', Arial, Helvetica, sans-serif;
+}
+
+h2, h3, h4 {
+    font-family: 'Metropolis Bold', Arial, Helvetica, sans-serif;
+}
+
+body {
+    font-family: 'Varela Round', Verdana, Geneva, Tahoma, sans-serif;
+}
