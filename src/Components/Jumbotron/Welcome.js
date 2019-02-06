@@ -2,10 +2,11 @@ import React from 'react';
 import { Jumbotron, Button, Container } from 'reactstrap';
 import './Jumbotron.css';
 
+
 const Welcome = (props) => {
     return (
         <div>
-            <Jumbotron>
+            <Jumbotron className="Jumbotron-Home">
                     <h1 className="display=3">Velkommmen!</h1>
                     <p className="lead">Velkomstmelding</p>
                     <hr className="my-2" />
