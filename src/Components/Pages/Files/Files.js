@@ -33,7 +33,7 @@ class Files extends Component {
                     </thead>
                 {
                     this.props.files.map(file => {
-                        return  <FilesTable file={file} deleteFile={this.props.deleteFile} key={file.id}/>
+                        return  <FileData file={file} deleteFile={this.props.deleteFile} key={file.id}/>
                     })
                 }
                 </Table>
