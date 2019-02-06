@@ -13,6 +13,7 @@ export default class Breadcrumbs extends React.Component {
             <div className={this.props.className}>
                 <Breadcrumb tag="nav" listTag="div">
                 <BreadcrumbItem tag="a" href="#">Placeholder</BreadcrumbItem>
+                <BreadcrumbItem tag="a" href="#">Placeholder</BreadcrumbItem>
                 <BreadcrumbItem tag="span" active>Hjem</BreadcrumbItem>
                 </Breadcrumb>
             </div>

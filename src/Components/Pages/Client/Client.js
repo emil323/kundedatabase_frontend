@@ -19,7 +19,7 @@ class Client extends Component {
     render() {
         return (
             <div className="container">
-                <h1>{this.state.name}</h1>
+                <ClientHeader clientName={this.state.name}/>
                 <Files client_id={this.props.match.params.client_id}/>
             </div>
         )

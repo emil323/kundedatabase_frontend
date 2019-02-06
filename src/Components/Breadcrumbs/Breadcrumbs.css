@@ -1,8 +1,11 @@
 .breadcrumb {
     background-color: #002540;
-
 }
 
 .breadcrumb-item {
-    
+    color: white;
+}
+
+.breadcrumb-item:hover {
+    color: white;
 }

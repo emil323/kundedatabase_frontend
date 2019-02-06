@@ -8,7 +8,6 @@
     width: 100%;
     background-color: #002540;
     color:white;
-    height:4.5em;
 }
 
 .navbar .menu p {
@@ -17,5 +16,5 @@
 
 .breadcrumb {
     background-color: #002540;
-    margin-top:1em;
+    transform: translate(0%, 30%);
 }
