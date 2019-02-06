@@ -1,8 +1,7 @@
 import React from 'react'
 import {Component} from 'react'
 import api from '../../../API/API'
-import FilesTable from './FilesTable'
-import AddFile from "./AddFile"
+import FileData from './FileData'
 import "./Files.css"
 import { Table } from 'reactstrap';
 import { Link } from "react-router-dom"

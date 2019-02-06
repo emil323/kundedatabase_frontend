@@ -9,10 +9,10 @@ import MainContent from '../Wrappers/MainContent/MainContent'
 import Home from "../Pages/Home/Home"
 import Clients from "../Pages/Clients/Clients"
 import Favourites from "../Pages/Favourites/Favourites"
-import NewFile from "../Pages/NewFile/NewFile"
 import Client from "../Pages/Client/Client"
 import AddClient from '../Pages/Clients/AddClient';
 import AddFile from '../Pages/Files/AddFile';
+import UserAccess from '../Pages/UserAccess/UserAccess'
 
 import './App.css'
 
@@ -33,6 +33,7 @@ class App extends Component {
                         <Route path="/addclient" component={AddClient}/>
                         <Route path="/addfile" component={AddFile}/>
                         <Route path="/client/:client_id" component={Client}/>
+                        <Route path="/useraccess" component={UserAccess}/>
                     </MainContent>
                 </div>
             </BrowserRouter>

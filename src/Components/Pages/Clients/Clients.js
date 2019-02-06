@@ -1,6 +1,6 @@
 import React from 'react'
 import {Component} from 'react'
-import ClientsTable from './ClientsTable'
+import ClientData from './ClientData'
 import "./Clients.css"
 import { Table } from 'reactstrap';
 
@@ -32,7 +32,7 @@ class Clients extends Component {
                     </thead>
                 {
                     filteredClients.map(client => {
-                        return  <ClientsTable client={client} deleteClient={this.props.deleteClient} key={client.id}/>
+                        return  <ClientData client={client} deleteClient={this.props.deleteClient} key={client.id}/>
                     })
                 }
                 </Table>

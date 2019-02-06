@@ -1,12 +1,14 @@
 import React from "react"
+import Welcome from '../../Jumbotron/Welcome';
+import Favorites from '../Favourites/Favourites';
 
 const Home = () => {
     return (
         <div className="container">
-            <h4 className="center">Home</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa similique eaque hic, tempore sint at repudiandae quis sit veniam earum aperiam quam provident mollitia reiciendis cupiditate animi aspernatur praesentium maiores.</p>
+            <Welcome />
+            <Favorites />
         </div>
     )
 }
 
-export default Home
+export default Home;

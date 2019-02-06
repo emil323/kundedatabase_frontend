@@ -2,11 +2,11 @@ import React from 'react'
 import {Component} from 'react'
 import "./Client.css"
 import Files from "../Files/Files"
-import { connect } from "react-redux";
-import {fetchFilesData} from '../../../Store/Actions/filesActions'
+
 import api from '../../../API/API';
 
 
+import ClientHeader from '../../Jumbotron/ClientHeader';
 
 class Client extends Component {
     constructor(props){
@@ -17,7 +17,6 @@ class Client extends Component {
     }
 
     render() {
-        console.log(this.props.match.params.client_id)
         return (
             <div className="container">
                 <h1>{this.state.name}</h1>
@@ -34,7 +33,5 @@ class Client extends Component {
             })
     }
 }
-
-
 
 export default Client

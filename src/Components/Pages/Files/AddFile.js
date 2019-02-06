@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import "./Files.css"
 import { addFile, fetchFilesData} from '../../../Store/Actions/filesActions'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-
+import UploadFile from "../UploadFile/UploadFile"
+import { Link } from "react-router-dom"
 
 class AddFile extends Component {
 
@@ -52,6 +53,9 @@ class AddFile extends Component {
                 <br></br>
                 <Button color="primary" onClick={this.handleSubmit}>Legg til Fil:</Button>
             </Form>
+            <br></br><br></br><br></br><br></br>
+            <UploadFile />
+            <Link to="./clients"><Button color="primary">Back</Button></Link>
         </div>
         )
     }

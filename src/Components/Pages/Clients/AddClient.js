@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import "./Clients.css"
 import { addClient, fetchClientsData} from '../../../Store/Actions/clientActions'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Link } from "react-router-dom"
 
 class AddClient extends Component {
     
@@ -52,6 +53,9 @@ class AddClient extends Component {
                     <Button color="primary" onClick={this.handleSubmit}>Legg til kunde</Button>
                 </FormGroup>
             </Form>
+            
+            <Link to="./clients"><Button color="primary">Back</Button></Link>
+          
         </div>
         )
     }
