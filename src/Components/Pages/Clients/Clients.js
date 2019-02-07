@@ -76,7 +76,7 @@ class Clients extends Component {
                                 <Table className="table table-hover">
                                     <thead className="thead-dark">
                                         <tr>
-                                            <th>Navn</th>
+                                            <th>Firmanavn</th>
                                             <th>#</th>
                                             <th></th>
                                         </tr>
@@ -100,7 +100,7 @@ class Clients extends Component {
                                 <Table className="table table-hover">
                                         <thead className="thead-dark">
                                             <tr>
-                                                <th>Firmanavn</th>
+                                                <th>Navn</th>
                                                 <th>#</th>
                                                 <th></th>
                                             </tr>
