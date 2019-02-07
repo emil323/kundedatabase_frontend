@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import DropdownBtn from '../../DropdownBtn/DropdownBtn';
 
 
-class ClientsTable extends React.Component {
+class ClientsData extends React.Component {
     constructor(props) {
         super(props);
             
@@ -36,4 +36,4 @@ class ClientsTable extends React.Component {
 }
 
 
-export default ClientsTable
+export default ClientsData

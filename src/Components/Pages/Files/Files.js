@@ -18,6 +18,9 @@ class Files extends Component {
     }
 
     render() {
+        let filteredFiles = this.props.files.filter(file => {
+            return file.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
+        })
         return (
             <div className="container">
             <label>Søk etter fil:</label>
@@ -33,7 +36,7 @@ class Files extends Component {
                         </tr>
                     </thead>
                 {
-                    this.props.files.map(file => {
+                    filteredFiles.map(file => {
                         return  <FileData file={file} deleteFile={this.props.deleteFile} key={file.id}/>
                     })
                 }

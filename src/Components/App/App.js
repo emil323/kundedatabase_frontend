@@ -13,6 +13,7 @@ import Client from "../Pages/Client/Client"
 import AddClient from '../Pages/Clients/AddClient';
 import AddFile from '../Pages/Files/AddFile';
 import UserAccess from '../Pages/UserAccess/UserAccess'
+import Tab from '../../Components/TabComponent/TabComponent'
 
 import './App.css'
 

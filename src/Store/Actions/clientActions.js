@@ -1,6 +1,6 @@
 
 import api from '../../API/API'
-import {FETCH_CLIENTS, ADD_CLIENT, DELETE_CLIENT, SEARCH_KEY} from '../types'
+import {FETCH_CLIENTS, ADD_CLIENT, DELETE_CLIENT, SEARCH_KEY, FETCH_ACCESS_LOG} from '../types'
 
 export const deleteClient = (id) => {
     return {
@@ -27,6 +27,25 @@ export const fetchClients = (clients) => {
     return {
         type: FETCH_CLIENTS,
         clients
+    }
+}
+
+export const fetchAccessLog = (log) => {
+    return {
+        type: FETCH_ACCESS_LOG,
+        log
+    }
+}
+
+export const fetchAccessLogData = () => {
+    return (dispatch) => {
+        return api.accesslog().list()
+            .then(response => {
+                dispatch(fetchAccessLog(response.data))
+            })
+            .catch(error => {
+                throw error
+            })
     }
 }
 

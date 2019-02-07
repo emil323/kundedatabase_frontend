@@ -23,6 +23,13 @@ export default  {
             }
         }
     },
+    accesslog: () => {
+        return {
+            list() {
+                return axios().get("/accesslog")    // Må være noe feil her?
+            }
+        }
+    },
     files: () => {
         return {
             folder: (folderID) => {

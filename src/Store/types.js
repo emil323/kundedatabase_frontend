@@ -11,3 +11,5 @@ export const FETCH_FILES = 'FETCH_FILES'
 // General
 export const SEARCH_KEY = 'SEARCH_KEY'
 
+export const FETCH_ACCESS_LOG = 'FETCH_ACCESS_LOG'
+
