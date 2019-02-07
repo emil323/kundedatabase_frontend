@@ -111,7 +111,7 @@ class Clients extends Component {
                                             })
                                         }
                                     </Table>
-                                    <label>Søk etter kunde:</label>
+                                    <label>Søk etter endring:</label>
                                     <input type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this)}/>
                             </Col>
                         </Row>
