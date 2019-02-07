@@ -31,7 +31,6 @@ class App extends Component {
                         <Route path="/favourites" component={Favourites} />
                         <Route path="/clients" component={Clients}/>
                         <Route path="/addclient" component={AddClient}/>
-                        <Route path="/addfile" component={AddFile}/>
                         <Route path="/client/:client_id" component={Client}/>
                         <Route path="/useraccess" component={UserAccess}/>
                     </MainContent>

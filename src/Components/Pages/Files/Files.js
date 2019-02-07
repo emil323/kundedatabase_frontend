@@ -9,7 +9,8 @@ import { Link } from "react-router-dom"
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
 import { deleteFile, fetchFilesData, updateSearch} from '../../../Store/Actions/filesActions'
-
+import ModalComponent from '../../ModelComponent/ModelComponent';
+import Dropzone from 'react-dropzone'
 class Files extends Component {
 
     constructor(props) {
@@ -37,6 +38,9 @@ class Files extends Component {
                     })
                 }
                 </Table>
+
+                <ModalComponent buttonLabel="Last Opp"/>
+
             </div>
             
         )

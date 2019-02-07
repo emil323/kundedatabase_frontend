@@ -21,6 +21,7 @@ class Client extends Component {
             <div className="container">
                 <ClientHeader clientName={this.state.name}/>
                 <Files client_id={this.props.match.params.client_id}/>
+                
             </div>
         )
     }

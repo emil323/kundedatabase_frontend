@@ -1,20 +1,14 @@
 import React from 'react'
 import {Button, Form, FormGroup, Label, Input, FormText} from 'reactstrap'
 
-class NewFile extends React.Component {
-
-    constructor(props) {
-        super(props)
-    }
-
+class UploadFile extends React.Component {
+   
     render() {
         return(
+        
+           
             <Form>
-                {/* Textarea to give your files a name for the system  */}
-                <FormGroup>
-                    <Label for="exampleText" > Legg ved kommentar til fil </Label>
-                    <Input type="textarena" name="text" id="exampletext" />    
-                </FormGroup>
+                
 
                 {/* Standarized button and selector for selecting files */}
                 <FormGroup>
@@ -23,13 +17,12 @@ class NewFile extends React.Component {
                         Velg filen du ønsker å laste opp! 
                     </FormText>
                 </FormGroup>
-
-                {/* Button for submitting     */}
-                <Button>Last opp</Button>
+               
 
             </Form>
+
         )
     }
 }
 
-export default NewFile
+export default UploadFile

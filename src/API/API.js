@@ -1,5 +1,6 @@
 
 import axios from './axiosInstance'
+import UploadFile from '../Components/Pages/UploadFile/UploadFile';
 
 export default  {
     client: (clientID) => {
@@ -12,6 +13,17 @@ export default  {
             },
             delete() {
                 return axios().delete("/client/" + clientID + "/delete")
+            },
+            folder: (folderID) => {
+                return{
+                    upload(formData) {
+                        return axios.post('client/' + clientID + "/" +  folderID + "/upload", formData, {
+                            headers: {
+                              'Content-Type': 'multipart/form-data'
+                            }
+                        })
+                    }
+                }
             }
         }
     },

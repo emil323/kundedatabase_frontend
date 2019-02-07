@@ -40,10 +40,10 @@ class AddFile extends Component {
     }
 
     render(){
-        console.log(this.props)
+        console.log(this.props.match.params.selected_folder)
         return (
         <div>
-            <Form onSubmit={this.handleSubmit}>
+        {/*     <Form onSubmit={this.handleSubmit}>
                 <Label for="tittel">Tittel:</Label>
                 <Input type="text" name="tittel" id="tittel" onChange={this.handleChange} value={this.state.tittel}/>
                 <Label for="type">Type:</Label>
@@ -52,8 +52,8 @@ class AddFile extends Component {
                 <Input type="text" name="sistendret" id="sistendret" onChange={this.handleChange} value={this.state.sistendret}/>
                 <br></br>
                 <Button color="primary" onClick={this.handleSubmit}>Legg til Fil:</Button>
-            </Form>
-            <br></br><br></br><br></br><br></br>
+            </Form> */}
+            <br></br>
             <UploadFile />
             <Link to="./clients"><Button color="primary">Back</Button></Link>
         </div>
