@@ -19,7 +19,7 @@ export default  {
     clients: () => {
         return {
             list() {
-                return axios.get("/clients")
+                return axios().get("/clients")
             }
         }
     },
