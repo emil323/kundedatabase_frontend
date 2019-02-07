@@ -1,6 +1,6 @@
 
 import axios from './axiosInstance'
-import UploadFile from '../Components/Pages/UploadFile/UploadFile';
+import {API_URL} from './Settings'
 
 export default  {
     client: (clientID) => {
@@ -13,41 +13,31 @@ export default  {
             },
             delete() {
                 return axios().delete("/client/" + clientID + "/delete")
-            },
-            folder: (folderID) => {
-                return{
-                    upload(formData) {
-                        return axios.post('client/' + clientID + "/" +  folderID + "/upload", formData, {
-                            headers: {
-                              'Content-Type': 'multipart/form-data'
-                            }
-                        })
-                    }
-                }
             }
         }
     },
     clients: () => {
         return {
             list() {
-                return axios().get("/clients")
+                return axios.get("/clients")
             }
         }
     },
     files: () => {
         return {
-            list() {
-                return axios().get("/files")
-            }
-        }
-    },
-    document: (documentID) => {
-        return {
-            get() {
-                return axios().get("/document/" + documentID)
+            folder: (folderID) => {
+                return{
+                    upload(formData) {
+                        return axios().post('/files/folder/' + folderID + "/upload", formData, {
+                            headers: {
+                              'Content-Type': 'multipart/form-data'
+                            }
+                        })
+                    }
+                }
             },
-            delete() {
-                return axios().delete("/document/" + documentID)
+            getURL(file_id, dummy_name) {
+                return API_URL + "/files/" + file_id + "/" + dummy_name
             }
         }
     },
@@ -63,6 +53,3 @@ export default  {
     }
 }
 
-export function get() {
-
-}

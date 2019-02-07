@@ -10,7 +10,7 @@ import { Link } from "react-router-dom"
 import { connect } from "react-redux";
 import { deleteFile, fetchFilesData, updateSearch} from '../../../Store/Actions/filesActions'
 import ModalComponent from '../../ModelComponent/ModelComponent';
-import Dropzone from 'react-dropzone'
+
 class Files extends Component {
 
     constructor(props) {

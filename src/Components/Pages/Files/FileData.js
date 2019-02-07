@@ -6,6 +6,7 @@ import textDoc from "../../../Assets/Icons/txt.png"
 
 import { Component } from 'react'
 import DropdownBtn from '../../DropdownBtn/DropdownBtn';
+import API from '../../../API/API';
 
  class FilesTable extends Component {
      constructor(props){
@@ -40,7 +41,7 @@ import DropdownBtn from '../../DropdownBtn/DropdownBtn';
                     <tr>
                         <td><img src={this.checkFileType(this.props.file.type)} alt="s"/></td>
                         <td>{this.props.file.type}</td>
-                        <td>{this.props.file.name}</td>
+                        <td><a href={API.files().getURL(this.props.file.id, this.props.file.name)}>{this.props.file.name}</a></td>
                         <td>{this.props.file.last_changed}</td>
                         <td><DropdownBtn options={this.state.btnOptions} /></td>
                     </tr>
