@@ -22,9 +22,13 @@ class ModalComponent extends React.Component {
   }
 
   onDrop(files) {
-    var formData = new FormData();
-    formData.append("file", files[0]);
-    console.log(formData)
+    let formData = new FormData();
+
+    for(let i = 0; i < files.length; i++){
+      formData.append("file", files[i]);
+    }
+
+    console.log(...formData)
 
    /*  API.client(this.props.client_id).folder(this.props.folder_id).upload(formData)
       .then((response) => {
