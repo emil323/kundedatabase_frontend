@@ -41,16 +41,14 @@ class Files extends Component {
                     })
                 }
                 </Table>
-
                 <ModalComponent buttonLabel="Last Opp"/>
-
             </div>
             
         )
     }
      //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
      componentDidMount() {
-        this.props.fetchFilesData(this.props.client_id, this.props.selected_folder)
+        this.props.fetchFilesData(this.props.client_id, this.props.selected_folder.id)
     }
 }
 
@@ -61,7 +59,7 @@ const mapStateToProps = (state) => {
     return {
         //Filter to only display files from selected folder or to handle a search value
         files:files.filter((file) => { 
-            return file.parent_id === selected_folder
+            return file.parent_id === selected_folder.id
             //TODO:Handle search value
         }),
         root_folder,

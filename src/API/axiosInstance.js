@@ -1,4 +1,5 @@
 import Axios from "axios"
+import { loadProgressBar } from 'axios-progress-bar'
 import {API_URL} from './Settings'
 
 
@@ -17,6 +18,8 @@ export default function (){
         config.headers.Authorization =  token ? `Bearer ${token}` : ''
         return config
       })
+
+    loadProgressBar(null, instance)
 
     return instance 
 }

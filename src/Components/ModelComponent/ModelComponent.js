@@ -33,9 +33,9 @@ class ModalComponent extends React.Component {
       const formData = new FormData();
       formData.append("file", file)
       console.log(this.props)
-       API.files().folder(this.props.selected_folder).upload(formData)
+       API.files().folder(this.props.selected_folder.id).upload(formData)
         .then((response) => {
-          this.props.fetchFilesData(this.props.client_id, this.props.selected_folder)
+          this.props.fetchFilesData(this.props.client_id, this.props.selected_folder.id)
         })
         .catch((err) => {
           console.log(err)
@@ -50,8 +50,8 @@ class ModalComponent extends React.Component {
     return (
       <div className="container">
         <Button color="primary" onClick={this.toggle}>{this.props.buttonLabel}</Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>{this.props.selected_folder}</ModalHeader>
+        <Modal isOpen={this.state.modal}  toggle={this.toggle} className={this.props.className}>
+          <ModalHeader toggle={this.toggle}>Last opp til: {this.props.selected_folder.name}</ModalHeader>
           <ModalBody>
           <Dropzone onDrop={this.onDrop.bind(this)}>
           {({getRootProps, getInputProps, isDragActive}) => {
@@ -66,10 +66,12 @@ class ModalComponent extends React.Component {
                     <p>Drop files here...</p> :
                     <p>sssssssssssssssssssssssssssssssssssssssssss</p>
                 }
+               
               </div>
             )
           }}
       </Dropzone>
+      
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
@@ -88,7 +90,7 @@ const mapStateToProps = (state) => {
   return {
       //Filter to only display files from selected folder or to handle a search value
       files:files.filter((file) => { 
-          return file.parent_id === selected_folder
+          return file.parent_id === selected_folder.id
           //TODO:Handle search value
       }),
       root_folder,
@@ -101,7 +103,7 @@ const mapStateToProps = (state) => {
 // Create a dispatch which sends information to the reducer. In this case a client is being deleted
 const mapDispatchToProps = (dispatch) => {
   return {
-      fetchFilesData: (client_id, selected_folder) =>{ dispatch(fetchFilesData(client_id, selected_folder))},
+      fetchFilesData: (client_id, selected_folder) =>{ dispatch(fetchFilesData(client_id, selected_folder.id))},
 }
 
 }
