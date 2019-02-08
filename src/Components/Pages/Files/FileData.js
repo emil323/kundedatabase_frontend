@@ -40,7 +40,6 @@ import API from '../../../API/API';
                 <tbody>
                     <tr>
                         <td><img src={this.checkFileType(this.props.file.type)} alt="s"/></td>
-                        <td>{this.props.file.type}</td>
                         <td><a href={API.files().getURL(this.props.file.id, this.props.file.name)}>{this.props.file.name}</a></td>
                         <td>{this.props.file.last_changed}</td>
                         <td><DropdownBtn options={this.state.btnOptions} /></td>

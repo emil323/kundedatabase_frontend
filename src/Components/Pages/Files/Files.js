@@ -9,7 +9,7 @@ import { Link } from "react-router-dom"
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
 import { deleteFile, fetchFilesData, updateSearch} from '../../../Store/Actions/filesActions'
-import ModalComponent from '../../ModelComponent/ModelComponent';
+import ModalComponent from '../../ModalComponent/ModalComponent';
 
 class Files extends Component {
 
@@ -22,13 +22,12 @@ class Files extends Component {
             return file.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
         })
         return (
-            <div className="container">
+            <div >
             <label>Søk etter fil:</label>
             <input type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch.bind(this)}/>
             <Table className="table table-hover">
             <thead className="thead-dark">
                         <tr>
-                            <th>#</th>
                             <th>Type</th>
                             <th>Tittel</th>
                             <th>Sist endret</th>
