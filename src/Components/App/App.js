@@ -9,9 +9,15 @@ import MainContent from '../Wrappers/MainContent/MainContent'
 import Home from "../Pages/Home/Home"
 import Clients from "../Pages/Clients/Clients"
 import Favourites from "../Pages/Favourites/Favourites"
-
+import Client from "../Pages/Client/Client"
+import AddClient from '../Pages/Clients/AddClient';
+import AddFile from '../Pages/Files/AddFile';
+import UserAccess from '../Pages/UserAccess/UserAccess'
+import Tab from '../../Components/TabComponent/TabComponent'
 
 import './App.css'
+
+
 
 class App extends Component {
       render () {
@@ -21,10 +27,13 @@ class App extends Component {
                     <Header />
                     <Sidebar />
                     <MainContent>
-                    <Breadcrumbs />
+                        <Breadcrumbs className="hidden-lg hidden-xl hidden-md hidden-sm "/>
                         <Route exact path="/" component={Home} />
                         <Route path="/favourites" component={Favourites} />
                         <Route path="/clients" component={Clients}/>
+                        <Route path="/addclient" component={AddClient}/>
+                        <Route path="/client/:client_id" component={Client}/>
+                        <Route path="/useraccess" component={UserAccess}/>
                     </MainContent>
                 </div>
             </BrowserRouter>

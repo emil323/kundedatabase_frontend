@@ -1,118 +1,152 @@
 import React from 'react'
 import {Component} from 'react'
-import ClientsTable from './ClientsTable'
+import ClientData from './ClientData'
+import AccessLog from '../../AccessLog/AccessLog'
 import "./Clients.css"
+import { Table } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import classnames from 'classnames';
+
+// Import connect, which lets us export data to the reducer
+import { connect } from "react-redux";
+import { deleteClient, fetchClientsData, fetchAccessLogData, updateSearch} from '../../../Store/Actions/clientActions'
 
 class Clients extends Component {
-    state = {
-        clients: [
-            {
-                id: 1,
-                firmanavn: "Astrojo",
-                kontaktperson: "Kriss",
-                sistendret: "dato"
-            },
-            {
-                id: 2,
-                firmanavn: "Uberill",
-                kontaktperson: "Jan",
-                sistendret: "dato"
-            },
-            {
-                id: 3,
-                firmanavn: "Ealium",
-                kontaktperson: "Joakim",
-                sistendret: "dato"
-            },
-            {
-                id: 4,
-                firmanavn: "Tavu",
-                kontaktperson: "Sofie",
-                sistendret: "dato"
-            },
-            {
-                id: 5,
-                firmanavn: "Pyromba",
-                kontaktperson: "Karen",
-                sistendret: "dato"
-            },
-            {
-                id: 6,
-                firmanavn: "Skazz",
-                kontaktperson: "Ole",
-                sistendret: "dato"
-            },
-            {
-                id: 7,
-                firmanavn: "Mistijo",
-                kontaktperson: "Emma",
-                sistendret: "dato"
-            },
-            {
-                id: 8,
-                firmanavn: "Misose",
-                kontaktperson: "Petter",
-                sistendret: "dato"
-            },
-            {
-                id: 9,
-                firmanavn: "Coravu",
-                kontaktperson: "Emil",
-                sistendret: "dato"
-            },
-            {
-                id: 10,
-                firmanavn: "Hemitude",
-                kontaktperson: "Mattis",
-                sistendret: "dato"
-            },
-            {
-                id: 11,
-                firmanavn: "Quicee",
-                kontaktperson: "Siren",
-                sistendret: "dato"
-            },
-            {
-                id: 12,
-                firmanavn: "Anous",
-                kontaktperson: "Simon",
-                sistendret: "dato"
-            },
-            {
-                id: 13,
-                firmanavn: "Diser",
-                kontaktperson: "Erna",
-                sistendret: "dato"
-            },
-            {
-                id: 14,
-                firmanavn: "Maxinti",
-                kontaktperson: "Fredrik",
-                sistendret: "dato"
-            },
-            {
-                id: 15,
-                firmanavn: "Enist",
-                kontaktperson: "Arne",
-                sistendret: "dato"
-            }
-        ]
+    constructor(props){
+        super(props);
+
+        this.toggle = this.toggle.bind(this);
+        this.state = {
+            activeTab: "1"
+        };
     }
 
-    deleteClient = (id) => {
-        const clients = this.state.clients.filter(client => {
-            return client.id !== id
-        })
-        this.setState({
-            clients: clients
-        })
+    toggle(tab){
+        if(this.state.activeTab !== tab){
+            this.setState({
+                activeTab: tab
+            })
+        }
     }
+
+    goToAddClient = () => {
+        this.props.history.push("/addclient")
+    }
+
 
     render() {
+        console.log(this.props.clients)
+        let filteredClients = this.props.clients.filter(client => {
+            return client.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
+        })
+        let filteredAccessLog = this.props.accesslog.filter(log => {
+            return log.first_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
+        })
         return (
-            <ClientsTable clients={this.state.clients} deleteClient={this.deleteClient}/>
+            <div className="container">
+                <Nav tabs>
+
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: this.state.activeTab === '1'})}
+                            onClick={() => { this.toggle('1'); }}
+                        >
+                        Klienter
+                        </NavLink>
+                    </NavItem>
+
+
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: this.state.activeTab === '2' })}
+                            onClick={() => { this.toggle('2'); }}
+                        >
+                        Adgangslogg
+                        </NavLink>
+                    </NavItem>
+
+                </Nav>
+
+
+                <TabContent activeTab={this.state.activeTab}>
+
+                    <TabPane tabId="1">
+                        <Row>
+                            <Col sm="12">
+                                <Table className="table table-hover">
+                                    <thead className="thead-dark">
+                                        <tr>
+                                            <th>Firmanavn</th>
+                                            <th>#</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    {
+                                        filteredClients.map(client => {
+                                            return  <ClientData client={client} deleteClient={this.props.deleteClient} key={client.id}/>
+                                        })
+                                    }
+                                </Table>
+                                <label>Søk etter kunde:</label>
+                                <input type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this)}/>
+                                <input type="button" value="Go to Add Client" onClick={this.goToAddClient}/>
+                            </Col>
+                        </Row>
+                    </TabPane>
+
+                    <TabPane tabId="2">
+                        <Row>
+                            <Col sm="12">
+                                <Table className="table table-hover">
+                                        <thead className="thead-dark">
+                                            <tr>
+                                                <th>Navn</th>
+                                                <th>#</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        {
+                                            filteredAccessLog.map(log => {
+                                                return  <AccessLog log={log} key={log.id}/>
+                                            })
+                                        }
+                                    </Table>
+                                    <label>Søk etter endring:</label>
+                                    <input type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this)}/>
+                            </Col>
+                        </Row>
+                    </TabPane>
+
+                </TabContent>
+
+            </div>
         )
+    }
+
+    //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
+    componentDidMount() {
+        this.props.fetchClientsData()
+        this.props.fetchAccessLogData()
     }
 }
 
-export default Clients
+
+// Calls on a clientsReducer that bring props to the component
+const mapStateToProps = (state) => {
+    return {
+        clients: state.clientsReducer.clients,
+        accesslog: state.clientsReducer.accesslog,
+        search: state.clientsReducer.search
+    }
+}
+
+// Create a dispatch which sends information to the reducer. In this case a client is being deleted
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteClient: (id) => { dispatch(deleteClient(id))},
+        fetchClientsData: () =>{ dispatch(fetchClientsData())},
+        fetchAccessLogData: () =>{ dispatch(fetchAccessLogData())},
+        updateSearch:(search_key) => {dispatch(updateSearch(search_key))}}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Clients)

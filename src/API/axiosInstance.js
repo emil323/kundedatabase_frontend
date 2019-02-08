@@ -1,9 +1,12 @@
 import Axios from "axios"
+import {API_URL} from './Settings'
+
+
 
 export default function (){
 
     const instance =  Axios.create({
-        baseURL: "http://localhost:8080",
+        baseURL: API_URL,
         headers: {
             'Content-Type': 'application/json',
           }
@@ -17,3 +20,5 @@ export default function (){
 
     return instance 
 }
+
+

@@ -6,7 +6,7 @@ class MainContent extends Component {
  
       render () {
         return (
-            <div>
+            <div className="mx-auto px-2">
                 <Col 
                  sm={{ size:12, offset:0}}
                  md={{ size:9,offset: 3 }}

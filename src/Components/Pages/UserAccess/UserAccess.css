@@ -1,0 +1,36 @@
+input[type="radio"] + label{
+    display: block;
+    margin: 0.2em;
+    cursor: pointer;
+    padding: 0.2em;
+}
+
+input[type="radio"]{
+    display: none;
+}
+
+input[type="radio"] + label:before{
+    content:"\2714";
+    border:0.1em solid #000;
+    border-radius:0.2em;
+    padding: 0.3em;
+    width:1em;
+    height:1em;
+    padding-bottom:0.3em;
+    margin-left:1em;
+    color:transparent;
+    transition: .2s;
+}
+
+input[type="radio"]:checked + label:before{
+    background-color: #337ab7;
+    border-color: #337ab7;
+    color:#fff;
+}
+
+
+
+
+
+
+

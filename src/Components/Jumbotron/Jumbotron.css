@@ -1,0 +1,16 @@
+.jumbotron {
+    background-color: white;
+}
+
+.jumbotron {
+    background-size: cover;
+    background-position: center;
+}
+
+.Jumbotron-Home {
+    background-image: url('../../img/Placeholders/Jumbotron/placeholder-jumbotron-home.jpg');
+}
+
+.Jumbotron-Client {
+    background-image: url('../../img/Placeholders/Jumbotron/placeholder-jumbotron-clients.jpg');
+}
