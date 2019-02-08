@@ -61,7 +61,7 @@ class ModalComponent extends React.Component {
  upload() {
    const formData =new FormData()
    this.state.files_to_upload.forEach(file => {
-     formData.append(file.get('file'))
+     formData.append('files',file.get('file'))
    })
    API.files().folder(this.props.selected_folder).upload(formData)
         .then((response) => {
@@ -79,7 +79,7 @@ class ModalComponent extends React.Component {
       
         <Button color="primary" onClick={this.toggle}>{this.props.buttonLabel}</Button>
         <Modal centered isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>{this.props.selected_folder}</ModalHeader>
+          <ModalHeader toggle={this.toggle}>{this.props.selected_folder.name}</ModalHeader>
           <ModalBody>
           <Dropzone onDrop={this.onDrop.bind(this)}>
             {({getRootProps, getInputProps, isDragActive}) => {
@@ -103,7 +103,7 @@ class ModalComponent extends React.Component {
    
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Last opp</Button>{' '}
+            <Button color="primary" onClick={this.upload.bind(this)}>Last opp</Button>{' '}
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
@@ -132,7 +132,7 @@ const mapStateToProps = (state) => {
 // Create a dispatch which sends information to the reducer. In this case a client is being deleted
 const mapDispatchToProps = (dispatch) => {
   return {
-      fetchFilesData: (client_id, selected_folder) =>{ dispatch(fetchFilesData(client_id, selected_folder.id))},
+      fetchFilesData: (client_id, selected_folder) =>{ dispatch(fetchFilesData(client_id, selected_folder))},
 }
 
 }
