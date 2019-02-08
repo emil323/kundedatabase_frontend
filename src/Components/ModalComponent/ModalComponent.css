@@ -1,0 +1,21 @@
+.modalImage{
+    display:block;
+    margin:auto;
+    margin-top: 4em;
+}
+
+.modalBtn{
+    display:block;
+    margin:auto;
+    margin-bottom: 4em;
+}
+
+.modalP{
+    text-align: center;
+    font-size: 25px;
+    padding: 10px;
+}
+
+.modalDiv{
+   text-align: center;
+}

@@ -37,8 +37,8 @@ export const fetchFilesData = (client_id, selected) => {
             .then(response => {
 
                 const files = response.data
-                const root_folder = files.find((file) => {return file.is_root}).id
-                const selected_folder = files.find((file) => {return file.id === selected && file.is_directory}) != null ? selected : root_folder
+                const root_folder = files.find((file) => {return file.is_root})
+                const selected_folder = files.find((file) => {return file.id === selected && file.is_directory}) != null ? selected_folder : root_folder
 
                 dispatch(fetchFiles(files,root_folder,selected_folder,client_id))
             })

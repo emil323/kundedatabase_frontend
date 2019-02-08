@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "axios-progress-bar": "^1.2.0",
     "react": "^16.7.0",
     "react-adal": "^0.4.22",
     "react-dom": "^16.7.0",
