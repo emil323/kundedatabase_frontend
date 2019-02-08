@@ -1,5 +1,6 @@
 .jumbotron {
     background-color: white;
+    color: #fff;
 }
 
 .jumbotron {
@@ -8,9 +9,9 @@
 }
 
 .Jumbotron-Home {
-    background-image: url('../../img/Placeholders/Jumbotron/placeholder-jumbotron-home.jpg');
+    background-image: linear-gradient(to bottom, #002540 0%, #002540 0%, transparent), url('../../img/Placeholders/Jumbotron/placeholder-jumbotron-home.jpg');
 }
 
 .Jumbotron-Client {
-    background-image: url('../../img/Placeholders/Jumbotron/placeholder-jumbotron-clients.jpg');
+    background-image: linear-gradient(to bottom, #002540 0%, #002540 0%, transparent), url('../../img/Placeholders/Jumbotron/placeholder-jumbotron-clients.jpg');
 }

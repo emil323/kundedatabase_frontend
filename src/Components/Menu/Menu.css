@@ -1,0 +1,37 @@
+.navName{
+  font-size: 1.8em;
+}
+
+.nav-item p{
+  font-size: 1.3em;
+  padding-bottom: 1.5em;
+}
+
+a{
+  font-size: 1.1em;
+  text-decoration: none;
+  color: #00ACE6;
+  font-weight: bold;
+}
+
+a:hover{
+  text-decoration: none;
+  color: #0353A4;
+}
+
+a:focus {
+  text-decoration: none;
+}
+
+.nav-item .nav-link{
+  text-decoration: none;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border-top: 1px solid;
+  border-color: #9B9B9B;
+}
+
+.nav-item .lastElement{
+  border-bottom: 1px solid;
+  border-color: #9B9B9B;
+}

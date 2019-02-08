@@ -1,8 +1,9 @@
 import React from 'react'
 import {Component} from 'react'
-import {NavItem} from 'reactstrap'
+import {NavItem, NavLink, } from 'reactstrap'
 import { Link } from "react-router-dom"
 import { authContext } from './../../Auth/adalConfig';
+import './Menu.css';
 
 class Menu extends Component {
 
@@ -22,12 +23,12 @@ class Menu extends Component {
     render() {
         return (
             <div className="menu">    
-                <NavItem>{this.state.name}</NavItem>      
+                <NavItem className="navName">{this.state.name}</NavItem>      
                 <NavItem><p>{this.state.email}</p></NavItem>   
-                <NavItem><Link to="/" >Hjem</Link></NavItem>
-                <NavItem><Link to="/favourites">Favoritter</Link></NavItem>
-                <NavItem><Link to="/clients" >Kunder</Link></NavItem>
-                <NavItem><Link to="/useraccess" >Brukertilgang</Link></NavItem>
+                <Link to="/" ><NavItem><NavLink>HJEM</NavLink></NavItem></Link>
+                <Link to="/favourites"><NavItem><NavLink>FAVORITTER</NavLink></NavItem></Link>
+                <Link to="/clients" ><NavItem><NavLink>KUNDER</NavLink></NavItem></Link>
+                <Link to="/useraccess" ><NavItem><NavLink className="lastElement">BRUKERTILGANG</NavLink></NavItem></Link>
             </div>
             
         )
