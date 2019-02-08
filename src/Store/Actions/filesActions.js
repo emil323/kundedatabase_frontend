@@ -38,8 +38,11 @@ export const fetchFilesData = (client_id, selected) => {
 
                 const files = response.data
                 const root_folder = files.find((file) => {return file.is_root})
-                const selected_folder = files.find((file) => {return file.id === selected && file.is_directory}) != null ? selected_folder : root_folder
 
+                //Determine what folder to set as selected
+                let selected_folder = files.find((file) => {return file.id === selected && file.is_directory}) 
+                selected_folder = selected_folder != null ? selected_folder : root_folder
+                //Dispatch to fetch_files
                 dispatch(fetchFiles(files,root_folder,selected_folder,client_id))
             })
             .catch(error => {

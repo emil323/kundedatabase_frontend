@@ -1,16 +1,15 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import UploadFile from '../Pages/UploadFile/UploadFile';
 import Dropzone from 'react-dropzone'
 import classNames from 'classnames'
-import API from '../../API/API';
+import API from '../../../../API/API';
 import { connect } from "react-redux";
-import {fetchFilesData} from '../../Store/Actions/filesActions'
-import './ModalComponent.css'
+import {fetchFilesData} from '../../../../Store/Actions/filesActions'
+import './UploadModal.css'
 
-import downloadIcon from "../../Assets/Icons/download.png"
+import downloadIcon from "../../../../Assets/Icons/download.png"
 
-class ModalComponent extends React.Component {
+class UploadModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,6 +19,10 @@ class ModalComponent extends React.Component {
 
     this.toggle = this.toggle.bind(this)
   }
+
+  /**
+   * Toggle Modal component visible/invisible
+   */
 
   toggle() {
 
@@ -31,7 +34,12 @@ class ModalComponent extends React.Component {
 
   }
 
-
+  /**
+   * 
+   * Handles files added to upload queue
+   * 
+   * @param {*} files 
+   */
 
   onDrop(files) {
 
@@ -47,39 +55,61 @@ class ModalComponent extends React.Component {
         ]
       }))
 
-      /* API.files().folder(this.props.selected_folder).upload(formData)
-        .then((response) => {
-          this.props.fetchFilesData(this.props.client_id, this.props.selected_folder.id)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-        */
     })
   }
 
+/**
+ * Handles uploading files, is fired when clicking at upload button
+ */
+
  upload() {
-   const formData =new FormData()
+
+  const formData =new FormData()
+
+  //Load all single formdatas, to one uniform formData.
    this.state.files_to_upload.forEach(file => {
      formData.append('files',file.get('file'))
    })
-   API.files().folder(this.props.selected_folder).upload(formData)
+
+   const folder_id = this.props.selected_folder.id
+
+   //Post formData to API
+   API.files().folder(folder_id).upload(formData)
         .then((response) => {
-          this.props.fetchFilesData(this.props.client_id, this.props.selected_folder)
+          console.log(response)
+          this.toggle()
+          this.props.fetchFilesData(this.props.client_id, folder_id)
         })
         .catch((err) => {
           console.log(err)
         })
  }
 
+/**
+ * Reset fileuploads
+ */
+
+ reset() {
+  this.setState(prevState => ({
+    ...prevState,
+    files_to_upload : []
+  }));
+ }
+
+ /**
+  * Renders Modal
+  */
+
   render() {
     
+    const hasFiles = this.state.files_to_upload.length === 0
+
     return (
       <div className="container">
       
         <Button color="primary" onClick={this.toggle}>{this.props.buttonLabel}</Button>
         <Modal centered isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>{this.props.selected_folder.name}</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Last opp til: {this.props.selected_folder.name}</ModalHeader>
           <ModalBody>
           <Dropzone onDrop={this.onDrop.bind(this)}>
             {({getRootProps, getInputProps, isDragActive}) => {
@@ -91,20 +121,30 @@ class ModalComponent extends React.Component {
                   <img className="modalImage" src={downloadIcon}></img>
                   <input  {...getInputProps()} />
                   {
-                   <p className="modalP">{isDragActive ? "Slipp her..." : " Dra filer hit..."}</p>
+                   <p className="modalP">{isDragActive ? "...og slipp her." : " Dra filer hit..."}</p>
                   }
             
-                  <Button  color="primary" className="modalBtn">Eller velg filer </Button>
-                  <div className="modalDiv">{this.state.files_to_upload.map((file) => {return (<p>{file.get('file').name}</p>)})}</div>
+                   <Button  color="primary" className="modalBtn">Eller velg filer </Button>
+                  <div className="modalDiv">
+                  <p className="modalChosenFiles">{hasFiles? '' : 'Valgte filer:'}</p>
+                  {this.state.files_to_upload.map((file) => {
+                    const name = file.get('file').name
+                    return (<p key={name}>{name}</p>)})}
+                 
+                  </div>
                 </div>
               )
             }}  
           </Dropzone>
+          {
+            <p className="modalResetFiles">{hasFiles? '' : <Button onClick={this.reset.bind(this)}>Nullstill</Button>}</p>
+          }
    
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.upload.bind(this)}>Last opp</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+             
+            <Button color="primary" className={hasFiles ? 'disabled' : ''} onClick={this.upload.bind(this)}>Start opplastning</Button>
+            <Button color="secondary" onClick={this.toggle}>Lukk</Button>
           </ModalFooter>
         </Modal>
       </div>
@@ -137,4 +177,4 @@ const mapDispatchToProps = (dispatch) => {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(UploadModal)
