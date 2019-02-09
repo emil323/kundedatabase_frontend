@@ -26,7 +26,6 @@ class Menu extends Component {
                 <NavItem className="navName">{this.state.name}</NavItem>      
                 <NavItem><p>{this.state.email}</p></NavItem>   
                 <Link to="/" ><NavItem><NavLink>HJEM</NavLink></NavItem></Link>
-                <Link to="/favourites"><NavItem><NavLink>FAVORITTER</NavLink></NavItem></Link>
                 <Link to="/clients" ><NavItem><NavLink>KUNDER</NavLink></NavItem></Link>
                 <Link to="/useraccess" ><NavItem><NavLink className="lastElement">BRUKERTILGANG</NavLink></NavItem></Link>
             </div>

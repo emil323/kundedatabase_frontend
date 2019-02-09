@@ -29,7 +29,6 @@ class App extends Component {
                     <MainContent>
                         <Breadcrumbs className="hidden-lg hidden-xl hidden-md hidden-sm "/>
                         <Route exact path="/" component={Home} />
-                        <Route path="/favourites" component={Favourites} />
                         <Route path="/clients" component={Clients}/>
                         <Route path="/addclient" component={AddClient}/>
                         <Route path="/client/:client_id" component={Client}/>
