@@ -8,12 +8,9 @@ import MainContent from '../Wrappers/MainContent/MainContent'
 
 import Home from "../Pages/Home/Home"
 import Clients from "../Pages/Clients/Clients"
-import Favourites from "../Pages/Favourites/Favourites"
 import Client from "../Pages/Client/Client"
 import AddClient from '../Pages/Clients/AddClient';
-import AddFile from '../Pages/Files/AddFile';
 import UserAccess from '../Pages/UserAccess/UserAccess'
-import Tab from '../../Components/TabComponent/TabComponent'
 
 import './App.css'
 

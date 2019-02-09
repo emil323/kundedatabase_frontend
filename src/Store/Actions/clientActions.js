@@ -30,10 +30,10 @@ export const fetchClients = (clients) => {
     }
 }
 
-export const fetchAccessLog = (log) => {
+export const fetchAccessLog = (accesslog) => {
     return {
         type: FETCH_ACCESS_LOG,
-        log
+        accesslog
     }
 }
 
