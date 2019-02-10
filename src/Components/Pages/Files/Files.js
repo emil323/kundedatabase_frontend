@@ -3,19 +3,27 @@ import {Component} from 'react'
 import api from '../../../API/API'
 import FileData from './FileData'
 import "./Files.css"
-import { Table } from 'reactstrap';
-import { Link } from "react-router-dom"
+import { Table, Row, Col, Button} from 'reactstrap';
+import { withRouter } from "react-router-dom"
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
-import { deleteFile, fetchFilesData, updateSearch} from '../../../Store/Actions/filesActions'
+import { deleteFile, fetchFilesData, updateSearch, changeFolder} from '../../../Store/Actions/filesActions'
 import UploadModal from './UploadModal/UploadModal';
 import NewFolderModal from './NewFolderModal/NewFolderModal';
+import { runInNewContext } from 'vm';
 
 class Files extends Component {
 
     constructor(props) {
         super(props)
+        this.upOneLevel = this.upOneLevel.bind(this)
+    }
+
+    upOneLevel() {
+        if(!this.props.selected_folder.is_root) {
+            this.props.history.push('/client/' + this.props.client_id + "/"  + this.props.selected_folder.parent_id)
+        }
     }
 
     render() {
@@ -23,9 +31,18 @@ class Files extends Component {
             return file.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
         })
         return (
-            <div >
-            <label>Søk etter fil:</label>
-            <input type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch.bind(this)}/>
+            <div className="container" >
+            <Row className="text-right">
+                <Col  >
+                    <input type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch.bind(this)}/>
+                </Col>
+            </Row>    
+            <Row>
+                    <Col xs="1" ><UploadModal buttonLabel="Last Opp"/> </Col>
+                    <Col xs="2"><NewFolderModal buttonLabel="Ny mappe"/></Col>
+                    <Col xs="3"><Button disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}>Opp et nivå</Button></Col>
+
+            </Row>
             <Table className="table table-hover">
             <thead className="thead-dark">
                         <tr>
@@ -37,19 +54,24 @@ class Files extends Component {
                     </thead>
                 {
                     filteredFiles.map(file => {
-                        return  <FileData file={file} deleteFile={this.props.deleteFile} key={file.id}/>
+                        return  <FileData file={file}  deleteFile={this.props.deleteFile} key={file.id}/>
                     })
                 }
                 </Table>
-                <UploadModal buttonLabel="Last Opp"/>
-                <NewFolderModal buttonLabel="Ny mappe"/>
             </div>
             
         )
     }
      //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
-     componentDidMount() {
-        this.props.fetchFilesData(this.props.client_id, this.props.selected_folder.id)
+     componentDidMount() { 
+        const folder = this.props.folder !== null ? this.props.folder : this.props.selected_folder.id
+        this.props.fetchFilesData(this.props.client_id, folder)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.props.folder !== nextProps.folder) {
+            this.props.fetchFilesData(nextProps.client_id, nextProps.folder)
+        }
     }
 }
 
@@ -74,8 +96,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         deleteFile: (id) => { dispatch(deleteFile(id))},
         fetchFilesData: (client_id, selected_folder) =>{ dispatch(fetchFilesData(client_id, selected_folder))},
-        updateSearch:(search_key) => {dispatch(updateSearch(search_key))}}
+        updateSearch:(search_key) => {dispatch(updateSearch(search_key))},
+        changeFolder: (folder) => {dispatch(changeFolder(folder))}
+    }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Files)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Files))

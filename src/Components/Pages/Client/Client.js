@@ -20,7 +20,8 @@ class Client extends Component {
         return (
             <div className="container">
                 <ClientHeader clientName={this.state.name}/>
-                <Files client_id={this.props.match.params.client_id}/>
+                <Files  client_id={this.props.match.params.client_id} 
+                        folder={this.props.match.params.selected_folder} />
                 
             </div>
         )

@@ -1,6 +1,6 @@
 
 import api from '../../API/API'
-import {FETCH_FILES, ADD_FILE, DELETE_FILE, SEARCH_KEY} from '../types'
+import {FETCH_FILES, ADD_FILE, CHANGE_FOLDER, DELETE_FILE, SEARCH_KEY} from '../types'
 
 export const deleteFile = (id) => {
     return {
@@ -13,6 +13,13 @@ export const addFile = (file) => {
     return {
         type: ADD_FILE,
         file: file
+    }
+}
+
+export const changeFolder = (folder) => {
+    return {
+        type: CHANGE_FOLDER,
+        folder
     }
 }
 

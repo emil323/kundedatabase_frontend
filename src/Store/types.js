@@ -7,6 +7,7 @@ export const FETCH_CLIENTS = 'FETCH_CLIENTS'
 export const ADD_FILE = 'ADD_FILE'
 export const DELETE_FILE = 'DELETE_FILE'
 export const FETCH_FILES = 'FETCH_FILES'
+export const CHANGE_FOLDER = 'CHANGE_FOLDER'
 
 // General
 export const SEARCH_KEY = 'SEARCH_KEY'
