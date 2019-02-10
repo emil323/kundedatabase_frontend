@@ -10,6 +10,7 @@ import { Link } from "react-router-dom"
 import { connect } from "react-redux";
 import { deleteFile, fetchFilesData, updateSearch} from '../../../Store/Actions/filesActions'
 import UploadModal from './UploadModal/UploadModal';
+import NewFolderModal from './NewFolderModal/NewFolderModal';
 
 class Files extends Component {
 
@@ -41,6 +42,7 @@ class Files extends Component {
                 }
                 </Table>
                 <UploadModal buttonLabel="Last Opp"/>
+                <NewFolderModal buttonLabel="Ny mappe"/>
             </div>
             
         )

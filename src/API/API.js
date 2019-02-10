@@ -40,6 +40,9 @@ export default  {
                               'Content-Type': 'multipart/form-data'
                             }
                         })
+                    },
+                    create_folder(data) {
+                        return axios().post('/files/folder/' + folderID + '/create_folder', data)
                     }
                 }
             },

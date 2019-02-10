@@ -3,6 +3,7 @@ import word from "../../../Assets/Icons/word.png"
 import pdf from "../../../Assets/Icons/pdf.png"
 import excel from "../../../Assets/Icons/excel.png"
 import textDoc from "../../../Assets/Icons/txt.png"
+import folder from "../../../Assets/Icons/folder.png"
 
 import { Component } from 'react'
 import DropdownBtn from '../../DropdownBtn/DropdownBtn';
@@ -31,6 +32,11 @@ import API from '../../../API/API';
                 return pdf
             case "EXCEL":
                 return excel
+            case "folder":
+                return folder     
+            case "image/png":
+                return pdf
+            break;    
             default:
                 return textDoc
         }
