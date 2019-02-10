@@ -15,7 +15,6 @@ const clientsReducer = (state = initState, action) => {
             return { ...state, 
                 clients: action.clients.clients
             }
-            // KOM HIT
         case FETCH_ACCESS_LOG:
             return { ...state,
                 accesslog: action.accesslog.accesslog
