@@ -1,0 +1,7 @@
+.dropdown-toggle {
+    background-color: #B08B5B;
+}
+
+.dropdown-toggle:active{
+    background-color: white;
+}

@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { fetchFilesData } from "../../../../Store/Actions/filesActions";
 import {FormGroup, Form, Input, Label } from 'reactstrap'
 
+import './NewFolderModal.css'
+
 import "./NewFolderModal.css";
 import API from "../../../../API/API";
 
@@ -69,7 +71,7 @@ class NewFolderModal extends React.Component {
   render() {
     return (
       <div className="container">
-        <Button color="primary" onClick={this.toggle}>
+        <Button className="dropUpBtn" color="primary" onClick={this.toggle}>
           {this.props.buttonLabel}
         </Button>
         <Modal

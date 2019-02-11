@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import './DropdownBtn.css'
 
 export default class DropdownBtn extends Component {
     constructor(props) {
@@ -32,7 +33,7 @@ export default class DropdownBtn extends Component {
         })
         return (
             <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                <DropdownToggle caret color="primary" />
+                <DropdownToggle caret color="secondary" />
                 <DropdownMenu>
                     {optionsList}
                 </DropdownMenu>

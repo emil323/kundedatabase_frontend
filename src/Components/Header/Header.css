@@ -8,6 +8,8 @@
     width: 100%;
     background-color: #002540;
     color:white;
+    position: fixed;
+    z-index: 1;
 }
 
 .navbar .menu p {

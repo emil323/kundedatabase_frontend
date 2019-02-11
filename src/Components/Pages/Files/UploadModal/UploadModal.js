@@ -13,6 +13,7 @@ class UploadModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      backdrop: true,
       modal: false,
       files_to_upload: []
     };
@@ -99,11 +100,13 @@ class UploadModal extends React.Component {
 
     return (
       <div className="container">
-        <Button color="primary" onClick={this.toggle}>
+        <Button className="dropUpBtn" color="primary" onClick={this.toggle}>
           {this.props.buttonLabel}
         </Button>
         <Modal
+        shouldCloseOnOverlayClick={false}
           centered
+          backdrop={this.state.backdrop}
           isOpen={this.state.modal}
           toggle={this.toggle}
           className={this.props.className}
