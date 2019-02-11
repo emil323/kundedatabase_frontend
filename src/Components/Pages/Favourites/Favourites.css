@@ -1,3 +1,7 @@
 .link {
     text-decoration: none;
 }
+
+.favourites Input {
+    margin-bottom: 2em;
+}

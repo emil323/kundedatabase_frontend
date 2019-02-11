@@ -4,7 +4,7 @@ import Dropzone from "react-dropzone";
 import classNames from "classnames";
 import API from "../../../../API/API";
 import { connect } from "react-redux";
-import { fetchFilesData } from "../../../../Store/Actions/filesActions";
+import { fetchFilesData, toggleUploadModal } from "../../../../Store/Actions/filesActions";
 import "./UploadModal.css";
 
 import downloadIcon from "../../../../Assets/Icons/download.png";
@@ -13,24 +13,11 @@ class UploadModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false,
+      backdrop: true,
       files_to_upload: []
-    };
-
-    this.toggle = this.toggle.bind(this);
+    }
   }
 
-  /**
-   * Toggle Modal component visible/invisible
-   */
-
-  toggle() {
-    this.setState(prevState => ({
-      ...this.state,
-      modal: !prevState.modal,
-      files_to_upload: []
-    }));
-  }
 
   /**
    *
@@ -71,7 +58,7 @@ class UploadModal extends React.Component {
       .upload(formData)
       .then(response => {
         console.log(response);
-        this.toggle();
+        this.props.toggleUploadModal()
         this.props.fetchFilesData(this.props.client_id, folder_id);
       })
       .catch(err => {
@@ -99,13 +86,15 @@ class UploadModal extends React.Component {
 
     return (
       <div className="container">
-        <Button color="primary" onClick={this.toggle}>
+        {/*<Button className="dropUpBtn" color="primary" onClick={this.toggle}>
           {this.props.buttonLabel}
-        </Button>
+          </Button> */}
         <Modal
+        shouldCloseOnOverlayClick={false}
           centered
-          isOpen={this.state.modal}
-          toggle={this.toggle}
+          backdrop={this.state.backdrop}
+          isOpen={this.props.upload_modal}
+          toggle={this.props.toggleUploadModal}
           className={this.props.className}
         >
           <ModalHeader toggle={this.toggle}>
@@ -165,7 +154,7 @@ class UploadModal extends React.Component {
             >
               Start opplastning
             </Button>
-            <Button color="secondary" onClick={this.toggle}>
+            <Button color="secondary" onClick={this.props.toggleUploadModal}>
               Lukk
             </Button>
           </ModalFooter>
@@ -182,7 +171,8 @@ const mapStateToProps = state => {
     root_folder,
     selected_folder,
     client_id,
-    search
+    search,
+    upload_modal
   } = state.filesReducer;
   return {
     //Filter to only display files from selected folder or to handle a search value
@@ -193,7 +183,8 @@ const mapStateToProps = state => {
     root_folder,
     selected_folder,
     client_id,
-    search
+    search,
+    upload_modal
   };
 };
 
@@ -202,7 +193,8 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchFilesData: (client_id, selected_folder) => {
       dispatch(fetchFilesData(client_id, selected_folder));
-    }
+    },
+    toggleUploadModal: () => {dispatch(toggleUploadModal())}
   };
 };
 

@@ -1,5 +1,5 @@
 
-import {ADD_FILE, DELETE_FILE, CHANGE_FOLDER, SEARCH_KEY, FETCH_FILES} from '../types'
+import {SEARCH_KEY, FETCH_FILES, TOGGLE_UPLOAD_MODAL, TOGGLE_NEW_FOLDER_MODAL} from '../types'
 
 // A Reducer requires an initial state when running the application
 const initState = {
@@ -7,7 +7,9 @@ const initState = {
     root_folder: {id:'', name:''},
     selected_folder: {id:'', name:''},
     client_id:'',
-    search: ''
+    search: '',
+    new_folder_modal: false, 
+    upload_modal: false 
 }
 
 // Reducers are called when a change happens. The reducers changes the initial state
@@ -22,32 +24,22 @@ const filesReducer = (state = initState, action) => {
                 client_id:action.client_id,
                 search:''
             }
-        case CHANGE_FOLDER: 
-     
-            return {
-                ...state,
-                selected_folder: action.folder
-            }
         case SEARCH_KEY:
             return {
                 ...state,
                 search: action.search_key    
             }
-        case ADD_FILE:
-        let files = [...state.files, action.file];
-        return {
-                ...state,
-                files: files
-        };
-        case DELETE_FILE:
-            let newFiles = state.files.filter(file => {
-                return action.id !== file.id
-            });
+        case TOGGLE_UPLOAD_MODAL:
             return {
                 ...state,
-                files: newFiles
-            };
-    
+                upload_modal: !state.upload_modal
+            }
+        case TOGGLE_NEW_FOLDER_MODAL: {
+            return {
+                ...state,
+                new_folder_modal: !state.new_folder_modal
+            }    
+        }   
         default:
             return state
     }

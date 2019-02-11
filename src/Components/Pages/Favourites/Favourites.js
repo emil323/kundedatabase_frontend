@@ -4,6 +4,7 @@ import FavouritesCard from "./FavouritesCard"
 import { Container, Row, Col } from 'reactstrap';
 import {fetchClientsData, updateSearch} from '../../../Store/Actions/clientActions'
 import { connect } from "react-redux";
+import './Favourites.css'
 
 class Favourites extends Component {
 
@@ -12,7 +13,8 @@ class Favourites extends Component {
         return client.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
       });
         return (
-          <div>
+          <div className="favourites">
+          <input placeholder="Søk etter favoritt.." type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this)}/>
             <Container fluid>
               <Row>
               {
@@ -23,7 +25,6 @@ class Favourites extends Component {
   
               </Row>
             </Container>
-            <input type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this)}/>
           </div>
         )
       }

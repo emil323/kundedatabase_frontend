@@ -6,7 +6,7 @@ import textDoc from "../../../Assets/Icons/txt.png"
 import folder from "../../../Assets/Icons/folder.png"
 
 import { connect } from "react-redux";
-import { deleteFile, fetchFilesData, updateSearch,changeFolder} from '../../../Store/Actions/filesActions'
+import { fetchFilesData} from '../../../Store/Actions/filesActions'
 import { Link, withRouter } from "react-router-dom";
 import { Component } from 'react'
 import DropdownBtn from '../../DropdownBtn/DropdownBtn';
@@ -73,7 +73,7 @@ const mapStateToProps = (state) => {
         btnOptions: [
             { tekst: 'Behandle', isHeader: 1, key: 1 },
             { tekst: 'Vis', isHeader: 0, key: 2 },
-            { tekst: 'Slett', isHeader: 0, key: 3, function: () => { return this.props.deleteFile(this.props.file.id)}},
+            { tekst: 'Slett', isHeader: 0, key: 3},
             { tekst: 'Test', isHeader: 1, key: 4 },
             { tekst: 'Placeholder', isHeader: 0, key: 5, },
         ]
@@ -83,10 +83,8 @@ const mapStateToProps = (state) => {
 // Create a dispatch which sends information to the reducer. In this case a client is being deleted
 const mapDispatchToProps = (dispatch) => {
     return {
-        deleteFile: (id) => { dispatch(deleteFile(id))},
         fetchFilesData: (client_id, selected_folder) =>{ dispatch(fetchFilesData(client_id, selected_folder))},
-        changeFolder: (folder) => {dispatch(changeFolder(folder))}
-       }
+    }
 }
 
 

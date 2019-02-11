@@ -3,3 +3,58 @@
     margin: 0px auto;
 }
 
+.menuBtn {
+    background-color: transparent; 
+    border: none;
+    position: fixed;
+    bottom: 0;
+}
+
+.menuBtn:hover {
+    background-color: transparent;
+    border: none;
+}
+
+.backBtn {
+    transform: translate(-10%, -50%);
+}
+
+.btnGroupNew {
+    right: 0;
+    transform: translate(-50%, -50%);
+}
+
+
+.btnImg {
+    height: 5rem;
+}
+
+input {
+    font-size: 2em;
+}
+
+table {
+    min-width: 100%;
+}
+
+.searchFiles {
+    margin: auto;
+}
+
+.dropdown-menu {
+    margin-right: 5em;
+    width: 40%;
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    
+}
+
+.dropdown-toggle {
+    background-color: transparent;
+    border: none;
+}
+
+.dropdown-divider {
+    opacity: 0;
+}

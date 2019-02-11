@@ -1,25 +1,17 @@
 
 import api from '../../API/API'
-import {FETCH_FILES, ADD_FILE, CHANGE_FOLDER, DELETE_FILE, SEARCH_KEY} from '../types'
+import {FETCH_FILES, SEARCH_KEY, TOGGLE_UPLOAD_MODAL, TOGGLE_NEW_FOLDER_MODAL} from '../types'
 
-export const deleteFile = (id) => {
+
+export const toggleUploadModal = () => {
     return {
-        type: DELETE_FILE,
-        id: id
+        type: TOGGLE_UPLOAD_MODAL
     }
 }
 
-export const addFile = (file) => {
+export const toggleNewFolderModal = () => {
     return {
-        type: ADD_FILE,
-        file: file
-    }
-}
-
-export const changeFolder = (folder) => {
-    return {
-        type: CHANGE_FOLDER,
-        folder
+        type: TOGGLE_NEW_FOLDER_MODAL
     }
 }
 
