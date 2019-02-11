@@ -12,7 +12,7 @@ export default function (){
             'Content-Type': 'application/json',
           }
     })
-
+    
     instance.interceptors.request.use(function (config) {
         const token = localStorage.getItem('adal.idtoken')
         config.headers.Authorization =  token ? `Bearer ${token}` : ''

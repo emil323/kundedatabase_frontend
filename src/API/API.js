@@ -23,6 +23,16 @@ export default  {
             }
         }
     },
+    users: () => {
+        return {
+            list() {
+                return axios().get("/useraccess")
+            },
+            create() {
+                return axios().get("/useraccess/create")
+            }
+        }
+    },
     accesslog: () => {
         return {
             list() {
@@ -48,6 +58,13 @@ export default  {
             },
             getURL(file_id, dummy_name) {
                 return API_URL + "/files/" + file_id + "/" + dummy_name
+            }
+        }
+    },
+    consultants: () => {
+        return {
+            list(graph_token) {
+                return axios().get('/users/' + graph_token)
             }
         }
     },

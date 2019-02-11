@@ -1,15 +1,15 @@
-input[type="radio"] + label{
+input[type="checkbox"] + label{
     display: block;
     margin: 0.2em;
     cursor: pointer;
     padding: 0.2em;
 }
 
-input[type="radio"]{
+input[type="checkbox"]{
     display: none;
 }
 
-input[type="radio"] + label:before{
+input[type="checkbox"] + label:before{
     content:"\2714";
     border:0.1em solid #000;
     border-radius:0.2em;
@@ -22,7 +22,7 @@ input[type="radio"] + label:before{
     transition: .2s;
 }
 
-input[type="radio"]:checked + label:before{
+input[type="checkbox"]:checked + label:before{
     background-color: #337ab7;
     border-color: #337ab7;
     color:#fff;
