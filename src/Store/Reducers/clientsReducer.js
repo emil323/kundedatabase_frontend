@@ -1,11 +1,12 @@
 
-import {ADD_CLIENT, DELETE_CLIENT, SEARCH_KEY, FETCH_CLIENTS, FETCH_ACCESS_LOG} from '../types'
+import {DELETE_CLIENT, SEARCH_KEY, FETCH_CLIENTS, FETCH_ACCESS_LOG, SEARCH_LOG_KEY} from '../types'
 
 // A Reducer requires an initial state when running the application
 const initState = {
     clients: [],
     accesslog: [],
-    search: ''
+    search: '',
+    searchlog: ''
 }
 
 // Reducers are called when a change happens. The reducers changes the initial state
@@ -24,12 +25,6 @@ const clientsReducer = (state = initState, action) => {
                 ...state,
                 search: action.search_key    
             }
-        case ADD_CLIENT:
-        let clients = [...state.clients, action.client];
-        return {
-                ...state,
-                clients: clients
-        };
         case DELETE_CLIENT:
             let newClients = state.clients.filter(client => {
                 return action.id !== client.id

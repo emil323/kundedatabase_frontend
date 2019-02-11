@@ -9,7 +9,7 @@ import classnames from 'classnames';
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
-import { deleteClient, fetchClientsData, fetchAccessLogData, updateSearch} from '../../../Store/Actions/clientActions'
+import { deleteClient, fetchClientsData, fetchAccessLogData, updateSearch, updateLogSearch} from '../../../Store/Actions/clientActions'
 
 class Clients extends Component {
     constructor(props){
@@ -88,7 +88,7 @@ class Clients extends Component {
                                     }
                                 </Table>
                                 <label>Søk etter kunde:</label>
-                                <input type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this)}/>
+                                <input type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this.props.updateSearch)}/>
                                 <input type="button" value="Go to Add Client" onClick={this.goToAddClient}/>
                             </Col>
                         </Row>
@@ -136,7 +136,7 @@ const mapStateToProps = (state) => {
     return {
         clients: state.clientsReducer.clients,
         accesslog: state.clientsReducer.accesslog,
-        search: state.clientsReducer.search
+        search: state.clientsReducer.search,
     }
 }
 
@@ -146,7 +146,7 @@ const mapDispatchToProps = (dispatch) => {
         deleteClient: (id) => { dispatch(deleteClient(id))},
         fetchClientsData: () =>{ dispatch(fetchClientsData())},
         fetchAccessLogData: () =>{ dispatch(fetchAccessLogData())},
-        updateSearch:(search_key) => {dispatch(updateSearch(search_key))}}
+        updateSearch:(search_key) => {dispatch(updateSearch(search_key))},}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Clients)
