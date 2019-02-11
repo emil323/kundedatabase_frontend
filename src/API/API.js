@@ -61,6 +61,13 @@ export default  {
             }
         }
     },
+    consultants: () => {
+        return {
+            list(graph_token) {
+                return axios().get('/users/' + graph_token)
+            }
+        }
+    },
     profile: () => {
         return {
             get() {

@@ -2,6 +2,8 @@ import React from 'react';
 import { Table, Form } from 'reactstrap';
 import "./UserAccess.css"
 import UserAccessData from "./UserAccessData"
+import {authContext} from '../../../Auth/adalConfig'
+import API from '../../../API/API';
 
 import { connect } from "react-redux";
 import {updateSearch, fetchUsersData } from '../../../Store/Actions/userActions'
@@ -44,9 +46,17 @@ class UserAccess extends React.Component {
   }
 
     //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
-    componentDidMount() {
-        this.props.fetchUsersData()
-    }
+    
+  componentDidMount() {
+
+    this.props.fetchUsersData()
+
+    authContext.acquireToken('https://graph.microsoft.com',(message, token, msg) => {
+        API.consultants().list(token)
+            .then(res => console.log(res)) 
+    })
+
+  }
 }
 
 
