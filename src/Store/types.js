@@ -12,5 +12,9 @@ export const CHANGE_FOLDER = 'CHANGE_FOLDER'
 // General
 export const SEARCH_KEY = 'SEARCH_KEY'
 
+// Access Log
 export const FETCH_ACCESS_LOG = 'FETCH_ACCESS_LOG'
 
+// Users
+export const FETCH_USERS = 'FETCH_USERS'
+export const ADD_USER = 'ADD_USER'

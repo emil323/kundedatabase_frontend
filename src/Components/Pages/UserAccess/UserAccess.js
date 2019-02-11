@@ -3,6 +3,9 @@ import { Table, Form } from 'reactstrap';
 import "./UserAccess.css"
 import UserAccessData from "./UserAccessData"
 
+import { connect } from "react-redux";
+import { } from '../../../Store/Actions/userActions'
+
 class UserAccess extends React.Component {
 
     toggleCheckbox = () => {
@@ -28,6 +31,31 @@ class UserAccess extends React.Component {
             </div>
         );
   }
+
+    //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
+    componentDidMount() {
+        this.props.()
+        this.props.fetchAccessLogData()
+    }
 }
 
-export default UserAccess
+
+
+// Calls on a clientsReducer that bring props to the component
+const mapStateToProps = (state) => {
+    return {
+        clients: state.clientsReducer.clients,
+        search: state.clientsReducer.search
+    }
+}
+
+// Create a dispatch which sends information to the reducer. In this case a client is being deleted
+const mapDispatchToProps = (dispatch) => {
+    return {
+      
+    }
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserAccess)
