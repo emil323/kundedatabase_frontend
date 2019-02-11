@@ -12,7 +12,7 @@ const usersReducer = (state = initState, action) => {
     switch(action.type){
         case FETCH_USERS:
             return { ...state, 
-                clients: action.clients.clients
+                users: action.users.users
             }
         case SEARCH_KEY:
             return {
@@ -20,10 +20,10 @@ const usersReducer = (state = initState, action) => {
                 search: action.search_key    
             }
         case ADD_USER:
-        let clients = [...state.clients, action.client];
+        let users = [...state.user, action.user];
         return {
                 ...state,
-                clients: clients
+                users: users
         };
         default:
             return state

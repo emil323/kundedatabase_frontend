@@ -3,10 +3,10 @@ import api from '../../API/API'
 import {FETCH_USERS, ADD_USER, SEARCH_KEY} from '../types'
 
 
-export const addClient = (client) => {
+export const addUser = (user) => {
     return {
         type: ADD_USER,
-        client: client
+        user: user
     }
 }
 
@@ -17,18 +17,18 @@ export const updateSearch = (e) => {
     }
 }
 
-export const fetchUsers = (clients) => {
+export const fetchUsers = (users) => {
     return {
         type: FETCH_USERS,
-        clients
+        users
     }
 }
 
-export const fetchClientsData = () => {
+export const fetchUsersData = () => {
     return (dispatch) => {
-        return api.clients().list()
+        return api.users().list()
             .then(response => {
-                dispatch(fetchClients(response.data))
+                dispatch(fetchUsers(response.data))
             })
             .catch(error => {
                 throw(error)

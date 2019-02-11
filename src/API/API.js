@@ -23,6 +23,16 @@ export default  {
             }
         }
     },
+    users: () => {
+        return {
+            list() {
+                return axios().get("/useraccess")
+            },
+            create() {
+                return axios().get("/useraccess/create")
+            }
+        }
+    },
     accesslog: () => {
         return {
             list() {
