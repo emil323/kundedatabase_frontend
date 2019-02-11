@@ -8,10 +8,9 @@ import { withRouter } from "react-router-dom"
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
-import { deleteFile, fetchFilesData, updateSearch, changeFolder } from '../../../Store/Actions/filesActions'
+import {fetchFilesData, updateSearch, toggleNewFolderModal, toggleUploadModal } from '../../../Store/Actions/filesActions'
 import UploadModal from './UploadModal/UploadModal';
 import NewFolderModal from './NewFolderModal/NewFolderModal';
-import { runInNewContext } from 'vm';
 import backBtnImg from '../../../img/backBtn.png'
 import newBtnImg from '../../../img/new.png'
 
@@ -81,11 +80,14 @@ class Files extends Component {
                         <img className="btnImg" src={newBtnImg}></img>
                     </DropdownToggle>
                     <DropdownMenu>
-                        <UploadModal className="dropUpBtn" buttonLabel="Ny fil"/>
+                        <Button onClick={this.props.toggleUploadModal} className="dropUpBtn"> Last opp filer</Button>
                         <DropdownItem divider />
-                        <NewFolderModal className="dropUpBtn"buttonLabel="Ny Mappe"/>
+                        <Button onClick={this.props.toggleNewFolderModal} className="dropUpBtn">Ny mappe</Button>
                     </DropdownMenu>
                 </ButtonDropdown>
+
+                <NewFolderModal/>
+                <UploadModal/>
             </div>
         )
     }
@@ -121,10 +123,10 @@ const mapStateToProps = (state) => {
 // Create a dispatch which sends information to the reducer. In this case a client is being deleted
 const mapDispatchToProps = (dispatch) => {
     return {
-        deleteFile: (id) => { dispatch(deleteFile(id)) },
         fetchFilesData: (client_id, selected_folder) => { dispatch(fetchFilesData(client_id, selected_folder)) },
         updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
-        changeFolder: (folder) => { dispatch(changeFolder(folder)) }
+        toggleNewFolderModal:() => {dispatch(toggleNewFolderModal())},
+        toggleUploadModal:() => {dispatch(toggleUploadModal())}
     }
 }
 

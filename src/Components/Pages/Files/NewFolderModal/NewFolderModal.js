@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
-import { fetchFilesData } from "../../../../Store/Actions/filesActions";
+import { fetchFilesData, toggleNewFolderModal } from "../../../../Store/Actions/filesActions";
 import {FormGroup, Form, Input, Label } from 'reactstrap'
 
 import './NewFolderModal.css'
@@ -13,23 +13,10 @@ class NewFolderModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false,
       value: ''
     }
-    this.toggle = this.toggle.bind(this);
     this.create_folder = this.create_folder.bind(this)
     this.handleChange = this.handleChange.bind(this)
-  }
-
-  /**
-   * Turn modal on or off
-   */
-
-  toggle() {
-    this.setState(prevState => ({
-      modal: !prevState.modal,
-      value: ''
-    }));
   }
 
   /**
@@ -48,7 +35,7 @@ class NewFolderModal extends React.Component {
       .then(res => {
         console.log(res)
         this.props.fetchFilesData(this.props.client_id, this.props.selected_folder.id)
-        this.toggle()
+        this.props.toggleNewFolderModal()
       })
       .catch(err => {
         console.log(err)
@@ -71,13 +58,14 @@ class NewFolderModal extends React.Component {
   render() {
     return (
       <div className="container">
-        <Button className="dropUpBtn" color="primary" onClick={this.toggle}>
+        {/*<Button className="dropUpBtn" color="primary" onClick={this.toggle}>
           {this.props.buttonLabel}
         </Button>
+        */}
         <Modal
           centered
-          isOpen={this.state.modal}
-          toggle={this.toggle}
+          isOpen={this.props.new_folder_modal}
+          toggle={this.props.toggleNewFolderModal}
           className={this.props.className}
         >
           <ModalHeader toggle={this.toggle}>
@@ -92,11 +80,11 @@ class NewFolderModal extends React.Component {
           </ModalBody>
           <ModalFooter>
             <Button form="new_folder_form" color="primary">Opprett</Button>  
-            <Button color="secondary" onClick={this.toggle}>Lukk</Button>
+            <Button color="secondary" onClick={this.props.toggleNewFolderModal}>Lukk</Button>
           </ModalFooter>
         </Modal>
       </div>
-    );
+    )
   }
 }
 
@@ -108,7 +96,8 @@ const mapStateToProps = state => {
         files,
         root_folder,
         selected_folder,
-        client_id} = state.filesReducer;
+        client_id,
+        new_folder_modal} = state.filesReducer;
   return {
     //Filter to only display files from selected folder or to handle a search value
     files: files.filter(file => {
@@ -117,7 +106,8 @@ const mapStateToProps = state => {
     }),
     root_folder,
     selected_folder,
-    client_id
+    client_id,
+    new_folder_modal
   }
 }
 
@@ -126,9 +116,10 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchFilesData: (client_id, selected_folder) => {
       dispatch(fetchFilesData(client_id, selected_folder));
-    }
-  };
-};
+    },
+    toggleNewFolderModal:() => {dispatch(toggleNewFolderModal())}
+  }
+}
 
 export default connect(
   mapStateToProps,

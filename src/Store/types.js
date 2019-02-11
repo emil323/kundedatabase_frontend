@@ -4,10 +4,9 @@ export const DELETE_CLIENT = 'DELETE_CLIENT'
 export const FETCH_CLIENTS = 'FETCH_CLIENTS'
 
 // Files
-export const ADD_FILE = 'ADD_FILE'
-export const DELETE_FILE = 'DELETE_FILE'
 export const FETCH_FILES = 'FETCH_FILES'
-export const CHANGE_FOLDER = 'CHANGE_FOLDER'
+export const TOGGLE_NEW_FOLDER_MODAL = 'TOGGLE_NEW_FOLDER_MODAL'
+export const TOGGLE_UPLOAD_MODAL = 'TOGGLE_UPLOAD_MODAL'
 
 // General
 export const SEARCH_KEY = 'SEARCH_KEY'
