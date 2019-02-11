@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { runWithAdal } from 'react-adal';
+import { runWithAdal ,adalGetToken} from 'react-adal';
 import { authContext } from './Auth/adalConfig';
 import App from './Components/App/App.js'
 import * as serviceWorker from './serviceWorker'
@@ -13,8 +13,11 @@ import './CSS/index.css';
 //Set this to true to ignore authentication
 const DO_NOT_LOGIN = false;
 
+
+
 // Wrap store into the application using a Provider
 runWithAdal(authContext, () => {
+    
     ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'))
 },DO_NOT_LOGIN);
 

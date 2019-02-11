@@ -2,6 +2,8 @@ import React from 'react';
 import { Table, Form } from 'reactstrap';
 import "./UserAccess.css"
 import UserAccessData from "./UserAccessData"
+import {authContext} from '../../../Auth/adalConfig'
+import API from '../../../API/API';
 
 class UserAccess extends React.Component {
 
@@ -27,6 +29,15 @@ class UserAccess extends React.Component {
             </Form>
             </div>
         );
+  }
+
+  componentDidMount() {
+
+    authContext.acquireToken('https://graph.microsoft.com',(message, token, msg) => {
+        API.consultants().list(token)
+            .then(res => console.log(res)) 
+    })
+
   }
 }
 
