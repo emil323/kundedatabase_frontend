@@ -59,6 +59,7 @@ class UploadModal extends React.Component {
       .then(response => {
         console.log(response);
         this.props.toggleUploadModal()
+        this.reset()
         this.props.fetchFilesData(this.props.client_id, folder_id);
       })
       .catch(err => {

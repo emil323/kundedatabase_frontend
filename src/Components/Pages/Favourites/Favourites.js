@@ -2,7 +2,7 @@ import React from 'react'
 import {Component} from 'react'
 import FavouritesCard from "./FavouritesCard"
 import { Container, Row, Col } from 'reactstrap';
-import {fetchClientsData, updateSearch} from '../../../Store/Actions/clientActions'
+import {fetchClientsData, updateSearch} from '../../../Store/Actions/clientsActions'
 import { connect } from "react-redux";
 import './Favourites.css'
 

@@ -25,15 +25,15 @@ const clientsReducer = (state = initState, action) => {
                 search: action.search_key    
             }
         case ADD_CLIENT:
-        let clients = [...state.clients, action.client];
-        return {
-                ...state,
-                clients: clients
-        };
+            let clients = [...state.clients, action.client];
+            return {
+                    ...state,
+                    clients: clients
+            }
         case DELETE_CLIENT:
             let newClients = state.clients.filter(client => {
                 return action.id !== client.id
-            });
+            })
             return {
                 ...state,
                 clients: newClients

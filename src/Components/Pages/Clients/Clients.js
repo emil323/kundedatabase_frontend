@@ -9,7 +9,7 @@ import classnames from 'classnames';
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
-import { deleteClient, fetchClientsData, fetchAccessLogData, updateSearch} from '../../../Store/Actions/clientActions'
+import { deleteClient, fetchClientsData, fetchAccessLogData, updateSearch} from '../../../Store/Actions/clientsActions'
 
 class Clients extends Component {
     constructor(props){

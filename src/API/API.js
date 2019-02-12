@@ -56,8 +56,8 @@ export default  {
                     }
                 }
             },
-            getURL(file_id, dummy_name) {
-                return API_URL + "/files/" + file_id + "/" + dummy_name
+            download: (file_id) => {
+                return axios().get('/files/' + file_id + "/download", {responseType: 'blob'})
             }
         }
     },

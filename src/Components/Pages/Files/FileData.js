@@ -25,8 +25,15 @@ import API from '../../../API/API';
     
         if(file.is_directory) 
             this.props.history.push('/client/' + file.client_id + "/"  + file.id)
-         else 
-            window.open(API.files().getURL(file.id, file.name), "_blank")
+         else //Download file
+            API.files().download(file.id).then(res => {
+                const url = window.URL.createObjectURL(new Blob([res.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', file.name);
+                document.body.appendChild(link);
+                link.click()
+            })
         
     }
 
@@ -65,7 +72,7 @@ import API from '../../../API/API';
 
 // Calls on a clientsReducer that bring props to the component
 const mapStateToProps = (state) => {
-    const {files, root_folder,selected_folder, search} = state.filesReducer
+    const {root_folder,selected_folder, search} = state.filesReducer
     return {
         root_folder,
         selected_folder,
@@ -74,7 +81,7 @@ const mapStateToProps = (state) => {
             { tekst: 'Behandle', isHeader: 1, key: 1 },
             { tekst: 'Vis', isHeader: 0, key: 2 },
             { tekst: 'Slett', isHeader: 0, key: 3},
-            { tekst: 'Test', isHeader: 1, key: 4 },
+            { tekst: 'Sett som logo', isHeader: 0, key: 4 },
             { tekst: 'Placeholder', isHeader: 0, key: 5, },
         ]
     }

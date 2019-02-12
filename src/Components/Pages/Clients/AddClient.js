@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import "./Clients.css"
-import { addClient, fetchClientsData} from '../../../Store/Actions/clientActions'
+import { addClient, fetchClientsData} from '../../../Store/Actions/clientsActions'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Link } from "react-router-dom"
 

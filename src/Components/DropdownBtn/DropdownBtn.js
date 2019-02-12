@@ -27,7 +27,7 @@ export default class DropdownBtn extends Component {
         const optionsList = options.map(option => {
             return option.isHeader !== 0 ? (
                 <DropdownItem header key={option.key}>{option.tekst}</DropdownItem>
-            ) : <DropdownItem onClick={option.function} key={option.key}>{option.tekst}<span class="glyphicon glyphicon-envelope"></span></DropdownItem>;
+            ) : <DropdownItem onClick={option.function} key={option.key}>{option.tekst}<span className="glyphicon glyphicon-envelope"></span></DropdownItem>;
 
 
         })
