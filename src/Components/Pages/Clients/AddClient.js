@@ -43,6 +43,9 @@ class AddClient extends Component {
               console.log(res)
               this.toggle()
               this.props.fetchClientsData()
+              this.setState({
+                  firmanavn: ''
+              })
             })
             .catch(err => {
               console.log(err)
