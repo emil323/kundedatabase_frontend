@@ -23,6 +23,8 @@ export const updateSearch = (e) => {
     }
 }
 
+
+
 export const fetchClients = (clients) => {
     return {
         type: FETCH_CLIENTS,
@@ -54,6 +56,19 @@ export const fetchClientsData = () => {
         return api.clients().list()
             .then(response => {
                 dispatch(fetchClients(response.data))
+            })
+            .catch(error => {
+                throw(error)
+            })
+    }
+}
+
+export const addClientData = () => {
+    console.log(addClient.client)
+    return(dispatch) => {
+        return api.clients().create()
+            .then(response => {
+                dispatch(addClient(response.data))
             })
             .catch(error => {
                 throw(error)

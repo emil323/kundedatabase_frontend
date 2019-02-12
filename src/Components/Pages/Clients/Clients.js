@@ -7,9 +7,11 @@ import { Table } from 'reactstrap';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 
+
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
 import { deleteClient, fetchClientsData, fetchAccessLogData, updateSearch, updateLogSearch} from '../../../Store/Actions/clientActions'
+import AddClient from './AddClient';
 
 class Clients extends Component {
     constructor(props){
@@ -28,11 +30,6 @@ class Clients extends Component {
             })
         }
     }
-
-    goToAddClient = () => {
-        this.props.history.push("/addclient")
-    }
-
 
     render() {
         console.log(this.props.clients)
@@ -89,7 +86,7 @@ class Clients extends Component {
                                 </Table>
                                 <label>Søk etter kunde:</label>
                                 <input type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this.props.updateSearch)}/>
-                                <input type="button" value="Go to Add Client" onClick={this.goToAddClient}/>
+                                <AddClient buttonLabel={"Ny kunde"}  />
                             </Col>
                         </Row>
                     </TabPane>
