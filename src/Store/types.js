@@ -2,13 +2,14 @@
 export const ADD_CLIENT = 'ADD_CLIENT'
 export const DELETE_CLIENT = 'DELETE_CLIENT'
 export const FETCH_CLIENTS = 'FETCH_CLIENTS'
+export const SEARCH_LOG_KEY = 'SEARCH_LOG_KEY'
 
 // Files
 export const FETCH_FILES = 'FETCH_FILES'
 export const TOGGLE_NEW_FOLDER_MODAL = 'TOGGLE_NEW_FOLDER_MODAL'
 export const TOGGLE_UPLOAD_MODAL = 'TOGGLE_UPLOAD_MODAL'
 
-// General
+// Keys
 export const SEARCH_KEY = 'SEARCH_KEY'
 
 // Access Log

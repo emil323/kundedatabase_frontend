@@ -20,6 +20,9 @@ export default  {
         return {
             list() {
                 return axios().get("/clients")
+            },
+            create(data) {
+                return axios().post("/clients/create", data)
             }
         }
     },
