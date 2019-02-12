@@ -60,3 +60,16 @@ export const fetchClientsData = () => {
             })
     }
 }
+
+export const addClientData = () => {
+    console.log(addClient.client)
+    return(dispatch) => {
+        return api.clients().create()
+            .then(response => {
+                dispatch(addClient(response.data))
+            })
+            .catch(error => {
+                throw(error)
+            })
+    }
+}
