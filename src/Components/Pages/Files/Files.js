@@ -61,7 +61,7 @@ class Files extends Component {
                             <th>Type</th>
                             <th>Tittel</th>
                             <th>Sist endret</th>
-                            <th>Slett</th>
+                            <th>Valg</th>
                         </tr>
                     </thead>
                     {
@@ -79,7 +79,7 @@ class Files extends Component {
                     <DropdownToggle caret className="menuBtn">
                         <img className="btnImg" src={newBtnImg}></img>
                     </DropdownToggle>
-                    <DropdownMenu>
+                    <DropdownMenu className="menuBtnContent">
                         <Button onClick={this.props.toggleUploadModal} className="dropUpBtn"> Last opp filer</Button>
                         <DropdownItem divider />
                         <Button onClick={this.props.toggleNewFolderModal} className="dropUpBtn">Ny mappe</Button>

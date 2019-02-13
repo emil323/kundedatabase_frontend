@@ -1,5 +1,10 @@
 .dropdown-toggle {
-    background-color: #B08B5B;
+    background-color: #03468A;
+    border: none;
+}
+
+.dropdown-toggle:hover {
+    background-color: #0353A4;
 }
 
 .dropdown-toggle:active{
