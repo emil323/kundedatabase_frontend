@@ -6,11 +6,12 @@ import "./Clients.css"
 import { Table } from 'reactstrap';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
+import newBtnImg from '../../../img/new.png'
 
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
-import { deleteClient, fetchClientsData, fetchAccessLogData, updateSearch, updateLogSearch} from '../../../Store/Actions/clientsActions'
+import { deleteClient, fetchClientsData, fetchAccessLogData, updateSearch, toggleModal} from '../../../Store/Actions/clientsActions'
 import AddClient from './AddClient';
 
 class Clients extends Component {
@@ -43,7 +44,7 @@ class Clients extends Component {
             <div className="container">
                 <Nav tabs>
 
-                    <NavItem>
+                    <NavItem className="tabItem">
                         <NavLink
                             className={classnames({ active: this.state.activeTab === '1'})}
                             onClick={() => { this.toggle('1'); }}
@@ -53,7 +54,7 @@ class Clients extends Component {
                     </NavItem>
 
 
-                    <NavItem>
+                    <NavItem className="tabItem">
                         <NavLink
                             className={classnames({ active: this.state.activeTab === '2' })}
                             onClick={() => { this.toggle('2'); }}
@@ -70,6 +71,7 @@ class Clients extends Component {
                     <TabPane tabId="1">
                         <Row>
                             <Col sm="12">
+                            <input type="text" value={this.props.search} placeholder="Søk etter kunde..." onChange={this.props.updateSearch.bind(this.props.updateSearch)}/>
                                 <Table className="table table-hover">
                                     <thead className="thead-dark">
                                         <tr>
@@ -84,9 +86,8 @@ class Clients extends Component {
                                         })
                                     }
                                 </Table>
-                                <label>Søk etter kunde:</label>
-                                <input type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this.props.updateSearch)}/>
-                                <AddClient buttonLabel={"Ny kunde"}  />
+                                <Button className="modalBtn"  onClick={this.props.toggleModal}><img className="btnImg" src={newBtnImg}></img></Button>
+                        
                             </Col>
                         </Row>
                     </TabPane>
@@ -94,6 +95,7 @@ class Clients extends Component {
                     <TabPane tabId="2">
                         <Row>
                             <Col sm="12">
+                                <input type="text" value={this.props.search} placeholder="Søk etter endring..." onChange={this.props.updateSearch.bind(this)}/>
                                 <Table className="table table-hover">
                                         <thead className="thead-dark">
                                             <tr>
@@ -108,14 +110,12 @@ class Clients extends Component {
                                             })
                                         }
                                     </Table>
-                                    <label>Søk etter endring:</label>
-                                    <input type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this)}/>
                             </Col>
                         </Row>
                     </TabPane>
 
                 </TabContent>
-
+                <AddClient />
             </div>
         )
     }
@@ -133,7 +133,7 @@ const mapStateToProps = (state) => {
     return {
         clients: state.clientsReducer.clients,
         accesslog: state.clientsReducer.accesslog,
-        search: state.clientsReducer.search,
+        search: state.clientsReducer.search
     }
 }
 
@@ -141,6 +141,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteClient: (id) => { dispatch(deleteClient(id))},
+        toggleModal: () => { dispatch(toggleModal())},
         fetchClientsData: () =>{ dispatch(fetchClientsData())},
         fetchAccessLogData: () =>{ dispatch(fetchAccessLogData())},
         updateSearch:(search_key) => {dispatch(updateSearch(search_key))},}

@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import "./Clients.css"
-import { addClientData, fetchClientsData} from '../../../Store/Actions/clientsActions'
+import { addClientData, fetchClientsData, toggleModal} from '../../../Store/Actions/clientsActions'
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Link } from "react-router-dom"
 
@@ -9,23 +9,14 @@ import API from "../../../API/API";
 
 class AddClient extends Component {
     
-    
     constructor(){
         super();
         this.state = {
             firmanavn: "",
-            modal: false
         }
 
         this.handleChange = this.handleChange.bind(this);
-        this.toggle = this.toggle.bind(this);
     }
-
-    toggle() {
-        this.setState(prevState => ({
-          modal: !prevState.modal
-        }));
-      }
 
     handleChange = (e) => {
         console.log([e.target.value]);
@@ -41,7 +32,7 @@ class AddClient extends Component {
             API.clients().create({client: this.state.firmanavn})
             .then(res => {
               console.log(res)
-              this.toggle()
+              this.props.toggleModal()
               this.props.fetchClientsData()
               this.setState({
                   firmanavn: ''
@@ -57,10 +48,9 @@ class AddClient extends Component {
 
     render(){
         return (
-        <div>
-            <Button className="modalBtn" color="primary" onClick={this.toggle}>{this.props.buttonLabel}</Button>
-            <Modal centered isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                <ModalHeader toggle={this.toggle}>Opprett ny kunde</ModalHeader>
+        <div> 
+            <Modal centered isOpen={this.props.modal} toggle={this.toggle} className={this.props.className}>
+                <ModalHeader toggle={this.props.toggleModal}>Opprett ny kunde</ModalHeader>
                 <ModalBody>
                     <Label for="firmanavn">Firmanavn:</Label>
                     <Input type="text" name="firmanavn" id="firmanavn" onChange={this.handleChange} value={this.state.firmanavn}/>
@@ -68,7 +58,7 @@ class AddClient extends Component {
                 <ModalFooter>
                    
                     <Button color="primary" onClick={this.handleSubmit}>Lagre</Button>
-                    <Button color="secondary" onClick={this.toggle}>Lukk</Button>
+                    <Button color="secondary" onClick={this.props.toggleModal}>Lukk</Button>
                 </ModalFooter>
             </Modal>
         </div>
@@ -78,13 +68,22 @@ class AddClient extends Component {
 }
 
 
+// Calls on a clientsReducer that bring props to the component
+const mapStateToProps = (state) => {
+    const { modal } = state.clientsReducer
+    return {
+        modal
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return { 
         addClientData: (client) => { dispatch(addClientData(client))},
         fetchClientsData: () => {dispatch(fetchClientsData())},
+        toggleModal: () => {dispatch(toggleModal())}
 
     }
 }
 
 
-export default connect(null, mapDispatchToProps)(AddClient)
+export default connect(mapStateToProps, mapDispatchToProps)(AddClient)

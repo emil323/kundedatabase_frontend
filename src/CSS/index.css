@@ -30,16 +30,16 @@ body {
 }
 
 Input {
+    font-size: 2rem;
     border-radius: 5px;
 }
 
-.dropUpBtn {
-    width: 10em;
-    height: 3em;
-    background-color: #B08B5B;
+button {
+    background-color: #03468A;
     border: none;
 }
 
-.dropUpBtn:hover {
-    background-color: #002540;
+button:hover {
+    background-color: #0353A4;
+    color: #fff;
 }

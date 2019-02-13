@@ -3,3 +3,26 @@
     margin: 0px auto;
 }
 
+.modalBtn {
+    right: 0;
+    border: none;
+    background-color: transparent;
+    float: right;
+}
+
+.modalBtn:hover{
+    background-color: transparent; 
+}
+
+.btnImg {
+    border: none;
+    bottom: 0;
+    height: 5rem;
+}
+input{
+    margin: 3% 0 2% 0;
+}
+
+.tabItem{
+    cursor: pointer;
+}

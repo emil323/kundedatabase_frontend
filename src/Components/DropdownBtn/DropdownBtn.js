@@ -33,7 +33,7 @@ export default class DropdownBtn extends Component {
         })
         return (
             <ButtonDropdown direction="left" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                <DropdownToggle caret color="primary" />
+                <DropdownToggle caret color="primary " />
                 <DropdownMenu>
                     {optionsList}
                 </DropdownMenu>
