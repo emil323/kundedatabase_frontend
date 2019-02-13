@@ -44,7 +44,7 @@ class Clients extends Component {
             <div className="container">
                 <Nav tabs>
 
-                    <NavItem>
+                    <NavItem className="tabItem">
                         <NavLink
                             className={classnames({ active: this.state.activeTab === '1'})}
                             onClick={() => { this.toggle('1'); }}
@@ -54,7 +54,7 @@ class Clients extends Component {
                     </NavItem>
 
 
-                    <NavItem>
+                    <NavItem className="tabItem">
                         <NavLink
                             className={classnames({ active: this.state.activeTab === '2' })}
                             onClick={() => { this.toggle('2'); }}
