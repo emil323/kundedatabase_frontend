@@ -3,6 +3,8 @@ export const ADD_CLIENT = 'ADD_CLIENT'
 export const DELETE_CLIENT = 'DELETE_CLIENT'
 export const FETCH_CLIENTS = 'FETCH_CLIENTS'
 export const SEARCH_LOG_KEY = 'SEARCH_LOG_KEY'
+export const TOGGLE_MODAL = 'TOGGLE_MODAL'
+export const TOGGLE = 'TOGGLE'
 
 // Files
 export const FETCH_FILES = 'FETCH_FILES'

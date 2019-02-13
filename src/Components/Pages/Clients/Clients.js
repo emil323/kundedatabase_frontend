@@ -6,11 +6,12 @@ import "./Clients.css"
 import { Table } from 'reactstrap';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
+import newBtnImg from '../../../img/new.png'
 
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
-import { deleteClient, fetchClientsData, fetchAccessLogData, updateSearch, updateLogSearch} from '../../../Store/Actions/clientsActions'
+import { deleteClient, fetchClientsData, fetchAccessLogData, updateSearch, toggleModal} from '../../../Store/Actions/clientsActions'
 import AddClient from './AddClient';
 
 class Clients extends Component {
@@ -86,7 +87,7 @@ class Clients extends Component {
                                 </Table>
                                 <label>Søk etter kunde:</label>
                                 <input type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this.props.updateSearch)}/>
-                                <AddClient buttonLabel={"Ny kunde"}  />
+                                <Button className="modalBtn"  onClick={this.props.toggleModal}><img className="btnImg" src={newBtnImg}></img></Button>
                             </Col>
                         </Row>
                     </TabPane>
@@ -115,7 +116,7 @@ class Clients extends Component {
                     </TabPane>
 
                 </TabContent>
-
+                <AddClient />
             </div>
         )
     }
@@ -133,7 +134,7 @@ const mapStateToProps = (state) => {
     return {
         clients: state.clientsReducer.clients,
         accesslog: state.clientsReducer.accesslog,
-        search: state.clientsReducer.search,
+        search: state.clientsReducer.search
     }
 }
 
@@ -141,6 +142,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteClient: (id) => { dispatch(deleteClient(id))},
+        toggleModal: () => { dispatch(toggleModal())},
         fetchClientsData: () =>{ dispatch(fetchClientsData())},
         fetchAccessLogData: () =>{ dispatch(fetchAccessLogData())},
         updateSearch:(search_key) => {dispatch(updateSearch(search_key))},}
