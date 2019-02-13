@@ -9,10 +9,10 @@ export const toggleUploadModal = () => {
     }
 }
 
-export const toggleMoveModal = (test) => {
+export const toggleMoveModal = (file) => {
     return {
         type: TOGGLE_MOVE_MODAL,
-        test
+        file
     }
 }
 

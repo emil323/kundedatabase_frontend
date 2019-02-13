@@ -10,7 +10,10 @@ const initState = {
     search: '',
     new_folder_modal: false, 
     upload_modal: false,
-    move_modal: false
+    move_folder: {
+        modal:false,
+        file:{id:'',name:''}
+    }
 }
 
 // Reducers are called when a change happens. The reducers changes the initial state
@@ -19,6 +22,7 @@ const filesReducer = (state = initState, action) => {
         case FETCH_FILES:
             console.log(action)
             return { 
+                ...state,
                 files:action.files,
                 root_folder:action.root_folder,
                 selected_folder:action.selected_folder,
@@ -39,7 +43,10 @@ const filesReducer = (state = initState, action) => {
             console.log(action)
             return {
                 ...state,
-                move_modal: !state.move_modal
+                move_folder: {
+                    file: action.file,
+                    modal: !state.move_folder.modal
+                }
             }    
         case TOGGLE_NEW_FOLDER_MODAL: {
             return {

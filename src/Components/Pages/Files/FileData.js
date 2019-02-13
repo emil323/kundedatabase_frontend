@@ -62,7 +62,7 @@ import API from '../../../API/API';
                 { tekst: 'Behandle', isHeader: 1, key: 1 },
                 { tekst: 'Vis', isHeader: 0, key: 2 },
                 { tekst: 'Slett', isHeader: 0, key: 3},
-                { tekst: 'Flytt', isHeader: 0, key: 5, function: ()=> {this.props.toggleMoveModal('test')}}
+                { tekst: 'Flytt', isHeader: 0, key: 5, function: ()=> {this.props.toggleMoveModal(this.props.file)}}
             ]
 
             return(
@@ -93,7 +93,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchFilesData: (client_id, selected_folder) =>{ dispatch(fetchFilesData(client_id, selected_folder))},
-        toggleMoveModal: (test) => {dispatch(toggleMoveModal(test))},
+        toggleMoveModal: (file) => {dispatch(toggleMoveModal(file))},
     }
 }
 

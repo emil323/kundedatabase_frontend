@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
 import { fetchFilesData, toggleMoveModal } from "../../../../Store/Actions/filesActions";
-import {FormGroup, Form, Input, Label } from 'reactstrap'
+import {FormGroup, Form, Input, ListGroup, ListGroupItem  } from 'reactstrap'
 
 import API from "../../../../API/API";
 
@@ -37,27 +37,34 @@ class NewFolderModal extends React.Component {
   }
 
   render() {
-      console.log(this)
     return (
       <div className="container">
         <Modal
           centered
-          isOpen={this.props.move_modal}
+          isOpen={this.props.move_folder.modal}
           toggle={this.props.toggleMoveModal}
           className={this.props.className}
         >
-          <ModalHeader toggle={this.toggle}>
-            Flytt: {this.props.selected_folder.name}
+          <ModalHeader toggle={this.props.toggleMoveModal}>
+            Flytt: {this.props.move_folder.file.name}
           </ModalHeader>
           <ModalBody>
-           <Form id="move_folder_form">
-               <FormGroup>
-                   <Input type="text" name="move_location" id="move_location" value={this.state.value} onChange={this.handleChange} placeholder="Navn på ny mappe"></Input>
-               </FormGroup>
-           </Form>
+            <ListGroup>
+                <p>Velg hvilken mappe du vil flytte til.</p>
+                {
+                    this.props.files.map(file => {
+                        if(file.is_directory) {
+
+                            let mappesti = file.name
+                            
+
+                            return <ListGroupItem tag="button" action>{file.name}</ListGroupItem>
+                        }
+                    })
+                }
+            </ListGroup>
           </ModalBody>
           <ModalFooter>
-            <Button form="move_folder_form" color="primary">Flytt</Button>  
             <Button color="secondary" onClick={this.props.toggleMoveModal}>Lukk</Button>
           </ModalFooter>
         </Modal>
@@ -72,22 +79,20 @@ class NewFolderModal extends React.Component {
 
 
 const mapStateToProps = state => {
+    console.log(state.filesReducer)
     const {
         files,
         root_folder,
         selected_folder,
         client_id,
-        move_modal} = state.filesReducer;
+        move_folder} = state.filesReducer;
   return {
     //Filter to only display files from selected folder or to handle a search value
-    files: files.filter(file => {
-      return file.parent_id === selected_folder.id;
-      //TODO:Handle search value
-    }),
+    files,
     root_folder,
     selected_folder,
     client_id,
-    move_modal
+    move_folder
   }
 }
 
@@ -97,7 +102,7 @@ const mapDispatchToProps = dispatch => {
     fetchFilesData: (client_id, selected_folder) => {
       dispatch(fetchFilesData(client_id, selected_folder));
     },
-    toggleMoveModal:() => {dispatch(toggleMoveModal())}
+    toggleMoveModal:(file) => {dispatch(toggleMoveModal(file))}
   }
 }
 
