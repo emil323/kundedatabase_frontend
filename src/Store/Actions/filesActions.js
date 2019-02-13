@@ -1,11 +1,18 @@
 
 import api from '../../API/API'
-import {FETCH_FILES, SEARCH_KEY, TOGGLE_UPLOAD_MODAL, TOGGLE_NEW_FOLDER_MODAL} from '../types'
+import {FETCH_FILES, SEARCH_KEY, TOGGLE_UPLOAD_MODAL, TOGGLE_NEW_FOLDER_MODAL, TOGGLE_MOVE_MODAL} from '../types'
 
 
 export const toggleUploadModal = () => {
     return {
         type: TOGGLE_UPLOAD_MODAL
+    }
+}
+
+export const toggleMoveModal = (test) => {
+    return {
+        type: TOGGLE_MOVE_MODAL,
+        test
     }
 }
 
@@ -28,6 +35,8 @@ export const fetchFiles = (files, root_folder, selected_folder, client_id) => {
         files, root_folder,selected_folder,client_id
     }
 }
+
+
 
 export const fetchFilesData = (client_id, selected) => {
     

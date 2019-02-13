@@ -6,7 +6,7 @@ import textDoc from "../../../Assets/Icons/txt.png"
 import folder from "../../../Assets/Icons/folder.png"
 
 import { connect } from "react-redux";
-import { fetchFilesData} from '../../../Store/Actions/filesActions'
+import { fetchFilesData, toggleMoveModal} from '../../../Store/Actions/filesActions'
 import { Link, withRouter } from "react-router-dom";
 import { Component } from 'react'
 import DropdownBtn from '../../DropdownBtn/DropdownBtn';
@@ -56,13 +56,22 @@ import API from '../../../API/API';
         }
     }
         render(){
+
+        
+            const btnOptions =  [
+                { tekst: 'Behandle', isHeader: 1, key: 1 },
+                { tekst: 'Vis', isHeader: 0, key: 2 },
+                { tekst: 'Slett', isHeader: 0, key: 3},
+                { tekst: 'Flytt', isHeader: 0, key: 5, function: ()=> {this.props.toggleMoveModal('test')}}
+            ]
+
             return(
                 <tbody>
                     <tr>
                         <td><img src={this.checkFileType(this.props.file.type)} alt="s"/></td>
                         <td><Link to="" onClick={this.handleSelection}>{this.props.file.name}</Link></td>
                         <td>{this.props.file.last_changed}</td>
-                        <td><DropdownBtn options={this.props.btnOptions} /></td>
+                        <td><DropdownBtn file={this.props.file} options={btnOptions} /></td>
                     </tr>
                 </tbody>
             )
@@ -76,14 +85,7 @@ const mapStateToProps = (state) => {
     return {
         root_folder,
         selected_folder,
-        search,
-        btnOptions: [
-            { tekst: 'Behandle', isHeader: 1, key: 1 },
-            { tekst: 'Vis', isHeader: 0, key: 2 },
-            { tekst: 'Slett', isHeader: 0, key: 3},
-            { tekst: 'Sett som logo', isHeader: 0, key: 4 },
-            { tekst: 'Placeholder', isHeader: 0, key: 5, },
-        ]
+        search
     }
 }
 
@@ -91,6 +93,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchFilesData: (client_id, selected_folder) =>{ dispatch(fetchFilesData(client_id, selected_folder))},
+        toggleMoveModal: (test) => {dispatch(toggleMoveModal(test))},
     }
 }
 

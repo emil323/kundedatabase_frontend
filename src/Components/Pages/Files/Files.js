@@ -13,6 +13,7 @@ import UploadModal from './UploadModal/UploadModal';
 import NewFolderModal from './NewFolderModal/NewFolderModal';
 import backBtnImg from '../../../img/backBtn.png'
 import newBtnImg from '../../../img/new.png'
+import MoveModal from './MoveModal/MoveModal';
 
 class Files extends Component {
 
@@ -88,6 +89,7 @@ class Files extends Component {
 
                 <NewFolderModal/>
                 <UploadModal/>
+                <MoveModal/>
             </div>
         )
     }
