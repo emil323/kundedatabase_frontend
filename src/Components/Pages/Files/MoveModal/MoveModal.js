@@ -1,10 +1,9 @@
 import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
-import { fetchFilesData, toggleNewFolderModal } from "../../../../Store/Actions/filesActions";
+import { fetchFilesData, toggleMoveModal } from "../../../../Store/Actions/filesActions";
 import {FormGroup, Form, Input, Label } from 'reactstrap'
 
-import './NewFolderModal.css'
 import API from "../../../../API/API";
 
 class NewFolderModal extends React.Component {
@@ -13,7 +12,7 @@ class NewFolderModal extends React.Component {
     this.state = {
       value: ''
     }
-    this.create_folder = this.create_folder.bind(this)
+   // this.create_folder = this.create_folder.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
 
@@ -22,23 +21,7 @@ class NewFolderModal extends React.Component {
    * @param {} e 
    */
 
-  create_folder(e) {
-    e.preventDefault()
 
-    const post_data = {
-      new_folder_name: this.state.value
-    }
-
-    API.files().folder(this.props.selected_folder.id).create_folder(post_data)
-      .then(res => {
-        console.log(res)
-        this.props.fetchFilesData(this.props.client_id, this.props.selected_folder.id)
-        this.props.toggleNewFolderModal()
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
 
 
   /**
@@ -54,36 +37,35 @@ class NewFolderModal extends React.Component {
   }
 
   render() {
+      console.log(this)
     return (
       <div className="container">
-        {/*<Button className="dropUpBtn" color="primary" onClick={this.toggle}>
-          {this.props.buttonLabel}
-        </Button>
-        */}
         <Modal
           centered
-          isOpen={this.props.new_folder_modal}
-          toggle={this.props.toggleNewFolderModal}
+          isOpen={this.props.move_modal}
+          toggle={this.props.toggleMoveModal}
           className={this.props.className}
         >
           <ModalHeader toggle={this.toggle}>
-            Legg til ny mappe i: {this.props.selected_folder.name}
+            Flytt: {this.props.selected_folder.name}
           </ModalHeader>
           <ModalBody>
-           <Form id="new_folder_form" onSubmit={this.create_folder}>
+           <Form id="move_folder_form">
                <FormGroup>
-                   <Input type="text" name="new_folder_name" id="new_folder_name" value={this.state.value} onChange={this.handleChange} placeholder="Navn på ny mappe"></Input>
+                   <Input type="text" name="move_location" id="move_location" value={this.state.value} onChange={this.handleChange} placeholder="Navn på ny mappe"></Input>
                </FormGroup>
            </Form>
           </ModalBody>
           <ModalFooter>
-            <Button form="new_folder_form" color="primary">Opprett</Button>  
-            <Button color="secondary" onClick={this.props.toggleNewFolderModal}>Lukk</Button>
+            <Button form="move_folder_form" color="primary">Flytt</Button>  
+            <Button color="secondary" onClick={this.props.toggleMoveModal}>Lukk</Button>
           </ModalFooter>
         </Modal>
       </div>
     )
   }
+
+
 }
 
 // Calls on a clientsReducer that bring props to the component
@@ -95,7 +77,7 @@ const mapStateToProps = state => {
         root_folder,
         selected_folder,
         client_id,
-        new_folder_modal} = state.filesReducer;
+        move_modal} = state.filesReducer;
   return {
     //Filter to only display files from selected folder or to handle a search value
     files: files.filter(file => {
@@ -105,7 +87,7 @@ const mapStateToProps = state => {
     root_folder,
     selected_folder,
     client_id,
-    new_folder_modal
+    move_modal
   }
 }
 
@@ -115,7 +97,7 @@ const mapDispatchToProps = dispatch => {
     fetchFilesData: (client_id, selected_folder) => {
       dispatch(fetchFilesData(client_id, selected_folder));
     },
-    toggleNewFolderModal:() => {dispatch(toggleNewFolderModal())}
+    toggleMoveModal:() => {dispatch(toggleMoveModal())}
   }
 }
 

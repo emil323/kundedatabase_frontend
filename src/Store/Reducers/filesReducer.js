@@ -1,5 +1,5 @@
 
-import {SEARCH_KEY, FETCH_FILES, TOGGLE_UPLOAD_MODAL, TOGGLE_NEW_FOLDER_MODAL} from '../types'
+import {SEARCH_KEY, FETCH_FILES, TOGGLE_UPLOAD_MODAL, TOGGLE_NEW_FOLDER_MODAL, TOGGLE_MOVE_MODAL} from '../types'
 
 // A Reducer requires an initial state when running the application
 const initState = {
@@ -9,7 +9,8 @@ const initState = {
     client_id:'',
     search: '',
     new_folder_modal: false, 
-    upload_modal: false 
+    upload_modal: false,
+    move_modal: false
 }
 
 // Reducers are called when a change happens. The reducers changes the initial state
@@ -34,6 +35,12 @@ const filesReducer = (state = initState, action) => {
                 ...state,
                 upload_modal: !state.upload_modal
             }
+        case TOGGLE_MOVE_MODAL:
+            console.log(action)
+            return {
+                ...state,
+                move_modal: !state.move_modal
+            }    
         case TOGGLE_NEW_FOLDER_MODAL: {
             return {
                 ...state,

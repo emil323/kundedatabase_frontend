@@ -71,6 +71,7 @@ class Clients extends Component {
                     <TabPane tabId="1">
                         <Row>
                             <Col sm="12">
+                            <input type="text" value={this.props.search} placeholder="Søk etter kunde..." onChange={this.props.updateSearch.bind(this.props.updateSearch)}/>
                                 <Table className="table table-hover">
                                     <thead className="thead-dark">
                                         <tr>
@@ -85,9 +86,8 @@ class Clients extends Component {
                                         })
                                     }
                                 </Table>
-                                <label>Søk etter kunde:</label>
-                                <input type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this.props.updateSearch)}/>
                                 <Button className="modalBtn"  onClick={this.props.toggleModal}><img className="btnImg" src={newBtnImg}></img></Button>
+                        
                             </Col>
                         </Row>
                     </TabPane>
@@ -95,6 +95,7 @@ class Clients extends Component {
                     <TabPane tabId="2">
                         <Row>
                             <Col sm="12">
+                                <input type="text" value={this.props.search} placeholder="Søk etter endring..." onChange={this.props.updateSearch.bind(this)}/>
                                 <Table className="table table-hover">
                                         <thead className="thead-dark">
                                             <tr>
@@ -109,8 +110,6 @@ class Clients extends Component {
                                             })
                                         }
                                     </Table>
-                                    <label>Søk etter endring:</label>
-                                    <input type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this)}/>
                             </Col>
                         </Row>
                     </TabPane>

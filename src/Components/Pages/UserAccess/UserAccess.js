@@ -21,6 +21,7 @@ class UserAccess extends React.Component {
         return (
             <div className="container">
             <Form class="customRadio">
+                <input type="text" value={this.props.search} placeholder="Søk etter bruker..." onChange={this.props.updateSearch.bind(this)}/>  
                 <Table className="table table-hover">
                     <thead className="thead-dark">
                         <tr>
@@ -37,8 +38,6 @@ class UserAccess extends React.Component {
                             return  <UserAccessData user={user} key={user.id}/>
                         })
                     }
-                    <label>Søk etter bruker:</label>
-                    <input type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this)}/>
             </Table>
             </Form>
             </div>

@@ -13,6 +13,7 @@ import UploadModal from './UploadModal/UploadModal';
 import NewFolderModal from './NewFolderModal/NewFolderModal';
 import backBtnImg from '../../../img/backBtn.png'
 import newBtnImg from '../../../img/new.png'
+import MoveModal from './MoveModal/MoveModal';
 
 class Files extends Component {
 
@@ -61,7 +62,7 @@ class Files extends Component {
                             <th>Type</th>
                             <th>Tittel</th>
                             <th>Sist endret</th>
-                            <th>Slett</th>
+                            <th>Valg</th>
                         </tr>
                     </thead>
                     {
@@ -79,7 +80,7 @@ class Files extends Component {
                     <DropdownToggle caret className="menuBtn">
                         <img className="btnImg" src={newBtnImg}></img>
                     </DropdownToggle>
-                    <DropdownMenu>
+                    <DropdownMenu className="menuBtnContent">
                         <Button onClick={this.props.toggleUploadModal} className="dropUpBtn"> Last opp filer</Button>
                         <DropdownItem divider />
                         <Button onClick={this.props.toggleNewFolderModal} className="dropUpBtn">Ny mappe</Button>
@@ -88,6 +89,7 @@ class Files extends Component {
 
                 <NewFolderModal/>
                 <UploadModal/>
+                <MoveModal/>
             </div>
         )
     }
