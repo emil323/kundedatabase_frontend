@@ -56,11 +56,21 @@ export default  {
                     },
                     create_folder(data) {
                         return axios().post('/files/folder/' + folderID + '/create_folder', data)
+                    },
+                    move(parent_folder) {
+                        return axios().post('/files/folder/' + folderID + '/move/' + parent_folder)
                     }
                 }
             },
             download: (file_id) => {
                 return axios().get('/files/' + file_id + "/download", {responseType: 'blob'})
+            }
+        }
+    },
+    file: (file_id) => {
+        return {
+            move: (folder_id) => {
+                return axios().post('/files/' + file_id + '/move/' + folder_id)
             }
         }
     },

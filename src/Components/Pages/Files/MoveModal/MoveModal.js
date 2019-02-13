@@ -12,29 +12,51 @@ class NewFolderModal extends React.Component {
     this.state = {
       value: ''
     }
-   // this.create_folder = this.create_folder.bind(this)
-    this.handleChange = this.handleChange.bind(this)
   }
 
-  /**
-   * Send request to API to create folder
-   * @param {} e 
-   */
-
-
-
 
   /**
-   * Handle change of foldername
-   * @param {} event 
+   * Move folder logic
+   * @param {} new_folder 
    */
 
-  handleChange(event) {
-    this.setState({
-        ...this.state, 
-        value: event.target.value
+  moveFolder(new_folder) {
+    const folder_id = this.props.move_folder.file.id
+    API.files().folder(folder_id).move(new_folder.id).then(res => {
+      console.log(res)
+      this.props.fetchFilesData(this.props.client_id, this.props.selected_folder.id)
+      this.props.toggleMoveModal()
     })
   }
+
+  /**
+   * Move file logic
+   * @param {} folder 
+   */
+
+  moveFile(folder) {
+    const file_id = this.props.move_folder.file.id
+
+    API.file(file_id).move(folder.id).then(res => {
+      console.log(res)
+      this.props.fetchFilesData(this.props.client_id, this.props.selected_folder.id)
+      this.props.toggleMoveModal()
+    })
+  }
+
+/**
+ * Handle moving file
+ * @param {*} file 
+ */
+
+handleMove(file) {
+  if(this.props.move_folder.file.is_directory) {
+    this.moveFolder(file)
+  } else {
+    this.moveFile(file)
+  }
+  
+}
 
   render() {
     return (
@@ -53,14 +75,17 @@ class NewFolderModal extends React.Component {
                 <p>Velg hvilken mappe du vil flytte til.</p>
                 {
                     this.props.files.map(file => {
-                        if(file.is_directory) {
-
-                            let mappesti = file.name
-                            
-
-                            return <ListGroupItem tag="button" action>{file.name}</ListGroupItem>
-                        }
+                      //Check if is directory, is not in any relation conflict (don't allow to put folder inside its own folder)
+                      //Check if not in current directory
+                      if(file.is_directory
+                         && !file.relations.includes(this.props.move_folder.file)) {
+                          //Build a path based on relations array
+                          const path = [...file.relations].reverse().map(r => `${r.name}`).join('/')
+                          //Spew out, bind to this and file object
+                          return <ListGroupItem key={file.id} onClick={this.handleMove.bind(this, file)} tag="button" action>{path}</ListGroupItem>
+                      }      
                     })
+
                 }
             </ListGroup>
           </ModalBody>

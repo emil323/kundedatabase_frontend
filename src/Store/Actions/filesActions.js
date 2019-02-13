@@ -38,13 +38,37 @@ export const fetchFiles = (files, root_folder, selected_folder, client_id) => {
 
 
 
+
 export const fetchFilesData = (client_id, selected) => {
     
+    /**
+     * Recursive function to generate full path for each file and folde
+     * @param {*} files  
+     * @param {*} file 
+     * @param {*} path 
+     */
+    function generateRelations (files, file,relations) {
+        if(relations == null)
+            relations = [file]      
+        if(file.is_root) 
+            return relations    
+        const parent = files.find(f => {return f.id === file.parent_id})
+
+        relations.push(parent)
+        return generateRelations(files, parent, relations)
+    }
+
     return (dispatch) => {
         return api.client(client_id).files()
             .then(response => {
 
                 const files = response.data
+
+                //Run recursive function
+                files.forEach(file => {
+                    file.relations = generateRelations(files, file)
+                })
+
                 const root_folder = files.find((file) => {return file.is_root})
 
                 //Determine what folder to set as selected

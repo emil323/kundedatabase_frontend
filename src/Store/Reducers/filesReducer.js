@@ -16,6 +16,10 @@ const initState = {
     }
 }
 
+
+
+
+
 // Reducers are called when a change happens. The reducers changes the initial state
 const filesReducer = (state = initState, action) => {
     switch(action.type){
@@ -44,7 +48,7 @@ const filesReducer = (state = initState, action) => {
             return {
                 ...state,
                 move_folder: {
-                    file: action.file,
+                    file: action.file ? action.file : state.move_folder.file,
                     modal: !state.move_folder.modal
                 }
             }    
