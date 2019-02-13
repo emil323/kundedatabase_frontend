@@ -30,6 +30,7 @@ body {
 }
 
 Input {
+    font-size: 2rem;
     border-radius: 5px;
 }
 
