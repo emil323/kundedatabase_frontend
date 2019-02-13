@@ -7,7 +7,7 @@
     background-color: transparent; 
     border: none;
     position: fixed;
-    bottom: 0;
+    bottom: 0;    
 }
 
 .menuBtn:hover {
@@ -41,20 +41,14 @@ table {
     margin: auto;
 }
 
-.dropdown-menu {
+.menuBtnContent {
     margin-right: 5em;
     width: 40%;
     border: none;
     background-color: transparent;
     box-shadow: none;
-    
 }
 
-.dropdown-toggle {
-    background-color: transparent;
-    border: none;
-}
-
-.dropdown-divider {
+.menuBtnContent .dropdown-divider {
     opacity: 0;
 }
