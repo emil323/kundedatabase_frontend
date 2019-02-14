@@ -10,3 +10,14 @@
 .dropdown-toggle:visited{
     background-color: white;
 } */
+
+.dropDownToggle {
+    background-color: transparent;
+    border: 0;
+}
+
+.dropDownToggle:hover {
+    background-color: transparent;
+    border: 0;
+}
+
