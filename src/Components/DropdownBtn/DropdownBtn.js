@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import './DropdownBtn.css'
+import moreImg from "../../Assets/Icons/more.png"
 
 export default class DropdownBtn extends Component {
     constructor(props) {
@@ -33,7 +34,7 @@ export default class DropdownBtn extends Component {
         })
         return (
             <ButtonDropdown direction="left" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                <DropdownToggle caret color="primary " />
+                <DropdownToggle className="dropDownToggle"><img src={moreImg}></img></DropdownToggle>
                 <DropdownMenu>
                     {optionsList}
                 </DropdownMenu>
