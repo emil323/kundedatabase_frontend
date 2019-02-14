@@ -59,6 +59,9 @@ export default  {
                     },
                     move(parent_folder) {
                         return axios().post('/files/folder/' + folderID + '/move/' + parent_folder)
+                    },
+                    rename(new_name) {
+                        return axios().post('/files/folder/' + folderID + '/rename/', {new_name})
                     }
                 }
             },
@@ -71,6 +74,9 @@ export default  {
         return {
             move: (folder_id) => {
                 return axios().post('/files/' + file_id + '/move/' + folder_id)
+            },
+            rename(new_name) {
+                return axios().post('/files/' + file_id + '/rename/', {new_name})
             }
         }
     },
