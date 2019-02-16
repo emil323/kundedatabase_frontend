@@ -104,7 +104,7 @@ class Clients extends Component {
                                         <thead className="thead-dark">
                                             <tr>
                                                 <th>Kunde</th>
-                                                <th>Besøkt fil</th>
+                                                <th>Besøkt</th>
                                                 <th>Navn</th>
                                                 <th>IP</th>
                                                 <th>Sist besøkt</th>
