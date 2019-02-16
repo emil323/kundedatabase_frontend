@@ -2,16 +2,13 @@ import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
 import { fetchFilesData, toggleMoveModal } from "../../../../Store/Actions/filesActions";
-import {FormGroup, Form, Input, ListGroup, ListGroupItem  } from 'reactstrap'
+import {ListGroup, ListGroupItem  } from 'reactstrap'
 
 import API from "../../../../API/API";
 
 class NewFolderModal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: ''
-    }
   }
 
 
@@ -21,7 +18,7 @@ class NewFolderModal extends React.Component {
    */
 
   moveFolder(new_folder) {
-    const folder_id = this.props.move_folder.file.id
+    const folder_id = this.props.move.file.id
     API.files().folder(folder_id).move(new_folder.id).then(res => {
       console.log(res)
       this.props.fetchFilesData(this.props.client_id, this.props.selected_folder.id)
@@ -35,7 +32,7 @@ class NewFolderModal extends React.Component {
    */
 
   moveFile(folder) {
-    const file_id = this.props.move_folder.file.id
+    const file_id = this.props.move.file.id
 
     API.file(file_id).move(folder.id).then(res => {
       console.log(res)
@@ -50,7 +47,7 @@ class NewFolderModal extends React.Component {
  */
 
 handleMove(file) {
-  if(this.props.move_folder.file.is_directory) {
+  if(this.props.move.file.is_directory) {
     this.moveFolder(file)
   } else {
     this.moveFile(file)
@@ -63,12 +60,12 @@ handleMove(file) {
       <div className="container">
         <Modal
           centered
-          isOpen={this.props.move_folder.modal}
+          isOpen={this.props.move.modal}
           toggle={this.props.toggleMoveModal}
           className={this.props.className}
         >
           <ModalHeader toggle={this.props.toggleMoveModal}>
-            Flytt: {this.props.move_folder.file.name}
+            Flytt: {this.props.move.file.name}
           </ModalHeader>
           <ModalBody>
             <ListGroup>
@@ -78,11 +75,13 @@ handleMove(file) {
                       //Check if is directory, is not in any relation conflict (don't allow to put folder inside its own folder)
                       //Check if not in current directory
                       if(file.is_directory
-                         && !file.relations.includes(this.props.move_folder.file)) {
+                         && !file.relations.includes(this.props.move.file)
+                         && file.id !== this.props.selected_folder.id) {
                           //Build a path based on relations array
                           const path = [...file.relations].reverse().map(r => `${r.name}`).join('/')
+          
                           //Spew out, bind to this and file object
-                          return <ListGroupItem key={file.id} onClick={this.handleMove.bind(this, file)} tag="button" action>{path}</ListGroupItem>
+                          return <ListGroupItem key={file.id} onClick={this.handleMove.bind(this, file)} color="red" tag="button" action>{path}</ListGroupItem>
                       }      
                     })
 
@@ -106,18 +105,10 @@ handleMove(file) {
 const mapStateToProps = state => {
     console.log(state.filesReducer)
     const {
-        files,
-        root_folder,
-        selected_folder,
-        client_id,
-        move_folder} = state.filesReducer;
+        files,root_folder,selected_folder,client_id,move} = state.filesReducer;
   return {
     //Filter to only display files from selected folder or to handle a search value
-    files,
-    root_folder,
-    selected_folder,
-    client_id,
-    move_folder
+    files, root_folder, selected_folder,client_id, move
   }
 }
 

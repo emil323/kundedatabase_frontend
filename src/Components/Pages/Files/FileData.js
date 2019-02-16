@@ -6,7 +6,7 @@ import textDoc from "../../../Assets/Icons/txt.png"
 import folder from "../../../Assets/Icons/folder.png"
 
 import { connect } from "react-redux";
-import { fetchFilesData, toggleMoveModal} from '../../../Store/Actions/filesActions'
+import { fetchFilesData, toggleMoveModal, toggleRenameModal} from '../../../Store/Actions/filesActions'
 import {addLogItem} from '../../../Store/Actions/accesslogActions'
 import { Link, withRouter } from "react-router-dom";
 import { Component } from 'react'
@@ -80,7 +80,7 @@ import API from '../../../API/API';
             const btnOptions =  [
                 { tekst: 'Behandle', isHeader: 1, key: 1 },
                 { tekst: 'Vis', isHeader: 0, key: 2 },
-                { tekst: 'Slett', isHeader: 0, key: 3},
+                { tekst: 'Endre navn', isHeader: 0, key: 3, function: () => {this.props.toggleRenameModal(this.props.file)}},
                 { tekst: 'Flytt', isHeader: 0, key: 5, function: ()=> {this.props.toggleMoveModal(this.props.file)}}
             ]
 
@@ -123,7 +123,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchFilesData: (client_id, selected_folder) =>{ dispatch(fetchFilesData(client_id, selected_folder))},
         toggleMoveModal: (file) => {dispatch(toggleMoveModal(file))},
-        addLogItem: (logItem) => { dispatch(addLogItem(logItem))}
+        addLogItem: (logItem) => { dispatch(addLogItem(logItem))},
+        toggleRenameModal:(file) => {dispatch(toggleRenameModal(file))}
     }
 }
 

@@ -8,12 +8,14 @@ import { withRouter } from "react-router-dom"
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
-import {fetchFilesData, updateSearch, toggleNewFolderModal, toggleUploadModal } from '../../../Store/Actions/filesActions'
+import {fetchFilesData, updateSearch, toggleNewFolderModal, toggleUploadModal, toggleEditorModal } from '../../../Store/Actions/filesActions'
 import UploadModal from './UploadModal/UploadModal';
 import NewFolderModal from './NewFolderModal/NewFolderModal';
 import backBtnImg from '../../../img/backBtn.png'
 import newBtnImg from '../../../img/new.png'
 import MoveModal from './MoveModal/MoveModal';
+import RenameModal from './RenameModal/RenameModal';
+import EditorModal from './EditorModal/EditorModal'
 
 class Files extends Component {
 
@@ -81,6 +83,8 @@ class Files extends Component {
                         <img className="btnImg" src={newBtnImg}></img>
                     </DropdownToggle>
                     <DropdownMenu className="menuBtnContent">
+                        <Button onClick={this.props.toggleEditorModal} className="dropUpBtn">Ny tekstfil</Button>
+                        <DropdownItem divider />
                         <Button onClick={this.props.toggleUploadModal} className="dropUpBtn"> Last opp filer</Button>
                         <DropdownItem divider />
                         <Button onClick={this.props.toggleNewFolderModal} className="dropUpBtn">Ny mappe</Button>
@@ -90,6 +94,8 @@ class Files extends Component {
                 <NewFolderModal/>
                 <UploadModal/>
                 <MoveModal/>
+                <RenameModal/>
+                <EditorModal />
             </div>
         )
     }
@@ -128,7 +134,8 @@ const mapDispatchToProps = (dispatch) => {
         fetchFilesData: (client_id, selected_folder) => { dispatch(fetchFilesData(client_id, selected_folder)) },
         updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
         toggleNewFolderModal:() => {dispatch(toggleNewFolderModal())},
-        toggleUploadModal:() => {dispatch(toggleUploadModal())}
+        toggleUploadModal:() => {dispatch(toggleUploadModal())},
+        toggleEditorModal:() => {dispatch(toggleEditorModal())}
     }
 }
 

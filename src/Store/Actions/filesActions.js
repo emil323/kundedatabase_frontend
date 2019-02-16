@@ -1,7 +1,12 @@
 
 import api from '../../API/API'
-import {FETCH_FILES, SEARCH_KEY, TOGGLE_UPLOAD_MODAL, TOGGLE_NEW_FOLDER_MODAL, TOGGLE_MOVE_MODAL} from '../types'
+import {FETCH_FILES, SEARCH_KEY, TOGGLE_UPLOAD_MODAL, TOGGLE_NEW_FOLDER_MODAL, TOGGLE_MOVE_MODAL, TOGGLE_RENAME_MODAL, TOGGLE_EDITOR_MODAL } from '../types'
 
+export const toggleEditorModal = () => {
+    return {
+        type: TOGGLE_EDITOR_MODAL
+    }
+}
 
 export const toggleUploadModal = () => {
     return {
@@ -12,6 +17,13 @@ export const toggleUploadModal = () => {
 export const toggleMoveModal = (file) => {
     return {
         type: TOGGLE_MOVE_MODAL,
+        file
+    }
+}
+
+export const toggleRenameModal = (file) => {
+    return {
+        type: TOGGLE_RENAME_MODAL,
         file
     }
 }
