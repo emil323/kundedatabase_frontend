@@ -2,7 +2,6 @@
 export const ADD_CLIENT = 'ADD_CLIENT'
 export const DELETE_CLIENT = 'DELETE_CLIENT'
 export const FETCH_CLIENTS = 'FETCH_CLIENTS'
-export const SEARCH_LOG_KEY = 'SEARCH_LOG_KEY'
 export const TOGGLE_MODAL = 'TOGGLE_MODAL'
 export const TOGGLE = 'TOGGLE'
 
@@ -17,6 +16,9 @@ export const SEARCH_KEY = 'SEARCH_KEY'
 
 // Access Log
 export const FETCH_ACCESS_LOG = 'FETCH_ACCESS_LOG'
+export const ADD_LOG_ITEM = 'ADD_LOG_ITEM'
+
+
 
 // Users
 export const FETCH_USERS = 'FETCH_USERS'

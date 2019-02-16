@@ -11,7 +11,8 @@ import newBtnImg from '../../../img/new.png'
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
-import { deleteClient, fetchClientsData, fetchAccessLogData, updateSearch, toggleModal} from '../../../Store/Actions/clientsActions'
+import { deleteClient, fetchClientsData, updateSearch, toggleModal} from '../../../Store/Actions/clientsActions'
+import {fetchAccessLogData} from '../../../Store/Actions/accesslogActions'
 import AddClient from './AddClient';
 
 class Clients extends Component {
@@ -38,7 +39,10 @@ class Clients extends Component {
             return client.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
         })
         let filteredAccessLog = this.props.accesslog.filter(log => {
-            return log.first_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
+            return log.first_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 ||
+            log.client.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 ||
+            log.file.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
+
         })
         return (
             <div className="container">
@@ -71,7 +75,7 @@ class Clients extends Component {
                     <TabPane tabId="1">
                         <Row>
                             <Col sm="12">
-                            <input type="text" value={this.props.search} placeholder="Søk etter kunde..." onChange={this.props.updateSearch.bind(this.props.updateSearch)}/>
+                            <input type="text" value={this.props.search} placeholder="Søk etter kunde..." onChange={this.props.updateSearch.bind(this)}/>
                                 <Table className="table table-hover">
                                     <thead className="thead-dark">
                                         <tr>
@@ -95,13 +99,15 @@ class Clients extends Component {
                     <TabPane tabId="2">
                         <Row>
                             <Col sm="12">
-                                <input type="text" value={this.props.search} placeholder="Søk etter endring..." onChange={this.props.updateSearch.bind(this)}/>
+                                <input type="text" value={this.props.searchLog} placeholder="Søk..." onChange={this.props.updateSearchLog.bind(this)}/>
                                 <Table className="table table-hover">
                                         <thead className="thead-dark">
                                             <tr>
+                                                <th>Kunde</th>
+                                                <th>Besøkt fil</th>
                                                 <th>Navn</th>
-                                                <th>#</th>
-                                                <th></th>
+                                                <th>IP</th>
+                                                <th>Sist besøkt</th>
                                             </tr>
                                         </thead>
                                         {
@@ -132,8 +138,9 @@ class Clients extends Component {
 const mapStateToProps = (state) => {
     return {
         clients: state.clientsReducer.clients,
-        accesslog: state.clientsReducer.accesslog,
-        search: state.clientsReducer.search
+        search: state.clientsReducer.search,
+        accesslog: state.accesslogReducer.accesslog,
+        searchLog: state.accesslogReducer.searchLog
     }
 }
 
@@ -144,7 +151,9 @@ const mapDispatchToProps = (dispatch) => {
         toggleModal: () => { dispatch(toggleModal())},
         fetchClientsData: () =>{ dispatch(fetchClientsData())},
         fetchAccessLogData: () =>{ dispatch(fetchAccessLogData())},
-        updateSearch:(search_key) => {dispatch(updateSearch(search_key))},}
+        updateSearch:(search_key) => {dispatch(updateSearch(search_key))},
+        updateSearchLog:(search_key) => {dispatch(updateSearch(search_key))},
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Clients)

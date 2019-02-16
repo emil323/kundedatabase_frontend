@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import "./Clients.css"
-import { addClientData, fetchClientsData, toggleModal} from '../../../Store/Actions/clientsActions'
+import { fetchClientsData, toggleModal} from '../../../Store/Actions/clientsActions'
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Link } from "react-router-dom"
 
@@ -78,10 +78,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return { 
-        addClientData: (client) => { dispatch(addClientData(client))},
         fetchClientsData: () => {dispatch(fetchClientsData())},
         toggleModal: () => {dispatch(toggleModal())}
-
     }
 }
 
