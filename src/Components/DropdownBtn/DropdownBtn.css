@@ -11,12 +11,7 @@
     background-color: white;
 } */
 
-.dropDownToggle {
-    background-color: transparent;
-    border: 0;
-}
-
-.dropDownToggle:hover {
+.dropDownToggle, .dropDownToggle:hover {
     background-color: transparent;
     border: 0;
 }

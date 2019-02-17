@@ -36,24 +36,6 @@ export const fetchClients = (clients) => {
     }
 }
 
-export const fetchAccessLog = (accesslog) => {
-    return {
-        type: FETCH_ACCESS_LOG,
-        accesslog
-    }
-}
-
-export const fetchAccessLogData = () => {
-    return (dispatch) => {
-        return api.accesslog().list()
-            .then(response => {
-                dispatch(fetchAccessLog(response.data))
-            })
-            .catch(error => {
-                throw error
-            })
-    }
-}
 
 export const fetchClientsData = () => {
     return (dispatch) => {
@@ -67,15 +49,3 @@ export const fetchClientsData = () => {
     }
 }
 
-export const addClientData = () => {
-    console.log(addClient.client)
-    return(dispatch) => {
-        return api.clients().create()
-            .then(response => {
-                dispatch(addClient(response.data))
-            })
-            .catch(error => {
-                throw(error)
-            })
-    }
-}

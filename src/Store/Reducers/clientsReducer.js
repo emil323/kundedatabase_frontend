@@ -1,5 +1,5 @@
 
-import {DELETE_CLIENT, SEARCH_KEY, FETCH_CLIENTS, FETCH_ACCESS_LOG, ADD_CLIENT, TOGGLE_MODAL, TOGGLE} from '../types'
+import {DELETE_CLIENT, SEARCH_KEY, FETCH_CLIENTS, ADD_CLIENT, TOGGLE_MODAL} from '../types'
 
 // A Reducer requires an initial state when running the application
 const initState = {
@@ -20,10 +20,6 @@ const clientsReducer = (state = initState, action) => {
         case FETCH_CLIENTS:
             return { ...state, 
                 clients: action.clients.clients
-            }
-        case FETCH_ACCESS_LOG:
-            return { ...state,
-                accesslog: action.accesslog.accesslog
             }
         case SEARCH_KEY:
             return {

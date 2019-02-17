@@ -39,7 +39,10 @@ export default  {
     accesslog: () => {
         return {
             list() {
-                return axios().get("/accesslog")    // Må være noe feil her?
+                return axios().get("/accesslog") 
+            },
+            create(data) {
+                return axios().post("/accesslog/create", data)
             }
         }
     },

@@ -1,5 +1,5 @@
 
-import {SEARCH_KEY, FETCH_FILES, TOGGLE_UPLOAD_MODAL, TOGGLE_NEW_FOLDER_MODAL, TOGGLE_MOVE_MODAL, TOGGLE_RENAME_MODAL} from '../types'
+import {SEARCH_KEY, FETCH_FILES, TOGGLE_UPLOAD_MODAL, TOGGLE_NEW_FOLDER_MODAL, TOGGLE_MOVE_MODAL, TOGGLE_RENAME_MODAL, TOGGLE_EDITOR_MODAL} from '../types'
 
 // A Reducer requires an initial state when running the application
 const initState = {
@@ -10,6 +10,7 @@ const initState = {
     search: '',
     new_folder_modal: false, 
     upload_modal: false,
+    editor_modal:false,
     move: {
         modal:false,
         file:{id:'',name:''}
@@ -41,6 +42,11 @@ const filesReducer = (state = initState, action) => {
             return {
                 ...state,
                 search: action.search_key    
+            }
+        case TOGGLE_EDITOR_MODAL:
+            return {
+                ...state,
+                editor_modal: !state.editor_modal
             }
         case TOGGLE_UPLOAD_MODAL:
             return {
