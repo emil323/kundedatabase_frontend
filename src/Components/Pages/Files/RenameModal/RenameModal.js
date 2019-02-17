@@ -16,29 +16,31 @@ class RenameModal extends React.Component {
     this.handleRename = this.handleRename.bind(this)
   }
 
-  renameFile() {
-    API.file(this.props.rename.file.id).rename(this.state.value).then(res => {
-        console.log(res)
-        this.props.fetchFilesData(this.props.client_id, this.props.selected_folder.id)
-        this.props.toggleRenameModal()
-    })
-  }
-
-  renameFolder() {
-    API.files().folder(this.props.rename.file.id).rename(this.state.value).then(res => {
-        console.log(res)
-        this.props.fetchFilesData(this.props.client_id, this.props.selected_folder.id)
-        this.props.toggleRenameModal()
-    })
-  }
+  /**
+   * Handle renaming of files and folder
+   */
 
   handleRename() {
-    if(this.props.rename.file.is_directory) {
-        this.renameFolder()
-    } else {
-        this.renameFile()
+
+    const {file} = this.props.rename
+    const {value} = this.state
+
+    //Create request object to differentiate between folder and file 
+
+    const request = (res) => {
+      return file.is_directory 
+          ? API.folder(file.id).rename(value).then(res)  
+          : API.file(file.id).rename(value).then(res)
     }
+
+    //Do request
+    request(res => {
+        this.props.fetchFilesData(this.props.client_id, this.props.selected_folder.id)
+        this.props.toggleRenameModal()
+    })
   }
+
+
 
   handleChange(event) {
     this.setState({

@@ -12,47 +12,29 @@ class NewFolderModal extends React.Component {
   }
 
 
-  /**
-   * Move folder logic
-   * @param {} new_folder 
-   */
-
-  moveFolder(new_folder) {
-    const folder_id = this.props.move.file.id
-    API.files().folder(folder_id).move(new_folder.id).then(res => {
-      console.log(res)
-      this.props.fetchFilesData(this.props.client_id, this.props.selected_folder.id)
-      this.props.toggleMoveModal()
-    })
-  }
-
-  /**
-   * Move file logic
-   * @param {} folder 
-   */
-
-  moveFile(folder) {
-    const file_id = this.props.move.file.id
-
-    API.file(file_id).move(folder.id).then(res => {
-      console.log(res)
-      this.props.fetchFilesData(this.props.client_id, this.props.selected_folder.id)
-      this.props.toggleMoveModal()
-    })
-  }
 
 /**
  * Handle moving file
  * @param {*} file 
  */
 
-handleMove(file) {
-  if(this.props.move.file.is_directory) {
-    this.moveFolder(file)
-  } else {
-    this.moveFile(file)
-  }
-  
+handleMove(new_parent) {
+
+    const {file} = this.props.move
+
+    //Create request object to differentiate between folder and file 
+
+    const request = (res) => {
+      return file.is_directory 
+          ? API.folder(file.id).move(new_parent.id).then(res)  
+          : API.file(file.id).move(new_parent.id).then(res)
+    }
+
+    //Do request
+    request(res => {
+        this.props.fetchFilesData(this.props.client_id, this.props.selected_folder.id)
+        this.props.toggleMoveModal()
+    })
 }
 
   render() {
@@ -71,17 +53,16 @@ handleMove(file) {
             <ListGroup>
                 <p>Velg hvilken mappe du vil flytte til.</p>
                 {
-                    this.props.files.map(file => {
+                    this.props.folders.map(folder => {
                       //Check if is directory, is not in any relation conflict (don't allow to put folder inside its own folder)
                       //Check if not in current directory
-                      if(file.is_directory
-                         && !file.relations.includes(this.props.move.file)
-                         && file.id !== this.props.selected_folder.id) {
+                      if(!folder.relations.includes(this.props.move.file)
+                         && folder.id !== this.props.selected_folder.id) {
                           //Build a path based on relations array
-                          const path = [...file.relations].reverse().map(r => `${r.name}`).join('/')
+                          const path = [...folder.relations].reverse().map(r => `${r.name}`).join('/')
           
                           //Spew out, bind to this and file object
-                          return <ListGroupItem key={file.id} onClick={this.handleMove.bind(this, file)} color="red" tag="button" action>{path}</ListGroupItem>
+                          return <ListGroupItem key={folder.id} onClick={this.handleMove.bind(this, folder)} color="red" tag="button" action>{path}</ListGroupItem>
                       }      
                     })
 
@@ -108,7 +89,8 @@ const mapStateToProps = state => {
         files,root_folder,selected_folder,client_id,move} = state.filesReducer;
   return {
     //Filter to only display files from selected folder or to handle a search value
-    files, root_folder, selected_folder,client_id, move
+    folders: files.filter(f =>  f.is_directory),
+    root_folder, selected_folder,client_id, move
   }
 }
 

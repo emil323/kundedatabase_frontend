@@ -25,11 +25,11 @@ class NewFolderModal extends React.Component {
   create_folder(e) {
     e.preventDefault()
 
-    const post_data = {
-      new_folder_name: this.state.value
-    }
+   
+      const new_folder_name =  this.state.value
+    
 
-    API.files().folder(this.props.selected_folder.id).create_folder(post_data)
+    API.folder(this.props.selected_folder.id).create_folder(new_folder_name)
       .then(res => {
         console.log(res)
         this.props.fetchFilesData(this.props.client_id, this.props.selected_folder.id)

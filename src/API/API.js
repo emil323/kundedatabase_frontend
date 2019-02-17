@@ -43,33 +43,7 @@ export default  {
             }
         }
     },
-    files: () => {
-        return {
-            folder: (folderID) => {
-                return{
-                    upload(formData) {
-                        return axios().post('/files/folder/' + folderID + "/upload", formData, {
-                            headers: {
-                              'Content-Type': 'multipart/form-data'
-                            }
-                        })
-                    },
-                    create_folder(data) {
-                        return axios().post('/files/folder/' + folderID + '/create_folder', data)
-                    },
-                    move(parent_folder) {
-                        return axios().post('/files/folder/' + folderID + '/move/' + parent_folder)
-                    },
-                    rename(new_name) {
-                        return axios().post('/files/folder/' + folderID + '/rename/', {new_name})
-                    }
-                }
-            },
-            download: (file_id) => {
-                return axios().get('/files/' + file_id + "/download", {responseType: 'blob'})
-            }
-        }
-    },
+   
     file: (file_id) => {
         return {
             move: (folder_id) => {
@@ -77,6 +51,29 @@ export default  {
             },
             rename(new_name) {
                 return axios().post('/files/' + file_id + '/rename/', {new_name})
+            },
+            download: () => {
+                return axios().get('/files/' + file_id + "/download", {responseType: 'blob'})
+            }
+        }
+    },
+    folder: (folder_id) => {
+        return {
+            upload(form_data) {
+                return axios().post('/files/folder/' + folder_id + "/upload", form_data, {
+                    headers: {
+                      'Content-Type': 'multipart/form-data'
+                    }
+                })
+            },
+            create_folder(new_folder_name) {
+                return axios().post('/files/folder/' + folder_id + '/create_folder', {new_folder_name})
+            },
+            move(new_parent_folder) {
+                return axios().post('/files/folder/' + folder_id + '/move/' + new_parent_folder)
+            },
+            rename(new_name) {
+                return axios().post('/files/folder/' + folder_id + '/rename/', {new_name})
             }
         }
     },

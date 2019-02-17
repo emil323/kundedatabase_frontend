@@ -53,8 +53,7 @@ class UploadModal extends React.Component {
     const folder_id = this.props.selected_folder.id;
 
     //Post formData to API
-    API.files()
-      .folder(folder_id)
+    API.folder(folder_id)
       .upload(formData)
       .then(response => {
         console.log(response);

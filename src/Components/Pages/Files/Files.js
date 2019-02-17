@@ -96,6 +96,7 @@ class Files extends Component {
         )
     }
     //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
+  
     componentDidMount() {
         const folder = this.props.folder !== null ? this.props.folder : this.props.selected_folder.id
         this.props.fetchFilesData(this.props.client_id, folder)

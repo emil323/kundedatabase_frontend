@@ -26,7 +26,7 @@ import API from '../../../API/API';
         if(file.is_directory) 
             this.props.history.push('/client/' + file.client_id + "/"  + file.id)
          else //Download file
-            API.files().download(file.id).then(res => {
+            API.file(file.id).download().then(res => {
                 const url = window.URL.createObjectURL(new Blob([res.data]));
                 const link = document.createElement('a');
                 link.href = url;
