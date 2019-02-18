@@ -49,34 +49,40 @@ export default  {
    
     file: (file_id) => {
         return {
-            move: (folder_id) => {
-                return axios().post('/files/' + file_id + '/move/' + folder_id)
+            move: (new_parent_folder) => {
+                return axios().post('/file/' + file_id + '/move', {new_parent_folder})
             },
             rename(new_name) {
-                return axios().post('/files/' + file_id + '/rename/', {new_name})
+                return axios().post('/file/' + file_id + '/rename/', {new_name})
             },
             download: () => {
-                return axios().get('/files/' + file_id + "/download", {responseType: 'blob'})
+                return axios().get('/file/' + file_id, {responseType: 'blob'})
+            },
+            delete: () => {
+                return axios().delete('/file/' + file_id)
             }
         }
     },
     folder: (folder_id) => {
         return {
             upload(form_data) {
-                return axios().post('/files/folder/' + folder_id + "/upload", form_data, {
+                return axios().post('/folder/' + folder_id + "/upload", form_data, {
                     headers: {
                       'Content-Type': 'multipart/form-data'
                     }
                 })
             },
             create_folder(new_folder_name) {
-                return axios().post('/files/folder/' + folder_id + '/create_folder', {new_folder_name})
+                return axios().post('/folder/' + folder_id + '/create_folder', {new_folder_name})
             },
             move(new_parent_folder) {
-                return axios().post('/files/folder/' + folder_id + '/move/' + new_parent_folder)
+                return axios().post('/folder/' + folder_id + '/move', {new_parent_folder})
             },
             rename(new_name) {
-                return axios().post('/files/folder/' + folder_id + '/rename/', {new_name})
+                return axios().post('/folder/' + folder_id + '/rename', {new_name})
+            },
+            delete: () => {
+                return axios().delete('/folder/' + folder_id)
             }
         }
     },

@@ -1,6 +1,6 @@
 
 import api from '../../API/API'
-import {FETCH_FILES, SEARCH_KEY, TOGGLE_UPLOAD_MODAL, TOGGLE_NEW_FOLDER_MODAL, TOGGLE_MOVE_MODAL, TOGGLE_RENAME_MODAL, TOGGLE_EDITOR_MODAL } from '../types'
+import {FETCH_FILES, SEARCH_KEY, TOGGLE_UPLOAD_MODAL, TOGGLE_NEW_FOLDER_MODAL, TOGGLE_MOVE_MODAL, TOGGLE_RENAME_MODAL, TOGGLE_EDITOR_MODAL, TOGGLE_DELETE_MODAL } from '../types'
 
 export const toggleEditorModal = () => {
     return {
@@ -11,6 +11,13 @@ export const toggleEditorModal = () => {
 export const toggleUploadModal = () => {
     return {
         type: TOGGLE_UPLOAD_MODAL
+    }
+}
+
+export const toggleDeleteModal = (file) => {
+    return {
+        type: TOGGLE_DELETE_MODAL,
+        file
     }
 }
 
@@ -65,7 +72,7 @@ export const fetchFilesData = (client_id, selected) => {
         if(file.is_root) 
             return relations    
         const parent = files.find(f => {return f.id === file.parent_id})
-
+        if(parent == null) return relations
         relations.push(parent)
         return generateRelations(files, parent, relations)
     }
@@ -73,9 +80,9 @@ export const fetchFilesData = (client_id, selected) => {
     return (dispatch) => {
         return api.client(client_id).files()
             .then(response => {
-
+                console.log(response)
                 const files = response.data
-
+                
                 //Run recursive function
                 files.forEach(file => {
                     file.relations = generateRelations(files, file)

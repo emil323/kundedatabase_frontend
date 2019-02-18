@@ -16,6 +16,7 @@ import newBtnImg from '../../../img/new.png'
 import MoveModal from './MoveModal/MoveModal';
 import RenameModal from './RenameModal/RenameModal';
 import EditorModal from './EditorModal/EditorModal'
+import DeleteModal from './DeleteModal/DeleteModal';
 
 class Files extends Component {
 
@@ -96,6 +97,7 @@ class Files extends Component {
                 <MoveModal/>
                 <RenameModal/>
                 <EditorModal />
+                <DeleteModal />
             </div>
         )
     }
