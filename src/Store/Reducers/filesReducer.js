@@ -1,5 +1,5 @@
 
-import {SEARCH_KEY, FETCH_FILES, TOGGLE_UPLOAD_MODAL, TOGGLE_NEW_FOLDER_MODAL, TOGGLE_MOVE_MODAL, TOGGLE_RENAME_MODAL, TOGGLE_EDITOR_MODAL, TOGGLE_DELETE_MODAL} from '../types'
+import {SEARCH_KEY, FETCH_FILES,SELECT_FOLDER, TOGGLE_UPLOAD_MODAL, TOGGLE_NEW_FOLDER_MODAL, TOGGLE_MOVE_MODAL, TOGGLE_RENAME_MODAL, TOGGLE_EDITOR_MODAL, TOGGLE_DELETE_MODAL} from '../types'
 
 // A Reducer requires an initial state when running the application
 const initState = {
@@ -7,22 +7,7 @@ const initState = {
     root_folder: {id:'', name:''},
     selected_folder: {id:'', name:''},
     client_id:'',
-    search: '',
-    new_folder_modal: false, 
-    upload_modal: false,
-    editor_modal:false,
-    delete: {
-        modal:false,
-        file:{id:'',name:''}
-    },
-    move: {
-        modal:false,
-        file:{id:'',name:''}
-    },
-    rename: {
-        modal:false,
-        file: {id:'',name:''}
-    }
+    search: ''
 }
 
 
@@ -42,52 +27,19 @@ const filesReducer = (state = initState, action) => {
                 client_id:action.client_id,
                 search:''
             }
+        case SELECT_FOLDER:
+            const new_selected_folder = state.files.find(f=>  f.id == action.folder_id ) //Find folder object based on folder_id
+            return {
+                ...state, 
+                selected_folder : new_selected_folder //Do this, and if folder does not exist, go to root...
+                    ? new_selected_folder
+                    : state.root_folder
+            }    
         case SEARCH_KEY:
             return {
                 ...state,
                 search: action.search_key    
             }
-        case TOGGLE_EDITOR_MODAL:
-            return {
-                ...state,
-                editor_modal: !state.editor_modal
-            }
-        case TOGGLE_UPLOAD_MODAL:
-            return {
-                ...state,
-                upload_modal: !state.upload_modal
-            }
-        case TOGGLE_MOVE_MODAL:
-            console.log(action)
-            return {
-                ...state,
-                move: {
-                    file: action.file ? action.file : state.move.file,
-                    modal: !state.move.modal
-                }
-            }
-        case TOGGLE_DELETE_MODAL:
-            return {
-                ...state,
-                delete: {
-                    file: action.file ? action.file : state.delete.file,
-                    modal: !state.delete.modal
-                }
-            }    
-        case TOGGLE_RENAME_MODAL: 
-            return {
-                ...state,
-                rename: {
-                    file: action.file ? action.file : state.rename.file,
-                    modal: !state.rename.modal
-                }        
-            }        
-        case TOGGLE_NEW_FOLDER_MODAL: {
-            return {
-                ...state,
-                new_folder_modal: !state.new_folder_modal
-            }    
-        }   
         default:
             return state
     }

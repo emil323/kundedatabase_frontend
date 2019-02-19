@@ -3,12 +3,13 @@ import { Component } from 'react'
 import api from '../../../API/API'
 import FileData from './FileData'
 import "./Files.css"
-import { Table, Row, Col, Button, ButtonGroup, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Table, Alert, Col, Button, ButtonGroup, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { withRouter } from "react-router-dom"
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
-import {fetchFilesData, updateSearch, toggleNewFolderModal, toggleUploadModal, toggleEditorModal } from '../../../Store/Actions/filesActions'
+import {fetchFilesData, selectFolder,updateSearch} from '../../../Store/Actions/filesActions'
+import { toggleNewFolderModal, toggleUploadModal, toggleEditorModal } from '../../../Store/Actions/modalActions'
 import UploadModal from './UploadModal/UploadModal';
 import NewFolderModal from './NewFolderModal/NewFolderModal';
 import backBtnImg from '../../../img/backBtn.png'
@@ -38,17 +39,23 @@ class Files extends Component {
 
     upOneLevel() {
         if (!this.props.selected_folder.is_root) {
-            this.props.history.push('/client/' + this.props.client_id + "/" + this.props.selected_folder.parent_id)
+            this.props.history.push('/client/' + this.props.match.params.client_id + "/" + this.props.selected_folder.parent_id)
         }
     }
 
     render() {
-        let filteredFiles = this.props.files.filter(file => {
+
+        const filteredFiles = this.props.is_searching
+        ? this.props.all_files.filter(file => { //Search in all files in this client
+            //searching logic
             return file.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
-        })
+        }) 
+        : this.props.files //Nothing to seach, view all files
+
+
         return (
             <div className="container" >
-            <input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch.bind(this)} />
+            <input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch} />
 
                 {/*}
             <Row>
@@ -69,8 +76,22 @@ class Files extends Component {
                         </tr>
                     </thead>
                     {
+                      this.props.is_searching ? 
+                      <tr>
+                          <td colspan="4">
+                            <Alert color="dark">
+                                <h4>
+                                    Søkeresultat: {this.props.search}
+                                </h4>
+                            </Alert>
+                            </td> 
+                        </tr>
+                        : ''
+                       
+                    }
+                    {
                         filteredFiles.map(file => {
-                            return <FileData file={file} deleteFile={this.props.deleteFile} key={file.id} />
+                            return <FileData file={file}  key={file.id} />
                         })
                     }
                 </Table>
@@ -104,13 +125,25 @@ class Files extends Component {
     //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
   
     componentDidMount() {
-        const folder = this.props.folder !== null ? this.props.folder : this.props.selected_folder.id
-        this.props.fetchFilesData(this.props.client_id, folder)
+        //Initial fetch of data
+        const folder = this.props.match.params.selected_folder !== null ? this.props.match.params.selected_folder : this.props.selected_folder.id
+        this.props.fetchFilesData(this.props.match.params.client_id, folder)
     }
 
+    /**
+     *  This is important, it will be called when the URL changes. That means user has clicked a folder, and we need to react to that. 
+     * @param {*} nextProps 
+     */
+
     componentWillReceiveProps(nextProps) {
-        if (this.props.folder !== nextProps.folder) {
-            this.props.fetchFilesData(nextProps.client_id, nextProps.folder)
+        const old_params = this.props.match.params
+        const new_params = nextProps.match.params
+        //Get fuckt
+        if (old_params.client_id !== new_params.client_id 
+                || old_params.selected_folder !== new_params.selected_folder) {
+            console.log("Change folder: ", new_params.selected_folder)
+            //this.props.fetchFilesData(nextProps.match.params.client_id, nextProps.match.params.selected_folder)
+            this.props.selectFolder(new_params.selected_folder)
         }
     }
 }
@@ -125,9 +158,11 @@ const mapStateToProps = (state) => {
             return file.parent_id === selected_folder.id
             //TODO:Handle search value
         }),
+        all_files: files,
         root_folder,
         selected_folder,
-        search
+        search,
+        is_searching: search !== ''
     }
 }
 
@@ -135,6 +170,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchFilesData: (client_id, selected_folder) => { dispatch(fetchFilesData(client_id, selected_folder)) },
+        selectFolder: (folder_id) => {dispatch(selectFolder(folder_id))},
         updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
         toggleNewFolderModal:() => {dispatch(toggleNewFolderModal())},
         toggleUploadModal:() => {dispatch(toggleUploadModal())},

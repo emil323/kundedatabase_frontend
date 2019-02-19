@@ -1,7 +1,13 @@
 import React from 'react'
 import {Component} from 'react'
+import {Button} from 'reactstrap'
 import "./Client.css"
 import Files from "../Files/Files"
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+  } from 'react-router-dom'
 
 import api from '../../../API/API';
 
@@ -19,9 +25,11 @@ class Client extends Component {
     render() {
         return (
             <div className="container">
+
                 <ClientHeader clientName={this.state.name}/>
-                <Files  client_id={this.props.match.params.client_id} 
-                        folder={this.props.match.params.selected_folder} />
+                
+                <Route path={`/client/:client_id/:selected_folder?`} component={Files}/>
+                
                 
             </div>
         )

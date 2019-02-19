@@ -4,7 +4,8 @@ import Dropzone from "react-dropzone";
 import classNames from "classnames";
 import API from "../../../../API/API";
 import { connect } from "react-redux";
-import { fetchFilesData, toggleUploadModal } from "../../../../Store/Actions/filesActions";
+import { fetchFilesData } from "../../../../Store/Actions/filesActions";
+import { toggleUploadModal } from "../../../../Store/Actions/modalActions";
 import "./UploadModal.css";
 
 import downloadIcon from "../../../../Assets/Icons/download.png";
@@ -171,9 +172,11 @@ const mapStateToProps = state => {
     root_folder,
     selected_folder,
     client_id,
-    search,
-    upload_modal
+    search
   } = state.filesReducer;
+
+  const {upload_modal} = state.modalReducer
+
   return {
     //Filter to only display files from selected folder or to handle a search value
     files: files.filter(file => {

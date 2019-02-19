@@ -1,7 +1,8 @@
 import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
-import { fetchFilesData, toggleDeleteModal } from "../../../../Store/Actions/filesActions";
+import { fetchFilesData } from "../../../../Store/Actions/filesActions";
+import { toggleDeleteModal } from "../../../../Store/Actions/modalActions";
 
 import API from "../../../../API/API";
 
@@ -23,7 +24,6 @@ handleDelete() {
     const {file} = this.props.delete
 
     //Create request object to differentiate between folder and file 
-
     const request = (res) => {
       return file.is_directory 
           ? API.folder(file.id).delete().then(res)  
@@ -72,7 +72,7 @@ const mapStateToProps = state => {
     const {root_folder,selected_folder,client_id} = state.filesReducer;
   return {
     //Filter to only display files from selected folder or to handle a search value
-    root_folder, selected_folder,client_id, delete: state.filesReducer.delete
+    root_folder, selected_folder,client_id, delete: state.modalReducer.delete
   }
 }
 

@@ -6,7 +6,8 @@ import textDoc from "../../../Assets/Icons/txt.png"
 import folder from "../../../Assets/Icons/folder.png"
 
 import { connect } from "react-redux";
-import { fetchFilesData, toggleMoveModal, toggleRenameModal, toggleDeleteModal} from '../../../Store/Actions/filesActions'
+import { fetchFilesData} from '../../../Store/Actions/filesActions'
+import { toggleMoveModal, toggleRenameModal, toggleDeleteModal} from '../../../Store/Actions/modalActions'
 import {addLogItem} from '../../../Store/Actions/accesslogActions'
 import { Link, withRouter } from "react-router-dom";
 import { Component } from 'react'
@@ -17,31 +18,16 @@ import API from '../../../API/API';
      constructor(props){
          super(props)
          this.handleSelection = this.handleSelection.bind(this)
-         this.state = {
-            name: ''
-        }
      }
 
 
-    updateAccesslog = () => {
-        API.accesslog().create({
-            file: this.props.file.name,
-            client: this.state.name
-        })
-        .then(res => {
-          this.props.fetchAccessLogData()
-        })
-        .catch(err => {
-          console.log(err)
-        })
-        
-    }
+
 
     handleSelection = (e) => {
         e.preventDefault()
 
         const {file} = this.props
-    
+        console.log(file)
         if(file.is_directory) 
             this.props.history.push('/client/' + file.client_id + "/"  + file.id)
          else //Download file
@@ -88,7 +74,7 @@ import API from '../../../API/API';
                 <tbody>
                     <tr>
                         <td><img src={this.checkFileType(this.props.file.type)} alt="s"/></td>
-                        <td><Link to="" onClick={(e) => {this.updateAccesslog(); this.handleSelection(e)}}>{this.props.file.name}</Link></td>
+                        <td><Link to="" onClick={(e) => {this.handleSelection(e)}}>{this.props.file.name}</Link></td>
                         <td>{this.props.file.last_changed}</td>
                         <td><DropdownBtn file={this.props.file} options={btnOptions} /></td>
                     </tr>
@@ -98,13 +84,7 @@ import API from '../../../API/API';
             
         }    
 
-        componentDidMount() {
-            const {client_id} = this.props.match.params
-            API.client(client_id).get()
-                .then((response) => {
-                    this.setState({name: response.data.name})
-                })
-        }
+
 }
 
 
@@ -123,7 +103,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchFilesData: (client_id, selected_folder) =>{ dispatch(fetchFilesData(client_id, selected_folder))},
         toggleMoveModal: (file) => {dispatch(toggleMoveModal(file))},
-        addLogItem: (logItem) => { dispatch(addLogItem(logItem))},
         toggleRenameModal:(file) => {dispatch(toggleRenameModal(file))},
         toggleDeleteModal:(file) => {dispatch(toggleDeleteModal(file))}
     }

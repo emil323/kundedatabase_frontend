@@ -1,50 +1,19 @@
 
 import api from '../../API/API'
-import {FETCH_FILES, SEARCH_KEY, TOGGLE_UPLOAD_MODAL, TOGGLE_NEW_FOLDER_MODAL, TOGGLE_MOVE_MODAL, TOGGLE_RENAME_MODAL, TOGGLE_EDITOR_MODAL, TOGGLE_DELETE_MODAL } from '../types'
+import {FETCH_FILES, SEARCH_KEY,SELECT_FOLDER, } from '../types'
 
-export const toggleEditorModal = () => {
-    return {
-        type: TOGGLE_EDITOR_MODAL
-    }
-}
-
-export const toggleUploadModal = () => {
-    return {
-        type: TOGGLE_UPLOAD_MODAL
-    }
-}
-
-export const toggleDeleteModal = (file) => {
-    return {
-        type: TOGGLE_DELETE_MODAL,
-        file
-    }
-}
-
-export const toggleMoveModal = (file) => {
-    return {
-        type: TOGGLE_MOVE_MODAL,
-        file
-    }
-}
-
-export const toggleRenameModal = (file) => {
-    return {
-        type: TOGGLE_RENAME_MODAL,
-        file
-    }
-}
-
-export const toggleNewFolderModal = () => {
-    return {
-        type: TOGGLE_NEW_FOLDER_MODAL
-    }
-}
 
 export const updateSearch = (e) => {
     return {
         type: SEARCH_KEY,
         search_key : e.target.value.substr(0,20)
+    }
+}
+
+export const selectFolder = (folder_id) => {
+    return {
+        type: SELECT_FOLDER,
+        folder_id
     }
 }
 
@@ -72,7 +41,7 @@ export const fetchFilesData = (client_id, selected) => {
         if(file.is_root) 
             return relations    
         const parent = files.find(f => {return f.id === file.parent_id})
-        if(parent == null) return relations
+        if(parent == null) return relations //This should normally not happen, and indicates problem with folder-hiarchy
         relations.push(parent)
         return generateRelations(files, parent, relations)
     }

@@ -1,7 +1,8 @@
 import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
-import { fetchFilesData, toggleMoveModal } from "../../../../Store/Actions/filesActions";
+import { fetchFilesData} from "../../../../Store/Actions/filesActions";
+import { toggleMoveModal} from "../../../../Store/Actions/modalActions";
 import {ListGroup, ListGroupItem  } from 'reactstrap'
 
 import API from "../../../../API/API";
@@ -84,9 +85,8 @@ handleMove(new_parent) {
 
 
 const mapStateToProps = state => {
-    console.log(state.filesReducer)
-    const {
-        files,root_folder,selected_folder,client_id,move} = state.filesReducer;
+    const { files,root_folder,selected_folder,client_id} = state.filesReducer;
+    const {move} = state.modalReducer
   return {
     //Filter to only display files from selected folder or to handle a search value
     folders: files.filter(f =>  f.is_directory),

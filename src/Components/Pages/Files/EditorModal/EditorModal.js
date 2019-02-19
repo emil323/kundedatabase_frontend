@@ -3,7 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import ReactQuill, { Quill, Mixin, Toolbar, Editor } from 'react-quill';
 import API from "../../../../API/API";
 import { connect } from 'react-redux'
-import { toggleEditorModal } from '../../../../Store/Actions/filesActions';
+import { toggleEditorModal } from '../../../../Store/Actions/modalActions';
 import './EditorModal.css'
 
 class EditorModal extends Component {
@@ -53,9 +53,7 @@ class EditorModal extends Component {
 }
 
 const mapStateToProps = state => {
-    const {
-        editor_modal
-    } = state.filesReducer
+    const {editor_modal } = state.modalReducer
     return {
         editor_modal
     }

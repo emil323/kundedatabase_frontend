@@ -1,7 +1,8 @@
 import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
-import { fetchFilesData, toggleNewFolderModal } from "../../../../Store/Actions/filesActions";
+import { fetchFilesData } from "../../../../Store/Actions/filesActions";
+import { toggleNewFolderModal } from "../../../../Store/Actions/modalActions";
 import {FormGroup, Form, Input, Label } from 'reactstrap'
 
 import './NewFolderModal.css'
@@ -90,12 +91,15 @@ class NewFolderModal extends React.Component {
 
 
 const mapStateToProps = state => {
-    const {
-        files,
-        root_folder,
-        selected_folder,
-        client_id,
-        new_folder_modal} = state.filesReducer;
+  const {
+      files,
+      root_folder,
+      selected_folder,
+      client_id
+      } = state.filesReducer;
+
+  const {new_folder_modal} = state.modalReducer     
+
   return {
     //Filter to only display files from selected folder or to handle a search value
     files: files.filter(file => {

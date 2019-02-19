@@ -1,7 +1,8 @@
 import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
-import { fetchFilesData, toggleRenameModal } from "../../../../Store/Actions/filesActions";
+import { fetchFilesData } from "../../../../Store/Actions/filesActions"
+import { toggleRenameModal } from "../../../../Store/Actions/modalActions";
 import {Form, FormGroup, Input} from 'reactstrap'
 
 import API from "../../../../API/API";
@@ -90,7 +91,8 @@ class RenameModal extends React.Component {
 
 const mapStateToProps = state => {
    
-  const {files,root_folder,selected_folder,client_id,rename} = state.filesReducer;
+  const {files,root_folder,selected_folder,client_id} = state.filesReducer;
+  const {rename} = state.modalReducer
 
   return {
     //Filter to only display files from selected folder or to handle a search value

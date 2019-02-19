@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import "./Files.css"
-import { addFile, fetchFilesData} from '../../../Store/Actions/filesActions'
+import { addFile, fetchFilesData, fetchAccessLogData} from '../../../Store/Actions/filesActions'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import UploadFile from "../UploadFile/UploadFile"
 import { Link } from "react-router-dom"
@@ -70,7 +70,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return { 
         addFile: (file) => { dispatch(addFile(file))},
-        fetchFilesData: () =>{ dispatch(fetchFilesData())}
+        fetchFilesData: () =>{ dispatch(fetchFilesData())},
+        fetchAccessLogData: () => {dispatch(fetchAccessLogData)}
     }
 }
 
