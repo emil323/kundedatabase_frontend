@@ -1,5 +1,5 @@
 
-import {SEARCH_KEY, FETCH_FILES,SELECT_FOLDER} from '../types'
+import {SEARCH_KEY, FETCH_DELETED_FILES,SELECT_FOLDER} from '../types'
 
 // A Reducer requires an initial state when running the application
 const initState = {
@@ -15,9 +15,9 @@ const initState = {
 
 
 // Reducers are called when a change happens. The reducers changes the initial state
-const filesReducer = (state = initState, action) => {
+const recyclebinReducer = (state = initState, action) => {
     switch(action.type){
-        case FETCH_FILES:
+        case FETCH_DELETED_FILES:
             console.log(action)
             return { 
                 ...state,
@@ -28,7 +28,7 @@ const filesReducer = (state = initState, action) => {
                 search:''
             }
         case SELECT_FOLDER:
-            const new_selected_folder = state.files.find(f=>  f.id == action.folder_id ) //Find folder object based on folder_id
+            const new_selected_folder = state.files.find(f=> f.id == action.folder_id ) //Find folder object based on folder_id
             return {
                 ...state, 
                 selected_folder : new_selected_folder //Do this, and if folder does not exist, go to root...
@@ -45,4 +45,4 @@ const filesReducer = (state = initState, action) => {
     }
 }
 
-export default filesReducer
+export default recyclebinReducer

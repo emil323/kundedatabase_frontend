@@ -1,5 +1,6 @@
 
 import api from '../../API/API'
+import {fetchRecyclebin} from './recyclebinActions'
 import {FETCH_FILES, SEARCH_KEY,SELECT_FOLDER, } from '../types'
 
 
@@ -27,7 +28,7 @@ export const fetchFiles = (files, root_folder, selected_folder, client_id) => {
 
 
 
-export const fetchFilesData = (client_id, selected) => {
+export const fetchFilesData = (client_id, selected, recyclebin) => {
     
     /**
      * Recursive function to generate full path for each file and folde
@@ -46,27 +47,33 @@ export const fetchFilesData = (client_id, selected) => {
         return generateRelations(files, parent, relations)
     }
 
+    const request = (res) => {
+        return recyclebin 
+            ? api.client(client_id).deleted_files().then(res)
+            : api.client(client_id).files().then(res)
+      }
     return (dispatch) => {
-        return api.client(client_id).files()
-            .then(response => {
-                console.log(response)
-                const files = response.data
-                
-                //Run recursive function
-                files.forEach(file => {
-                    file.relations = generateRelations(files, file)
-                })
-
-                const root_folder = files.find((file) => {return file.is_root})
-
-                //Determine what folder to set as selected
-                let selected_folder = files.find((file) => {return file.id === selected && file.is_directory}) 
-                selected_folder = selected_folder != null ? selected_folder : root_folder
-                //Dispatch to fetch_files
-                dispatch(fetchFiles(files,root_folder,selected_folder,client_id))
+        return request(response => {
+            console.log(response)
+            const files = response.data
+            
+            //Run recursive function
+            files.forEach(file => {
+                file.relations = generateRelations(files, file)
             })
-            .catch(error => {
-                throw(error)
-            })
+
+            const root_folder = files.find(file => file.is_root)
+
+            //Determine what folder to set as selected
+            let selected_folder = files.find((file) => {return file.id === selected && file.is_directory}) 
+            selected_folder = selected_folder != null ? selected_folder : root_folder
+            //Dispatch to fetch_files
+            recyclebin 
+            ? dispatch(fetchRecyclebin(files,root_folder,selected_folder,client_id))
+            : dispatch(fetchFiles(files,root_folder,selected_folder,client_id))
+        })
+        .catch(error => {
+            throw(error)
+        })
     }
 }

@@ -9,6 +9,8 @@ export const TOGGLE = 'TOGGLE'
 export const FETCH_FILES = 'FETCH_FILES'
 export const SELECT_FOLDER = 'SELECT_FOLDER'
 
+//Recycle bin
+export const FETCH_DELETED_FILES = 'FETCH_DELETED_FILES'
 
 //MODALS
 export const NEW_FOLDER_MODAL = 'NEW_FOLDER_MODAL'

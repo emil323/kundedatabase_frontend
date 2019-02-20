@@ -6,6 +6,7 @@ import Files from "../Files/Files"
 import {
     BrowserRouter as Router,
     Route,
+    Switch,
     Link,
   } from 'react-router-dom'
 
@@ -13,6 +14,7 @@ import api from '../../../API/API';
 
 
 import ClientHeader from '../../Jumbotron/ClientHeader';
+import RecycleBin from '../RecycleBin/RecycleBin';
 
 class Client extends Component {
     constructor(props){
@@ -27,9 +29,10 @@ class Client extends Component {
             <div className="container">
 
                 <ClientHeader clientName={this.state.name}/>
-                
-                <Route path={`/client/:client_id/:selected_folder?`} component={Files}/>
-                
+                <Switch>
+                    <Route path={`/client/:client_id/files/:selected_folder?`} component={Files}/>
+                    <Route path={`/client/:client_id/recyclebin/:selected_folder?`} component={RecycleBin}/>
+                </Switch>
                 
             </div>
         )

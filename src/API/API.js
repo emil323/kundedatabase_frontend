@@ -11,6 +11,9 @@ export default  {
             files() {
                 return axios().get("/client/" + clientID + "/files")
             },
+            deleted_files() {
+                return axios().get("/client/" + clientID + "/deleted_files")
+            },
             delete() {
                 return axios().delete("/client/" + clientID + "/delete")
             }

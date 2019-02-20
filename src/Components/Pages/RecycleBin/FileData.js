@@ -7,11 +7,9 @@ import folder from "../../../Assets/Icons/folder.png"
 
 import { connect } from "react-redux";
 import { fetchFilesData} from '../../../Store/Actions/filesActions'
-import { toggleMoveModal, toggleRenameModal, toggleDeleteModal} from '../../../Store/Actions/modalActions'
-import {addLogItem} from '../../../Store/Actions/accesslogActions'
 import { Link, withRouter } from "react-router-dom";
 import { Component } from 'react'
-import DropdownBtn from '../../DropdownBtn/DropdownBtn';
+import {Button} from 'reactstrap'
 import API from '../../../API/API';
 
  class FilesTable extends Component {
@@ -25,21 +23,6 @@ import API from '../../../API/API';
 
     handleSelection = (e) => {
         e.preventDefault()
-
-        const {file} = this.props
-        console.log(file)
-        if(file.is_directory) 
-            this.props.history.push('/client/' + file.client_id + "/files/"  + file.id)
-         else //Download file
-            API.file(file.id).download().then(res => {
-                const url = window.URL.createObjectURL(new Blob([res.data]));
-                const link = document.createElement('a');
-                link.href = url;
-                link.setAttribute('download', file.name);
-                document.body.appendChild(link);
-                link.click()
-            })
-        
     }
 
      
@@ -63,12 +46,7 @@ import API from '../../../API/API';
 
         render(){
         
-            const btnOptions =  [
-                { tekst: 'Vis', isHeader: 0, key: 1 },
-                { tekst: 'Endre navn', isHeader: 0, key: 2, function: () => {this.props.toggleRenameModal(this.props.file)}},
-                { tekst: 'Flytt', isHeader: 0, key: 3, function: ()=> {this.props.toggleMoveModal(this.props.file)}},
-                { tekst: 'Slett', isHeader: 0, key: 4, function: ()=> {this.props.toggleDeleteModal(this.props.file)}}
-            ]
+
 
             return(
                 <tbody>
@@ -76,7 +54,7 @@ import API from '../../../API/API';
                         <td><img src={this.checkFileType(this.props.file.type)} alt="s"/></td>
                         <td><Link to="" onClick={(e) => {this.handleSelection(e)}}>{this.props.file.name}</Link></td>
                         <td>{this.props.file.last_changed}</td>
-                        <td><DropdownBtn file={this.props.file} options={btnOptions} /></td>
+                        <td><Button>Recover</Button></td>
                     </tr>
                 </tbody>
             )
@@ -90,7 +68,7 @@ import API from '../../../API/API';
 
 // Calls on a clientsReducer that bring props to the component
 const mapStateToProps = (state) => {
-    const {root_folder,selected_folder, search} = state.filesReducer
+    const {root_folder,selected_folder, search} = state.recyclebinReducer
     return {
         root_folder,
         selected_folder,
@@ -101,10 +79,7 @@ const mapStateToProps = (state) => {
 // Create a dispatch which sends information to the reducer. In this case a client is being deleted
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchFilesData: (client_id, selected_folder) =>{ dispatch(fetchFilesData(client_id, selected_folder))},
-        toggleMoveModal: (file) => {dispatch(toggleMoveModal(file))},
-        toggleRenameModal:(file) => {dispatch(toggleRenameModal(file))},
-        toggleDeleteModal:(file) => {dispatch(toggleDeleteModal(file))}
+        fetchFilesData: (client_id, selected_folder) =>{ dispatch(fetchFilesData(client_id, selected_folder,true))},
     }
 }
 

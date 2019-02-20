@@ -2,24 +2,17 @@ import React from 'react'
 import { Component } from 'react'
 import api from '../../../API/API'
 import FileData from './FileData'
-import "./Files.css"
 import { Table, Alert, Col, Button, ButtonGroup, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { withRouter } from "react-router-dom"
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
-import {fetchFilesData, selectFolder,updateSearch} from '../../../Store/Actions/filesActions'
-import { toggleNewFolderModal, toggleUploadModal, toggleEditorModal } from '../../../Store/Actions/modalActions'
-import UploadModal from './UploadModal/UploadModal';
-import NewFolderModal from './NewFolderModal/NewFolderModal';
-import backBtnImg from '../../../img/backBtn.png'
-import newBtnImg from '../../../img/new.png'
-import MoveModal from './MoveModal/MoveModal';
-import RenameModal from './RenameModal/RenameModal';
-import EditorModal from './EditorModal/EditorModal'
-import DeleteModal from './DeleteModal/DeleteModal';
+import {fetchFilesData} from '../../../Store/Actions/filesActions'
 
-class Files extends Component {
+import backBtnImg from '../../../img/backBtn.png'
+
+
+class RecycleBin extends Component {
 
     constructor(props) {
         super(props)
@@ -39,12 +32,8 @@ class Files extends Component {
 
     upOneLevel() {
         if (!this.props.selected_folder.is_root) {
-            this.props.history.push('/client/' + this.props.match.params.client_id + "/files/" + this.props.selected_folder.parent_id)
+            this.props.history.push('/client/' + this.props.match.params.client_id + "/" + this.props.selected_folder.parent_id)
         }
-    }
-
-    openRecyclebin() {
-        this.props.history.push('/client/' + this.props.match.params.client_id + "/recyclebin")
     }
 
     render() {
@@ -59,9 +48,9 @@ class Files extends Component {
 
         return (
             <div className="container" >
-        
-            <input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch} />
-            <Button onClick={this.openRecyclebin.bind(this)}>Papirkurv</Button>
+            <h1>Papirkurv</h1>
+            <input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter slettede filer..." onChange={this.props.updateSearch} />
+
                 {/*}
             <Row>
                     <Col xs="1" ><UploadModal buttonLabel="Last Opp"/> </Col>
@@ -105,25 +94,9 @@ class Files extends Component {
                         <Button className="backBtn menuBtn" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img src={backBtnImg} className="btnImg" /></Button>
                 }
 
-                <ButtonDropdown className="menuBtn btnGroupNew" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                    <DropdownToggle caret className="menuBtn">
-                        <img className="btnImg" src={newBtnImg}></img>
-                    </DropdownToggle>
-                    <DropdownMenu className="menuBtnContent">
-                        <Button onClick={this.props.toggleEditorModal} className="dropUpBtn">Ny tekstfil</Button>
-                        <DropdownItem divider />
-                        <Button onClick={this.props.toggleUploadModal} className="dropUpBtn"> Last opp filer</Button>
-                        <DropdownItem divider />
-                        <Button onClick={this.props.toggleNewFolderModal} className="dropUpBtn">Ny mappe</Button>
-                    </DropdownMenu>
-                </ButtonDropdown>
 
-                <NewFolderModal/>
-                <UploadModal/>
-                <MoveModal/>
-                <RenameModal/>
-                <EditorModal />
-                <DeleteModal />
+
+
             </div>
         )
     }
@@ -156,7 +129,7 @@ class Files extends Component {
 
 // Calls on a clientsReducer that bring props to the component
 const mapStateToProps = (state) => {
-    const { files, root_folder, selected_folder, search } = state.filesReducer
+    const { files, root_folder, selected_folder, search } = state.recyclebinReducer
     return {
         //Filter to only display files from selected folder or to handle a search value
         files: files.filter((file) => {
@@ -174,14 +147,9 @@ const mapStateToProps = (state) => {
 // Create a dispatch which sends information to the reducer. In this case a client is being deleted
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchFilesData: (client_id, selected_folder) => { dispatch(fetchFilesData(client_id, selected_folder)) },
-        selectFolder: (folder_id) => {dispatch(selectFolder(folder_id))},
-        updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
-        toggleNewFolderModal:() => {dispatch(toggleNewFolderModal())},
-        toggleUploadModal:() => {dispatch(toggleUploadModal())},
-        toggleEditorModal:() => {dispatch(toggleEditorModal())}
+        fetchFilesData: (client_id, selected_folder) => { dispatch(fetchFilesData(client_id, selected_folder, true)) }
     }
 }
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Files))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RecycleBin))
