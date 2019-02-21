@@ -9,6 +9,7 @@ const Home = () => {
             <Favorites />
         </div>
     )
+
 }
 
 export default Home;

@@ -10,11 +10,11 @@ class AccessLog extends React.Component {
         return (
             <tbody>
                 <tr>
-                    <td>{this.props.log.client}</td>
-                    <td>{this.props.log.file}</td>
-                    <td>{this.props.log.first_name} {this.props.log.last_name}</td>
+                    <td>{this.props.log.client_name}</td>
+                    <td>{this.props.log.file_name}</td>
+                    <td>null</td>
                     <td>{this.props.log.ip}</td>
-                    <td>{this.props.log.time_stamp}</td>
+                    <td>{this.props.log.timestamp}</td>
                 </tr>
           
             </tbody>

@@ -7,7 +7,7 @@ import { Table } from 'reactstrap';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import newBtnImg from '../../../img/new.png'
-
+import {setTrail, pushTrail} from '../../../Store/Actions/breadcrumbActions'
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
@@ -39,9 +39,7 @@ class Clients extends Component {
             return client.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
         })
         let filteredAccessLog = this.props.accesslog.filter(log => {
-            return log.first_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 ||
-            log.client.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 ||
-            log.file.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
+            return log.client_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
 
         })
         return (
@@ -130,6 +128,15 @@ class Clients extends Component {
     componentDidMount() {
         this.props.fetchClientsData()
         this.props.fetchAccessLogData()
+
+        this.props.setTrail([{
+            title: 'Hjem',
+            path: '/'
+         },
+        {
+            title: 'Kunder',
+            path: '/clients'
+        }])
     }
 }
 
@@ -153,6 +160,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchAccessLogData: () =>{ dispatch(fetchAccessLogData())},
         updateSearch:(search_key) => {dispatch(updateSearch(search_key))},
         updateSearchLog:(search_key) => {dispatch(updateSearch(search_key))},
+        setTrail: (trail) => {dispatch(setTrail(trail))},
     }
 }
 

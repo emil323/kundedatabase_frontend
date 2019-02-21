@@ -1,6 +1,6 @@
 import React from 'react'
 import { Component } from 'react'
-import api from '../../../API/API'
+import {setTrail, pushTrail} from '../../../Store/Actions/breadcrumbActions'
 import FileData from './FileData'
 import "./Files.css"
 import { Table, Alert, Col, Button, ButtonGroup, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row } from 'reactstrap';
@@ -29,6 +29,7 @@ class Files extends Component {
         this.upOneLevel = this.upOneLevel.bind(this)
 
         this.toggle = this.toggle.bind(this);
+        this.updateTrail = this.updateTrail.bind(this)
         this.state = {
             dropdownOpen: false
         };
@@ -67,16 +68,15 @@ class Files extends Component {
         
         <Row className="row">
           
-            <Col  xs="0" sm="" lg="6" xl="">
-                <div className="buttonMenu hidden-xs">
-                    <Button >Ny tekstfil</Button>
-                    <Button >Last opp filer</Button>
-                    <Button >Ny mappe</Button>
-                    <Button onClick={this.openRecyclebin.bind(this)}>Papirkurv</Button>
+            <Col  sm="0" lg="9" >
+                <div className="buttonMenu hidden-xs hidden-sm">
+                    <Button color="primary" onClick={this.props.toggleUploadModal} >Last opp</Button>
+                    <Button color="primary" onClick={this.props.toggleNewFolderModal}>Ny mappe</Button>
+                    <Button color="primary" onClick={this.props.toggleEditorModal}>Nytt dokument</Button>
                 </div>
                
             </Col>
-            <Col xs="12" sm="" lg="6" xl="">
+            <Col sm="12" lg="3">
                 <input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch} />
             </Col>
       
@@ -125,7 +125,7 @@ class Files extends Component {
                         <Button className="backBtn menuBtn" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img src={backBtnImg} className="btnImg" /></Button>
                 }
 
-                <ButtonDropdown className="menuBtn btnGroupNew" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                <ButtonDropdown className="menuBtn btnGroupNew hidden-lg hidden-md" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                     <DropdownToggle caret className="menuBtn">
                         <img className="btnImg" src={newBtnImg}></img>
                     </DropdownToggle>
@@ -147,8 +147,16 @@ class Files extends Component {
             </div>
         )
     }
+
+    updateTrail(newFolder) {
+        console.log("update trails")
+        newFolder.relations.reverse().map(f => {
+            if(!f.is_root)
+                this.props.pushTrail(f.name, '/client/' + this.props.client_id + "/files/" + f.id)
+        })
+    }
+
     //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
-  
     componentDidMount() {
         //Initial fetch of data
         const folder = this.props.match.params.selected_folder !== null ? this.props.match.params.selected_folder : this.props.selected_folder.id
@@ -163,6 +171,7 @@ class Files extends Component {
     componentWillReceiveProps(nextProps) {
         const old_params = this.props.match.params
         const new_params = nextProps.match.params
+        
         //Get fuckt
         if (old_params.client_id !== new_params.client_id 
                 || old_params.selected_folder !== new_params.selected_folder) {
@@ -170,14 +179,20 @@ class Files extends Component {
             //this.props.fetchFilesData(nextProps.match.params.client_id, nextProps.match.params.selected_folder)
             this.props.selectFolder(new_params.selected_folder)
         }
+        //Kødd av en if test
+        if(nextProps.selected_folder !== this.props.selected_folder && nextProps.selected_folder.id !== '')
+        this.updateTrail(nextProps.selected_folder)
     }
+
 }
 
 
 // Calls on a clientsReducer that bring props to the component
 const mapStateToProps = (state) => {
     const { files, root_folder, selected_folder, search } = state.filesReducer
+    const {client_id} = state.clientReducer
     return {
+        client_id,
         //Filter to only display files from selected folder or to handle a search value
         files: files.filter((file) => {
             return file.parent_id === selected_folder.id
@@ -199,7 +214,9 @@ const mapDispatchToProps = (dispatch) => {
         updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
         toggleNewFolderModal:() => {dispatch(toggleNewFolderModal())},
         toggleUploadModal:() => {dispatch(toggleUploadModal())},
-        toggleEditorModal:() => {dispatch(toggleEditorModal())}
+        toggleEditorModal:() => {dispatch(toggleEditorModal())},
+        setTrail: (trail) => {dispatch(setTrail(trail))},
+        pushTrail: (title, path) => {dispatch(pushTrail(title, path))}
     }
 }
 

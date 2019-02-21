@@ -5,6 +5,13 @@ export const FETCH_CLIENTS = 'FETCH_CLIENTS'
 export const TOGGLE_MODAL = 'TOGGLE_MODAL'
 export const TOGGLE = 'TOGGLE'
 
+//Client
+export const FETCH_CLIENT = 'FETCH_CLIENT'
+
+//Breadcrumbs
+export const SET_TRAIL = 'SET_TRAIL'
+export const PUSH_TRAIL = 'PUSH_TRAIL'
+
 // Files
 export const FETCH_FILES = 'FETCH_FILES'
 export const SELECT_FOLDER = 'SELECT_FOLDER'
