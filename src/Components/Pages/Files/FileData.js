@@ -4,6 +4,7 @@ import pdf from "../../../Assets/Icons/pdf.png"
 import excel from "../../../Assets/Icons/excel.png"
 import textDoc from "../../../Assets/Icons/txt.png"
 import folder from "../../../Assets/Icons/folder.png"
+import horizontalDropdown  from '../../../Assets/Icons/horizontalDropdown.png'
 
 import { connect } from "react-redux";
 import { fetchFilesData} from '../../../Store/Actions/filesActions'
@@ -76,7 +77,7 @@ import API from '../../../API/API';
                         <td><img src={this.checkFileType(this.props.file.type)} alt="s"/></td>
                         <td><Link to="" onClick={(e) => {this.handleSelection(e)}}>{this.props.file.name}</Link></td>
                         <td>{this.props.file.last_changed}</td>
-                        <td><DropdownBtn file={this.props.file} options={btnOptions} /></td>
+                        <td><DropdownBtn icon={horizontalDropdown} options={btnOptions} /></td>
                     </tr>
                 </tbody>
             )

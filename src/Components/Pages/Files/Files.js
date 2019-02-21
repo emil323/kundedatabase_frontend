@@ -3,13 +3,14 @@ import { Component } from 'react'
 import api from '../../../API/API'
 import FileData from './FileData'
 import "./Files.css"
-import { Table, Alert, Col, Button, ButtonGroup, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Table, Alert, Col, Button, ButtonGroup, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row } from 'reactstrap';
 import { withRouter } from "react-router-dom"
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
 import {fetchFilesData, selectFolder,updateSearch} from '../../../Store/Actions/filesActions'
 import { toggleNewFolderModal, toggleUploadModal, toggleEditorModal } from '../../../Store/Actions/modalActions'
+import DropdownBtn from '../../DropdownBtn/DropdownBtn';
 import UploadModal from './UploadModal/UploadModal';
 import NewFolderModal from './NewFolderModal/NewFolderModal';
 import backBtnImg from '../../../img/backBtn.png'
@@ -18,6 +19,8 @@ import MoveModal from './MoveModal/MoveModal';
 import RenameModal from './RenameModal/RenameModal';
 import EditorModal from './EditorModal/EditorModal'
 import DeleteModal from './DeleteModal/DeleteModal';
+
+
 
 class Files extends Component {
 
@@ -49,6 +52,8 @@ class Files extends Component {
 
     render() {
 
+      
+
         const filteredFiles = this.props.is_searching
         ? this.props.all_files.filter(file => { //Search in all files in this client
             //searching logic
@@ -58,10 +63,25 @@ class Files extends Component {
 
 
         return (
-            <div className="container" >
+            <div >
         
-            <input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch} />
-            <Button onClick={this.openRecyclebin.bind(this)}>Papirkurv</Button>
+        <Row className="row">
+          
+            <Col  xs="0" sm="" lg="6" xl="">
+                <div className="buttonMenu hidden-xs">
+                    <Button >Ny tekstfil</Button>
+                    <Button >Last opp filer</Button>
+                    <Button >Ny mappe</Button>
+                    <Button onClick={this.openRecyclebin.bind(this)}>Papirkurv</Button>
+                </div>
+               
+            </Col>
+            <Col xs="12" sm="" lg="6" xl="">
+                <input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch} />
+            </Col>
+      
+        </Row>
+           
                 {/*}
             <Row>
                     <Col xs="1" ><UploadModal buttonLabel="Last Opp"/> </Col>

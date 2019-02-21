@@ -1,6 +1,5 @@
 .table {
     width: 90%;
-    margin: 0px auto;
 }
 
 .menuBtn {
@@ -31,11 +30,13 @@
 
 table {
     min-width: 100%;
+
 }
 
-.searchFiles {
-    margin: auto;
+.row{
+    margin-bottom: 20px;
 }
+
 
 .menuBtnContent {
     margin-right: 5em;
@@ -48,3 +49,13 @@ table {
 .menuBtnContent .dropdown-divider {
     opacity: 0;
 }
+
+
+.buttonMenu button{
+    margin-right: 0.5em;
+}
+
+.searchFiles {
+    float:right;
+}
+
