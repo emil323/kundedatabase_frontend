@@ -1,5 +1,5 @@
 
-import {SEARCH_KEY, FETCH_FILES,SELECT_FOLDER} from '../types'
+import {SEARCH_KEY, FETCH_FILES,SELECT_FOLDER, CLEAR} from '../types'
 
 // A Reducer requires an initial state when running the application
 const initState = {
@@ -40,6 +40,8 @@ const filesReducer = (state = initState, action) => {
                 ...state,
                 search: action.search_key    
             }
+        case CLEAR:
+            return initState
         default:
             return state
     }
