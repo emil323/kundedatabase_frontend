@@ -43,8 +43,8 @@ class EditorModal extends Component {
                         />
                     </ModalBody>
                     <ModalFooter>
-                        <Button onClick={this.insertText}>OK</Button>
-                        <Button onClick={this.props.toggleEditorModal}>Lukk</Button>
+                        <Button color="primary" onClick={this.insertText}>OK</Button>
+                        <Button color="secondary" onClick={this.props.toggleEditorModal}>Lukk</Button>
                     </ModalFooter>
                 </Modal>
             </div>

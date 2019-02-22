@@ -1,44 +1,46 @@
+.searchFiles {
+    width:100%;
+    float:right;
+}
+
 .table {
     width: 90%;
-}
-
-.menuBtn {
-    background-color: transparent; 
-    border: none;
-    position: fixed;
-    bottom: 0;    
-}
-
-.menuBtn:hover {
-    background-color: transparent;
-    border: none;
-}
-
-.backBtn {
-    transform: translate(-10%, -50%);
-}
-
-.btnGroupNew {
-    right: 0;
-    transform: translate(-50%, -50%);
-}
-
-
-.btnImg {
-    height: 5rem;
-}
-
-table {
-    min-width: 100%;
-
 }
 
 .row{
     margin-bottom: 20px;
 }
 
+.floatingActionButton {
+    position: fixed;
+    bottom: 0; 
+    background-color: transparent;   
+}
 
-.menuBtnContent {
+.fabBtn:hover {
+    background-color: transparent;
+    border: none;
+}
+
+.fabBack {
+    background-color: transparent;
+    transform: translate(-10%, -50%);
+}
+
+.fabNew {
+    right: 0;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+}
+
+
+.fabImg {
+    height: 5rem;
+    background-color: transparent;
+}
+
+
+.fabContentContainer {
     margin-right: 5em;
     width: 40%;
     border: none;
@@ -46,18 +48,15 @@ table {
     box-shadow: none;
 }
 
-.menuBtnContent .dropdown-divider {
+.fabContentContainer .dropdown-divider {
     opacity: 0;
+    background-color: transparent;
 }
 
 
-.buttonMenu button{
+.fab button{
     margin-right: 0.5em;
 }
 
-.searchFiles {
-    width:100%;
-    float:right;
-}
 
 

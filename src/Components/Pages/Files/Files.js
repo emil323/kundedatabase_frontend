@@ -122,19 +122,19 @@ class Files extends Component {
                 </Table>
                 {
                     this.props.selected_folder.is_root ? '' :
-                        <Button className="backBtn menuBtn" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img src={backBtnImg} className="btnImg" /></Button>
+                        <Button color="primary" className="floatingActionButton fabBack btn-vector" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img src={backBtnImg} className="btnImg" /></Button>
                 }
 
-                <ButtonDropdown className="menuBtn btnGroupNew hidden-lg hidden-md" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                    <DropdownToggle caret className="menuBtn">
-                        <img className="btnImg" src={newBtnImg}></img>
+                <ButtonDropdown className="floatingActionButton fabNew hidden-lg hidden-md" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                    <DropdownToggle className="fabBtn btn-vector" color="primary">
+                        <img className="fabImg" src={newBtnImg}></img>
                     </DropdownToggle>
-                    <DropdownMenu className="menuBtnContent">
-                        <Button onClick={this.props.toggleEditorModal} className="dropUpBtn">Ny tekstfil</Button>
+                    <DropdownMenu className="fabContentContainer">
+                        <Button color="primary" onClick={this.props.toggleEditorModal} className="dropUpBtn">Ny tekstfil</Button>
                         <DropdownItem divider />
-                        <Button onClick={this.props.toggleUploadModal} className="dropUpBtn"> Last opp filer</Button>
+                        <Button color="primary" onClick={this.props.toggleUploadModal} className="dropUpBtn"> Last opp filer</Button>
                         <DropdownItem divider />
-                        <Button onClick={this.props.toggleNewFolderModal} className="dropUpBtn">Ny mappe</Button>
+                        <Button color="primary" onClick={this.props.toggleNewFolderModal} className="dropUpBtn">Ny mappe</Button>
                     </DropdownMenu>
                 </ButtonDropdown>
 
