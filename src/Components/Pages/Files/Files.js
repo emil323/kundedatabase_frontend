@@ -1,6 +1,6 @@
 import React from 'react'
 import { Component } from 'react'
-import {setTrail, pushTrail} from '../../../Store/Actions/breadcrumbActions'
+import TrailUpdater from './TrailUpdater'
 import FileData from './FileData'
 import "./Files.css"
 import { Table, Alert, Col, Button, ButtonGroup, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row } from 'reactstrap';
@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom"
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
-import {fetchFilesData, selectFolder,updateSearch} from '../../../Store/Actions/filesActions'
+import {fetchFilesData, selectFolder,updateSearch, clearFiles} from '../../../Store/Actions/filesActions'
 import { toggleNewFolderModal, toggleUploadModal, toggleEditorModal } from '../../../Store/Actions/modalActions'
 import DropdownBtn from '../../DropdownBtn/DropdownBtn';
 import UploadModal from './UploadModal/UploadModal';
@@ -29,7 +29,6 @@ class Files extends Component {
         this.upOneLevel = this.upOneLevel.bind(this)
 
         this.toggle = this.toggle.bind(this);
-        this.updateTrail = this.updateTrail.bind(this)
         this.state = {
             dropdownOpen: false
         };
@@ -114,8 +113,17 @@ class Files extends Component {
                         : ''
                        
                     }
-                    {
-                        filteredFiles.map(file => {
+                    {  !this.props.is_searching && filteredFiles.length == 0 ?
+                        <tr>
+                        <td colspan="4">
+                          <Alert color="light">
+                              <p className="text-center">
+                                  Her er det tomt. 
+                              </p>
+                          </Alert>
+                          </td> 
+                      </tr>
+                       : filteredFiles.map(file => {
                             return <FileData file={file}  key={file.id} />
                         })
                     }
@@ -144,16 +152,10 @@ class Files extends Component {
                 <RenameModal/>
                 <EditorModal />
                 <DeleteModal />
+                
+                <TrailUpdater/>
             </div>
         )
-    }
-
-    updateTrail(newFolder) {
-        console.log("update trails")
-        newFolder.relations.reverse().map(f => {
-            if(!f.is_root)
-                this.props.pushTrail(f.name, '/client/' + this.props.client_id + "/files/" + f.id)
-        })
     }
 
     //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
@@ -179,9 +181,16 @@ class Files extends Component {
             //this.props.fetchFilesData(nextProps.match.params.client_id, nextProps.match.params.selected_folder)
             this.props.selectFolder(new_params.selected_folder)
         }
-        //Kødd av en if test
-        if(nextProps.selected_folder !== this.props.selected_folder && nextProps.selected_folder.id !== '')
-        this.updateTrail(nextProps.selected_folder)
+    }
+
+    /**
+     * Use this to clear the files reducer
+     * 
+     * We need to do this, to ensure that when a user goes into a new client, no remaining parts of the old client is visible. 
+     */
+
+    componentWillUnmount() {
+        this.props.clearFiles()
     }
 
 }
@@ -215,8 +224,7 @@ const mapDispatchToProps = (dispatch) => {
         toggleNewFolderModal:() => {dispatch(toggleNewFolderModal())},
         toggleUploadModal:() => {dispatch(toggleUploadModal())},
         toggleEditorModal:() => {dispatch(toggleEditorModal())},
-        setTrail: (trail) => {dispatch(setTrail(trail))},
-        pushTrail: (title, path) => {dispatch(pushTrail(title, path))}
+        clearFiles: () => {dispatch(clearFiles())}
     }
 }
 

@@ -1,7 +1,7 @@
 
 import api from '../../API/API'
 import {fetchRecyclebin} from './recyclebinActions'
-import {FETCH_FILES, SEARCH_KEY,SELECT_FOLDER, } from '../types'
+import {FETCH_FILES, SEARCH_KEY,SELECT_FOLDER, CLEAR} from '../types'
 
 
 export const updateSearch = (e) => {
@@ -15,6 +15,12 @@ export const selectFolder = (folder_id) => {
     return {
         type: SELECT_FOLDER,
         folder_id
+    }
+}
+
+export const clearFiles = () => {
+    return {
+        type: CLEAR
     }
 }
 
