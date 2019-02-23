@@ -79,7 +79,7 @@ class Clients extends Component {
                                         <tr>
                                             <th>Firmanavn</th>
                                             <th>#</th>
-                                            <th></th>
+                                            <th>Favoritt</th>
                                         </tr>
                                     </thead>
                                     {
