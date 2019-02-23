@@ -1,13 +1,7 @@
 import api from '../../API/API'
-import {ADD_FAVOURITE, FETCH_FAVOURITES, SEARCH_KEY} from '../types'
+import {FETCH_FAVOURITES, SEARCH_KEY} from '../types'
 
 
-export const addFavourite = (favourite) => {
-    return {
-        type: ADD_FAVOURITE,
-        favourite: favourite
-    }
-}
 
 export const updateSearch = (e) => {
     return {

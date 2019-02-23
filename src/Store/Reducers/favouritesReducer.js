@@ -1,5 +1,5 @@
 
-import {ADD_FAVOURITE, SEARCH_KEY, FETCH_FAVOURITES} from '../types'
+import {SEARCH_KEY, FETCH_FAVOURITES} from '../types'
 
 // A Reducer requires an initial state when running the application
 const initState = {
@@ -10,11 +10,6 @@ const initState = {
 // Reducers are called when a change happens. The reducers changes the initial state
 const favouritesReducer = (state = initState, action) => {
     switch(action.type){
-        case ADD_FAVOURITE:
-            return {
-                ...state,
-                favourites: [...state.favourites, action.favourite.favourite]
-            }
         case FETCH_FAVOURITES:
             return { ...state, 
                 favourites: action.favourites.favourites

@@ -56,13 +56,5 @@ class ClientsData extends React.Component {
     }
 }
 
-// Create a dispatch which sends information to the reducer.
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addFavourite: (favourite) =>{ dispatch(addFavourite(favourite))}
-    }
-  }
-  
 
-
-export default connect(null, mapDispatchToProps)(ClientsData)
+export default(ClientsData)

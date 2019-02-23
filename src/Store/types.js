@@ -39,7 +39,6 @@ export const ADD_LOG_ITEM = 'ADD_LOG_ITEM'
 
 // Favourites
 export const FETCH_FAVOURITES = 'FETCH_FAVOURITES'
-export const ADD_FAVOURITE = 'ADD_FAVOURITE'
 
 // Users
 export const FETCH_USERS = 'FETCH_USERS'
