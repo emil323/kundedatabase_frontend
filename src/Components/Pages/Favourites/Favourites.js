@@ -2,24 +2,24 @@ import React from 'react'
 import {Component} from 'react'
 import FavouritesCard from "./FavouritesCard"
 import { Container, Row, Col } from 'reactstrap';
-import {fetchClientsData, updateSearch} from '../../../Store/Actions/clientsActions'
+import {fetchFavouritesData, updateSearch} from '../../../Store/Actions/favouritesActions'
 import { connect } from "react-redux";
 import './Favourites.css'
 
 class Favourites extends Component {
 
     render () {
-      let filteredClients = this.props.clients.filter(client => {
-        return client.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
-      });
+        let filteredFavourites = this.props.favourites.filter(favourite => {
+          return favourite.client_id.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
+        });
         return (
           <div className="favourites">
           <input placeholder="Søk etter favoritt.." type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this)}/>
             <Container fluid>
               <Row>
               {
-              filteredClients.map(client => {
-                return  <Col sm="4"><FavouritesCard key={client.id}  client={client} /></Col>
+                filteredFavourites.map(favourite => {
+                return  <Col sm="4"><FavouritesCard key={favourite.client_id}  favourite={favourite} /></Col>
               })
               }
   
@@ -28,26 +28,27 @@ class Favourites extends Component {
           </div>
         )
       }
-       //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
+       //Calls fetchFavouritesData() immedeatly when loading the component, this agains gets the data from the API
     componentDidMount() {
-      this.props.fetchClientsData()
-  }
-
+      this.props.fetchFavouritesData()
+    }
 }
 
-// Calls on a clientsReducer that bring props to the component
+// Calls on a favouritesReducer that bring props to the component
 const mapStateToProps = (state) => {
   return {
-      clients: state.clientsReducer.clients,
-      search: state.clientsReducer.search
+      favourites: state.favouritesReducer.favourites,
+      search: state.favouritesReducer.search
   }
 }
 
-// Create a dispatch which sends information to the reducer. In this case a client is being deleted
+// Create a dispatch which sends information to the reducer.
 const mapDispatchToProps = (dispatch) => {
   return {
-      fetchClientsData: () =>{ dispatch(fetchClientsData())},
-      updateSearch:(search_key) => {dispatch(updateSearch(search_key))}}}
+      fetchFavouritesData: () =>{ dispatch(fetchFavouritesData())},
+      updateSearch:(search_key) => {dispatch(updateSearch(search_key))}
+  }
+}
 
 
 

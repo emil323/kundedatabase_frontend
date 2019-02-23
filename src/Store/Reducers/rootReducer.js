@@ -8,6 +8,7 @@ import accesslogReducer from "./accesslogReducer"
 import modalReducer from './modalReducer'
 import recyclebinReducer from './recyclebinReducer'
 import breadcrumbReducer from './breadcrumbReducer'
+import favouritesReducer from './favouritesReducer'
 
 
 // Combine reducers into a single reducer. 
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     accesslogReducer,
     modalReducer,
     recyclebinReducer,
-    breadcrumbReducer
+    breadcrumbReducer,
+    favouritesReducer
 })
 
 

@@ -24,3 +24,43 @@
 .tabItem{
     cursor: pointer;
 }
+
+
+
+/* CHECKBOX */
+
+label {
+    font-size: 40px
+}
+
+.custom-checkbox {
+display: table;
+position: relative;
+cursor: pointer;
+margin-right: 20px;
+margin-top: -5px;
+}
+
+.custom-checkbox .glyphicon {
+color: red;
+position: absolute;
+font-size: 0.75em;
+
+}
+
+.custom-checkbox .glyphicon-heart-empty {
+color: gray;
+}
+
+.custom-checkbox .glyphicon-heart {
+opacity: 0;
+transition: opacity 0.2s ease-in-out;
+}
+
+.custom-checkbox:hover .glyphicon-heart{
+opacity: 0.5;
+}
+
+.custom-checkbox input[type="checkbox"]:checked ~ .glyphicon-heart {
+opacity: 1;
+}

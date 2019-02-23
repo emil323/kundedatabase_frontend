@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from "react-router-dom"
-import DropdownBtn from '../../DropdownBtn/DropdownBtn';
-
+import { Button, Label, Input } from 'reactstrap'
+import API from '../../../API/API';
+import {addFavourite} from '../../../Store/Actions/favouritesActions'
+import { connect } from "react-redux";
 
 class ClientsData extends React.Component {
     constructor(props) {
@@ -16,7 +18,18 @@ class ClientsData extends React.Component {
                 { tekst: 'Placeholder', isHeader: 0, key: 5, },
             ]
         }
+    }
 
+    
+
+    updateFavourites = () => {
+        API.favourites().create({
+            client_id: this.props.client.id
+        })
+        .then(res => {})
+        .catch(err => { 
+          console.log(err)
+        })
     }
 
     render() {
@@ -24,16 +37,32 @@ class ClientsData extends React.Component {
         return (
             <tbody>
                 <tr>
-                    <Link to={"./client/" + this.props.client.id + '/files'}><td>{this.props.client.name}</td></Link>
+                    <Link  to={"./client/" + this.props.client.id + '/files'}><td>{this.props.client.name}</td></Link>
                     <th>{this.props.client.id}</th>
-                    {/* <td><button key={this.props.clients.id} onClick={() => { this.props.deleteClient(this.props.clients.id) }}>DEL</button></td> */}
-                    <td><DropdownBtn options={this.state.btnOptions} /></td>
+
+                    {/*Usikker på beste løsning her. Checkbox velger ikke riktig rad? */}
+                    <td > 
+                        <label onClick={this.updateFavourites}for="id-of-input" class="custom-checkbox">
+                            <input  type="checkbox" id="id-of-input"/>
+                            <i class="glyphicon glyphicon-heart-empty"></i>
+                            <i class="glyphicon glyphicon-heart"></i>
+                        </label>
+                    </td>
                 </tr>
-          
+
+               
             </tbody>
         )
     }
 }
 
+// Create a dispatch which sends information to the reducer.
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addFavourite: (favourite) =>{ dispatch(addFavourite(favourite))}
+    }
+  }
+  
 
-export default ClientsData
+
+export default connect(null, mapDispatchToProps)(ClientsData)

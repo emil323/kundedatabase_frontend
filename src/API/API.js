@@ -49,6 +49,17 @@ export default  {
             }
         }
     },
+
+    favourites: () => {
+        return {
+            list() {
+                return axios().get('/favourites')
+            },
+            create(data) {
+                return axios().post("/favourites/create", data)
+            }
+        }
+    },
    
     file: (file_id) => {
         return {
