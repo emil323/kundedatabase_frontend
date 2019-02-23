@@ -1,6 +1,6 @@
 
 import axios from './axiosInstance'
-import {API_URL} from './Settings'
+//import {API_URL} from './Settings'
 
 export default  {
     client: (clientID) => {

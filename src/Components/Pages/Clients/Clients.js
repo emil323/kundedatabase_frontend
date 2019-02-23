@@ -4,10 +4,10 @@ import ClientData from './ClientData'
 import AccessLog from '../../AccessLog/AccessLog'
 import "./Clients.css"
 import { Table } from 'reactstrap';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import newBtnImg from '../../../img/new.png'
-import {setTrail, pushTrail} from '../../../Store/Actions/breadcrumbActions'
+import {setTrail} from '../../../Store/Actions/breadcrumbActions'
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
@@ -88,7 +88,7 @@ class Clients extends Component {
                                         })
                                     }
                                 </Table>
-                                <Button className="modalBtn"  onClick={this.props.toggleModal}><img className="btnImg" src={newBtnImg}></img></Button>
+                                <Button className="modalBtn"  onClick={this.props.toggleModal}><img className="btnImg" src={newBtnImg} alt=""></img></Button>
                         
                             </Col>
                         </Row>

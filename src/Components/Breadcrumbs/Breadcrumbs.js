@@ -5,10 +5,6 @@ import './Breadcrumbs.css'
 
 class Breadcrumbs extends React.Component {
 
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         console.log(this.props.trail)
         return (

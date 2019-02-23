@@ -8,9 +8,6 @@ import {ListGroup, ListGroupItem  } from 'reactstrap'
 import API from "../../../../API/API";
 
 class NewFolderModal extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
 
 
@@ -64,9 +61,10 @@ handleMove(new_parent) {
           
                           //Spew out, bind to this and file object
                           return <ListGroupItem key={folder.id} onClick={this.handleMove.bind(this, folder)} color="red" tag="button" action>{path}</ListGroupItem>
-                      }      
+                      }else{
+                        return null;
+                      } 
                     })
-
                 }
             </ListGroup>
           </ModalBody>

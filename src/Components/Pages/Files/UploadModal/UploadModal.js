@@ -111,7 +111,7 @@ class UploadModal extends React.Component {
                       "dropzone--isActive": isDragActive
                     })}
                   >
-                    <img className="modalImage" src={downloadIcon} />
+                    <img className="modalImage" src={downloadIcon} alt=""/>
                     <input {...getInputProps()} />
                     {
                       <p className="modalP">

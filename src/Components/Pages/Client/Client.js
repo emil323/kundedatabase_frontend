@@ -4,12 +4,7 @@ import { connect } from "react-redux";
 import "./Client.css"
 import Files from "../Files/Files"
 import {fetchClientData} from '../../../Store/Actions/clientActions'
-import {
-    BrowserRouter as Router,
-    Route,
-    Switch,
-    Link,
-  } from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 
 
 

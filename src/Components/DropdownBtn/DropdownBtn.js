@@ -33,7 +33,7 @@ export default class DropdownBtn extends Component {
         })
         return (
             <ButtonDropdown direction="left" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                <DropdownToggle color="primary" className="btn-vector"><img src={this.props.icon}></img></DropdownToggle>
+                <DropdownToggle color="primary" className="btn-vector"><img src={this.props.icon} alt=""></img></DropdownToggle>
                 <DropdownMenu>
                     {optionsList}
                 </DropdownMenu>

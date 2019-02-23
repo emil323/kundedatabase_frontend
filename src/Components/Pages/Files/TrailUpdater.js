@@ -1,4 +1,3 @@
-import React from 'react'
 import {Component} from 'react'
 import { connect } from "react-redux";
 
@@ -25,8 +24,11 @@ class TrailUpdater extends Component {
         }])
         //Push relations to breadcrumb trail
         newFolder.relations.reverse().map(f => {
-            if(!f.is_root)
-                this.props.pushTrail(f.name, '/client/' + this.props.client_id + "/files/" + f.id)
+            if(!f.is_root){
+                return this.props.pushTrail(f.name, '/client/' + this.props.client_id + "/files/" + f.id)
+            }else{
+                return null;
+            }
         })
     }
 

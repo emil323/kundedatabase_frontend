@@ -1,6 +1,6 @@
 
 import api from '../../API/API'
-import {FETCH_CLIENTS, ADD_CLIENT, DELETE_CLIENT, SEARCH_KEY, FETCH_ACCESS_LOG, TOGGLE_MODAL, TOGGLE} from '../types'
+import {FETCH_CLIENTS, ADD_CLIENT, DELETE_CLIENT, SEARCH_KEY, TOGGLE_MODAL} from '../types'
 
 export const deleteClient = (id) => {
     return {

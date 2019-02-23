@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button } from 'reactstrap';
+import { Card, CardImg, CardBody,
+  CardTitle } from 'reactstrap';
 import { Link } from "react-router-dom"
 
 class FavouriteCard extends Component {

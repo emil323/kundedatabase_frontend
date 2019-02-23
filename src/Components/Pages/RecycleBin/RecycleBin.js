@@ -1,8 +1,7 @@
 import React from 'react'
 import { Component } from 'react'
-import api from '../../../API/API'
 import FileData from './FileData'
-import { Table, Alert, Col, Button, ButtonGroup, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Table, Alert, Button } from 'reactstrap';
 import { withRouter } from "react-router-dom"
 
 // Import connect, which lets us export data to the reducer
@@ -91,7 +90,7 @@ class RecycleBin extends Component {
                 </Table>
                 {
                     this.props.selected_folder.is_root ? '' :
-                        <Button className="backBtn menuBtn" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img src={backBtnImg} className="btnImg" /></Button>
+                        <Button className="backBtn menuBtn" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img src={backBtnImg} className="btnImg" alt=""/></Button>
                 }
 
 

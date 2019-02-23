@@ -1,5 +1,5 @@
 import React from 'react';
-import { Jumbotron, Button, Container } from 'reactstrap';
+import { Jumbotron, Button } from 'reactstrap';
 import './Jumbotron.css';
 
 

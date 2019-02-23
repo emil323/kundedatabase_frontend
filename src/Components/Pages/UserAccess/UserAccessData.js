@@ -4,9 +4,6 @@ import { Input, Label } from 'reactstrap';
 
 
 class UserAccessData extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
        

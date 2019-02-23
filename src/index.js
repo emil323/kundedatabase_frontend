@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { runWithAdal ,adalGetToken} from 'react-adal';
+import { runWithAdal} from 'react-adal';
 import { authContext } from './Auth/adalConfig';
 import App from './Components/App/App.js'
 import * as serviceWorker from './serviceWorker'
