@@ -1,3 +1,30 @@
+/* 
+--- COLORS --
+ 
+1. PRIMARY
+Medium Electric Blue (dark blue)
+#0353A4
+#03468A (hover)   
+- Primary GUI-buttons 
+
+
+2. SECONDARY
+Standard Bootstrap styling
+
+3. INFO
+Pale Aqua (light blue)
+#B08B5B
+#96774E (hover)
+- Jumbotron, cards
+
+4. LINK
+Deer (brown)
+#B08B5B
+#9677AE (hover)
+- Jumbotron (alt), help
+*/
+
+
 @font-face {
     font-family: 'Metropolis Extra Bold';
     src: url('./Fonts/Headlines/Metropolis-ExtraBold.otf');
@@ -34,12 +61,48 @@ Input {
     border-radius: 5px;
 }
 
-button {
-    background-color: #03468A;
-    border: none;
+button {    
 }
 
 button:hover {
+}
+
+.btn-primary {
     background-color: #0353A4;
     color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #03468A;
+    color: #fff;
+}
+
+.btn-secondary {
+}
+
+.btn-secondary:hover {
+    color: #fff;
+}
+
+.btn-vector, .btn-vector:hover, .btn-vector:focus, .btn-vector:active, .btn-vector:visited {
+    background-color: transparent;
+    border: 0;
+}
+
+.btn-info {
+    background-color: #B08B5B;
+}
+
+.btn-info:hover {
+    background-color: #96774E   
+}
+
+.btn-link {
+}
+
+.btn-group {
+}
+
+.dropleft {
+
 }

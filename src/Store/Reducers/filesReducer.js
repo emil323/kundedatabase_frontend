@@ -28,7 +28,7 @@ const filesReducer = (state = initState, action) => {
                 search:''
             }
         case SELECT_FOLDER:
-            const new_selected_folder = state.files.find(f=>  f.id == action.folder_id ) //Find folder object based on folder_id
+            const new_selected_folder = state.files.find(f=>  f.id === action.folder_id ) //Find folder object based on folder_id
             return {
                 ...state, 
                 selected_folder : new_selected_folder //Do this, and if folder does not exist, go to root...

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Jumbotron, Button, Container } from 'reactstrap';
+import { Jumbotron, Button } from 'reactstrap';
 import './Jumbotron.css';
 
 
@@ -12,7 +12,7 @@ const Welcome = (props) => {
                     <hr className="my-2" />
                     <p>Brødtekst</p>
                     <p className="lead">
-                        <Button color="primary">Knapp</Button>
+                        <Button color="info">Knapp</Button>
                     </p>
             </Jumbotron>
 

@@ -1,10 +1,6 @@
 import React from 'react'
 
 class AccessLog extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
        
         return (

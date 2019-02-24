@@ -1,6 +1,6 @@
 
 import axios from './axiosInstance'
-import {API_URL} from './Settings'
+//import {API_URL} from './Settings'
 
 export default  {
     client: (clientID) => {
@@ -46,6 +46,17 @@ export default  {
             },
             create(data) {
                 return axios().post("/accesslog/create", data)
+            }
+        }
+    },
+
+    favourites: () => {
+        return {
+            list() {
+                return axios().get('/favourites')
+            },
+            create(data) {
+                return axios().post("/favourites/create", data)
             }
         }
     },

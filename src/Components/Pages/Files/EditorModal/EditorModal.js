@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
-import ReactQuill, { Quill, Mixin, Toolbar, Editor } from 'react-quill';
-import API from "../../../../API/API";
+import ReactQuill from 'react-quill';
 import { connect } from 'react-redux'
 import { toggleEditorModal } from '../../../../Store/Actions/modalActions';
 import './EditorModal.css'
@@ -43,8 +42,8 @@ class EditorModal extends Component {
                         />
                     </ModalBody>
                     <ModalFooter>
-                        <Button onClick={this.insertText}>OK</Button>
-                        <Button onClick={this.props.toggleEditorModal}>Lukk</Button>
+                        <Button color="primary" onClick={this.insertText}>OK</Button>
+                        <Button color="secondary" onClick={this.props.toggleEditorModal}>Lukk</Button>
                     </ModalFooter>
                 </Modal>
             </div>

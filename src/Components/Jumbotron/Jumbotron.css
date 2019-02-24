@@ -16,6 +16,5 @@
     background-image: linear-gradient(to bottom, #002540 0%, #002540 0%, transparent), url('../../img/Placeholders/Jumbotron/placeholder-jumbotron-clients.jpg');
 }
 
-.jumbotron Button {
-    background-color: #B08B5B;
+.jumbotron {
 }

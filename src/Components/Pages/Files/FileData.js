@@ -9,7 +9,6 @@ import horizontalDropdown  from '../../../Assets/Icons/horizontalDropdown.png'
 import { connect } from "react-redux";
 import { fetchFilesData} from '../../../Store/Actions/filesActions'
 import { toggleMoveModal, toggleRenameModal, toggleDeleteModal} from '../../../Store/Actions/modalActions'
-import {addLogItem} from '../../../Store/Actions/accesslogActions'
 import { Link, withRouter } from "react-router-dom";
 import { Component } from 'react'
 import DropdownBtn from '../../DropdownBtn/DropdownBtn';
@@ -55,8 +54,7 @@ import API from '../../../API/API';
             case "folder":
                 return folder     
             case "image/png":
-                return pdf
-            break;    
+                return pdf  
             default:
                 return textDoc
         }

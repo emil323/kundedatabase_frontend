@@ -111,7 +111,7 @@ class UploadModal extends React.Component {
                       "dropzone--isActive": isDragActive
                     })}
                   >
-                    <img className="modalImage" src={downloadIcon} />
+                    <img className="modalImage" src={downloadIcon} alt=""/>
                     <input {...getInputProps()} />
                     {
                       <p className="modalP">
@@ -121,7 +121,7 @@ class UploadModal extends React.Component {
                       </p>
                     }
 
-                    <Button color="primary" className="modalBtn">
+                    <Button color="info" className="modalBtn">
                       Eller velg filer{" "}
                     </Button>
                     <div className="modalDiv">
@@ -142,7 +142,7 @@ class UploadModal extends React.Component {
                 {hasFiles ? (
                   ""
                 ) : (
-                  <Button onClick={this.reset.bind(this)}>Nullstill</Button>
+                  <Button color="link" onClick={this.reset.bind(this)}>Nullstill</Button>
                 )}
               </p>
             }

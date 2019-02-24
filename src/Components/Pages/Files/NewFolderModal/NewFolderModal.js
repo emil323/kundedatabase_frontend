@@ -3,7 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
 import { fetchFilesData } from "../../../../Store/Actions/filesActions";
 import { toggleNewFolderModal } from "../../../../Store/Actions/modalActions";
-import {FormGroup, Form, Input, Label } from 'reactstrap'
+import {FormGroup, Form, Input } from 'reactstrap'
 
 import './NewFolderModal.css'
 import API from "../../../../API/API";

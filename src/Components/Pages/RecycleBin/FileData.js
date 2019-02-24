@@ -10,7 +10,7 @@ import { fetchFilesData} from '../../../Store/Actions/filesActions'
 import { Link, withRouter } from "react-router-dom";
 import { Component } from 'react'
 import {Button} from 'reactstrap'
-import API from '../../../API/API';
+
 
  class FilesTable extends Component {
      constructor(props){
@@ -37,8 +37,7 @@ import API from '../../../API/API';
             case "folder":
                 return folder     
             case "image/png":
-                return pdf
-            break;    
+                return pdf  
             default:
                 return textDoc
         }

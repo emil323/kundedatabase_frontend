@@ -26,12 +26,6 @@ const clientsReducer = (state = initState, action) => {
                 ...state,
                 search: action.search_key    
             }
-        case ADD_CLIENT:
-            let clients = [...state.clients, action.client];
-            return {
-                    ...state,
-                    clients: clients
-            }
         case TOGGLE_MODAL:
             return {
                 ...state,

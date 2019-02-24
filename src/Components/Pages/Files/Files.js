@@ -3,14 +3,13 @@ import { Component } from 'react'
 import TrailUpdater from './TrailUpdater'
 import FileData from './FileData'
 import "./Files.css"
-import { Table, Alert, Col, Button, ButtonGroup, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row } from 'reactstrap';
+import { Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row } from 'reactstrap';
 import { withRouter } from "react-router-dom"
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
 import {fetchFilesData, selectFolder,updateSearch, clearFiles} from '../../../Store/Actions/filesActions'
 import { toggleNewFolderModal, toggleUploadModal, toggleEditorModal } from '../../../Store/Actions/modalActions'
-import DropdownBtn from '../../DropdownBtn/DropdownBtn';
 import UploadModal from './UploadModal/UploadModal';
 import NewFolderModal from './NewFolderModal/NewFolderModal';
 import backBtnImg from '../../../img/backBtn.png'
@@ -113,7 +112,7 @@ class Files extends Component {
                         : ''
                        
                     }
-                    {  !this.props.is_searching && filteredFiles.length == 0 ?
+                    {  !this.props.is_searching && filteredFiles.length === 0 ?
                         <tr>
                         <td colspan="4">
                           <Alert color="light">
@@ -130,19 +129,19 @@ class Files extends Component {
                 </Table>
                 {
                     this.props.selected_folder.is_root ? '' :
-                        <Button className="backBtn menuBtn" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img src={backBtnImg} className="btnImg" /></Button>
+                        <Button color="primary" className="floatingActionButton fabBack btn-vector" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img src={backBtnImg} className="btnImg" alt=""/></Button>
                 }
 
-                <ButtonDropdown className="menuBtn btnGroupNew hidden-lg hidden-md" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                    <DropdownToggle caret className="menuBtn">
-                        <img className="btnImg" src={newBtnImg}></img>
+                <ButtonDropdown className="floatingActionButton fabNew hidden-lg hidden-md" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                    <DropdownToggle className="fabBtn btn-vector" color="primary">
+                        <img className="fabImg" src={newBtnImg} alt=""></img>
                     </DropdownToggle>
-                    <DropdownMenu className="menuBtnContent">
-                        <Button onClick={this.props.toggleEditorModal} className="dropUpBtn">Ny tekstfil</Button>
+                    <DropdownMenu className="fabContentContainer">
+                        <Button color="primary" onClick={this.props.toggleEditorModal} className="dropUpBtn">Ny tekstfil</Button>
                         <DropdownItem divider />
-                        <Button onClick={this.props.toggleUploadModal} className="dropUpBtn"> Last opp filer</Button>
+                        <Button color="primary" onClick={this.props.toggleUploadModal} className="dropUpBtn"> Last opp filer</Button>
                         <DropdownItem divider />
-                        <Button onClick={this.props.toggleNewFolderModal} className="dropUpBtn">Ny mappe</Button>
+                        <Button color="primary" onClick={this.props.toggleNewFolderModal} className="dropUpBtn">Ny mappe</Button>
                     </DropdownMenu>
                 </ButtonDropdown>
 
