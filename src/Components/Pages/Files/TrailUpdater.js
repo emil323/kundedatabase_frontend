@@ -23,8 +23,8 @@ class TrailUpdater extends Component {
             title: this.props.client_name,
             path: '/client/' + this.props.client_id + '/files'
         }])
-        //Push relations to breadcrumb trail
-        newFolder.relations.reverse().map(f => {
+        //Push relations to breadcrumb trail, we use slice() because we don't want to modify our relations array
+        newFolder.relations.slice().reverse().map(f => {
             if(!f.is_root)
                 this.props.pushTrail(f.name, '/client/' + this.props.client_id + "/files/" + f.id)
         })

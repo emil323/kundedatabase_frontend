@@ -1,12 +1,19 @@
 import React from 'react'
 import { Breadcrumb, BreadcrumbItem}  from 'reactstrap'
 import { connect } from "react-redux"
+import { withRouter } from "react-router-dom"
 import './Breadcrumbs.css'
 
 class Breadcrumbs extends React.Component {
 
     constructor(props) {
         super(props)
+        this.open = this.open.bind(this)
+    }
+
+    open(e, path) {
+        e.preventDefault()
+        this.props.history.push(path)
     }
 
     render() {
@@ -17,8 +24,8 @@ class Breadcrumbs extends React.Component {
                     {
                         this.props.trail.map((crumb,i,trail) => {
                             return trail.length-1 !== i //Tenary operation on if the item is the last in map or not
-                            ?<BreadcrumbItem tag="a" href={crumb.path}>{crumb.title}</BreadcrumbItem>
-                            :<BreadcrumbItem tag="a" href={crumb.path} active>{crumb.title}</BreadcrumbItem>
+                            ?<BreadcrumbItem tag="a" href="" onClick={(e) => this.open(e, crumb.path)} active>{crumb.title}</BreadcrumbItem>
+                            :<BreadcrumbItem tag="a" href="" onClick={(e) => this.open(e, crumb.path)}>{crumb.title}</BreadcrumbItem>
                         })
                     }
                 </Breadcrumb>
@@ -40,4 +47,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Breadcrumbs)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Breadcrumbs))
