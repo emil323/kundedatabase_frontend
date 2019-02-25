@@ -5,45 +5,37 @@ import API from '../../../API/API';
 class ClientsData extends React.Component {
     constructor(props) {
         super(props);
-            
-        this.state = {
-            btnOptions: [
-                { tekst: 'Behandle', isHeader: 1, key: 1 },
-                { tekst: 'Vis', isHeader: 0, key: 2,function: () => {}},
-                { tekst: 'Slett', isHeader: 0, key: 3, function: () => {return props.deleteClient(props.client.id)} },
-                { tekst: 'Placeholder', isHeader: 1, key: 4 },
-                { tekst: 'Placeholder', isHeader: 0, key: 5, },
-            ]
-        }
+        this.updateFavourites = this.updateFavourites.bind(this) 
     }
 
     
 
     updateFavourites = () => {
-        API.favourites().create({
-            client_id: this.props.client.id
-        })
-        .then(res => {})
-        .catch(err => { 
-          console.log(err)
-        })
+
+        const {id, is_favourite} = this.props.client
+
+        //Create a request object
+        const request = (res) => {
+            return is_favourite 
+                ? API.favourites().delete(id).then(res) 
+                : API.favourites().create(id).then(res)}
+      
+        //Do request
+        request(res => {
+            //This is by all means not critical, so just refresh list and see what happens :)
+            this.props.fetchClientsData()
+        }).catch(err =>
+             console.log(err)) 
     }
 
     render() {
-       
         return (
             <tbody>
                 <tr>
                     <Link  to={"./client/" + this.props.client.id + '/files'}><td>{this.props.client.name}</td></Link>
-                    <th>{this.props.client.id}</th>
-
-                    {/*
-                    Usikker på beste løsning her. Checkbox velger ikke riktig rad?
-                    onClick={this.updateFavourites} plassering?
-                     */}
-                    <td> 
-                        <label for="id-of-input" class="custom-checkbox">
-                            <input  type="checkbox" id="id-of-input"/>
+                    <td className='text-right'>  
+                        <label for={this.props.client.id} class="custom-checkbox">
+                            <input checked={this.props.client.is_favourite} type="checkbox" id={this.props.client.id}/>
                             <i class="glyphicon glyphicon-heart-empty"></i>
                             <i onClick={this.updateFavourites} class="glyphicon glyphicon-heart"></i>
                         </label>

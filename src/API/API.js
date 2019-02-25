@@ -55,8 +55,11 @@ export default  {
             list() {
                 return axios().get('/favourites')
             },
-            create(data) {
-                return axios().post("/favourites/create", data)
+            create(client_id) {
+                return axios().post("/favourites/create", {client_id})
+            },
+            delete(client_id) {
+                return axios().post("/favourites/delete/", {client_id})
             }
         }
     },

@@ -76,15 +76,21 @@ class Clients extends Component {
                             <input type="text" value={this.props.search} placeholder="Søk etter kunde..." onChange={this.props.updateSearch.bind(this)}/>
                                 <Table className="table table-hover">
                                     <thead className="thead-dark">
+                                    { 
+                                        //Ser det finere ut uten?
+                                        /*
                                         <tr>
                                             <th>Firmanavn</th>
-                                            <th>#</th>
                                             <th>Favoritt</th>
                                         </tr>
+                                        */
+                                    }
                                     </thead>
                                     {
                                         filteredClients.map(client => {
-                                            return  <ClientData client={client} deleteClient={this.props.deleteClient} key={client.id}/>
+                                            return  <ClientData client={client} 
+                                                            fetchClientsData={this.props.fetchClientsData} 
+                                                            key={client.id}/>
                                         })
                                     }
                                 </Table>
