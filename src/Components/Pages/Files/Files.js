@@ -4,7 +4,7 @@ import TrailUpdater from './TrailUpdater'
 import FileData from './FileData'
 import "./Files.css"
 import { Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row } from 'reactstrap';
-import { withRouter } from "react-router-dom"
+import { withRouter, Link } from "react-router-dom"
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
@@ -49,6 +49,7 @@ class Files extends Component {
         this.props.history.push('/client/' + this.props.match.params.client_id + "/recyclebin")
     }
 
+
     render() {
 
       
@@ -71,6 +72,7 @@ class Files extends Component {
                     <Button color="primary" onClick={this.props.toggleUploadModal} >Last opp</Button>
                     <Button color="primary" onClick={this.props.toggleNewFolderModal}>Ny mappe</Button>
                     <Button color="primary" onClick={this.props.toggleEditorModal}>Nytt dokument</Button>
+                    <Link to={`/client/${this.props.match.params.client_id}/accesslog`}><Button color="primary">Adgangslogg</Button></Link>
                 </div>
                
             </Col>

@@ -4,7 +4,7 @@ import {FETCH_ACCESS_LOG, ADD_LOG_ITEM, SEARCH_KEY} from '../types'
 // A Reducer requires an initial state when running the application
 const initState = {
     accesslog: [],
-    searchLog: ''
+    search: ''
 }
 
 // Reducers are called when a change happens. The reducers changes the initial state
@@ -22,7 +22,7 @@ const accesslogReducer = (state = initState, action) => {
         case SEARCH_KEY:
             return {
                 ...state,
-                searchLog: action.search_key    
+                search: action.search_key    
             }
         default:
             return state
