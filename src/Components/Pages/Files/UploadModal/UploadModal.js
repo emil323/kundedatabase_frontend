@@ -120,10 +120,11 @@ class UploadModal extends React.Component {
                           : " Dra filer hit..."}
                       </p>
                     }
-
-                    <Button color="info" className="modalBtn">
-                      Eller velg filer{" "}
-                    </Button>
+                    <p className="modalDiv">
+                      <Button color="info" >
+                        Eller velg filer...
+                      </Button>
+                    </p>
                     <div className="modalDiv">
                       <p className="modalChosenFiles">
                         {hasFiles ? "" : "Valgte filer:"}
