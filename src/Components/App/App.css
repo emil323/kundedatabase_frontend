@@ -14,3 +14,10 @@ body {
     border-top-color: white !important;
     border-left-color: white !important;
 }
+
+.modal-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+}
