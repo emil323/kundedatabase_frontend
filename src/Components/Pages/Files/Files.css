@@ -1,6 +1,9 @@
+.jumboMenu  {
+ 
+}
+
 .searchFiles {
-    width:100%;
-    float:right;
+    color: #000;
 }
 
 .table {
@@ -57,6 +60,4 @@
 .fab button{
     margin-right: 0.5em;
 }
-
-
 

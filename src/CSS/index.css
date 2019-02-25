@@ -40,6 +40,29 @@ Deer (brown)
     src: url('./Fonts/Body-Paragraphs/VarelaRound-Regular.ttf');
 }
 
+ /* xs */
+ @media screen and (max-width: 576px) {
+}
+
+ /* sm */
+ @media screen and (min-width: 576px) {
+}
+
+ /* md */
+@media screen and (min-width: 768px) {
+    .searchFiles { 
+        float: right;
+    }
+}
+
+ /* lg */
+ @media screen and (min-width: 992px) {
+}
+
+ /* xl */
+ @media screen and (min-width: 1200px) {
+}
+
 h1 {
     font-family: 'Metropolis Extra Bold', Arial, Helvetica, sans-serif;
 }
@@ -53,7 +76,6 @@ body {
     color: #2A2A2A;
     overflow-x: hidden;
     width: 100%;
-    
 }
 
 Input {
