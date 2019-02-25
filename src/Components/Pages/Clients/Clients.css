@@ -41,25 +41,25 @@ margin-top: -5px;
 }
 
 .custom-checkbox .glyphicon{
-color: red;
+color: gold;
 position: absolute;
 font-size: 0.75em;
 
 }
 
-.custom-checkbox .glyphicon-heart-empty {
+.custom-checkbox .glyphicon-star-empty {
 color: gray;
 }
 
-.custom-checkbox .glyphicon-heart {
+.custom-checkbox .glyphicon-star {
 opacity: 0;
 transition: opacity 0.2s ease-in-out;
 }
 
-.custom-checkbox:hover .glyphicon-heart{
+.custom-checkbox:hover .glyphicon-star{
 opacity: 0.5;
 }
 
-.custom-checkbox input[type="checkbox"]:checked ~ .glyphicon-heart {
+.custom-checkbox input[type="checkbox"]:checked ~ .glyphicon-star {
 opacity: 1;
 }

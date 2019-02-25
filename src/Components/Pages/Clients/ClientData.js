@@ -36,8 +36,8 @@ class ClientsData extends React.Component {
                     <td className='text-right'>  
                         <label for={this.props.client.id} class="custom-checkbox">
                             <input checked={this.props.client.is_favourite} type="checkbox" id={this.props.client.id}/>
-                            <i class="glyphicon glyphicon-heart-empty"></i>
-                            <i onClick={this.updateFavourites} class="glyphicon glyphicon-heart"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i onClick={this.updateFavourites} class="glyphicon glyphicon-star"></i>
                         </label>
                     </td>
                 </tr>

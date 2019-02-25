@@ -18,7 +18,7 @@ class Client extends Component {
         return (
             <div className="container">
 
-                <ClientHeader clientName={this.props.client_name}/>
+                {/* <ClientHeader clientName={this.props.client_name}/> */}
                 <Switch>
                     <Route path={`/client/:client_id/files/:selected_folder?`} component={Files}/>
                     <Route path={`/client/:client_id/recyclebin/:selected_folder?`} component={RecycleBin}/>

@@ -9,7 +9,7 @@ export const addLogItem = (logItem) => {
     }
 }
 
-export const updateSearchLog = (e) => {
+export const updateSearch = (e) => {
     return {
         type: SEARCH_KEY,
         search_key : e.target.value.substr(0,20)
