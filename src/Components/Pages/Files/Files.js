@@ -3,12 +3,16 @@ import { Component } from 'react'
 import TrailUpdater from './TrailUpdater'
 import FileData from './FileData'
 import "./Files.css"
-import { Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row } from 'reactstrap';
+
+import { Jumbotron, Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row } from 'reactstrap';
 import { withRouter, Link } from "react-router-dom"
+
+
+
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
-import {fetchFilesData, selectFolder,updateSearch, clearFiles} from '../../../Store/Actions/filesActions'
+import { fetchFilesData, selectFolder, updateSearch, clearFiles } from '../../../Store/Actions/filesActions'
 import { toggleNewFolderModal, toggleUploadModal, toggleEditorModal } from '../../../Store/Actions/modalActions'
 import UploadModal from './UploadModal/UploadModal';
 import NewFolderModal from './NewFolderModal/NewFolderModal';
@@ -52,36 +56,51 @@ class Files extends Component {
 
     render() {
 
-      
+
 
         const filteredFiles = this.props.is_searching
-        ? this.props.all_files.filter(file => { //Search in all files in this client
-            //searching logic
-            return file.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
-        }) 
-        : this.props.files //Nothing to seach, view all files
+            ? this.props.all_files.filter(file => { //Search in all files in this client
+                //searching logic
+                return file.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
+            })
+            : this.props.files //Nothing to seach, view all files
 
 
         return (
             <div >
-        
-        <Row className="row">
-          
-            <Col  sm="0" lg="9" >
-                <div className="buttonMenu hidden-xs hidden-sm">
-                    <Button color="primary" onClick={this.props.toggleUploadModal} >Last opp</Button>
-                    <Button color="primary" onClick={this.props.toggleNewFolderModal}>Ny mappe</Button>
-                    <Button color="primary" onClick={this.props.toggleEditorModal}>Nytt dokument</Button>
+
+                <Jumbotron className="Jumbotron-Client">
+                    <h1 className="display-3">{this.props.client_name}</h1>
+
+                    <hr />
+
+
+                    <Button className="hidden-xs hidden-sm hidden-md" color="primary" onClick={this.props.toggleUploadModal} >Last opp</Button>
+                    <Button className="hidden-xs hidden-sm hidden-md" color="primary" onClick={this.props.toggleNewFolderModal}>Ny mappe</Button>
+                    <Button className="hidden-xs hidden-sm hidden-md" color="primary" onClick={this.props.toggleEditorModal}>Nytt dokument</Button>
                     <Link to={`/client/${this.props.match.params.client_id}/accesslog`}><Button color="primary">Adgangslogg</Button></Link>
-                </div>
-               
-            </Col>
-            <Col sm="12" lg="3">
-                <input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch} />
-            </Col>
-      
-        </Row>
-           
+
+                    <input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch} />
+
+                </Jumbotron>
+
+
+                {/*
+                <Row className="row">
+                    <Col sm="0" lg="9" >
+                        <div className="buttonMenu hidden-xs hidden-sm">
+                            <Button color="primary" onClick={this.props.toggleUploadModal} >Last opp</Button>
+                            <Button color="primary" onClick={this.props.toggleNewFolderModal}>Ny mappe</Button>
+                            <Button color="primary" onClick={this.props.toggleEditorModal}>Nytt dokument</Button>
+                        </div>
+
+                    </Col>
+                    <Col sm="12" lg="3">
+                        <input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch} />
+                    </Col>
+                </Row>
+                */}
+
                 {/*}
             <Row>
                     <Col xs="1" ><UploadModal buttonLabel="Last Opp"/> </Col>
@@ -101,40 +120,40 @@ class Files extends Component {
                         </tr>
                     </thead>
                     {
-                      this.props.is_searching ? 
-                      <tr>
-                          <td colspan="4">
-                            <Alert color="dark">
-                                <h4>
-                                    Søkeresultat: {this.props.search}
-                                </h4>
-                            </Alert>
-                            </td> 
-                        </tr>
-                        : ''
-                       
+                        this.props.is_searching ?
+                            <tr>
+                                <td colspan="4">
+                                    <Alert color="dark">
+                                        <h4>
+                                            Søkeresultat: {this.props.search}
+                                        </h4>
+                                    </Alert>
+                                </td>
+                            </tr>
+                            : ''
+
                     }
-                    {  !this.props.is_searching && filteredFiles.length === 0 ?
+                    {!this.props.is_searching && filteredFiles.length === 0 ?
                         <tr>
-                        <td colspan="4">
-                          <Alert color="light">
-                              <p className="text-center">
-                                  Her er det tomt. 
+                            <td colspan="4">
+                                <Alert color="light">
+                                    <p className="text-center">
+                                        Her er det tomt.
                               </p>
-                          </Alert>
-                          </td> 
-                      </tr>
-                       : filteredFiles.map(file => {
-                            return <FileData file={file}  key={file.id} />
+                                </Alert>
+                            </td>
+                        </tr>
+                        : filteredFiles.map(file => {
+                            return <FileData file={file} key={file.id} />
                         })
                     }
                 </Table>
                 {
                     this.props.selected_folder.is_root ? '' :
-                        <Button color="primary" className="floatingActionButton fabBack btn-vector" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img src={backBtnImg} className="btnImg" alt=""/></Button>
+                        <Button color="primary" className="floatingActionButton fabBack btn-vector" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img src={backBtnImg} className="btnImg" alt="" /></Button>
                 }
 
-                <ButtonDropdown className="floatingActionButton fabNew hidden-lg hidden-md" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                <ButtonDropdown className="floatingActionButton fabNew hidden-xl hidden-lg" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                     <DropdownToggle className="fabBtn btn-vector" color="primary">
                         <img className="fabImg" src={newBtnImg} alt=""></img>
                     </DropdownToggle>
@@ -147,14 +166,14 @@ class Files extends Component {
                     </DropdownMenu>
                 </ButtonDropdown>
 
-                <NewFolderModal/>
-                <UploadModal/>
-                <MoveModal/>
-                <RenameModal/>
+                <NewFolderModal />
+                <UploadModal />
+                <MoveModal />
+                <RenameModal />
                 <EditorModal />
                 <DeleteModal />
-                
-                <TrailUpdater/>
+
+                <TrailUpdater />
             </div>
         )
     }
@@ -174,10 +193,10 @@ class Files extends Component {
     componentWillReceiveProps(nextProps) {
         const old_params = this.props.match.params
         const new_params = nextProps.match.params
-        
+
         //Get fuckt
-        if (old_params.client_id !== new_params.client_id 
-                || old_params.selected_folder !== new_params.selected_folder) {
+        if (old_params.client_id !== new_params.client_id
+            || old_params.selected_folder !== new_params.selected_folder) {
             console.log("Change folder: ", new_params.selected_folder)
             //this.props.fetchFilesData(nextProps.match.params.client_id, nextProps.match.params.selected_folder)
             this.props.selectFolder(new_params.selected_folder)
@@ -200,9 +219,10 @@ class Files extends Component {
 // Calls on a clientsReducer that bring props to the component
 const mapStateToProps = (state) => {
     const { files, root_folder, selected_folder, search } = state.filesReducer
-    const {client_id} = state.clientReducer
+    const { client_id, client_name } = state.clientReducer
     return {
         client_id,
+        client_name,
         //Filter to only display files from selected folder or to handle a search value
         files: files.filter((file) => {
             return file.parent_id === selected_folder.id
@@ -220,12 +240,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchFilesData: (client_id, selected_folder) => { dispatch(fetchFilesData(client_id, selected_folder)) },
-        selectFolder: (folder_id) => {dispatch(selectFolder(folder_id))},
+        selectFolder: (folder_id) => { dispatch(selectFolder(folder_id)) },
         updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
-        toggleNewFolderModal:() => {dispatch(toggleNewFolderModal())},
-        toggleUploadModal:() => {dispatch(toggleUploadModal())},
-        toggleEditorModal:() => {dispatch(toggleEditorModal())},
-        clearFiles: () => {dispatch(clearFiles())}
+        toggleNewFolderModal: () => { dispatch(toggleNewFolderModal()) },
+        toggleUploadModal: () => { dispatch(toggleUploadModal()) },
+        toggleEditorModal: () => { dispatch(toggleEditorModal()) },
+        clearFiles: () => { dispatch(clearFiles()) }
     }
 }
 
