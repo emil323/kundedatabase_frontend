@@ -11,7 +11,6 @@ import Clients from "../Pages/Clients/Clients"
 import Client from "../Pages/Client/Client"
 import UserAccess from '../Pages/UserAccess/UserAccess'
 import AccessLog from '../Pages/AccessLog/AccessLog'
-import ClientAccessLog from '../Pages/AccessLog/ClientAccessLog'
 
 import './App.css'
 
@@ -31,7 +30,7 @@ class App extends Component {
                         <Route path="/client/:client_id" component={Client}/>
                         <Route path="/useraccess" component={UserAccess}/>
                         <Route path="/accesslog" component={AccessLog}/>
-                        <Route path="/client/:client_id/accesslog" component={ClientAccessLog}/>
+                        <Route path="/client/:client_id/accesslog" component={AccessLog}/>
                     </MainContent>
                 </div>
             </BrowserRouter>

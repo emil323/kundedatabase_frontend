@@ -7,14 +7,20 @@ import { Table } from 'reactstrap';
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
 import {fetchAccessLogData, updateSearch} from '../../../Store/Actions/accesslogActions'
+import {withRouter} from 'react-router-dom';
 
 class AccessLog extends Component {
 
     render() {
-        console.log(this.props.clients)
+        console.log(this.props.location.pathname)
         let filteredAccessLog = this.props.accesslog.filter(log => {
             return log.client_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
 
+        })
+        let clientFilteredAccessLog = this.props.accesslog.filter(log => {
+            if(log.client_id === this.props.match.params.client_id){
+                return log.client_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
+            }
         })
         return (
             <div className="container">
@@ -29,9 +35,19 @@ class AccessLog extends Component {
                             <th>Sist besøkt</th>
                         </tr>
                     </thead>
+                    
                     {
+                        
                         filteredAccessLog.map(log => {
-                            return  <AccessLogData log={log} key={log.id}/>
+                            if(this.props.location.pathname === "/accesslog"){
+                                return  <AccessLogData log={log} key={log.id}/>
+                            }
+                        })
+                        
+                    }
+                    {
+                        clientFilteredAccessLog.map(log => {
+                                return  <AccessLogData log={log} key={log.id}/>
                         })
                     }
                     </Table>
@@ -62,7 +78,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccessLog)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AccessLog))
 
 
 
