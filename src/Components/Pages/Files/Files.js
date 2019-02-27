@@ -4,7 +4,7 @@ import TrailUpdater from './TrailUpdater'
 import FileData from './FileData'
 import "./Files.css"
 
-import { Jumbotron, Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row } from 'reactstrap';
+import { Collapse, Navbar, NavbarBrand, Jumbotron, Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row, Input } from 'reactstrap';
 import { withRouter, Link } from "react-router-dom"
 
 
@@ -23,24 +23,30 @@ import RenameModal from './RenameModal/RenameModal';
 import EditorModal from './EditorModal/EditorModal'
 import DeleteModal from './DeleteModal/DeleteModal';
 
-
-
 class Files extends Component {
 
     constructor(props) {
         super(props)
         this.upOneLevel = this.upOneLevel.bind(this)
 
-        this.toggle = this.toggle.bind(this);
+        this.toggleFab = this.toggleFab.bind(this);
+        this.toggleMenu = this.toggleMenu.bind(this)
         this.state = {
-            dropdownOpen: false
+            fabOpen: false,
+            menuOpen: false
         };
     }
 
-    toggle() {
+    toggleFab() {
         this.setState({
-            dropdownOpen: !this.state.dropdownOpen
+            fabOpen: !this.state.fabOpen
         });
+    }
+
+    toggleMenu() {
+        this.setState({
+            menuOpen: !this.state.menuOpen
+        })
     }
 
     upOneLevel() {
@@ -68,7 +74,7 @@ class Files extends Component {
 
         return (
             <div >
-
+                {/* 
                 <Jumbotron className="Jumbotron-Client">
                     <h1 className="display-3">{this.props.client_name}</h1>
 
@@ -83,6 +89,7 @@ class Files extends Component {
                     <input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch} />
 
                 </Jumbotron>
+                */}
 
 
                 {/*
@@ -109,6 +116,16 @@ class Files extends Component {
             </Row>
             */}
 
+                <Navbar sticky="top" color="light">
+                {
+                    this.props.selected_folder.is_root ? '' :
+                        <Button color="link" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img src={backBtnImg} className="btnImg" alt="" /></Button>
+                }
+                    <Button color="primary" onClick={this.props.toggleEditorModal} className="dropUpBtn">Ny tekstfil</Button>
+                    <Button color="primary" onClick={this.props.toggleUploadModal} className="dropUpBtn"> Last opp filer</Button>
+                    <Button color="primary" onClick={this.props.toggleNewFolderModal} className="dropUpBtn">Ny mappe</Button>
+                    <Input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch} />
+                </Navbar>
 
                 <Table className="table table-hover">
                     <thead className="thead-dark">
@@ -148,23 +165,6 @@ class Files extends Component {
                         })
                     }
                 </Table>
-                {
-                    this.props.selected_folder.is_root ? '' :
-                        <Button color="primary" className="floatingActionButton fabBack btn-vector" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img src={backBtnImg} className="btnImg" alt="" /></Button>
-                }
-
-                <ButtonDropdown className="floatingActionButton fabNew hidden-xl hidden-lg" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                    <DropdownToggle className="fabBtn btn-vector" color="primary">
-                        <img className="fabImg" src={newBtnImg} alt=""></img>
-                    </DropdownToggle>
-                    <DropdownMenu className="fabContentContainer">
-                        <Button color="primary" onClick={this.props.toggleEditorModal} className="dropUpBtn">Ny tekstfil</Button>
-                        <DropdownItem divider />
-                        <Button color="primary" onClick={this.props.toggleUploadModal} className="dropUpBtn"> Last opp filer</Button>
-                        <DropdownItem divider />
-                        <Button color="primary" onClick={this.props.toggleNewFolderModal} className="dropUpBtn">Ny mappe</Button>
-                    </DropdownMenu>
-                </ButtonDropdown>
 
                 <NewFolderModal />
                 <UploadModal />
@@ -174,6 +174,23 @@ class Files extends Component {
                 <DeleteModal />
 
                 <TrailUpdater />
+
+                
+
+
+                {/*
+                <ButtonDropdown direction="left" isOpen={this.state.fabOpen} toggle={this.toggleFab}>
+                    <DropdownToggle color="primary" caret />
+                    <DropdownMenu className="fabContentContainer">
+                        <Button color="primary" onClick={this.props.toggleEditorModal} className="dropUpBtn">Ny tekstfil</Button>
+                        <DropdownItem divider />
+                        <Button color="primary" onClick={this.props.toggleUploadModal} className="dropUpBtn"> Last opp filer</Button>
+                        <DropdownItem divider />
+                        <Button color="primary" onClick={this.props.toggleNewFolderModal} className="dropUpBtn">Ny mappe</Button>
+                    </DropdownMenu>
+                </ButtonDropdown>
+                */}
+
             </div>
         )
     }
