@@ -41,8 +41,10 @@ export default  {
     },
     accesslog: () => {
         return {
-            list() {
-                return axios().get("/accesslog") 
+            list(client_id) {
+                //Client ID is optional
+                const url = client_id === undefined ? '/accesslog' : '/accesslog/' + client_id
+                return axios().get(url) 
             },
             create(data) {
                 return axios().post("/accesslog/create", data)

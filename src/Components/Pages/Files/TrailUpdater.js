@@ -22,6 +22,13 @@ class TrailUpdater extends Component {
             title: this.props.client_name,
             path: '/client/' + this.props.client_id + '/files'
         }])
+
+        //Check if newFolder is deleted, that means we are navigating recyclebin
+        //We want a link to recyclebin in navigation
+        if(newFolder.is_deleted) {
+            this.props.pushTrail('Papirkurv', '/client/' + this.props.client_id + '/recyclebin')
+        }
+
         //Push relations to breadcrumb trail, we use slice() because we don't want to modify our relations array
         newFolder.relations.slice().reverse().map(f => {
             if(!f.is_root)

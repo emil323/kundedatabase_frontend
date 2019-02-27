@@ -12,6 +12,7 @@ import { toggleMoveModal, toggleRenameModal, toggleDeleteModal} from '../../../S
 import { Link, withRouter } from "react-router-dom";
 import { Component } from 'react'
 import DropdownBtn from '../../DropdownBtn/DropdownBtn';
+import {Button} from 'reactstrap'
 import API from '../../../API/API';
 
  class FilesTable extends Component {
@@ -28,8 +29,11 @@ import API from '../../../API/API';
 
         const {file} = this.props
         console.log(file)
-        if(file.is_directory) 
-            this.props.history.push('/client/' + file.client_id + "/files/"  + file.id)
+        if(file.is_directory) {
+            this.props.file.is_deleted 
+            ? this.props.history.push('/client/' + file.client_id + "/recyclebin/"  + file.id) 
+            : this.props.history.push('/client/' + file.client_id + "/files/"  + file.id)
+        }
          else //Download file
             API.file(file.id).download().then(res => {
                 const url = window.URL.createObjectURL(new Blob([res.data]));
@@ -75,7 +79,10 @@ import API from '../../../API/API';
                         <td><img src={this.checkFileType(this.props.file.type)} alt="s"/></td>
                         <td><Link to="" onClick={(e) => {this.handleSelection(e)}}>{this.props.file.name}</Link></td>
                         <td>{this.props.file.last_changed}</td>
-                        <td><DropdownBtn icon={horizontalDropdown} options={btnOptions} /></td>
+                        {this.props.file.is_deleted 
+                        ? <td><Button>Gjenopprett</Button></td> 
+                        : <td><DropdownBtn icon={horizontalDropdown} options={btnOptions} /></td>
+                        }
                     </tr>
                 </tbody>
             )

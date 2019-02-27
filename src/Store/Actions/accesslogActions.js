@@ -23,9 +23,9 @@ export const fetchAccessLog = (accesslog) => {
     }
 }
 
-export const fetchAccessLogData = () => {
+export const fetchAccessLogData = (client_id) => {
     return (dispatch) => {
-        return api.accesslog().list()
+        return api.accesslog().list(client_id)
             .then(response => {
                 dispatch(fetchAccessLog(response.data))
             })

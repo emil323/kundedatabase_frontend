@@ -45,13 +45,12 @@ class Files extends Component {
 
     upOneLevel() {
         if (!this.props.selected_folder.is_root) {
-            this.props.history.push('/client/' + this.props.match.params.client_id + "/files/" + this.props.selected_folder.parent_id)
+            this.props.is_recyclebin 
+            ? this.props.history.push('/client/' + this.props.match.params.client_id + "/recyclebin/" + this.props.selected_folder.parent_id) 
+            : this.props.history.push('/client/' + this.props.match.params.client_id + "/files/" + this.props.selected_folder.parent_id)
         }
     }
 
-    openRecyclebin() {
-        this.props.history.push('/client/' + this.props.match.params.client_id + "/recyclebin")
-    }
 
 
     render() {
@@ -71,7 +70,9 @@ class Files extends Component {
 
                 <Jumbotron className="Jumbotron-Client">
                     <h1 className="display-3">{this.props.client_name}</h1>
-
+                    {
+                        this.props.is_recyclebin ? <h3>Papirkurv</h3> : ''
+                    }
                     <hr />
 
 
@@ -79,7 +80,11 @@ class Files extends Component {
                     <Button className="hidden-xs hidden-sm hidden-md" color="primary" onClick={this.props.toggleNewFolderModal}>Ny mappe</Button>
                     <Button className="hidden-xs hidden-sm hidden-md" color="primary" onClick={this.props.toggleEditorModal}>Nytt dokument</Button>
                     <Link to={`/client/${this.props.match.params.client_id}/accesslog`}><Button color="primary">Adgangslogg</Button></Link>
-
+                    {
+                    this.props.is_recyclebin 
+                    ?  <Button onClick={() => this.props.history.push('/client/' + this.props.match.params.client_id + "/files/")}>Gå tilbake</Button> 
+                    :  <Button onClick={() => this.props.history.push('/client/' + this.props.match.params.client_id + "/recyclebin/")}>Papirkurv</Button>
+                    }
                     <input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch} />
 
                 </Jumbotron>
@@ -181,8 +186,8 @@ class Files extends Component {
     //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
     componentDidMount() {
         //Initial fetch of data
-        const folder = this.props.match.params.selected_folder !== null ? this.props.match.params.selected_folder : this.props.selected_folder.id
-        this.props.fetchFilesData(this.props.match.params.client_id, folder)
+        const folder = this.props.match.params.selected_folder
+        this.props.fetchFilesData(this.props.match.params.client_id, folder, this.props.is_recyclebin)
     }
 
     /**
@@ -201,6 +206,13 @@ class Files extends Component {
             //this.props.fetchFilesData(nextProps.match.params.client_id, nextProps.match.params.selected_folder)
             this.props.selectFolder(new_params.selected_folder)
         }
+        //Check if mode (url) is toggled to recyclebin
+
+        if(this.props.is_recyclebin !== nextProps.is_recyclebin) {
+            console.log('mode change')
+            //Refetch inventory
+            this.props.fetchFilesData(new_params.client_id, new_params.selected_folder, nextProps.is_recyclebin)
+        }
     }
 
     /**
@@ -217,19 +229,24 @@ class Files extends Component {
 
 
 // Calls on a clientsReducer that bring props to the component
-const mapStateToProps = (state) => {
-    const { files, root_folder, selected_folder, search } = state.filesReducer
+const mapStateToProps = (state, ownProps) => {
+    const { files, deleted_files, root_folder, recyclebin_root, selected_folder, search } = state.filesReducer
     const { client_id, client_name } = state.clientReducer
+
+    //Create a variable that selects files that is viewable, based on if prop is set to recyclebin or not
+    const viewable_files = ownProps.is_recyclebin ? deleted_files : files
+    console.log(files, deleted_files)
     return {
         client_id,
         client_name,
         //Filter to only display files from selected folder or to handle a search value
-        files: files.filter((file) => {
+        files: viewable_files.filter((file) => {
             return file.parent_id === selected_folder.id
             //TODO:Handle search value
         }),
-        all_files: files,
+        all_files: viewable_files, //Define this to be used for seaching
         root_folder,
+        recyclebin_root,
         selected_folder,
         search,
         is_searching: search !== ''
@@ -239,7 +256,7 @@ const mapStateToProps = (state) => {
 // Create a dispatch which sends information to the reducer. In this case a client is being deleted
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchFilesData: (client_id, selected_folder) => { dispatch(fetchFilesData(client_id, selected_folder)) },
+        fetchFilesData: (client_id, selected_folder, is_recyclebin) => { dispatch(fetchFilesData(client_id, selected_folder,is_recyclebin)) },
         selectFolder: (folder_id) => { dispatch(selectFolder(folder_id)) },
         updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
         toggleNewFolderModal: () => { dispatch(toggleNewFolderModal()) },

@@ -4,6 +4,9 @@ import {SEARCH_KEY, FETCH_DELETED_FILES,SELECT_FOLDER} from '../types'
 // A Reducer requires an initial state when running the application
 const initState = {
     files: [],
+    recycle_bin : {
+        deleted_files: [] 
+    },
     root_folder: {id:'', name:''},
     selected_folder: {id:'', name:''},
     client_id:'',

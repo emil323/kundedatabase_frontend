@@ -12,16 +12,20 @@ import {withRouter} from 'react-router-dom';
 class AccessLog extends Component {
 
     render() {
+        console.log(this.props)
         console.log(this.props.location.pathname)
         let filteredAccessLog = this.props.accesslog.filter(log => {
             return log.client_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
 
         })
+        /*
         let clientFilteredAccessLog = this.props.accesslog.filter(log => {
             if(log.client_id === this.props.match.params.client_id){
                 return log.client_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
             }
         })
+        */
+
         return (
             <div className="container">
             <input type="text" value={this.props.searchLog} placeholder="Søk..." onChange={this.props.updateSearch.bind(this)}/>
@@ -37,18 +41,19 @@ class AccessLog extends Component {
                     </thead>
                     
                     {
-                        
+                 
                         filteredAccessLog.map(log => {
-                            if(this.props.location.pathname === "/accesslog"){
+ 
                                 return  <AccessLogData log={log} key={log.id}/>
-                            }
+            
                         })
                         
                     }
-                    {
+                    {/*
                         clientFilteredAccessLog.map(log => {
                                 return  <AccessLogData log={log} key={log.id}/>
                         })
+                    */
                     }
                     </Table>
             </div>
@@ -57,7 +62,8 @@ class AccessLog extends Component {
 
     //Calls fetchAccessLogData() immedeatly when loading the component, this agains gets the data from the API
     componentDidMount() {
-        this.props.fetchAccessLogData()
+        const {client_id} = this.props.match.params //Client ID can be undefined, api allows this
+        this.props.fetchAccessLogData(client_id)
     }
 }
 
@@ -73,7 +79,7 @@ const mapStateToProps = (state) => {
 // Create a dispatch which sends information to the reducer.
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchAccessLogData: () =>{ dispatch(fetchAccessLogData())},
+        fetchAccessLogData: (client_id) =>{ dispatch(fetchAccessLogData(client_id))},
         updateSearch:(search_key) => {dispatch(updateSearch(search_key))}
     }
 }
