@@ -3,7 +3,7 @@
 	○ Medfører at kolonne-endringer i wrapper må ignoreres
 	○ Man får valget mellom at nav er statisk i topp, men at den ikke dytter innhold ned, eller at den dytter innhold ned, men er ikke statisk i top
 - 	Fixed="top" lar en ikke dytte ned innhold
-	§ Fungerer delvis med sticky="top", men her blir det kluss med parent-diver
+	§ Fungerer delvis med sticky="top", men her blir det kluss med parent-div's
 - Kunde-tabellen mangler favoritt-knapp. Noe med stylingen her?
 - "Hidden-" klassene fungerer ikke lengre
 - Egne fonts vil ikke brukes
