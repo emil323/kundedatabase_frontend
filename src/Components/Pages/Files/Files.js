@@ -8,6 +8,7 @@ import NewFile from '../../../Assets/Icons/add.png'
 import NewFolder from '../../../Assets/Icons/new-folder.png'
 import KebabVert from '../../../Assets/Icons/kebab-vert.png'
 import OpenEditor from '../../../Assets/Icons/new-textfile.png'
+import AccessLog from '../../../Assets/Icons/access-log.png'
 
 import { ButtonToolbar, ButtonGroup, Collapse, Navbar, NavbarBrand, Jumbotron, Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row, Input } from 'reactstrap';
 import { withRouter, Link } from "react-router-dom"
@@ -121,17 +122,19 @@ class Files extends Component {
 
                 <Navbar sticky="top" color="faded">
 
-                        <ButtonGroup className="btn-group-left">
-                            {
-                                this.props.selected_folder.is_root ? (<button className="btn-vector" disabled><img id="previous-folder" className="btn-vector-img" src={PrevFolder} alt="" /></button>) :
-                                    <button className="btn-vector" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img id="#previous-folder" className="btn-vector-img" src={PrevFolder} alt="" /></button>
-                            }
-                        </ButtonGroup>
-                        <ButtonGroup className="btn-group-right">
-                            <button className="btn-vector" onClick={this.props.toggleUploadModal}><img className="btn-vector-img" src={NewFile} /></button>
-                            <button className="btn-vector" onClick={this.props.toggleEditorModal}><img className="btn-vector-img" src={OpenEditor} /></button>
-                            <button className="btn-vector" onClick={this.props.toggleNewFolderModal} ><img className="btn-vector-img" src={NewFolder} /></button>
-                        </ButtonGroup>
+                    <ButtonGroup className="btn-group-left">
+                        {
+                            this.props.selected_folder.is_root ? (<button className="btn-vector" disabled><img id="previous-folder" className="btn-vector-img" src={PrevFolder} alt="" /></button>) :
+                                <button className="btn-vector" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img id="#previous-folder" className="btn-vector-img" src={PrevFolder} alt="" /></button>
+                        }
+                    </ButtonGroup>
+                    <ButtonGroup className="btn-group-right">
+                        <button className="btn-vector" onClick={this.props.toggleUploadModal}><img className="btn-vector-img" src={NewFile} /></button>
+                        <button className="btn-vector" onClick={this.props.toggleEditorModal}><img className="btn-vector-img" src={OpenEditor} /></button>
+                        <button className="btn-vector" onClick={this.props.toggleNewFolderModal} ><img className="btn-vector-img" src={NewFolder} /></button>
+                        <Link to={`/client/${this.props.match.params.client_id}/accesslog`}><button className="btn-vector"><img className="btn-vector-img" src={AccessLog} /></button></Link>
+
+                    </ButtonGroup>
                     <Input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer" onChange={this.props.updateSearch} />
 
 
