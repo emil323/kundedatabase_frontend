@@ -3,8 +3,13 @@ import { Component } from 'react'
 import TrailUpdater from './TrailUpdater'
 import FileData from './FileData'
 import "./Files.css"
+import PrevFolder from '../../../Assets/Icons/prev-folder.png'
+import NewFile from '../../../Assets/Icons/add.png'
+import NewFolder from '../../../Assets/Icons/new-folder.png'
+import KebabVert from '../../../Assets/Icons/kebab-vert.png'
+import OpenEditor from '../../../Assets/Icons/new-textfile.png'
 
-import { Collapse, Navbar, NavbarBrand, Jumbotron, Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row, Input } from 'reactstrap';
+import { ButtonToolbar, ButtonGroup, Collapse, Navbar, NavbarBrand, Jumbotron, Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row, Input } from 'reactstrap';
 import { withRouter, Link } from "react-router-dom"
 
 
@@ -106,9 +111,7 @@ class Files extends Component {
                         <input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch} />
                     </Col>
                 </Row>
-                */}
-
-                {/*}
+                
             <Row>
                     <Col xs="1" ><UploadModal buttonLabel="Last Opp"/> </Col>
                     <Col xs="2"><NewFolderModal buttonLabel="Ny mappe"/></Col>
@@ -116,15 +119,22 @@ class Files extends Component {
             </Row>
             */}
 
-                <Navbar sticky="top" color="light">
-                {
-                    this.props.selected_folder.is_root ? '' :
-                        <Button color="link" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img src={backBtnImg} className="btnImg" alt="" /></Button>
-                }
-                    <Button color="primary" onClick={this.props.toggleEditorModal} className="dropUpBtn">Ny tekstfil</Button>
-                    <Button color="primary" onClick={this.props.toggleUploadModal} className="dropUpBtn"> Last opp filer</Button>
-                    <Button color="primary" onClick={this.props.toggleNewFolderModal} className="dropUpBtn">Ny mappe</Button>
-                    <Input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch} />
+                <Navbar sticky="top" color="faded">
+
+                        <ButtonGroup className="btn-group-left">
+                            {
+                                this.props.selected_folder.is_root ? (<button className="btn-vector" disabled><img id="previous-folder" className="btn-vector-img" src={PrevFolder} alt="" /></button>) :
+                                    <button className="btn-vector" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img id="#previous-folder" className="btn-vector-img" src={PrevFolder} alt="" /></button>
+                            }
+                        </ButtonGroup>
+                        <ButtonGroup className="btn-group-right">
+                            <button className="btn-vector" onClick={this.props.toggleUploadModal}><img className="btn-vector-img" src={NewFile} /></button>
+                            <button className="btn-vector" onClick={this.props.toggleEditorModal}><img className="btn-vector-img" src={OpenEditor} /></button>
+                            <button className="btn-vector" onClick={this.props.toggleNewFolderModal} ><img className="btn-vector-img" src={NewFolder} /></button>
+                        </ButtonGroup>
+                    <Input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer" onChange={this.props.updateSearch} />
+
+
                 </Navbar>
 
                 <Table className="table table-hover">
@@ -166,6 +176,8 @@ class Files extends Component {
                     }
                 </Table>
 
+
+
                 <NewFolderModal />
                 <UploadModal />
                 <MoveModal />
@@ -174,22 +186,6 @@ class Files extends Component {
                 <DeleteModal />
 
                 <TrailUpdater />
-
-                
-
-
-                {/*
-                <ButtonDropdown direction="left" isOpen={this.state.fabOpen} toggle={this.toggleFab}>
-                    <DropdownToggle color="primary" caret />
-                    <DropdownMenu className="fabContentContainer">
-                        <Button color="primary" onClick={this.props.toggleEditorModal} className="dropUpBtn">Ny tekstfil</Button>
-                        <DropdownItem divider />
-                        <Button color="primary" onClick={this.props.toggleUploadModal} className="dropUpBtn"> Last opp filer</Button>
-                        <DropdownItem divider />
-                        <Button color="primary" onClick={this.props.toggleNewFolderModal} className="dropUpBtn">Ny mappe</Button>
-                    </DropdownMenu>
-                </ButtonDropdown>
-                */}
 
             </div>
         )

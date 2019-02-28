@@ -25,10 +25,10 @@ class Menu extends Component {
             <div className="menu">    
                 <NavItem className="navName">{this.state.name}</NavItem>      
                 <NavItem><p>{this.state.email}</p></NavItem>   
-                <Link to="/" ><NavItem><NavLink>HJEM</NavLink></NavItem></Link>
-                <Link to="/clients" ><NavItem><NavLink>KUNDER</NavLink></NavItem></Link>
-                <Link to="/useraccess" ><NavItem><NavLink>BRUKERTILGANG</NavLink></NavItem></Link>
-                <Link to="/accesslog" ><NavItem><NavLink className="lastElement">ADGANGSLOGG</NavLink></NavItem></Link>
+                <NavItem><Link onClick={this.props.closeHamburger} to="/" ><NavLink>HJEM</NavLink></Link></NavItem>
+                <NavItem><Link onClick={this.props.closeHamburger} to="/clients" ><NavLink>KUNDER</NavLink></Link></NavItem>
+                <NavItem><Link onClick={this.props.closeHamburger} to="/useraccess" ><NavLink>BRUKERTILGANG</NavLink></Link></NavItem>
+                <NavItem><Link onClick={this.props.closeHamburger} to="/accesslog" ><NavLink className="lastElement">ADGANGSLOGG</NavLink></Link></NavItem>
             </div>
             
         )

@@ -1,19 +1,19 @@
 .navbar {
     position: fixed;
     top: 0;
+    z-index: 1;   
+    background-color: #fff;  
+}
+
+.mainHeader {
+    background-color: #002540;
+    color:white;
 }
 
 
 
 .navbar-brand img{
     height:2em;
-}
-
-
-.navbar {
-    background-color: #002540;
-    color:white;
-    /* z-index: 1; */
 }
 
 .navbar .menu p {

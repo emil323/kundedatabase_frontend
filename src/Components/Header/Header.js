@@ -21,6 +21,17 @@ export default class Header extends React.Component {
 			open: !this.state.open
 		})
 	}
+
+	closeNav() {
+		if (this.state.open == true) {
+			this.toggleHamburger()
+		}
+	}
+
+	testFunc() {
+		alert("Function ran")
+	}
+
 	render() {
 		return (
 			/*
@@ -46,7 +57,7 @@ export default class Header extends React.Component {
 			</div>*/
 
 			<div>
-				<Navbar>
+				<Navbar className="mainHeader">
 					<Hamburger
 						isOpen={this.state.open}
 						menuClicked={this.toggleHamburger}
@@ -59,11 +70,11 @@ export default class Header extends React.Component {
 					<NavbarBrand href="/" className="mx-auto"><img alt="Logo" src="/img/ecit-logo.png" /></NavbarBrand>
 					<Collapse isOpen={this.state.open} navbar>
 						<Nav navbar >
-							<Menu />
+							<Menu closeHamburger={this.toggleHamburger}/>
 						</Nav>
 					</Collapse>
 				</Navbar>
-				
+
 				<Breadcrumbs />
 			</div>
 		)

@@ -3,7 +3,7 @@ import { Component } from 'react'
 import ClientData from './ClientData'
 import "./Clients.css"
 import { Table } from 'reactstrap';
-import { Navbar, Button, Input } from 'reactstrap';
+import { ButtonGroup, Navbar, Button, Input } from 'reactstrap';
 import newBtnImg from '../../../img/new.png'
 import { setTrail } from '../../../Store/Actions/breadcrumbActions'
 
@@ -11,6 +11,7 @@ import { setTrail } from '../../../Store/Actions/breadcrumbActions'
 import { connect } from "react-redux";
 import { deleteClient, fetchClientsData, updateSearch, toggleModal } from '../../../Store/Actions/clientsActions'
 import AddClient from './AddClient';
+import NewClient from '../../../Assets/Icons/new-client.png'
 
 class Clients extends Component {
     constructor(props) {
@@ -25,10 +26,13 @@ class Clients extends Component {
 
         return (
             <div className="container">
-                <Navbar sticky="top" color="light">
-                    <Button onClick={this.props.toggleModal} color="primary">Ny kunde</Button>
-                    <Input type="text" value={this.props.search} placeholder="Søk etter kunde..." onChange={this.props.updateSearch.bind(this)} />
+                <Navbar sticky="top">
+                    <ButtonGroup>
+                        <button className="btn-vector" onClick={this.props.toggleModal}><img className="btn-vector-img" src={NewClient} /></button>
+                    </ButtonGroup>
+                    <Input type="text" value={this.props.search} placeholder="Søk etter kunde" onChange={this.props.updateSearch.bind(this)} />
                 </Navbar>
+
                 <Table className="table table-hover">
                     <thead className="thead-dark">
                         {
