@@ -22,6 +22,7 @@ import MoveModal from './MoveModal/MoveModal';
 import RenameModal from './RenameModal/RenameModal';
 import EditorModal from './EditorModal/EditorModal'
 import DeleteModal from './DeleteModal/DeleteModal';
+import RecoverModal from './RecoverModal/RecoverModal';
 
 
 
@@ -177,6 +178,7 @@ class Files extends Component {
                 <RenameModal />
                 <EditorModal />
                 <DeleteModal />
+                <RecoverModal />
 
                 <TrailUpdater />
             </div>

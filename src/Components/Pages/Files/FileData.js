@@ -8,7 +8,7 @@ import horizontalDropdown  from '../../../Assets/Icons/horizontalDropdown.png'
 
 import { connect } from "react-redux";
 import { fetchFilesData} from '../../../Store/Actions/filesActions'
-import { toggleMoveModal, toggleRenameModal, toggleDeleteModal} from '../../../Store/Actions/modalActions'
+import { toggleMoveModal, toggleRenameModal, toggleDeleteModal, toggleRecoverModal} from '../../../Store/Actions/modalActions'
 import { Link, withRouter } from "react-router-dom";
 import { Component } from 'react'
 import DropdownBtn from '../../DropdownBtn/DropdownBtn';
@@ -80,7 +80,7 @@ import API from '../../../API/API';
                         <td><Link to="" onClick={(e) => {this.handleSelection(e)}}>{this.props.file.name}</Link></td>
                         <td>{this.props.file.last_changed}</td>
                         {this.props.file.is_deleted 
-                        ? <td><Button>Gjenopprett</Button></td> 
+                        ? <td><Button onClick={()=> this.props.toggleRecoverModal(this.props.file)}>Gjenopprett</Button></td> 
                         : <td><DropdownBtn icon={horizontalDropdown} options={btnOptions} /></td>
                         }
                     </tr>
@@ -110,7 +110,8 @@ const mapDispatchToProps = (dispatch) => {
         fetchFilesData: (client_id, selected_folder) =>{ dispatch(fetchFilesData(client_id, selected_folder))},
         toggleMoveModal: (file) => {dispatch(toggleMoveModal(file))},
         toggleRenameModal:(file) => {dispatch(toggleRenameModal(file))},
-        toggleDeleteModal:(file) => {dispatch(toggleDeleteModal(file))}
+        toggleDeleteModal:(file) => {dispatch(toggleDeleteModal(file))},
+        toggleRecoverModal: (file) => {dispatch(toggleRecoverModal(file))}
     }
 }
 

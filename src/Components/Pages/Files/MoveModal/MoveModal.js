@@ -56,11 +56,9 @@ handleMove(new_parent) {
                       //Check if not in current directory
                       if(!folder.relations.includes(this.props.move.file)
                          && folder.id !== this.props.selected_folder.id) {
-                          //Build a path based on relations array
-                          const path = [...folder.relations].reverse().map(r => `${r.name}`).join('/')
-          
+                
                           //Spew out, bind to this and file object
-                          return <ListGroupItem key={folder.id} onClick={this.handleMove.bind(this, folder)} color="red" tag="button" action>{path}</ListGroupItem>
+                          return <ListGroupItem key={folder.id} onClick={this.handleMove.bind(this, folder)} color="red" tag="button" action>{folder.fullpath}</ListGroupItem>
                       }else{
                         return null;
                       } 

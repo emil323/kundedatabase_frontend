@@ -52,6 +52,7 @@ export const fetchFilesData = (client_id, selected, is_recyclebin) => {
             //Run recursive function for files
             files.forEach(file => {
                 file.relations = generateRelations(files, file)
+                file.fullpath = [...file.relations].reverse().map(r => `${r.name}`).join('/') //Generate full path
             })
 
             //Run recursive path making for deleted files
@@ -67,7 +68,6 @@ export const fetchFilesData = (client_id, selected, is_recyclebin) => {
             let selected_folder
 
             if(is_recyclebin) {
-                
                 //Selected folder is in recyclebin
                 selected_folder = deleted_files.find((file) => {return file.id === selected && file.is_directory}) 
                 selected_folder = selected_folder != null ? selected_folder : recyclebin_root
