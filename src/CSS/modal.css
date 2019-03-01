@@ -1,23 +1,42 @@
 @media (min-width: 576px) {
-    .modal-dialog {
-         width: none; 
-         height:none;
-         margin: none;
-        }
-    .modal-content {width:none; height:none;}
-  }
-  
+
   .modal-dialog {
+      max-width: none; 
+      max-height:none;
+      }
+
+    .modal-content {
+      width:none; 
+      height:none;
+    }
+  }
+
+
+  @media (max-width: 575px) {  
+
+  .modal-dialog {
+    
     width: 100%;
     height: 100%;
-    margin:0 !important;  
-    padding: 0;
+    margin: 0 auto !important;
   }
   
   .modal-content {
+    overflow: auto;
     height: 100%;
     width:100%;
     -webkit-border-radius: 0px !important;
     -moz-border-radius: 0px !important;
     border-radius: 0px !important; 
   }
+
+}
+
+.modal-dialog{
+  overflow-y: initial !important;
+  z-index: 9999 !important;
+}
+
+.modal-body{
+  overflow-y: auto;
+}
