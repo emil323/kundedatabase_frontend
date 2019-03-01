@@ -4,37 +4,35 @@ import pdf from "../../../Assets/Icons/pdf.png"
 import excel from "../../../Assets/Icons/excel.png"
 import textDoc from "../../../Assets/Icons/txt.png"
 import folder from "../../../Assets/Icons/folder.png"
-import horizontalDropdown  from '../../../Assets/Icons/horizontalDropdown.png'
+import horizontalDropdown from '../../../Assets/Icons/horizontalDropdown.png'
 
 import { connect } from "react-redux";
-import { fetchFilesData} from '../../../Store/Actions/filesActions'
-import { toggleMoveModal, toggleRenameModal, toggleDeleteModal, toggleRecoverModal} from '../../../Store/Actions/modalActions'
+import { fetchFilesData } from '../../../Store/Actions/filesActions'
+import { toggleMoveModal, toggleRenameModal, toggleDeleteModal, toggleRecoverModal } from '../../../Store/Actions/modalActions'
 import { Link, withRouter } from "react-router-dom";
 import { Component } from 'react'
 import DropdownBtn from '../../DropdownBtn/DropdownBtn';
-import {Button} from 'reactstrap'
+import { Button } from 'reactstrap'
 import API from '../../../API/API';
 
- class FilesTable extends Component {
-     constructor(props){
-         super(props)
-         this.handleSelection = this.handleSelection.bind(this)
-     }
-
-
-
+class FilesTable extends Component {
+    constructor(props) {
+        super(props)
+        this.handleSelection = this.handleSelection.bind(this)
+        this.formatDate = this.formatDate.bind(this)
+    }
 
     handleSelection = (e) => {
         e.preventDefault()
 
-        const {file} = this.props
+        const { file } = this.props
         console.log(file)
-        if(file.is_directory) {
-            this.props.file.is_deleted 
-            ? this.props.history.push('/client/' + file.client_id + "/recyclebin/"  + file.id) 
-            : this.props.history.push('/client/' + file.client_id + "/files/"  + file.id)
+        if (file.is_directory) {
+            this.props.file.is_deleted
+                ? this.props.history.push('/client/' + file.client_id + "/recyclebin/" + file.id)
+                : this.props.history.push('/client/' + file.client_id + "/files/" + file.id)
         }
-         else //Download file
+        else //Download file
             API.file(file.id).download().then(res => {
                 const url = window.URL.createObjectURL(new Blob([res.data]));
                 const link = document.createElement('a');
@@ -43,12 +41,11 @@ import API from '../../../API/API';
                 document.body.appendChild(link);
                 link.click()
             })
-        
+
     }
 
-     
     checkFileType = (type) => {
-        switch(type){
+        switch (type) {
             case "WORD":
                 return word
             case "pdf":
@@ -56,39 +53,46 @@ import API from '../../../API/API';
             case "EXCEL":
                 return excel
             case "folder":
-                return folder     
+                return folder
             case "image/png":
-                return pdf  
+                return pdf
             default:
                 return textDoc
         }
     }
 
-        render(){
-        
-            const btnOptions =  [
-                { tekst: 'Vis', isHeader: 0, key: 1 },
-                { tekst: 'Endre navn', isHeader: 0, key: 2, function: () => {this.props.toggleRenameModal(this.props.file)}},
-                { tekst: 'Flytt', isHeader: 0, key: 3, function: ()=> {this.props.toggleMoveModal(this.props.file)}},
-                { tekst: 'Slett', isHeader: 0, key: 4, function: ()=> {this.props.toggleDeleteModal(this.props.file)}}
-            ]
+    formatDate(date) {
+        const format = {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric'};
+        return new Date(date).toLocaleString('no-NO', format)
+    }
 
-            return(
-                <tbody>
-                    <tr>
-                        <td><img src={this.checkFileType(this.props.file.type)} alt="s"/></td>
-                        <td><Link to="" onClick={(e) => {this.handleSelection(e)}}>{this.props.file.name}</Link></td>
-                        <td>{this.props.file.last_changed}</td>
-                        {this.props.file.is_deleted 
-                        ? <td><Button onClick={()=> this.props.toggleRecoverModal(this.props.file)}>Gjenopprett</Button></td> 
+    render() {
+
+        const btnOptions = [
+            { tekst: 'Endre navn', isHeader: 0, key: 0, function: () => { this.props.toggleRenameModal(this.props.file) } },
+            { tekst: 'Flytt', isHeader: 0, key: 1, function: () => { this.props.toggleMoveModal(this.props.file) } },
+            { tekst: 'Slett', isHeader: 0, key: 2, function: () => { this.props.toggleDeleteModal(this.props.file) } }
+        ]
+
+        return (
+            <tbody>
+                <tr>
+                    <td><img src={this.checkFileType(this.props.file.type)} alt="s" /></td>
+
+                    <td><Link to="" onClick={(e) => { this.handleSelection(e) }}>{this.props.file.name}</Link>
+                        <br /><p className="date">{this.formatDate(this.props.file.last_changed)}</p>
+                    </td>
+
+                    {this.props.file.is_deleted
+                        ? <td><Button onClick={() => this.props.toggleRecoverModal(this.props.file)}>Gjenopprett</Button></td>
                         : <td><DropdownBtn icon={horizontalDropdown} options={btnOptions} /></td>
-                        }
-                    </tr>
-                </tbody>
-            )
+                    }
+                </tr>
+            </tbody>
+        )
 
-            
-        }    
+
+    }
 
 
 }
@@ -96,7 +100,7 @@ import API from '../../../API/API';
 
 // Calls on a clientsReducer that bring props to the component
 const mapStateToProps = (state) => {
-    const {root_folder,selected_folder, search} = state.filesReducer
+    const { root_folder, selected_folder, search } = state.filesReducer
     return {
         root_folder,
         selected_folder,
@@ -107,11 +111,11 @@ const mapStateToProps = (state) => {
 // Create a dispatch which sends information to the reducer. In this case a client is being deleted
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchFilesData: (client_id, selected_folder) =>{ dispatch(fetchFilesData(client_id, selected_folder))},
-        toggleMoveModal: (file) => {dispatch(toggleMoveModal(file))},
-        toggleRenameModal:(file) => {dispatch(toggleRenameModal(file))},
-        toggleDeleteModal:(file) => {dispatch(toggleDeleteModal(file))},
-        toggleRecoverModal: (file) => {dispatch(toggleRecoverModal(file))}
+        fetchFilesData: (client_id, selected_folder) => { dispatch(fetchFilesData(client_id, selected_folder)) },
+        toggleMoveModal: (file) => { dispatch(toggleMoveModal(file)) },
+        toggleRenameModal: (file) => { dispatch(toggleRenameModal(file)) },
+        toggleDeleteModal: (file) => { dispatch(toggleDeleteModal(file)) },
+        toggleRecoverModal: (file) => { dispatch(toggleRecoverModal(file)) }
     }
 }
 

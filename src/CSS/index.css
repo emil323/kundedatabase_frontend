@@ -41,23 +41,29 @@ Deer (brown)
 
 /* xs */
 
-@media screen and (max-width: 576px) {}
+@media only screen and (max-width: 576px) {}
 
 /* sm */
 
-@media screen and (min-width: 576px) {}
+@media only screen and (min-width: 576px) {
+}
 
 /* md */
 
-@media screen and (min-width: 768px) {}
+@media only screen and (min-width: 768px) {
+}
+
+@media only screen and (max-width: 768px) {
+    
+}
 
 /* lg */
 
-@media screen and (min-width: 992px) {}
+@media only screen and (min-width: 992px) {}
 
 /* xl */
 
-@media screen and (min-width: 1200px) {}
+@media only screen and (min-width: 1200px) {}
 
 h1 {
     font-family: 'Metropolis Extra Bold', Arial, Helvetica, sans-serif;
@@ -142,4 +148,9 @@ button:disabled #previous-folder {
 .btn-group-right {
     position: fixed;
     right: 0;
+}
+
+.date {
+    opacity: 0.6;
+    font-style: italic;
 }
