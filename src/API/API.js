@@ -41,8 +41,10 @@ export default  {
     },
     accesslog: () => {
         return {
-            list() {
-                return axios().get("/accesslog") 
+            list(client_id) {
+                //Client ID is optional
+                const url = client_id === undefined ? '/accesslog' : '/accesslog/' + client_id
+                return axios().get(url) 
             },
             create(data) {
                 return axios().post("/accesslog/create", data)
@@ -77,6 +79,9 @@ export default  {
             },
             delete: () => {
                 return axios().delete('/file/' + file_id)
+            },
+            recover: (new_parent_folder) => {
+                return axios().post('/file/' + file_id + '/recover',{new_parent_folder})
             }
         }
     },
@@ -100,6 +105,9 @@ export default  {
             },
             delete: () => {
                 return axios().delete('/folder/' + folder_id)
+            },
+            recover: (new_parent_folder) => {
+                return axios().post('/folder/' + folder_id + '/recover',{new_parent_folder})
             }
         }
     },

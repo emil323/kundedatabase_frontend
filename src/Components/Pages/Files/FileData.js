@@ -8,10 +8,11 @@ import horizontalDropdown  from '../../../Assets/Icons/horizontalDropdown.png'
 
 import { connect } from "react-redux";
 import { fetchFilesData} from '../../../Store/Actions/filesActions'
-import { toggleMoveModal, toggleRenameModal, toggleDeleteModal} from '../../../Store/Actions/modalActions'
+import { toggleMoveModal, toggleRenameModal, toggleDeleteModal, toggleRecoverModal} from '../../../Store/Actions/modalActions'
 import { Link, withRouter } from "react-router-dom";
 import { Component } from 'react'
 import DropdownBtn from '../../DropdownBtn/DropdownBtn';
+import {Button} from 'reactstrap'
 import API from '../../../API/API';
 
  class FilesTable extends Component {
@@ -28,8 +29,11 @@ import API from '../../../API/API';
 
         const {file} = this.props
         console.log(file)
-        if(file.is_directory) 
-            this.props.history.push('/client/' + file.client_id + "/files/"  + file.id)
+        if(file.is_directory) {
+            this.props.file.is_deleted 
+            ? this.props.history.push('/client/' + file.client_id + "/recyclebin/"  + file.id) 
+            : this.props.history.push('/client/' + file.client_id + "/files/"  + file.id)
+        }
          else //Download file
             API.file(file.id).download().then(res => {
                 const url = window.URL.createObjectURL(new Blob([res.data]));
@@ -75,7 +79,10 @@ import API from '../../../API/API';
                         <td><img src={this.checkFileType(this.props.file.type)} alt="s"/></td>
                         <td><Link to="" onClick={(e) => {this.handleSelection(e)}}>{this.props.file.name}</Link></td>
                         <td>{this.props.file.last_changed}</td>
-                        <td><DropdownBtn icon={horizontalDropdown} options={btnOptions} /></td>
+                        {this.props.file.is_deleted 
+                        ? <td><Button onClick={()=> this.props.toggleRecoverModal(this.props.file)}>Gjenopprett</Button></td> 
+                        : <td><DropdownBtn icon={horizontalDropdown} options={btnOptions} /></td>
+                        }
                     </tr>
                 </tbody>
             )
@@ -103,7 +110,8 @@ const mapDispatchToProps = (dispatch) => {
         fetchFilesData: (client_id, selected_folder) =>{ dispatch(fetchFilesData(client_id, selected_folder))},
         toggleMoveModal: (file) => {dispatch(toggleMoveModal(file))},
         toggleRenameModal:(file) => {dispatch(toggleRenameModal(file))},
-        toggleDeleteModal:(file) => {dispatch(toggleDeleteModal(file))}
+        toggleDeleteModal:(file) => {dispatch(toggleDeleteModal(file))},
+        toggleRecoverModal: (file) => {dispatch(toggleRecoverModal(file))}
     }
 }
 

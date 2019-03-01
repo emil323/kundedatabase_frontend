@@ -1,4 +1,4 @@
-import { UPLOAD_MODAL ,NEW_FOLDER_MODAL, MOVE_MODAL, RENAME_MODAL, EDITOR_MODAL, DELETE_MODAL} from '../types'
+import { UPLOAD_MODAL ,NEW_FOLDER_MODAL, MOVE_MODAL, RENAME_MODAL, EDITOR_MODAL, DELETE_MODAL, RECOVER_MODAL} from '../types'
 
 export const toggleEditorModal = () => {
     return {
@@ -15,6 +15,13 @@ export const toggleUploadModal = () => {
 export const toggleDeleteModal = (file) => {
     return {
         type: DELETE_MODAL,
+        file
+    }
+}
+
+export const toggleRecoverModal = (file) => {
+    return {
+        type: RECOVER_MODAL,
         file
     }
 }
