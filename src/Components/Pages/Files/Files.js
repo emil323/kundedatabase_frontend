@@ -67,8 +67,6 @@ class Files extends Component {
         }
     }
 
-
-
     render() {
         const filteredFiles = this.props.is_searching
             ? this.props.all_files.filter(file => { //Search in all files in this client
@@ -127,36 +125,43 @@ class Files extends Component {
             */}
 
                 <Navbar sticky="top" color="faded">
-
                     <ButtonGroup className="btn-group-left">
                         {
                             this.props.selected_folder.is_root ? (<button className="btn-vector" disabled><img id="previous-folder" className="btn-vector-img" src={PrevFolder} alt="" /></button>) :
                                 <button className="btn-vector" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img id="#previous-folder" className="btn-vector-img" src={PrevFolder} alt="" /></button>
                         }
-                    </ButtonGroup>
-                    <ButtonGroup id="filesMenuGroup" className="btn-group-right testGroup">
-                        <button className="btn-vector" onClick={this.props.toggleUploadModal}>
-                            <img className="btn-vector-img" src={UploadFile} /></button>
-                        <button className="btn-vector" onClick={this.props.toggleEditorModal}>
-                            <img className="btn-vector-img" src={OpenEditor} /></button>
-                        <button className="btn-vector" onClick={this.props.toggleNewFolderModal} >
-                            <img className="btn-vector-img" src={NewFolder} /></button>
-                        <Link to={`/client/${this.props.match.params.client_id}/accesslog`}>
-                            <button className="btn-vector"><img className="btn-vector-img" src={AccessLog} /></button></Link>
-                        <Link to={`/client/${this.props.match.params.client_id}/recyclebin`}><
-                            button className="btn-vector"><img className="btn-vector-img" src={Trash} /></button></Link>
-                    </ButtonGroup>               
+                    <button onClick={this.toggleMenu} className="btn-vector"><img className="btn-vector-img" src={KebabHor} /></button>
 
-                    <Input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer" onChange={this.props.updateSearch} />
+                    </ButtonGroup>
+
+
+                    <Collapse isOpen={this.state.menuOpen}>
+
+                        <ButtonGroup id="filesMenuGroup" className="btn-group-right testGroup">
+                            <button className="btn-vector" onClick={this.props.toggleUploadModal}>
+                                <img className="btn-vector-img" src={UploadFile} /></button>
+                            <button className="btn-vector" onClick={this.props.toggleEditorModal}>
+                                <img className="btn-vector-img" src={OpenEditor} /></button>
+                            <button className="btn-vector" onClick={this.props.toggleNewFolderModal} >
+                                <img className="btn-vector-img" src={NewFolder} /></button>
+                            <Link to={`/client/${this.props.match.params.client_id}/accesslog`}>
+                                <button className="btn-vector"><img className="btn-vector-img" src={AccessLog} /></button></Link>
+                            <Link to={`/client/${this.props.match.params.client_id}/recyclebin`}><
+                                button className="btn-vector"><img className="btn-vector-img" src={Trash} /></button></Link>
+                        </ButtonGroup>
+                        <Input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer" onChange={this.props.updateSearch} />
+
+                    </Collapse>
+
                 </Navbar>
-                
+
                 <Table className="table table-hover">
                     <thead className="thead-dark">
-                        <tr>
+                        {/*  <tr>
                             <th>Type</th>
                             <th>Fil</th>
                             <th>Valg</th>
-                        </tr>
+                        </tr> */}
                     </thead>
                     {
                         this.props.is_searching ?

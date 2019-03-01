@@ -20,6 +20,7 @@ class FilesTable extends Component {
         super(props)
         this.handleSelection = this.handleSelection.bind(this)
         this.formatDate = this.formatDate.bind(this)
+        this.formatTitle = this.formatTitle.bind(this)
     }
 
     handleSelection = (e) => {
@@ -66,6 +67,15 @@ class FilesTable extends Component {
         return new Date(date).toLocaleString('no-NO', format)
     }
 
+    formatTitle(title) {
+        const length = 20;
+        if(title.length > length) {
+            return title.substring(0, 20) + "..."
+        } else {
+            return title
+        }
+    }
+
     render() {
 
         const btnOptions = [
@@ -79,7 +89,7 @@ class FilesTable extends Component {
                 <tr>
                     <td><img src={this.checkFileType(this.props.file.type)} alt="s" /></td>
 
-                    <td><Link to="" onClick={(e) => { this.handleSelection(e) }}>{this.props.file.name}</Link>
+                    <td><Link to="" onClick={(e) => { this.handleSelection(e) }}>{this.formatTitle(this.props.file.name)}</Link>
                         <br /><p className="date">{this.formatDate(this.props.file.last_changed)}</p>
                     </td>
 
