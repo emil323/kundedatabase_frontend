@@ -3,14 +3,19 @@ import { Component } from 'react'
 import TrailUpdater from './TrailUpdater'
 import FileData from './FileData'
 import "./Files.css"
+
 import PrevFolder from '../../../Assets/Icons/prev-folder.png'
+import UploadFile from '../../../Assets/Icons/upload-file.png'
 import NewFile from '../../../Assets/Icons/add.png'
 import NewFolder from '../../../Assets/Icons/new-folder.png'
 import KebabVert from '../../../Assets/Icons/kebab-vert.png'
+import KebabHor from '../../../Assets/Icons/kebab-hor.png'
 import OpenEditor from '../../../Assets/Icons/new-textfile.png'
 import AccessLog from '../../../Assets/Icons/access-log.png'
+import Trash from '../../../Assets/Icons/trash.png'
 
-import { ButtonToolbar, ButtonGroup, Collapse, Navbar, NavbarBrand, Jumbotron, Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row, Input } from 'reactstrap';
+
+import { Tooltip, Dropdown, ButtonToolbar, ButtonGroup, Collapse, Navbar, NavbarBrand, Jumbotron, Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row, Input } from 'reactstrap';
 import { withRouter, Link } from "react-router-dom"
 
 
@@ -35,19 +40,11 @@ class Files extends Component {
     constructor(props) {
         super(props)
         this.upOneLevel = this.upOneLevel.bind(this)
-
-        this.toggleFab = this.toggleFab.bind(this);
         this.toggleMenu = this.toggleMenu.bind(this)
-        this.state = {
-            fabOpen: false,
-            menuOpen: false
-        };
-    }
 
-    toggleFab() {
-        this.setState({
-            fabOpen: !this.state.fabOpen
-        });
+        this.state = {
+            menuOpen: false,
+        };
     }
 
     toggleMenu() {
@@ -56,20 +53,23 @@ class Files extends Component {
         })
     }
 
+    toggleTooltop() {
+        this.setState({
+            tooltipOpen: !this.state.tooltipOpen
+        })
+    }
+
     upOneLevel() {
         if (!this.props.selected_folder.is_root) {
-            this.props.is_recyclebin 
-            ? this.props.history.push('/client/' + this.props.match.params.client_id + "/recyclebin/" + this.props.selected_folder.parent_id) 
-            : this.props.history.push('/client/' + this.props.match.params.client_id + "/files/" + this.props.selected_folder.parent_id)
+            this.props.is_recyclebin
+                ? this.props.history.push('/client/' + this.props.match.params.client_id + "/recyclebin/" + this.props.selected_folder.parent_id)
+                : this.props.history.push('/client/' + this.props.match.params.client_id + "/files/" + this.props.selected_folder.parent_id)
         }
     }
 
 
 
     render() {
-
-
-
         const filteredFiles = this.props.is_searching
             ? this.props.all_files.filter(file => { //Search in all files in this client
                 //searching logic
@@ -134,24 +134,27 @@ class Files extends Component {
                                 <button className="btn-vector" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img id="#previous-folder" className="btn-vector-img" src={PrevFolder} alt="" /></button>
                         }
                     </ButtonGroup>
-                    <ButtonGroup className="btn-group-right">
-                        <button className="btn-vector" onClick={this.props.toggleUploadModal}><img className="btn-vector-img" src={NewFile} /></button>
-                        <button className="btn-vector" onClick={this.props.toggleEditorModal}><img className="btn-vector-img" src={OpenEditor} /></button>
-                        <button className="btn-vector" onClick={this.props.toggleNewFolderModal} ><img className="btn-vector-img" src={NewFolder} /></button>
-                        <Link to={`/client/${this.props.match.params.client_id}/accesslog`}><button className="btn-vector"><img className="btn-vector-img" src={AccessLog} /></button></Link>
+                    <ButtonGroup id="filesMenuGroup" className="btn-group-right testGroup">
+                        <button className="btn-vector" onClick={this.props.toggleUploadModal}>
+                            <img className="btn-vector-img" src={UploadFile} /></button>
+                        <button className="btn-vector" onClick={this.props.toggleEditorModal}>
+                            <img className="btn-vector-img" src={OpenEditor} /></button>
+                        <button className="btn-vector" onClick={this.props.toggleNewFolderModal} >
+                            <img className="btn-vector-img" src={NewFolder} /></button>
+                        <Link to={`/client/${this.props.match.params.client_id}/accesslog`}>
+                            <button className="btn-vector"><img className="btn-vector-img" src={AccessLog} /></button></Link>
+                        <Link to={`/client/${this.props.match.params.client_id}/recyclebin`}><
+                            button className="btn-vector"><img className="btn-vector-img" src={Trash} /></button></Link>
+                    </ButtonGroup>               
 
-                    </ButtonGroup>
                     <Input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer" onChange={this.props.updateSearch} />
-
-
                 </Navbar>
-
+                
                 <Table className="table table-hover">
                     <thead className="thead-dark">
                         <tr>
                             <th>Type</th>
-                            <th>Tittel</th>
-                            <th>Sist endret</th>
+                            <th>Fil</th>
                             <th>Valg</th>
                         </tr>
                     </thead>
@@ -226,7 +229,7 @@ class Files extends Component {
         }
         //Check if mode (url) is toggled to recyclebin
 
-        if(this.props.is_recyclebin !== nextProps.is_recyclebin) {
+        if (this.props.is_recyclebin !== nextProps.is_recyclebin) {
             console.log('mode change')
             //Refetch inventory
             this.props.fetchFilesData(new_params.client_id, new_params.selected_folder, nextProps.is_recyclebin)
@@ -274,7 +277,7 @@ const mapStateToProps = (state, ownProps) => {
 // Create a dispatch which sends information to the reducer. In this case a client is being deleted
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchFilesData: (client_id, selected_folder, is_recyclebin) => { dispatch(fetchFilesData(client_id, selected_folder,is_recyclebin)) },
+        fetchFilesData: (client_id, selected_folder, is_recyclebin) => { dispatch(fetchFilesData(client_id, selected_folder, is_recyclebin)) },
         selectFolder: (folder_id) => { dispatch(selectFolder(folder_id)) },
         updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
         toggleNewFolderModal: () => { dispatch(toggleNewFolderModal()) },
