@@ -135,9 +135,11 @@ class Files extends Component {
 
 
                     </ButtonGroup>
+                    {
+                        isDesktop ? '' : <button onClick={this.toggleMenu} className="btn-vector"><img className="btn-vector-img" src={KebabHor} /></button>
+                    }
 
                     <Collapse isOpen={isDesktop ? 'true' : this.state.menuOpen}>
-
                         <ButtonGroup id="filesMenuGroup" className="btn-group-right testGroup">
                             <button className="btn-vector" onClick={this.props.toggleUploadModal}>
                                 <img className="btn-vector-img" src={UploadFile} /></button>
@@ -154,9 +156,7 @@ class Files extends Component {
 
                     </Collapse>
 
-                    {
-                        isDesktop ? '' : <button onClick={this.toggleMenu} className="btn-vector"><img className="btn-vector-img" src={KebabHor} /></button>
-                    }
+                  
 
                 </Navbar>
 
