@@ -9,6 +9,7 @@ import { Provider } from "react-redux"
 import store from './Store/store'
 
 import './CSS/index.css';
+import './CSS/modal.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 

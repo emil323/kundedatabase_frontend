@@ -86,7 +86,7 @@ class UploadModal extends React.Component {
     const hasFiles = this.state.files_to_upload.length === 0;
 
     return (
-      <div className="container">
+      <div className='modal_override'>
         {/*<Button className="dropUpBtn" color="primary" onClick={this.toggle}>
           {this.props.buttonLabel}
           </Button> */}
@@ -96,7 +96,7 @@ class UploadModal extends React.Component {
           backdrop={this.state.backdrop}
           isOpen={this.props.upload_modal}
           toggle={this.props.toggleUploadModal}
-          className={this.props.className}
+          
         >
           <ModalHeader toggle={this.toggle}>
             Last opp til: {this.props.selected_folder.name}
