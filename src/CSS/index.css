@@ -179,7 +179,7 @@ button:disabled #previous-folder {
 }
 
 .btn-vector-img {
-    height: 3em;
+    height: 2em;
 }
 
 .btn-vector-kebab {
@@ -202,5 +202,4 @@ button:disabled #previous-folder {
 
 .date {
     opacity: 0.6;
-    font-style: italic;
 }
