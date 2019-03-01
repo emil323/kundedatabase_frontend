@@ -152,11 +152,7 @@ class Files extends Component {
                 
                 <Table className="table table-hover">
                     <thead className="thead-dark">
-                        <tr>
-                            <th>Type</th>
-                            <th>Fil</th>
-                            <th>Valg</th>
-                        </tr>
+                     
                     </thead>
                     {
                         this.props.is_searching ?

@@ -79,13 +79,13 @@ class FilesTable extends Component {
                 <tr>
                     <td><img src={this.checkFileType(this.props.file.type)} alt="s" /></td>
 
-                    <td><Link to="" onClick={(e) => { this.handleSelection(e) }}>{this.props.file.name}</Link>
+                    <td><Link to="" onClick={(e) => { this.handleSelection(e) }}>{this.props.file.name.substring(0, 20)}</Link>
                         <br /><p className="date">{this.formatDate(this.props.file.last_changed)}</p>
                     </td>
 
                     {this.props.file.is_deleted
                         ? <td><Button onClick={() => this.props.toggleRecoverModal(this.props.file)}>Gjenopprett</Button></td>
-                        : <td><DropdownBtn icon={horizontalDropdown} options={btnOptions} /></td>
+                        : <td className="DropDwnIcon"><DropdownBtn icon={horizontalDropdown} options={btnOptions} /></td>
                     }
                 </tr>
             </tbody>

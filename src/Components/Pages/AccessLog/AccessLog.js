@@ -31,8 +31,8 @@ class AccessLog extends Component {
                 <Navbar sticky="top">
                     <Input type="text" value={this.props.searchLog} placeholder="Søk" onChange={this.props.updateSearch.bind(this)} />
                 </Navbar>
-                <Table className="table table-hover">
-                    <thead className="thead-dark">
+                <Table id="accesslogTable" className="table table-hover">
+                    <thead id="accesslogThead" className="thead-dark">
                         <tr>
                             <th>Kunde</th>
                             <th>Besøkt</th>
