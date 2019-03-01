@@ -24,7 +24,6 @@ Deer (brown)
 - Jumbotron (alt), help
 */
 
-
 @font-face {
     font-family: 'Metropolis Extra Bold';
     src: url('./Fonts/Headlines/Metropolis-ExtraBold.otf');
@@ -40,28 +39,25 @@ Deer (brown)
     src: url('./Fonts/Body-Paragraphs/VarelaRound-Regular.ttf');
 }
 
- /* xs */
- @media screen and (max-width: 576px) {
-}
+/* xs */
 
- /* sm */
- @media screen and (min-width: 576px) {
-}
+@media screen and (max-width: 576px) {}
 
- /* md */
-@media screen and (min-width: 768px) {
-    .searchFiles { 
-        float: right;
-    }
-}
+/* sm */
 
- /* lg */
- @media screen and (min-width: 992px) {
-}
+@media screen and (min-width: 576px) {}
 
- /* xl */
- @media screen and (min-width: 1200px) {
-}
+/* md */
+
+@media screen and (min-width: 768px) {}
+
+/* lg */
+
+@media screen and (min-width: 992px) {}
+
+/* xl */
+
+@media screen and (min-width: 1200px) {}
 
 h1 {
     font-family: 'Metropolis Extra Bold', Arial, Helvetica, sans-serif;
@@ -71,60 +67,79 @@ h2, h3, h4 {
     font-family: 'Metropolis Bold', Arial, Helvetica, sans-serif;
 }
 
+html {
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 body {
-    font-family: 'Varela Round', Verdana, Geneva, Tahoma, sans-serif;
     color: #2A2A2A;
-    overflow-x: hidden;
-    width: 100%;
+    height: 100%;
 }
 
 Input {
     font-size: 2rem;
-    border-radius: 5px;
+    border-radius: 1px;
 }
 
-button {    
+button {}
+
+button:hover {}
+
+button:disabled #previous-folder {
+    opacity: 0.5;
+    
 }
 
-button:hover {
-}
-
-.btn-primary {
-    background-color: #0353A4;
-    color: #fff;
-}
-
-.btn-primary:hover {
-    background-color: #03468A;
-    color: #fff;
-}
-
-.btn-secondary {
-}
-
-.btn-secondary:hover {
-    color: #fff;
-}
-
-.btn-vector, .btn-vector:hover, .btn-vector:focus, .btn-vector:active, .btn-vector:visited {
+.btn-vector {
     background-color: transparent;
-    border: 0;
+    border: transparent;
+    transition: transform .2s;
+    padding: 1em;
+    outline: none;
 }
 
-.btn-info {
-    background-color: #B08B5B;
+.btn-vector:hover{
+    transform: scale(1.5);
 }
 
-.btn-info:hover {
-    background-color: #96774E   
+.btn-vector:focus {
+    outline: none;
 }
 
-.btn-link {
+.btn-vector:active {
+    transform: scale(2);
 }
 
-.btn-group {
+.btn-vector-img {
+    height: 3em;
 }
 
-.dropleft {
+.btn-vector-kebab {
+    height: 3em;
+}
 
+.btn-vector-kebab-img {
+    height: 2em;
+}
+
+.btn-group-left {
+    position: fixed;
+    left: 0;
+}
+
+.btn-group-right {
+    position: fixed;
+    right: 0;
 }

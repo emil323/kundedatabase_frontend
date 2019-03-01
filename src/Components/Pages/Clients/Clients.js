@@ -1,19 +1,20 @@
 import React from 'react'
-import {Component} from 'react'
+import { Component } from 'react'
 import ClientData from './ClientData'
 import "./Clients.css"
 import { Table } from 'reactstrap';
-import {Button} from 'reactstrap';
+import { ButtonGroup, Navbar, Button, Input } from 'reactstrap';
 import newBtnImg from '../../../img/new.png'
-import {setTrail} from '../../../Store/Actions/breadcrumbActions'
+import { setTrail } from '../../../Store/Actions/breadcrumbActions'
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
-import { deleteClient, fetchClientsData, updateSearch, toggleModal} from '../../../Store/Actions/clientsActions'
+import { deleteClient, fetchClientsData, updateSearch, toggleModal } from '../../../Store/Actions/clientsActions'
 import AddClient from './AddClient';
+import NewClient from '../../../Assets/Icons/new-client.png'
 
 class Clients extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
 
@@ -25,10 +26,16 @@ class Clients extends Component {
 
         return (
             <div className="container">
-                <input type="text" value={this.props.search} placeholder="Søk etter kunde..." onChange={this.props.updateSearch.bind(this)}/>
-                    <Table className="table table-hover">
-                        <thead className="thead-dark">
-                        { 
+                <Navbar sticky="top">
+                    <ButtonGroup>
+                        <button className="btn-vector" onClick={this.props.toggleModal}><img className="btn-vector-img" src={NewClient} /></button>
+                    </ButtonGroup>
+                    <Input type="text" value={this.props.search} placeholder="Søk etter kunde" onChange={this.props.updateSearch.bind(this)} />
+                </Navbar>
+
+                <Table className="table table-hover">
+                    <thead className="thead-dark">
+                        {
                             //Ser det finere ut uten?
                             /*
                             <tr>
@@ -37,16 +44,15 @@ class Clients extends Component {
                             </tr>
                             */
                         }
-                        </thead>
-                        {
-                            filteredClients.map(client => {
-                                return  <ClientData client={client} 
-                                                fetchClientsData={this.props.fetchClientsData} 
-                                                key={client.id}/>
-                            })
-                        }
-                    </Table>
-                    <Button className="modalBtn"  onClick={this.props.toggleModal}><img className="btnImg" src={newBtnImg} alt=""></img></Button>       
+                    </thead>
+                    {
+                        filteredClients.map(client => {
+                            return <ClientData client={client}
+                                fetchClientsData={this.props.fetchClientsData}
+                                key={client.id} />
+                        })
+                    }
+                </Table>
                 <AddClient />
             </div>
         )
@@ -59,7 +65,7 @@ class Clients extends Component {
         this.props.setTrail([{
             title: 'Hjem',
             path: '/'
-         },
+        },
         {
             title: 'Kunder',
             path: '/clients'
@@ -79,11 +85,11 @@ const mapStateToProps = (state) => {
 // Create a dispatch which sends information to the reducer. In this case a client is being deleted
 const mapDispatchToProps = (dispatch) => {
     return {
-        deleteClient: (id) => { dispatch(deleteClient(id))},
-        toggleModal: () => { dispatch(toggleModal())},
-        fetchClientsData: () =>{ dispatch(fetchClientsData())},
-        updateSearch:(search_key) => {dispatch(updateSearch(search_key))},
-        setTrail: (trail) => {dispatch(setTrail(trail))},
+        deleteClient: (id) => { dispatch(deleteClient(id)) },
+        toggleModal: () => { dispatch(toggleModal()) },
+        fetchClientsData: () => { dispatch(fetchClientsData()) },
+        updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
+        setTrail: (trail) => { dispatch(setTrail(trail)) },
     }
 }
 

@@ -22,9 +22,8 @@ class App extends Component {
             <BrowserRouter>
                 <div>
                     <Header />
-                    <Sidebar />
-                    <MainContent>
-                        <Breadcrumbs className="hidden-lg hidden-xl hidden-md hidden-sm "/>
+                    {/* <Sidebar /> */} 
+                        <MainContent>
                         <Route exact path="/" component={Home} />
                         <Route path="/clients" component={Clients}/>
                         <Route path="/client/:client_id" component={Client}/>

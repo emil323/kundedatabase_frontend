@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { UncontrolledDropdown, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import './DropdownBtn.css'
+import KebabVert from '../../Assets/Icons/kebab-vert.png'
 
 export default class DropdownBtn extends Component {
     constructor(props) {
@@ -32,12 +33,14 @@ export default class DropdownBtn extends Component {
 
         })
         return (
-            <ButtonDropdown direction="left" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                <DropdownToggle color="primary" className="btn-vector"><img src={this.props.icon} alt=""></img></DropdownToggle>
+
+            <UncontrolledDropdown size="md">
+                <DropdownToggle className="btn-vector btn-vector-kebab" outline color=""><img className="btn-vector-img btn-vector-kebab-img" src={KebabVert} /></DropdownToggle>
                 <DropdownMenu>
                     {optionsList}
                 </DropdownMenu>
-            </ButtonDropdown>
+            </UncontrolledDropdown>
+           
         )
     }
 }

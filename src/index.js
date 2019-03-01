@@ -10,6 +10,8 @@ import store from './Store/store'
 
 import './CSS/index.css';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 //Set this to true to ignore authentication
 const DO_NOT_LOGIN = false;
 

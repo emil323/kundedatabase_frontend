@@ -3,8 +3,14 @@ import { Component } from 'react'
 import TrailUpdater from './TrailUpdater'
 import FileData from './FileData'
 import "./Files.css"
+import PrevFolder from '../../../Assets/Icons/prev-folder.png'
+import NewFile from '../../../Assets/Icons/add.png'
+import NewFolder from '../../../Assets/Icons/new-folder.png'
+import KebabVert from '../../../Assets/Icons/kebab-vert.png'
+import OpenEditor from '../../../Assets/Icons/new-textfile.png'
+import AccessLog from '../../../Assets/Icons/access-log.png'
 
-import { Jumbotron, Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row } from 'reactstrap';
+import { ButtonToolbar, ButtonGroup, Collapse, Navbar, NavbarBrand, Jumbotron, Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row, Input } from 'reactstrap';
 import { withRouter, Link } from "react-router-dom"
 
 
@@ -24,24 +30,30 @@ import EditorModal from './EditorModal/EditorModal'
 import DeleteModal from './DeleteModal/DeleteModal';
 import RecoverModal from './RecoverModal/RecoverModal';
 
-
-
 class Files extends Component {
 
     constructor(props) {
         super(props)
         this.upOneLevel = this.upOneLevel.bind(this)
 
-        this.toggle = this.toggle.bind(this);
+        this.toggleFab = this.toggleFab.bind(this);
+        this.toggleMenu = this.toggleMenu.bind(this)
         this.state = {
-            dropdownOpen: false
+            fabOpen: false,
+            menuOpen: false
         };
     }
 
-    toggle() {
+    toggleFab() {
         this.setState({
-            dropdownOpen: !this.state.dropdownOpen
+            fabOpen: !this.state.fabOpen
         });
+    }
+
+    toggleMenu() {
+        this.setState({
+            menuOpen: !this.state.menuOpen
+        })
     }
 
     upOneLevel() {
@@ -68,7 +80,7 @@ class Files extends Component {
 
         return (
             <div >
-
+                {/* 
                 <Jumbotron className="Jumbotron-Client">
                     <h1 className="display-3">{this.props.client_name}</h1>
                     {
@@ -89,6 +101,7 @@ class Files extends Component {
                     <input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch} />
 
                 </Jumbotron>
+                */}
 
 
                 {/*
@@ -105,9 +118,7 @@ class Files extends Component {
                         <input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch} />
                     </Col>
                 </Row>
-                */}
-
-                {/*}
+                
             <Row>
                     <Col xs="1" ><UploadModal buttonLabel="Last Opp"/> </Col>
                     <Col xs="2"><NewFolderModal buttonLabel="Ny mappe"/></Col>
@@ -115,6 +126,25 @@ class Files extends Component {
             </Row>
             */}
 
+                <Navbar sticky="top" color="faded">
+
+                    <ButtonGroup className="btn-group-left">
+                        {
+                            this.props.selected_folder.is_root ? (<button className="btn-vector" disabled><img id="previous-folder" className="btn-vector-img" src={PrevFolder} alt="" /></button>) :
+                                <button className="btn-vector" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img id="#previous-folder" className="btn-vector-img" src={PrevFolder} alt="" /></button>
+                        }
+                    </ButtonGroup>
+                    <ButtonGroup className="btn-group-right">
+                        <button className="btn-vector" onClick={this.props.toggleUploadModal}><img className="btn-vector-img" src={NewFile} /></button>
+                        <button className="btn-vector" onClick={this.props.toggleEditorModal}><img className="btn-vector-img" src={OpenEditor} /></button>
+                        <button className="btn-vector" onClick={this.props.toggleNewFolderModal} ><img className="btn-vector-img" src={NewFolder} /></button>
+                        <Link to={`/client/${this.props.match.params.client_id}/accesslog`}><button className="btn-vector"><img className="btn-vector-img" src={AccessLog} /></button></Link>
+
+                    </ButtonGroup>
+                    <Input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer" onChange={this.props.updateSearch} />
+
+
+                </Navbar>
 
                 <Table className="table table-hover">
                     <thead className="thead-dark">
@@ -154,23 +184,8 @@ class Files extends Component {
                         })
                     }
                 </Table>
-                {
-                    this.props.selected_folder.is_root ? '' :
-                        <Button color="primary" className="floatingActionButton fabBack btn-vector" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img src={backBtnImg} className="btnImg" alt="" /></Button>
-                }
 
-                <ButtonDropdown className="floatingActionButton fabNew hidden-xl hidden-lg" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                    <DropdownToggle className="fabBtn btn-vector" color="primary">
-                        <img className="fabImg" src={newBtnImg} alt=""></img>
-                    </DropdownToggle>
-                    <DropdownMenu className="fabContentContainer">
-                        <Button color="primary" onClick={this.props.toggleEditorModal} className="dropUpBtn">Ny tekstfil</Button>
-                        <DropdownItem divider />
-                        <Button color="primary" onClick={this.props.toggleUploadModal} className="dropUpBtn"> Last opp filer</Button>
-                        <DropdownItem divider />
-                        <Button color="primary" onClick={this.props.toggleNewFolderModal} className="dropUpBtn">Ny mappe</Button>
-                    </DropdownMenu>
-                </ButtonDropdown>
+
 
                 <NewFolderModal />
                 <UploadModal />
@@ -181,6 +196,7 @@ class Files extends Component {
                 <RecoverModal />
 
                 <TrailUpdater />
+
             </div>
         )
     }

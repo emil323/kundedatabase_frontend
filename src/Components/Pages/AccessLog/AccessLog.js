@@ -1,13 +1,13 @@
 import React from 'react'
-import {Component} from 'react'
+import { Component } from 'react'
 import AccessLogData from './AccessLogData'
 import "./AccessLog.css"
-import { Table } from 'reactstrap';
+import { Navbar, Input, Table } from 'reactstrap';
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
-import {fetchAccessLogData, updateSearch} from '../../../Store/Actions/accesslogActions'
-import {withRouter} from 'react-router-dom';
+import { fetchAccessLogData, updateSearch } from '../../../Store/Actions/accesslogActions'
+import { withRouter } from 'react-router-dom';
 
 class AccessLog extends Component {
 
@@ -20,7 +20,7 @@ class AccessLog extends Component {
         })
         /*
         let clientFilteredAccessLog = this.props.accesslog.filter(log => {
-            if(log.client_id === this.props.match.params.client_id){
+            if (log.client_id === this.props.match.params.client_id) {
                 return log.client_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
             }
         })
@@ -28,7 +28,9 @@ class AccessLog extends Component {
 
         return (
             <div className="container">
-            <input type="text" value={this.props.searchLog} placeholder="Søk..." onChange={this.props.updateSearch.bind(this)}/>
+                <Navbar sticky="top">
+                    <Input type="text" value={this.props.searchLog} placeholder="Søk" onChange={this.props.updateSearch.bind(this)} />
+                </Navbar>
                 <Table className="table table-hover">
                     <thead className="thead-dark">
                         <tr>
@@ -39,23 +41,22 @@ class AccessLog extends Component {
                             <th>Sist besøkt</th>
                         </tr>
                     </thead>
-                    
+
                     {
-                 
                         filteredAccessLog.map(log => {
  
                                 return  <AccessLogData log={log} key={log.id}/>
             
                         })
-                        
+
                     }
                     {/*
                         clientFilteredAccessLog.map(log => {
-                                return  <AccessLogData log={log} key={log.id}/>
+                            return <AccessLogData log={log} key={log.id} />
                         })
                     */
                     }
-                    </Table>
+                </Table>
             </div>
         )
     }
@@ -119,6 +120,5 @@ export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AccessLog
 
 
 
-                
 
-            
+

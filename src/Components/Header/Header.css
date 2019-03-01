@@ -1,15 +1,19 @@
-.navbar-brand img{
-    height:1.3em;
+.navbar {
+    position: fixed;
+    top: 0;
+    z-index: 1;   
+    background-color: #fff;  
+}
+
+.mainHeader {
+    background-color: #002540;
+    color:white;
 }
 
 
-.navbar {
-    border-radius: 0;
-    width: 100%;
-    background-color: #002540;
-    color:white;
-    position: fixed;
-    z-index: 1;
+
+.navbar-brand img{
+    height:2em;
 }
 
 .navbar .menu p {
@@ -18,5 +22,6 @@
 
 .breadcrumb {
     background-color: #002540;
-    transform: translate(0%, 30%);
+    /* transform: translate(0%, 30%); */
 }
+
