@@ -75,6 +75,8 @@ class Files extends Component {
             })
             : this.props.files //Nothing to seach, view all files
 
+        const isDesktop = window.innerWidth >= 768 ? true : false
+
 
         return (
             <div >
@@ -130,12 +132,11 @@ class Files extends Component {
                             this.props.selected_folder.is_root ? (<button className="btn-vector" disabled><img id="previous-folder" className="btn-vector-img" src={PrevFolder} alt="" /></button>) :
                                 <button className="btn-vector" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img id="#previous-folder" className="btn-vector-img" src={PrevFolder} alt="" /></button>
                         }
-                    <button onClick={this.toggleMenu} className="btn-vector"><img className="btn-vector-img" src={KebabHor} /></button>
+
 
                     </ButtonGroup>
 
-
-                    <Collapse isOpen={this.state.menuOpen}>
+                    <Collapse isOpen={isDesktop ? 'true' : this.state.menuOpen}>
 
                         <ButtonGroup id="filesMenuGroup" className="btn-group-right testGroup">
                             <button className="btn-vector" onClick={this.props.toggleUploadModal}>
@@ -152,6 +153,10 @@ class Files extends Component {
                         <Input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer" onChange={this.props.updateSearch} />
 
                     </Collapse>
+
+                    {
+                        isDesktop ? '' : <button onClick={this.toggleMenu} className="btn-vector"><img className="btn-vector-img" src={KebabHor} /></button>
+                    }
 
                 </Navbar>
 
