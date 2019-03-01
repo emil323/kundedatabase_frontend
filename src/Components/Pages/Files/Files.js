@@ -13,9 +13,10 @@ import KebabHor from '../../../Assets/Icons/kebab-hor.png'
 import OpenEditor from '../../../Assets/Icons/new-textfile.png'
 import AccessLog from '../../../Assets/Icons/access-log.png'
 import Trash from '../../../Assets/Icons/trash.png'
+import Back from '../../../Assets/Icons/back.png'
 
 
-import { Tooltip, Dropdown, ButtonToolbar, ButtonGroup, Collapse, Navbar, NavbarBrand, Jumbotron, Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row, Input } from 'reactstrap';
+import { Tooltip, Dropdown, Spinner, ButtonGroup, Collapse, Navbar, NavbarBrand, Jumbotron, Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row, Input } from 'reactstrap';
 import { withRouter, Link } from "react-router-dom"
 
 
@@ -135,16 +136,25 @@ class Files extends Component {
                         }
                     </ButtonGroup>
                     <ButtonGroup id="filesMenuGroup" className="btn-group-right testGroup">
-                        <button className="btn-vector" onClick={this.props.toggleUploadModal}>
-                            <img className="btn-vector-img" src={UploadFile} /></button>
-                        <button className="btn-vector" onClick={this.props.toggleEditorModal}>
+                        {this.props.is_recyclebin ?
+                        <div> <Link to={`/client/${this.props.match.params.client_id}/files`}>
+                        <button className="btn-vector"><img className="btn-vector-img" src={Back} />Tilbake til kunde</button></Link>
+                        </div>
+                         : 
+                        <div>
+                            <button className="btn-vector" onClick={this.props.toggleUploadModal}>
+                                <img className="btn-vector-img" src={UploadFile} /></button>
+                            <button className="btn-vector" onClick={this.props.toggleEditorModal}>
                             <img className="btn-vector-img" src={OpenEditor} /></button>
-                        <button className="btn-vector" onClick={this.props.toggleNewFolderModal} >
-                            <img className="btn-vector-img" src={NewFolder} /></button>
-                        <Link to={`/client/${this.props.match.params.client_id}/accesslog`}>
+                            <button className="btn-vector" onClick={this.props.toggleNewFolderModal} >
+                                <img className="btn-vector-img" src={NewFolder} /></button>
+                            <Link to={`/client/${this.props.match.params.client_id}/accesslog`}>
                             <button className="btn-vector"><img className="btn-vector-img" src={AccessLog} /></button></Link>
-                        <Link to={`/client/${this.props.match.params.client_id}/recyclebin`}><
-                            button className="btn-vector"><img className="btn-vector-img" src={Trash} /></button></Link>
+                            <Link to={`/client/${this.props.match.params.client_id}/recyclebin`}>
+                            <button className="btn-vector"><img className="btn-vector-img" src={Trash} /></button></Link>
+                        </div>
+                    }
+                        
                     </ButtonGroup>               
 
                     <Input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer" onChange={this.props.updateSearch} />
@@ -172,7 +182,7 @@ class Files extends Component {
                             : ''
 
                     }
-                    {!this.props.is_searching && filteredFiles.length === 0 ?
+                    {!this.props.is_searching && !this.props.is_loading && filteredFiles.length === 0 ?
                         <tr>
                             <td colspan="4">
                                 <Alert color="light">
@@ -182,6 +192,17 @@ class Files extends Component {
                                 </Alert>
                             </td>
                         </tr>
+                        : this.props.is_loading ?
+                        <tr>
+                            <td colspan="4">
+                                <Alert color="light">
+                                    <p className="text-center">
+                                       <Spinner color="dark"/>
+                              </p>
+                                </Alert>
+                            </td>
+                        </tr> 
+                        //Show all files
                         : filteredFiles.map(file => {
                             return <FileData file={file} key={file.id} />
                         })
@@ -251,7 +272,7 @@ class Files extends Component {
 
 // Calls on a clientsReducer that bring props to the component
 const mapStateToProps = (state, ownProps) => {
-    const { files, deleted_files, root_folder, recyclebin_root, selected_folder, search } = state.filesReducer
+    const { files, deleted_files, root_folder, recyclebin_root, selected_folder, search, is_loading } = state.filesReducer
     const { client_id, client_name } = state.clientReducer
 
     //Create a variable that selects files that is viewable, based on if prop is set to recyclebin or not
@@ -270,7 +291,8 @@ const mapStateToProps = (state, ownProps) => {
         recyclebin_root,
         selected_folder,
         search,
-        is_searching: search !== ''
+        is_searching: search !== '',
+        is_loading
     }
 }
 

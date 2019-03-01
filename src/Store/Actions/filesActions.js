@@ -1,6 +1,6 @@
 
 import api from '../../API/API'
-import {FETCH_FILES, SEARCH_KEY,SELECT_FOLDER, CLEAR} from '../types'
+import {FETCH_FILES, SEARCH_KEY,SELECT_FOLDER, CLEAR, IS_LOADING} from '../types'
 
 
 export const updateSearch = (e) => {
@@ -30,7 +30,12 @@ export const fetchFiles = (newState) => {
     }
 }
 
-
+export const setIsLoading = (is_loading) => {
+    return {
+        type: IS_LOADING,
+        is_loading
+    }
+}
 
 
 export const fetchFilesData = (client_id, selected, is_recyclebin) => {
@@ -44,6 +49,7 @@ export const fetchFilesData = (client_id, selected, is_recyclebin) => {
 
 
     return (dispatch) => {
+        dispatch(setIsLoading(true))
         return api.client(client_id).files().then(response => {
             //Create files array and deleted files array
             const files = response.data.filter(file => !file.is_deleted)
@@ -58,6 +64,7 @@ export const fetchFilesData = (client_id, selected, is_recyclebin) => {
             //Run recursive path making for deleted files
             deleted_files.forEach(deleted => {
                 deleted.relations = generateRelations(deleted_files, deleted)
+                deleted.fullpath = [...deleted.relations].reverse().map(r => `${r.name}`).join('/') //Generate full path
             })
 
             //Find root folder and root for deleted files
@@ -89,6 +96,7 @@ export const fetchFilesData = (client_id, selected, is_recyclebin) => {
             }
             
             //Dispatch to fetch_files
+            dispatch(setIsLoading(false))
             dispatch(fetchFiles(newState))
         })
         .catch(error => {

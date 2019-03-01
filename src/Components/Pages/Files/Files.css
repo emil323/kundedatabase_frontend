@@ -14,3 +14,6 @@
     margin-bottom: 20px;
 }
 
+.word_break {
+    word-break: break-word;
+}

@@ -1,5 +1,5 @@
 
-import {SEARCH_KEY, FETCH_FILES,SELECT_FOLDER, CLEAR} from '../types'
+import {SEARCH_KEY, FETCH_FILES,SELECT_FOLDER, CLEAR, IS_LOADING} from '../types'
 
 // A Reducer requires an initial state when running the application
 const initState = {
@@ -10,7 +10,8 @@ const initState = {
     selected_folder: {id:'', name:''},
     client_id:'',
     is_recyclebin: false,
-    search: ''
+    search: '',
+    is_loading: true
 }
 
 
@@ -39,6 +40,11 @@ const filesReducer = (state = initState, action) => {
             return {
                 ...state,
                 search: action.search_key    
+            }
+        case IS_LOADING: 
+            return {
+                ...state, 
+                is_loading: action.is_loading
             }
         case CLEAR:
             return initState

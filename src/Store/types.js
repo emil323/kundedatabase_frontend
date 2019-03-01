@@ -1,5 +1,6 @@
 //COMMON
 export const CLEAR = 'CLEAR'
+export const IS_LOADING = 'IS_LOADING'
 
 // Clients
 export const ADD_CLIENT = 'ADD_CLIENT'

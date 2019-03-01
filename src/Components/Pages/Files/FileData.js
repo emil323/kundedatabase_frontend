@@ -75,11 +75,13 @@ class FilesTable extends Component {
         ]
 
         return (
-            <tbody>
+            <tbody  >
                 <tr>
                     <td><img src={this.checkFileType(this.props.file.type)} alt="s" /></td>
 
-                    <td><Link to="" onClick={(e) => { this.handleSelection(e) }}>{this.props.file.name}</Link>
+                    <td className="word_break"><Link to=""  onClick={(e) => { 
+                        this.handleSelection(e) }}>{this.props.is_searching ? this.props.file.fullpath :this.props.file.name
+                        }</Link>
                         <br /><p className="date">{this.formatDate(this.props.file.last_changed)}</p>
                     </td>
 
@@ -104,7 +106,8 @@ const mapStateToProps = (state) => {
     return {
         root_folder,
         selected_folder,
-        search
+        search,
+        is_searching: search !== ''
     }
 }
 
