@@ -10,7 +10,7 @@ class Favourites extends Component {
 
   render() {
     let filteredFavourites = this.props.favourites.filter(favourite => {
-      return favourite.client_id.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
+      return favourite.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
     });
     return (
       <div className="favourites">
