@@ -1,6 +1,10 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 import API from '../../../API/API';
+import {Button} from 'reactstrap'
+import star_filled from '../../../Assets/Icons/star_filled.png'
+import star_border from '../../../Assets/Icons/star_border.png'
+
 
 class ClientsData extends React.Component {
     constructor(props) {
@@ -27,18 +31,16 @@ class ClientsData extends React.Component {
         }).catch(err =>
              console.log(err)) 
     }
+    
 
     render() {
+          
         return (
             <tbody>
                 <tr>
                     <Link  to={"./client/" + this.props.client.id + '/files'}><td>{this.props.client.name}</td></Link>
                     <td className='text-right'>  
-                        <label for={this.props.client.id} class="custom-checkbox">
-                            <input checked={this.props.client.is_favourite} type="checkbox" id={this.props.client.id}/>
-                            <i class="glyphicon glyphicon-star-empty"></i>
-                            <i onClick={this.updateFavourites} class="glyphicon glyphicon-star"></i>
-                        </label>
+                        <button class="btn-vector" onClick={this.updateFavourites} ><img className="btn-vector-img" id={this.props.client.id} src={this.props.client.is_favourite ? star_filled : star_border}></img></button>
                     </td>
                 </tr>
             </tbody>

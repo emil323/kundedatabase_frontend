@@ -63,3 +63,4 @@ opacity: 0.5;
 .custom-checkbox input[type="checkbox"]:checked ~ .glyphicon-star {
 opacity: 1;
 }
+
