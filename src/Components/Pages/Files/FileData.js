@@ -20,6 +20,7 @@ class FilesTable extends Component {
         super(props)
         this.handleSelection = this.handleSelection.bind(this)
         this.formatDate = this.formatDate.bind(this)
+        this.formatTitle = this.formatTitle.bind(this)
     }
 
     handleSelection = (e) => {
@@ -66,6 +67,15 @@ class FilesTable extends Component {
         return new Date(date).toLocaleString('no-NO', format)
     }
 
+    formatTitle(title) {
+        const length = 20;
+        if(title.length > length) {
+            return title.substring(0, 20) + "..."
+        } else {
+            return title
+        }
+    }
+
     render() {
 
         const btnOptions = [
@@ -87,7 +97,7 @@ class FilesTable extends Component {
 
                     {this.props.file.is_deleted
                         ? <td><Button onClick={() => this.props.toggleRecoverModal(this.props.file)}>Gjenopprett</Button></td>
-                        : <td><DropdownBtn icon={horizontalDropdown} options={btnOptions} /></td>
+                        : <td className="DropDwnIcon"><DropdownBtn icon={horizontalDropdown} options={btnOptions} /></td>
                     }
                 </tr>
             </tbody>
