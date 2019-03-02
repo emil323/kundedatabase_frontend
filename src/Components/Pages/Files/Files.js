@@ -3,7 +3,7 @@ import { Component } from 'react'
 import TrailUpdater from './TrailUpdater'
 import FileData from './FileData'
 import "./Files.css"
-
+import { withResizeDetector } from 'react-resize-detector';
 import PrevFolder from '../../../Assets/Icons/prev-folder.png'
 import UploadFile from '../../../Assets/Icons/upload-file.png'
 import NewFile from '../../../Assets/Icons/add.png'
@@ -14,6 +14,8 @@ import OpenEditor from '../../../Assets/Icons/new-textfile.png'
 import AccessLog from '../../../Assets/Icons/access-log.png'
 import Trash from '../../../Assets/Icons/trash.png'
 import Back from '../../../Assets/Icons/back.png'
+import Up from '../../../Assets/Icons/up.png'
+import Down from '../../../Assets/Icons/down.png'
 
 
 import { Tooltip, Dropdown, Spinner, ButtonGroup, Collapse, Navbar, NavbarBrand, Jumbotron, Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row, Input } from 'reactstrap';
@@ -45,6 +47,7 @@ class Files extends Component {
 
         this.state = {
             menuOpen: false,
+            width: window.innerWidth
         };
     }
 
@@ -68,6 +71,10 @@ class Files extends Component {
         }
     }
 
+    handleWindowSizeChange = () => {
+        this.setState({ width: window.innerWidth })
+      }
+
     render() {
         const filteredFiles = this.props.is_searching
             ? this.props.all_files.filter(file => { //Search in all files in this client
@@ -76,7 +83,7 @@ class Files extends Component {
             })
             : this.props.files //Nothing to seach, view all files
 
-        const isDesktop = window.innerWidth >= 768 ? true : false
+        let isDesktop = this.props.width >= 768 
 
 
         return (
@@ -137,7 +144,7 @@ class Files extends Component {
 
                     </ButtonGroup>
                     {
-                        isDesktop ? '' : <button onClick={this.toggleMenu} className="btn-vector"><img className="btn-vector-img" src={KebabHor} /></button>
+                        isDesktop ? '' : <button onClick={this.toggleMenu} className="btn-vector"><img className="btn-vector-img" src={this.state.menuOpen ? Up : Down} /></button>
                     }
 
                     <Collapse isOpen={isDesktop ? 'true' : this.state.menuOpen}>
@@ -317,4 +324,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Files))
+export default withResizeDetector(withRouter(connect(mapStateToProps, mapDispatchToProps)(Files)))
