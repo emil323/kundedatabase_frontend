@@ -16,7 +16,7 @@ import Trash from '../../../Assets/Icons/trash.png'
 import Back from '../../../Assets/Icons/back.png'
 
 
-import { Tooltip, Dropdown, Spinner, ButtonGroup, Collapse, Navbar, NavbarBrand, Jumbotron, Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row, Input } from 'reactstrap';
+import { Spinner, ButtonGroup, Collapse, Navbar, NavbarBrand, Jumbotron, Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row, Input } from 'reactstrap';
 import { withRouter, Link } from "react-router-dom"
 
 
@@ -54,12 +54,6 @@ class Files extends Component {
         })
     }
 
-    toggleTooltop() {
-        this.setState({
-            tooltipOpen: !this.state.tooltipOpen
-        })
-    }
-
     upOneLevel() {
         if (!this.props.selected_folder.is_root) {
             this.props.is_recyclebin
@@ -81,51 +75,6 @@ class Files extends Component {
 
         return (
             <div >
-                {/* 
-                <Jumbotron className="Jumbotron-Client">
-                    <h1 className="display-3">{this.props.client_name}</h1>
-                    {
-                        this.props.is_recyclebin ? <h3>Papirkurv</h3> : ''
-                    }
-                    <hr />
-
-
-                    <Button className="hidden-xs hidden-sm hidden-md" color="primary" onClick={this.props.toggleUploadModal} >Last opp</Button>
-                    <Button className="hidden-xs hidden-sm hidden-md" color="primary" onClick={this.props.toggleNewFolderModal}>Ny mappe</Button>
-                    <Button className="hidden-xs hidden-sm hidden-md" color="primary" onClick={this.props.toggleEditorModal}>Nytt dokument</Button>
-                    <Link to={`/client/${this.props.match.params.client_id}/accesslog`}><Button color="primary">Adgangslogg</Button></Link>
-                    {
-                    this.props.is_recyclebin 
-                    ?  <Button onClick={() => this.props.history.push('/client/' + this.props.match.params.client_id + "/files/")}>Gå tilbake</Button> 
-                    :  <Button onClick={() => this.props.history.push('/client/' + this.props.match.params.client_id + "/recyclebin/")}>Papirkurv</Button>
-                    }
-                    <input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch} />
-
-                </Jumbotron>
-                */}
-
-
-                {/*
-                <Row className="row">
-                    <Col sm="0" lg="9" >
-                        <div className="buttonMenu hidden-xs hidden-sm">
-                            <Button color="primary" onClick={this.props.toggleUploadModal} >Last opp</Button>
-                            <Button color="primary" onClick={this.props.toggleNewFolderModal}>Ny mappe</Button>
-                            <Button color="primary" onClick={this.props.toggleEditorModal}>Nytt dokument</Button>
-                        </div>
-
-                    </Col>
-                    <Col sm="12" lg="3">
-                        <input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer..." onChange={this.props.updateSearch} />
-                    </Col>
-                </Row>
-                
-            <Row>
-                    <Col xs="1" ><UploadModal buttonLabel="Last Opp"/> </Col>
-                    <Col xs="2"><NewFolderModal buttonLabel="Ny mappe"/></Col>
-                    <Col xs="3"><Button className="backBtn" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}>Opp et nivå</Button></Col>
-            </Row>
-            */}
 
                 <Navbar sticky="top" color="faded">
                     <ButtonGroup className="btn-group-left">

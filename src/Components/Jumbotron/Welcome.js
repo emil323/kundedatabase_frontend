@@ -12,19 +12,23 @@ class Welcome extends React.Component {
             email: null,
             name: null
         }
+
+        this.formatDate = this.formatDate.bind(this)
     }
+
+    formatDate(date) {
+        const format = {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric'};
+        return new Date(date).toLocaleString('no-NO', format)
+    }
+
     render(){
         var curDate = Date();
         return (
             <div>
                 <Jumbotron className="Jumbotron-Home">
                         <h1 className="display=3">Velkommmen {this.state.name}!</h1>
-                        <p className="lead">{curDate}</p>
                         <hr className="my-2" />
-                      {/*   <p>Brødtekst</p>
-                        <p className="lead">
-                            <Button color="info">Knapp</Button>
-                        </p> */}
+                        <h2 className="lead">{this.formatDate(curDate)}</h2>                    
                 </Jumbotron>
     
             </div>
