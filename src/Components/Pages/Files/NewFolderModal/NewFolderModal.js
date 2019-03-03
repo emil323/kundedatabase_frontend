@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Alert } from "reactstrap";
 import { connect } from "react-redux";
 import { fetchFilesData } from "../../../../Store/Actions/filesActions";
 import { toggleNewFolderModal } from "../../../../Store/Actions/modalActions";
@@ -55,6 +55,17 @@ class NewFolderModal extends React.Component {
   }
 
   render() {
+
+    if(this.state.value === undefined) return null //shit fix
+
+    const is_unique = this.props.files.filter(file => {
+      return this.state.value.toLowerCase() === file.name.toLowerCase()
+           && file.parent_id === this.props.selected_folder.id
+    }).length === 0 
+
+    const valid_filename = this.state.value.match(/^\s*[a-z-._\d,\s]+\s*$/i)
+    const is_empty = this.state.value.length === 0
+
     return (
       <div className="container">
         {/*<Button className="dropUpBtn" color="primary" onClick={this.toggle}>
@@ -71,6 +82,12 @@ class NewFolderModal extends React.Component {
             Legg til ny mappe i: {this.props.selected_folder.name}
           </ModalHeader>
           <ModalBody>
+          {
+            !valid_filename && !is_empty ? <Alert color='danger'>Navnet inneholder ugyldige tegn</Alert> : ''
+          }
+          {
+            !is_unique ? <Alert color='danger'>Navnet finnes allerede i denne mappen.</Alert> : ''
+          }
            <Form id="new_folder_form" onSubmit={this.create_folder}>
                <FormGroup>
                    <Input type="text" name="new_folder_name" id="new_folder_name" value={this.state.value} onChange={this.handleChange} placeholder="Navn på ny mappe"></Input>
@@ -78,7 +95,7 @@ class NewFolderModal extends React.Component {
            </Form>
           </ModalBody>
           <ModalFooter>
-            <Button form="new_folder_form" color="primary">Opprett</Button>  
+            <Button form="new_folder_form" color="primary" className={!is_unique || !valid_filename ? 'disabled' : ''}>Opprett</Button>  
             <Button color="secondary" onClick={this.props.toggleNewFolderModal}>Lukk</Button>
           </ModalFooter>
         </Modal>
@@ -102,10 +119,7 @@ const mapStateToProps = state => {
 
   return {
     //Filter to only display files from selected folder or to handle a search value
-    files: files.filter(file => {
-      return file.parent_id === selected_folder.id;
-      //TODO:Handle search value
-    }),
+    files,
     root_folder,
     selected_folder,
     client_id,

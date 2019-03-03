@@ -110,7 +110,7 @@ export const fetchFilesData = (client_id, selected, is_recyclebin) => {
 
         function generateFullPath(relations) {
             let path = [...relations].reverse().map(r => `${r.name}`).join('/')
-            if(path.startsWith('//')) path = path.substr(1) //Remove first backslash if root
+            if(path.startsWith('//')) path = path.substr(1) //Remove first backslash
             return path
         }
 
@@ -128,7 +128,7 @@ export const fetchFilesData = (client_id, selected, is_recyclebin) => {
             if(file.is_root) 
                 return relations    
             const parent = files.find(f => {return f.id === file.parent_id})
-            if(parent == null) return relations //This should normally not happen, and indicates problem with folder-hiarchy
+            if(parent == null) throw('Folder hiarchy broken.') //This should normally not happen, and indicates problem with folder-hiarchy
             relations.push(parent)
             return generateRelations(files, parent, relations)
         }

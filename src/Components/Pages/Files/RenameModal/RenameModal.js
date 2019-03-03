@@ -1,9 +1,10 @@
 import React from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Alert } from "reactstrap";
 import { connect } from "react-redux";
 import { fetchFilesData } from "../../../../Store/Actions/filesActions"
 import { toggleRenameModal } from "../../../../Store/Actions/modalActions";
 import {Form, FormGroup, Input} from 'reactstrap'
+
 
 import API from "../../../../API/API";
 
@@ -53,7 +54,18 @@ class RenameModal extends React.Component {
 
   render() {
 
-    
+    if(this.state.value === undefined) return null
+
+    //Check if value if unique in selected directory
+    const is_unique = this.props.files.filter(file => {
+      return  this.state.value.toLowerCase() === file.name.toLowerCase()
+           && file.id !== this.props.rename.file.id
+           && file.parent_id === this.props.selected_folder.id
+    }).length === 0 
+
+    const valid_filename = this.state.value.match(/^\s*[a-z-._\d,\s]+\s*$/i)
+    const is_empty = this.state.value.length === 0
+
     return (
       <div className="container">
         <Modal
@@ -66,6 +78,12 @@ class RenameModal extends React.Component {
             Endre navn: {this.props.rename.file.name}
           </ModalHeader>
           <ModalBody>
+          {
+            !valid_filename && !is_empty ? <Alert color='danger'>Navnet inneholder ugyldige tegn</Alert> : ''
+          }
+          {
+            !is_unique ? <Alert color='danger'>Navnet finnes allerede i denne mappen.</Alert> : ''
+          }
           <Form id="rename_form" onSubmit={this.create_folder}>
                <FormGroup>
                    <Input  type="text" name="rename" id="rename" value={this.state.value} onChange={this.handleChange} ></Input>
@@ -73,7 +91,7 @@ class RenameModal extends React.Component {
            </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.handleRename}>Endre navn</Button>
+            <Button color="primary" onClick={this.handleRename} className={!is_unique  || !valid_filename ? 'disabled' : ''}>Endre navn</Button>
             <Button color="secondary" onClick={this.props.toggleRenameModal}>Lukk</Button>
           </ModalFooter>
         </Modal>
@@ -81,7 +99,7 @@ class RenameModal extends React.Component {
     )
   }
   componentWillReceiveProps(nextProps) {
-     this.setState({value:nextProps.rename.file.name})
+      this.setState({value:nextProps.rename.file.name})
   }
 
 }
