@@ -49,7 +49,7 @@ export const fetchFilesData = (client_id, selected, is_recyclebin) => {
 
 
     return (dispatch) => {
-        dispatch(setIsLoading(true))
+        dispatch(setIsLoading(true)) //Toggle is loading
         return api.client(client_id).files().then(response => {
             //Create files array and deleted files array
             const files = response.data.filter(file => !file.is_deleted)
@@ -58,13 +58,13 @@ export const fetchFilesData = (client_id, selected, is_recyclebin) => {
             //Run recursive function for files
             files.forEach(file => {
                 file.relations = generateRelations(files, file)
-                file.fullpath = [...file.relations].reverse().map(r => `${r.name}`).join('/') //Generate full path
+                file.fullpath = generateFullPath(file.relations)
             })
 
             //Run recursive path making for deleted files
             deleted_files.forEach(deleted => {
                 deleted.relations = generateRelations(deleted_files, deleted)
-                deleted.fullpath = [...deleted.relations].reverse().map(r => `${r.name}`).join('/') //Generate full path
+                deleted.fullpath = generateFullPath(deleted.relations)
             })
 
             //Find root folder and root for deleted files
@@ -96,12 +96,23 @@ export const fetchFilesData = (client_id, selected, is_recyclebin) => {
             }
             
             //Dispatch to fetch_files
-            dispatch(setIsLoading(false))
+            dispatch(setIsLoading(false)) //Toggle is loading to false
             dispatch(fetchFiles(newState))
         })
         .catch(error => {
             throw(error)
         })
+
+        /**
+         * Generate full file path based on generated relations
+         * @param {} relations 
+         */
+
+        function generateFullPath(relations) {
+            let path = [...relations].reverse().map(r => `${r.name}`).join('/')
+            if(path.startsWith('//')) path = path.substr(1) //Remove first backslash if root
+            return path
+        }
 
         /**
          * Function to generate an array of a file/folders relations
