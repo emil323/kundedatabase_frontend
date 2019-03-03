@@ -1,6 +1,6 @@
 
 import api from '../../API/API'
-import {FETCH_ACCESS_LOG, ADD_LOG_ITEM, SEARCH_KEY} from '../types'
+import {FETCH_ACCESS_LOG, ADD_LOG_ITEM, SEARCH_KEY, IS_LOADING} from '../types'
 
 export const addLogItem = (logItem) => {
     return {
@@ -23,10 +23,19 @@ export const fetchAccessLog = (accesslog) => {
     }
 }
 
+export const setIsLoading = (is_loading) => {
+    return {
+        type: IS_LOADING,
+        is_loading
+    }
+}
+
 export const fetchAccessLogData = (client_id) => {
     return (dispatch) => {
+        dispatch(setIsLoading(true))
         return api.accesslog().list(client_id)
             .then(response => {
+                dispatch(setIsLoading(false))
                 dispatch(fetchAccessLog(response.data))
             })
             .catch(error => {

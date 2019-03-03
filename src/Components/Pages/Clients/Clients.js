@@ -3,7 +3,7 @@ import { Component } from 'react'
 import ClientData from './ClientData'
 import "./Clients.css"
 import { Table } from 'reactstrap';
-import { ButtonGroup, Navbar, Button, Input } from 'reactstrap';
+import { ButtonGroup, Navbar, Alert, Input, Spinner } from 'reactstrap';
 import newBtnImg from '../../../img/new.png'
 import { setTrail } from '../../../Store/Actions/breadcrumbActions'
 
@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { deleteClient, fetchClientsData, updateSearch, toggleModal } from '../../../Store/Actions/clientsActions'
 import AddClient from './AddClient';
 import NewClient from '../../../Assets/Icons/new-client.png'
+import { IS_LOADING } from '../../../Store/types';
 
 class Clients extends Component {
     constructor(props) {
@@ -46,7 +47,17 @@ class Clients extends Component {
                         }
                     </thead>
                     {
-                        filteredClients.map(client => {
+                        this.props.is_loading ?
+                        <tr>
+                            <td colspan="4">
+                                <Alert color="light">
+                                    <p className="text-center">
+                                       <Spinner color="dark"/>
+                              </p>
+                                </Alert>
+                            </td>
+                        </tr> 
+                        : filteredClients.map(client => {
                             return <ClientData client={client}
                                 fetchClientsData={this.props.fetchClientsData}
                                 key={client.id} />
@@ -78,7 +89,8 @@ class Clients extends Component {
 const mapStateToProps = (state) => {
     return {
         clients: state.clientsReducer.clients,
-        search: state.clientsReducer.search
+        search: state.clientsReducer.search,
+        is_loading: state.clientsReducer.is_loading
     }
 }
 

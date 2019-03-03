@@ -18,10 +18,11 @@ class TrailUpdater extends Component {
 
     updateTrail(newFolder) {
         //Set inital trail for client
-        this.props.setTrail([{
-            title: this.props.client_name,
-            path: '/client/' + this.props.client_id + '/files'
-        }])
+        this.props.setTrail([
+            {
+                title: this.props.client_name,
+                path: '/client/' + this.props.client_id + '/files'
+            }])
 
         //Check if newFolder is deleted, that means we are navigating recyclebin
         //We want a link to recyclebin in navigation

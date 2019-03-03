@@ -1,5 +1,5 @@
 
-import {DELETE_CLIENT, SEARCH_KEY, FETCH_CLIENTS, ADD_CLIENT, TOGGLE_MODAL} from '../types'
+import {DELETE_CLIENT, SEARCH_KEY, FETCH_CLIENTS, ADD_CLIENT, TOGGLE_MODAL, IS_LOADING} from '../types'
 
 // A Reducer requires an initial state when running the application
 const initState = {
@@ -7,6 +7,7 @@ const initState = {
     accesslog: [],
     search: '',
     modal: false,
+    is_loading: false
 }
 
 // Reducers are called when a change happens. The reducers changes the initial state
@@ -31,6 +32,11 @@ const clientsReducer = (state = initState, action) => {
                 ...state,
                 modal: !state.modal
             }
+        case IS_LOADING:
+            return {
+                ...state,
+                is_loading: action.is_loading
+            }    
         case DELETE_CLIENT:
             let newClients = state.clients.filter(client => {
                 return action.id !== client.id

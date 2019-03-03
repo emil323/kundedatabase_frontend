@@ -2,10 +2,11 @@ import React from 'react'
 import { Component } from 'react'
 import AccessLogData from './AccessLogData'
 import "./AccessLog.css"
-import { Navbar, Input, Table } from 'reactstrap';
+import { Navbar, Input, Table, Alert, Spinner} from 'reactstrap';
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
+import { setTrail } from '../../../Store/Actions/breadcrumbActions'
 import { fetchAccessLogData, updateSearch } from '../../../Store/Actions/accesslogActions'
 import { withRouter } from 'react-router-dom';
 
@@ -42,11 +43,18 @@ class AccessLog extends Component {
                         </tr>
                     </thead>
 
-                    {
-                        filteredAccessLog.map(log => {
- 
+                    {this.props.is_loading ?
+                        <tr>
+                            <td Colspan="5">
+                                <Alert color="light">
+                                    <p className="text-center">
+                                       <Spinner color="dark"/>
+                              </p>
+                                </Alert>
+                            </td>
+                        </tr>
+                        : filteredAccessLog.map(log => {
                                 return  <AccessLogData log={log} key={log.id}/>
-            
                         })
 
                     }
@@ -65,6 +73,15 @@ class AccessLog extends Component {
     componentDidMount() {
         const {client_id} = this.props.match.params //Client ID can be undefined, api allows this
         this.props.fetchAccessLogData(client_id)
+        
+        this.props.setTrail([{
+            title: 'Hjem',
+            path: '/'
+        }, 
+        {
+            title: 'Adgangslogg',
+            path: '/accesslog'
+        }])
     }
 }
 
@@ -73,7 +90,8 @@ class AccessLog extends Component {
 const mapStateToProps = (state) => {
     return {
         accesslog: state.accesslogReducer.accesslog,
-        search: state.accesslogReducer.search
+        search: state.accesslogReducer.search,
+        is_loading: state.accesslogReducer.is_loading
     }
 }
 
@@ -81,7 +99,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchAccessLogData: (client_id) =>{ dispatch(fetchAccessLogData(client_id))},
-        updateSearch:(search_key) => {dispatch(updateSearch(search_key))}
+        updateSearch:(search_key) => {dispatch(updateSearch(search_key))},
+        setTrail:(trail) => {dispatch(setTrail(trail))}
     }
 }
 

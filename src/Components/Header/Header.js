@@ -1,5 +1,6 @@
 import React from 'react'
-import { Collapse, Nav, Navbar, NavItem, NavLink, NavbarToggler, NavbarBrand } from 'reactstrap'
+import { Collapse, Nav, Navbar, NavItem, NavLink, NavbarBrand } from 'reactstrap'
+import {Link} from 'react-router-dom'
 import Hamburger from 'react-hamburger-menu'
 import './Header.css'
 import Menu from './../Menu/Menu'
@@ -67,7 +68,10 @@ export default class Header extends React.Component {
 						strokeWidth={3}
 						animationDuration={0.3}
 					/>
-					<NavbarBrand href="/" className="mx-auto"><img alt="Logo" src="/img/ecit-logo.png" /></NavbarBrand>
+					<NavbarBrand href="/" className="mx-auto">
+					<Link to={`/`}>
+					<button className="btn-vector"><img className="btn-vector-img" src="/img/ecit-logo.png" /></button></Link>
+					</NavbarBrand>
 					<Collapse isOpen={this.state.open} navbar>
 						<Nav navbar >
 							<Menu closeHamburger={this.toggleHamburger}/>

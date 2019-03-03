@@ -8,13 +8,21 @@
 .mainHeader {
     background-color: #002540;
     color:white;
+    
 }
 
 
 
-.navbar-brand img{
-    height:2em;
+
+.navbar-brand .btn-vector-img {
+    height: 1.5em;
 }
+
+
+.navbar-brand .btn-vector:hover{
+    transform: scale(1.2);
+}
+
 
 .navbar .menu p {
     color:white;
@@ -25,3 +33,4 @@
     /* transform: translate(0%, 30%); */
 }
 
+ 

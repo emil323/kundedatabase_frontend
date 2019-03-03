@@ -1,6 +1,6 @@
 
 import api from '../../API/API'
-import {FETCH_CLIENTS, ADD_CLIENT, DELETE_CLIENT, SEARCH_KEY, TOGGLE_MODAL} from '../types'
+import {FETCH_CLIENTS, ADD_CLIENT, DELETE_CLIENT, SEARCH_KEY, TOGGLE_MODAL, IS_LOADING} from '../types'
 
 export const deleteClient = (id) => {
     return {
@@ -36,11 +36,21 @@ export const fetchClients = (clients) => {
     }
 }
 
+export const setIsLoading = (is_loading) => {
+    return {
+        type: IS_LOADING,
+        is_loading
+    }
+}
+
+
 
 export const fetchClientsData = () => {
     return (dispatch) => {
+        dispatch(setIsLoading(true))
         return api.clients().list()
             .then(response => {
+                dispatch(setIsLoading(false))
                 dispatch(fetchClients(response.data))
             })
             .catch(error => {

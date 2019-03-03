@@ -1,5 +1,5 @@
 
-import {FETCH_ACCESS_LOG, ADD_LOG_ITEM, SEARCH_KEY} from '../types'
+import {FETCH_ACCESS_LOG, ADD_LOG_ITEM, SEARCH_KEY, IS_LOADING} from '../types'
 
 // A Reducer requires an initial state when running the application
 const initState = {
@@ -24,6 +24,11 @@ const accesslogReducer = (state = initState, action) => {
                 ...state,
                 search: action.search_key    
             }
+        case IS_LOADING:
+            return {
+                ...state,
+                is_loading: action.is_loading
+            }    
         default:
             return state
     }

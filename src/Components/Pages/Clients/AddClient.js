@@ -51,8 +51,7 @@ class AddClient extends Component {
             <Modal centered isOpen={this.props.modal} toggle={this.toggle} className={this.props.className}>
                 <ModalHeader toggle={this.props.toggleModal}>Opprett ny kunde</ModalHeader>
                 <ModalBody>
-                    <Label for="firmanavn">Firmanavn:</Label>
-                    <Input type="text" name="firmanavn" id="firmanavn" onChange={this.handleChange} value={this.state.firmanavn}/>
+                    <Input type="text" name="firmanavn" placeholder="firmanavn" id="firmanavn" onChange={this.handleChange} value={this.state.firmanavn}/>
                 </ModalBody>
                 <ModalFooter>
                    
