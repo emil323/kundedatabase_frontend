@@ -1,0 +1,41 @@
+.btn-vector {
+    background-color: transparent;
+    border: transparent;
+    transition: transform .2s;
+    padding: 1em;
+    outline: none;
+}
+
+.btn-vector:hover{
+    transform: scale(1.5);
+}
+
+.btn-vector:focus {
+    outline: none;
+}
+
+.btn-vector:active {
+    transform: scale(2);
+}
+
+.btn-vector-img {
+    height: 2.5em;
+}
+
+.btn-vector-kebab {
+    height: 2.5em;
+}
+
+.btn-vector-kebab-img {
+    height: 1.5em;
+}
+
+.btn-group-left {
+    position: fixed;
+    left: 0;
+}
+
+.btn-group-right {
+    position: fixed;
+    right: 0;
+}

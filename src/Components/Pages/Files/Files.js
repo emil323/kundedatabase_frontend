@@ -2,26 +2,13 @@ import React from 'react'
 import { Component } from 'react'
 import TrailUpdater from './TrailUpdater'
 import FileData from './FileData'
+import PageNav from '../../PageNav/PageNav'
+
 import "./Files.css"
 import { withResizeDetector } from 'react-resize-detector';
-import PrevFolder from '../../../Assets/Icons/prev-folder.png'
-import UploadFile from '../../../Assets/Icons/upload-file.png'
-import NewFile from '../../../Assets/Icons/add.png'
-import NewFolder from '../../../Assets/Icons/new-folder.png'
-import KebabVert from '../../../Assets/Icons/kebab-vert.png'
-import KebabHor from '../../../Assets/Icons/kebab-hor.png'
-import OpenEditor from '../../../Assets/Icons/new-textfile.png'
-import AccessLog from '../../../Assets/Icons/access-log.png'
-import Trash from '../../../Assets/Icons/trash.png'
-import Back from '../../../Assets/Icons/back.png'
-import Up from '../../../Assets/Icons/up.png'
-import Down from '../../../Assets/Icons/down.png'
 
-
-import { Spinner, ButtonGroup, Collapse, Navbar, NavbarBrand, Jumbotron, Table, Alert, Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row, Input } from 'reactstrap';
-import { withRouter, Link } from "react-router-dom"
-
-
+import { Spinner, Table, Alert } from 'reactstrap';
+import { withRouter } from "react-router-dom"
 
 
 // Import connect, which lets us export data to the reducer
@@ -30,8 +17,6 @@ import { fetchFilesData, selectFolder, updateSearch, clearFiles } from '../../..
 import { toggleNewFolderModal, toggleUploadModal, toggleEditorModal } from '../../../Store/Actions/modalActions'
 import UploadModal from './UploadModal/UploadModal';
 import NewFolderModal from './NewFolderModal/NewFolderModal';
-import backBtnImg from '../../../img/backBtn.png'
-import newBtnImg from '../../../img/new.png'
 import MoveModal from './MoveModal/MoveModal';
 import RenameModal from './RenameModal/RenameModal';
 import EditorModal from './EditorModal/EditorModal'
@@ -67,7 +52,7 @@ class Files extends Component {
 
     handleWindowSizeChange = () => {
         this.setState({ width: window.innerWidth })
-      }
+    }
 
     render() {
         const filteredFiles = this.props.is_searching
@@ -77,54 +62,77 @@ class Files extends Component {
             })
             : this.props.files //Nothing to seach, view all files
 
-        let isDesktop = this.props.width >= 768 
+        let isDesktop = this.props.width >= 768
 
+        const buttonMenuFiles = [
+            {
+                btnKey: 0,
+                img: "UploadFile",
+                imgDescr: "Upload a file",
+                btnAction: () => { this.props.toggleUploadModal() }
+            },
+            {
+                btnKey: 1,
+                img: "OpenEditor",
+                imgDescr: "Open editor",
+                btnAction: () => { this.props.toggleEditorModal() }
+            },
+            {
+                btnKey: 2,
+                img: "NewFolder",
+                imgDescr: "New folder",
+                btnAction: () => { this.props.toggleNewFolderModal() }
+            },
+            {
+                btnKey: 3,
+                type: "link",
+                to: `/client/${this.props.match.params.client_id}/recyclebin`,
+                img: "RecycleBin",
+                imgDescr: "Recyble bin"
+            },
+            {
+                btnKey: 4,
+                type: "link",
+                to: `/client/${this.props.match.params.client_id}/accesslog`,
+                img: "AccessLog",
+                imgDescr: "Accesslog"
+            }
+        ]
+
+        const buttonMenuRecycleBin = []
 
         return (
             <div >
 
-                <Navbar sticky="top" color="faded">
-                    <ButtonGroup className="btn-group-left">
-                        {
-                            this.props.selected_folder.is_root ? (<button className="btn-vector" disabled><img id="previous-folder" className="btn-vector-img" src={PrevFolder} alt="" /></button>) :
-                                <button className="btn-vector" disabled={this.props.selected_folder.is_root} onClick={this.upOneLevel}><img id="#previous-folder" className="btn-vector-img" src={PrevFolder} alt="" /></button>
-                        }
+                {this.props.is_recyclebin ?
+                    (<PageNav
+                        backBtnType="link"
+                        backBtnDescr="Tilbake til kunde"
+                        backTo={`/client/${this.props.match.params.client_id}/files`}
 
+                        hasCollapse="false"
 
-                    </ButtonGroup>
-                    {
-                        isDesktop ? '' : <button onClick={this.toggleMenu} className="btn-vector"><img className="btn-vector-img" src={this.state.menuOpen ? Up : Down} /></button>
-                    }
+                        searchValue={this.props.search}
+                        searchAction={this.props.updateSearch}
+                        searchPlaceholder="Søk etter filer" 
+                        
+                        buttons={buttonMenuRecycleBin} />
+                    ) : (
+                        <PageNav
+                            backAction={this.upOneLevel}
+                            backBtnDescr="Tilbake et hakk"
+                            backIsDisabled={this.props.selected_folder.is_root}
 
-                    <Collapse isOpen={isDesktop ? 'true' : this.state.menuOpen}>
-                        <ButtonGroup id="filesMenuGroup" className="btn-group-right testGroup">
-                            {this.props.is_recyclebin ?
-                            <div> <Link to={`/client/${this.props.match.params.client_id}/files`}>
-                            <button className="btn-vector"><img className="btn-vector-img" src={Back} />Tilbake til kunde</button></Link>
-                            </div>
-                            : 
-                            <div>
-                                <button className="btn-vector" onClick={this.props.toggleUploadModal}>
-                                    <img className="btn-vector-img" src={UploadFile} /></button>
-                                <button className="btn-vector" onClick={this.props.toggleEditorModal}>
-                                <img className="btn-vector-img" src={OpenEditor} /></button>
-                                <button className="btn-vector" onClick={this.props.toggleNewFolderModal} >
-                                    <img className="btn-vector-img" src={NewFolder} /></button>
-                                <Link to={`/client/${this.props.match.params.client_id}/accesslog`}>
-                                <button className="btn-vector"><img className="btn-vector-img" src={AccessLog} /></button></Link>
-                                <Link to={`/client/${this.props.match.params.client_id}/recyclebin`}>
-                                <button className="btn-vector"><img className="btn-vector-img" src={Trash} /></button></Link>
-                            </div>
-                        }
-                        </ButtonGroup>               
-                    </Collapse>
-                    <Input className="searchFiles" type="text" value={this.props.search} placeholder="Søk etter filer" onChange={this.props.updateSearch} />
-            
-                </Navbar>
+                            searchValue={this.props.search}
+                            searchAction={this.props.updateSearch}
+                            searchPlaceholder="Søk etter filer"
+
+                            buttons={buttonMenuFiles} />
+                    )}
 
                 <Table className="table table-hover">
                     <thead className="thead-dark">
-                     
+
                         {/*  <tr>
                             <th>Type</th>
                             <th>Fil</th>
@@ -156,19 +164,19 @@ class Files extends Component {
                             </td>
                         </tr>
                         : this.props.is_loading ?
-                        <tr>
-                            <td colspan="4">
-                                <Alert color="light">
-                                    <p className="text-center">
-                                       <Spinner color="dark"/>
-                              </p>
-                                </Alert>
-                            </td>
-                        </tr> 
-                        //Show all files
-                        : filteredFiles.map(file => {
-                            return <FileData file={file} key={file.id} />
-                        })
+                            <tr>
+                                <td colspan="4">
+                                    <Alert color="light">
+                                        <p className="text-center">
+                                            <Spinner color="dark" />
+                                        </p>
+                                    </Alert>
+                                </td>
+                            </tr>
+                            //Show all files
+                            : filteredFiles.map(file => {
+                                return <FileData file={file} key={file.id} />
+                            })
                     }
                 </Table>
 

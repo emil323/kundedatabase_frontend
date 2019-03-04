@@ -10,7 +10,7 @@ export default class DropdownBtn extends Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             dropdownOpen: false,
-            tekst: 'tekst'
+            tekst: ''
         };
 
 
@@ -27,20 +27,29 @@ export default class DropdownBtn extends Component {
         const { options } = this.props;
         const optionsList = options.map(option => {
             return option.isHeader !== 0 ? (
-                <DropdownItem header key={option.key}>{option.tekst}</DropdownItem>
-            ) : <DropdownItem onClick={option.function} key={option.key}>{option.tekst}</DropdownItem>;
+                <DropdownItem header key={option.key}>
+                    {option.tekst}
+                </DropdownItem>
+            ) : <DropdownItem onClick={option.function} key={option.key}>
+                    {option.tekst}
+                </DropdownItem>;
 
 
         })
         return (
 
             <UncontrolledDropdown size="md">
-                <DropdownToggle className="btn-vector btn-vector-kebab" outline color=""><img className="btn-vector-img btn-vector-kebab-img" src={KebabVert} /></DropdownToggle>
+                <DropdownToggle
+                    className="btn-vector btn-vector-kebab"
+                    outline color="">
+                    <img
+                        className="btn-vector-img btn-vector-kebab-img"
+                        src={KebabVert} /></DropdownToggle>
                 <DropdownMenu>
                     {optionsList}
                 </DropdownMenu>
             </UncontrolledDropdown>
-           
+
         )
     }
 }

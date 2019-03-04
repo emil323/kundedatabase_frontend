@@ -63,13 +63,13 @@ class FilesTable extends Component {
     }
 
     formatDate(date) {
-        const format = {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric'};
+        const format = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric' };
         return new Date(date).toLocaleString('no-NO', format)
     }
 
     formatTitle(title) {
         const length = 20;
-        if(title.length > length) {
+        if (title.length > length) {
             return title.substring(0, 20) + "..."
         } else {
             return title
@@ -79,9 +79,24 @@ class FilesTable extends Component {
     render() {
 
         const btnOptions = [
-            { tekst: 'Endre navn', isHeader: 0, key: 0, function: () => { this.props.toggleRenameModal(this.props.file) } },
-            { tekst: 'Flytt', isHeader: 0, key: 1, function: () => { this.props.toggleMoveModal(this.props.file) } },
-            { tekst: 'Slett', isHeader: 0, key: 2, function: () => { this.props.toggleDeleteModal(this.props.file) } }
+            {
+                tekst: 'Endre navn',
+                isHeader: 0,
+                key: 0,
+                function: () => { this.props.toggleRenameModal(this.props.file) }
+            },
+            {
+                tekst: 'Flytt',
+                isHeader: 0,
+                key: 1,
+                function: () => { this.props.toggleMoveModal(this.props.file) }
+            },
+            {
+                tekst: 'Slett',
+                isHeader: 0,
+                key: 2,
+                function: () => { this.props.toggleDeleteModal(this.props.file) }
+            }
         ]
 
         return (
@@ -89,8 +104,9 @@ class FilesTable extends Component {
                 <tr>
                     <td><img src={this.checkFileType(this.props.file.type)} alt="s" /></td>
 
-                    <td className="word_break"><Link to=""  onClick={(e) => { 
-                        this.handleSelection(e) }}>{this.props.is_searching ? this.props.file.fullpath :this.props.file.name
+                    <td className="word_break"><Link to="" onClick={(e) => {
+                        this.handleSelection(e)
+                    }}>{this.props.is_searching ? this.props.file.fullpath : this.props.file.name
                         }</Link>
                         <br /><p className="date">{this.formatDate(this.props.file.last_changed)}</p>
                     </td>
