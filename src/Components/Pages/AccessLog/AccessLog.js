@@ -16,7 +16,8 @@ class AccessLog extends Component {
         console.log(this.props)
         console.log(this.props.location.pathname)
         let filteredAccessLog = this.props.accesslog.filter(log => {
-            return log.client_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
+            return log.client_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 ||
+            log.file_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
 
         })
         /*
