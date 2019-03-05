@@ -4,6 +4,7 @@ import './NavBtn.css'
 // Imports all icons
 import ArrowBack from '../../Assets/Icons/arrow-back.png'
 import UploadFile from '../../Assets/Icons/upload-file.png'
+import NewClient from '../../Assets/Icons/new-client.png'
 import NewFile from '../../Assets/Icons/add.png'
 import NewFolder from '../../Assets/Icons/new-folder.png'
 import KebabVert from '../../Assets/Icons/kebab-vert.png'
@@ -29,6 +30,8 @@ class NavBtn extends Component {
                 return ArrowBack
             case 'Down':
                 return Down
+            case 'NewClient':
+                return NewClient
             case 'NewFile':
                 return NewFile
             case 'NewFolder':
@@ -55,6 +58,7 @@ class NavBtn extends Component {
         return (
             <button className="btn-vector" onClick={this.props.action} disabled={this.props.isDisabled}>
                 <img className="btn-vector-img" src={this.getImg(this.props.img)} alt={this.props.descr} />
+                <p className="btn-vector-descr">{this.props.descr}</p>
             </button>
         )
     }

@@ -3,6 +3,7 @@ import { Component } from 'react'
 import AccessLogData from './AccessLogData'
 import "./AccessLog.css"
 import { Navbar, Input, Table, Alert, Spinner} from 'reactstrap';
+import PageNav from '../../PageNav/PageNav'
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
@@ -28,11 +29,22 @@ class AccessLog extends Component {
         })
         */
 
+        const buttonMenu = []
+
         return (
             <div className="container">
-                <Navbar sticky="top">
-                    <Input type="text" value={this.props.searchLog} placeholder="Søk" onChange={this.props.updateSearch.bind(this)} />
-                </Navbar>
+                <PageNav 
+                backBtnType="link"
+                backBtnDescr="Tilbake til kunde"
+                backTo={`/client/${this.props.match.params.client_id}/files`}
+
+                searchValue={this.props.searchLog}
+                searchActtion={this.props.updateSearch.bind(this)}
+                searchPlaceholder="Søk i loggen"
+
+                hasCollapse="false"
+                buttons={buttonMenu} />
+
                 <Table id="accesslogTable" className="table table-hover">
                     <thead id="accesslogThead" className="thead-dark">
                         <tr>

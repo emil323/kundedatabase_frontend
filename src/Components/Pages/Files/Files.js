@@ -62,25 +62,23 @@ class Files extends Component {
             })
             : this.props.files //Nothing to seach, view all files
 
-        let isDesktop = this.props.width >= 768
-
         const buttonMenuFiles = [
             {
                 btnKey: 0,
                 img: "UploadFile",
-                imgDescr: "Upload a file",
+                imgDescr: "Filopplasting",
                 btnAction: () => { this.props.toggleUploadModal() }
             },
             {
                 btnKey: 1,
                 img: "OpenEditor",
-                imgDescr: "Open editor",
+                imgDescr: "Tekstbehandling",
                 btnAction: () => { this.props.toggleEditorModal() }
             },
             {
                 btnKey: 2,
                 img: "NewFolder",
-                imgDescr: "New folder",
+                imgDescr: "Ny mappe",
                 btnAction: () => { this.props.toggleNewFolderModal() }
             },
             {
@@ -88,14 +86,14 @@ class Files extends Component {
                 type: "link",
                 to: `/client/${this.props.match.params.client_id}/recyclebin`,
                 img: "RecycleBin",
-                imgDescr: "Recyble bin"
+                imgDescr: "Søpplebøtte"
             },
             {
                 btnKey: 4,
                 type: "link",
                 to: `/client/${this.props.match.params.client_id}/accesslog`,
                 img: "AccessLog",
-                imgDescr: "Accesslog"
+                imgDescr: "Adgangslogg"
             }
         ]
 

@@ -32,7 +32,7 @@ class PageNav extends Component {
     render() {
         const { buttons } = this.props
         const btnMenu = buttons.map(btn => {
-            // Some button uses a Router
+            // Some buttons uses a Router
             switch (btn.type) {
                 case "link":
                     return <Link to={btn.to}>
@@ -55,12 +55,6 @@ class PageNav extends Component {
 
         return (
             <Navbar sticky="top" color="faded">
-                <Input
-                    placeholder={this.props.searchPlaceholder}
-                    type="text" value={this.props.searchValue}
-                    onChange={this.props.searchAction}
-                />
-
                 {/* Sub-pages need a Link-tag to go back to parent */}
                 {this.props.backBtnType === "link" ? (
                     <Link to={this.props.backTo}>
@@ -78,7 +72,7 @@ class PageNav extends Component {
                         />)
                 }
 
-                {/* Hides Collapse-toggler in desktop, or prop is set to false */}
+                {/* Hides Collapse-toggler in desktop, or if prop is set to false */}
                 {this.props.hasCollapse || this.props.width >= 768 ? '' : (
                     <NavBtn
                         class="collapse"
@@ -94,6 +88,13 @@ class PageNav extends Component {
                         {btnMenu}
                     </ButtonGroup>
                 </Collapse>
+
+                <Input
+                    placeholder={this.props.searchPlaceholder}
+                    type="text" value={this.props.searchValue}
+                    onChange={this.props.searchAction}
+                />
+
             </Navbar>
         )
     }

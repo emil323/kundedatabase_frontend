@@ -4,14 +4,12 @@ import ClientData from './ClientData'
 import "./Clients.css"
 import { Table } from 'reactstrap';
 import { ButtonGroup, Navbar, Alert, Input, Spinner } from 'reactstrap';
-import newBtnImg from '../../../img/new.png'
 import { setTrail } from '../../../Store/Actions/breadcrumbActions'
-
+import PageNav from '../../PageNav/PageNav'
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
 import { deleteClient, fetchClientsData, updateSearch, toggleModal } from '../../../Store/Actions/clientsActions'
 import AddClient from './AddClient';
-import NewClient from '../../../Assets/Icons/new-client.png'
 import { IS_LOADING } from '../../../Store/types';
 
 class Clients extends Component {
@@ -25,15 +23,29 @@ class Clients extends Component {
             return client.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
         })
 
+        const buttonMenu = [
+            {
+                btnKey: 0,
+                img: "NewClient",
+                imgDescr: "Ny kunde",
+                btnAction: () => { this.props.toggleModal() }
+            }
+        ]
+
         return (
             <div className="container">
-                <Navbar sticky="top">
-                    <ButtonGroup>
-                        <button className="btn-vector" onClick={this.props.toggleModal}><img className="btn-vector-img" src={NewClient} /></button>
-                    </ButtonGroup>
-                    <Input type="text" value={this.props.search} placeholder="Søk etter kunde" onChange={this.props.updateSearch.bind(this)} />
-                </Navbar>
+                <PageNav 
+                    backBtnType="link"
+                    backBtnDescr="Hjem"
+                    backTo={'/'}
 
+                    searchValue={this.props.search}
+                    searchAction={this.props.updateSearch.bind(this)}
+                    searchPlaceholder="Søk etter kunde"
+
+                    buttons={buttonMenu}
+                />
+                
                 <Table className="table table-hover">
                     <thead className="thead-dark">
                         {

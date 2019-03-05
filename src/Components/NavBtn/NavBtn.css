@@ -18,6 +18,10 @@
     transform: scale(2);
 }
 
+.btn-vector-descr {
+    display: none;
+}
+
 .btn-vector-img {
     height: 2.5em;
 }
