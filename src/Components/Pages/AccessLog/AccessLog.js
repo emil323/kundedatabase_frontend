@@ -2,7 +2,7 @@ import React from 'react'
 import { Component } from 'react'
 import AccessLogData from './AccessLogData'
 import "./AccessLog.css"
-import { Navbar, Input, Table, Alert, Spinner} from 'reactstrap';
+import { Container, Row, Col, Table, Alert, Spinner } from 'reactstrap';
 import PageNav from '../../PageNav/PageNav'
 
 // Import connect, which lets us export data to the reducer
@@ -18,7 +18,7 @@ class AccessLog extends Component {
         console.log(this.props.location.pathname)
         let filteredAccessLog = this.props.accesslog.filter(log => {
             return log.client_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 ||
-            log.file_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
+                log.file_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
 
         })
         /*
@@ -32,65 +32,69 @@ class AccessLog extends Component {
         const buttonMenu = []
 
         return (
-            <div className="container">
-                <PageNav 
-                backBtnType="link"
-                backBtnDescr="Tilbake til kunde"
-                backTo={`/client/${this.props.match.params.client_id}/files`}
+            <Container fluid>
+                <PageNav
+                    backIsLink="true"
+                    backDescr={!this.props.match.params.client_id ? "Hjem" : "Tilbake til kunde"}
+                    backTo={!this.props.match.params.client_id ? ('/') : (`/client/${this.props.match.params.client_id}/files`)}
 
-                searchValue={this.props.searchLog}
-                searchActtion={this.props.updateSearch.bind(this)}
-                searchPlaceholder="Søk i loggen"
+                    searchValue={this.props.searchLog}
+                    searchActtion={this.props.updateSearch.bind(this)}
+                    searchPlaceholder="Søk i loggen"
 
-                hasCollapse="false"
-                buttons={buttonMenu} />
+                    hasCollapseToggle="false"
+                    buttons={buttonMenu} />
+                <Row>
 
-                <Table id="accesslogTable" className="table table-hover">
-                    <thead id="accesslogThead" className="thead-dark">
-                        <tr>
-                            <th>Kunde</th>
-                            <th>Besøkt</th>
-                            <th>Navn</th>
-                            <th>IP</th>
-                            <th>Sist besøkt</th>
-                        </tr>
-                    </thead>
+                    <Col>
+                        <Table id="accesslogTable" className="table table-hover">
+                            <thead id="accesslogThead" className="thead-dark">
+                                <tr>
+                                    <th>Kunde</th>
+                                    <th>Besøkt</th>
+                                    <th>Navn</th>
+                                    <th>IP</th>
+                                    <th>Sist besøkt</th>
+                                </tr>
+                            </thead>
 
-                    {this.props.is_loading ?
-                        <tr>
-                            <td Colspan="5">
-                                <Alert color="light">
-                                    <p className="text-center">
-                                       <Spinner color="dark"/>
-                              </p>
-                                </Alert>
-                            </td>
-                        </tr>
-                        : filteredAccessLog.map(log => {
-                                return  <AccessLogData log={log} key={log.id}/>
-                        })
+                            {this.props.is_loading ?
+                                <tr>
+                                    <td Colspan="5">
+                                        <Alert color="light">
+                                            <p className="text-center">
+                                                <Spinner color="dark" />
+                                            </p>
+                                        </Alert>
+                                    </td>
+                                </tr>
+                                : filteredAccessLog.map(log => {
+                                    return <AccessLogData log={log} key={log.id} />
+                                })
 
-                    }
-                    {/*
+                            }
+                            {/*
                         clientFilteredAccessLog.map(log => {
                             return <AccessLogData log={log} key={log.id} />
                         })
                     */
-                    }
-                </Table>
-            </div>
+                            }
+                        </Table>
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 
     //Calls fetchAccessLogData() immedeatly when loading the component, this agains gets the data from the API
     componentDidMount() {
-        const {client_id} = this.props.match.params //Client ID can be undefined, api allows this
+        const { client_id } = this.props.match.params //Client ID can be undefined, api allows this
         this.props.fetchAccessLogData(client_id)
-        
+
         this.props.setTrail([{
             title: 'Hjem',
             path: '/'
-        }, 
+        },
         {
             title: 'Adgangslogg',
             path: '/accesslog'
@@ -111,9 +115,9 @@ const mapStateToProps = (state) => {
 // Create a dispatch which sends information to the reducer.
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchAccessLogData: (client_id) =>{ dispatch(fetchAccessLogData(client_id))},
-        updateSearch:(search_key) => {dispatch(updateSearch(search_key))},
-        setTrail:(trail) => {dispatch(setTrail(trail))}
+        fetchAccessLogData: (client_id) => { dispatch(fetchAccessLogData(client_id)) },
+        updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
+        setTrail: (trail) => { dispatch(setTrail(trail)) }
     }
 }
 

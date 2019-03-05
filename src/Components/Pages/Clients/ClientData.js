@@ -12,8 +12,6 @@ class ClientsData extends React.Component {
         this.updateFavourites = this.updateFavourites.bind(this) 
     }
 
-    
-
     updateFavourites = () => {
 
         const {id, is_favourite} = this.props.client

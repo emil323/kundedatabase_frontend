@@ -30,6 +30,7 @@ class App extends Component {
                         <Route path="/useraccess" component={UserAccess}/>
                         <Route path="/accesslog" component={AccessLog}/>
                         <Route path="/client/:client_id/accesslog" component={AccessLog}/>
+
                     </MainContent>
                 </div>
             </BrowserRouter>

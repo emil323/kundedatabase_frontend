@@ -1,9 +1,10 @@
 import React from 'react';
-import { Navbar, Input, Table, Form } from 'reactstrap';
+import { Container, Row, Col, Table, Form } from 'reactstrap';
 import "./UserAccess.css"
 import UserAccessData from "./UserAccessData"
 import { authContext } from '../../../Auth/adalConfig'
 import API from '../../../API/API';
+import PageNav from '../../PageNav/PageNav'
 
 import { connect } from "react-redux";
 import { updateSearch, fetchUsersData } from '../../../Store/Actions/userActions'
@@ -18,32 +19,49 @@ class UserAccess extends React.Component {
         let filteredUsers = this.props.users.filter(user => {
             return user.first_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
         })
-        return (
-            <div className="container">
-                <Form class="customRadio">
-                    <Navbar sticky="top">
-                        <Input type="text" value={this.props.search} placeholder="Søk etter bruker" onChange={this.props.updateSearch.bind(this)} />
-                    </Navbar>
 
-                    <Table className="table table-hover">
-                        <thead className="thead-dark">
-                            <tr>
-                                <th>Email</th>
-                                <th>Fornavn</th>
-                                <th>Etternavn</th>
-                                <th>Har adgang</th>
-                                <th>Administrator</th>
-                                <th>Superadmin</th>
-                            </tr>
-                        </thead>
-                        {
-                            filteredUsers.map(user => {
-                                return <UserAccessData user={user} key={user.id} />
-                            })
-                        }
-                    </Table>
-                </Form>
-            </div>
+        const buttonMenu = []
+
+        return (
+            <Container fluid>
+                <PageNav
+                    hasCollapseToggle="false"
+
+                    backIsLink="true"
+                    backTo="/"
+                    backDescr="Hjem"
+
+                    searchValue={this.props.search}
+                    searchAction={this.props.updateSearch.bind(this)}
+                    searchPlaceholder="Søk etter bruker"
+
+                    buttons={buttonMenu}
+                />
+
+                <Row>
+                    <Col>
+                        <Form class="customRadio">
+                            <Table className="table table-hover">
+                                <thead className="thead-dark">
+                                    <tr>
+                                        <th>Email</th>
+                                        <th>Fornavn</th>
+                                        <th>Etternavn</th>
+                                        <th>Har adgang</th>
+                                        <th>Administrator</th>
+                                        <th>Superadmin</th>
+                                    </tr>
+                                </thead>
+                                {
+                                    filteredUsers.map(user => {
+                                        return <UserAccessData user={user} key={user.id} />
+                                    })
+                                }
+                            </Table>
+                        </Form>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 

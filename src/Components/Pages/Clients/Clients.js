@@ -3,7 +3,7 @@ import { Component } from 'react'
 import ClientData from './ClientData'
 import "./Clients.css"
 import { Table } from 'reactstrap';
-import { ButtonGroup, Navbar, Alert, Input, Spinner } from 'reactstrap';
+import { Container, Row, Col, ButtonGroup, Navbar, Alert, Input, Spinner } from 'reactstrap';
 import { setTrail } from '../../../Store/Actions/breadcrumbActions'
 import PageNav from '../../PageNav/PageNav'
 // Import connect, which lets us export data to the reducer
@@ -33,10 +33,12 @@ class Clients extends Component {
         ]
 
         return (
-            <div className="container">
-                <PageNav 
-                    backBtnType="link"
-                    backBtnDescr="Hjem"
+            <Container fluid>
+                <PageNav
+                    hasCollapseToggle="false"
+
+                    backIsLink="true"
+                    backDescr="Hjem"
                     backTo={'/'}
 
                     searchValue={this.props.search}
@@ -45,39 +47,44 @@ class Clients extends Component {
 
                     buttons={buttonMenu}
                 />
-                
-                <Table className="table table-hover">
-                    <thead className="thead-dark">
-                        {
-                            //Ser det finere ut uten?
-                            /*
-                            <tr>
-                                <th>Firmanavn</th>
-                                <th>Favoritt</th>
-                            </tr>
-                            */
-                        }
-                    </thead>
-                    {
-                        this.props.is_loading ?
-                        <tr>
-                            <td colspan="4">
-                                <Alert color="light">
-                                    <p className="text-center">
-                                       <Spinner color="dark"/>
-                              </p>
-                                </Alert>
-                            </td>
-                        </tr> 
-                        : filteredClients.map(client => {
-                            return <ClientData client={client}
-                                fetchClientsData={this.props.fetchClientsData}
-                                key={client.id} />
-                        })
-                    }
-                </Table>
-                <AddClient />
-            </div>
+
+                <Row>
+                    <Col>
+                        <Table className="table table-hover">
+                            <thead className="thead-dark">
+                                {
+                                    //Ser det finere ut uten?
+                                    /*
+                                    <tr>
+                                        <th>Firmanavn</th>
+                                        <th>Favoritt</th>
+                                    </tr>
+                                    */
+                                }
+                            </thead>
+                            {
+                                this.props.is_loading ?
+                                    <tr>
+                                        <td colspan="4">
+                                            <Alert color="light">
+                                                <p className="text-center">
+                                                    <Spinner color="dark" />
+                                                </p>
+                                            </Alert>
+                                        </td>
+                                    </tr>
+                                    : filteredClients.map(client => {
+                                        return <ClientData client={client}
+                                            fetchClientsData={this.props.fetchClientsData}
+                                            key={client.id} />
+                                    })
+                            }
+                        </Table>
+                        <AddClient />
+
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 

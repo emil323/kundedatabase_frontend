@@ -1,32 +1,24 @@
 import React from 'react'
-import {Component} from 'react'
-import {Row, Col} from 'reactstrap';
+import { Component } from 'react'
+import { Container, Row, Col } from 'reactstrap';
 import './MainContent.css';
 
 class MainContent extends Component {
- 
-      render () {
+
+    render() {
         return (
-           
-            <div className="mx-auto px-2 main">
-                <Col 
-                /*
-                 sm={{ size:12, offset:0}}
-                 md={{ size:9,offset: 3 }}
-                 xl={{size:10, offset: 2}}
-                 */>
-                    <Row>
+            <Container fluid>
+                <Row>
+                    <Col>
                         {this.props.children}
-                    </Row> 
-                  
-                </Col>
-                
-            </div>
-          
+                    </Col>
+                </Row>
+            </Container>
+
         )
-      }
+    }
 }
-    
+
 export default MainContent;
 
 

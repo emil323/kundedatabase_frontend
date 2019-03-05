@@ -4,16 +4,26 @@ import Favorites from '../Favourites/Favourites';
 
 import { setTrail } from '../../../Store/Actions/breadcrumbActions'
 import { connect } from "react-redux";
+import { Container, Row, Col } from 'reactstrap'
 
 class Home extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <Welcome />
-                <hr />
-                <Favorites />
-            </div>
+            <Container fluid>
+                <Row>
+                    <Col>
+                        <Welcome />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <hr />
+                        <Favorites />
+                    </Col>
+                </Row>
+            </Container>
+
         )
     }
 

@@ -3,6 +3,7 @@ import './NavBtn.css'
 
 // Imports all icons
 import ArrowBack from '../../Assets/Icons/arrow-back.png'
+import ArrowPrevFolder from '../../Assets/Icons/arrow-prev-folder.png'
 import UploadFile from '../../Assets/Icons/upload-file.png'
 import NewClient from '../../Assets/Icons/new-client.png'
 import NewFile from '../../Assets/Icons/add.png'
@@ -14,12 +15,13 @@ import AccessLog from '../../Assets/Icons/access-log.png'
 import RecycleBin from '../../Assets/Icons/recycle-bin.png'
 import Up from '../../Assets/Icons/up.png'
 import Down from '../../Assets/Icons/down.png'
+import Home from '../../Assets/Icons/home.png'
 
 class NavBtn extends Component {
     constructor(props) {
         super(props)
 
-        this.getImg = this.getImg.bind(this)  
+        this.getImg = this.getImg.bind(this)
     }
 
     getImg(name) {
@@ -28,8 +30,12 @@ class NavBtn extends Component {
                 return AccessLog
             case 'ArrowBack':
                 return ArrowBack
+            case 'ArrowPrevFolder':
+                return ArrowPrevFolder
             case 'Down':
                 return Down
+            case 'Home':
+                return Home
             case 'NewClient':
                 return NewClient
             case 'NewFile':
@@ -56,9 +62,18 @@ class NavBtn extends Component {
 
     render() {
         return (
-            <button className="btn-vector" onClick={this.props.action} disabled={this.props.isDisabled}>
-                <img className="btn-vector-img" src={this.getImg(this.props.img)} alt={this.props.descr} />
-                <p className="btn-vector-descr">{this.props.descr}</p>
+            <button
+                className={this.props.isBackBtn ? "btn-vector btn-vector-back" : "btn-vector"}
+                onClick={this.props.action}
+                disabled={this.props.isDisabled}>
+                <img
+                    className="btn-vector-img"
+                    src={this.getImg(this.props.img)}
+                    alt={this.props.descr} />
+                <span
+                    className={this.props.isBackBtn ? "btn-vector-descr btn-vector-descr-back" : "btn-vector-descr"}>
+                    {this.props.descr}
+                </span>
             </button>
         )
     }

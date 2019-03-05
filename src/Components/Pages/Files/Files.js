@@ -5,9 +5,7 @@ import FileData from './FileData'
 import PageNav from '../../PageNav/PageNav'
 
 import "./Files.css"
-import { withResizeDetector } from 'react-resize-detector';
-
-import { Spinner, Table, Alert } from 'reactstrap';
+import { Container, Row, Col, Spinner, Table, Alert, } from 'reactstrap';
 import { withRouter } from "react-router-dom"
 
 
@@ -29,6 +27,7 @@ class Files extends Component {
         super(props)
         this.upOneLevel = this.upOneLevel.bind(this)
         this.toggleMenu = this.toggleMenu.bind(this)
+        this.getBackLink = this.getBackLink.bind(this)
 
         this.state = {
             menuOpen: false,
@@ -50,8 +49,13 @@ class Files extends Component {
         }
     }
 
-    handleWindowSizeChange = () => {
-        this.setState({ width: window.innerWidth })
+    getBackLink() {
+        if (this.props.is_recyclebin) {
+            return `/client/${this.props.match.params.client_id}/files`
+        }
+        if (this.props.selected_folder.is_root) {
+            return '/clients'
+        }
     }
 
     render() {
@@ -100,97 +104,85 @@ class Files extends Component {
         const buttonMenuRecycleBin = []
 
         return (
-            <div >
+            <Container fluid>
+                <PageNav
+                    backIsLink={this.props.selected_folder.is_root || this.props.is_recyclebin ? "true" : "false"}
+                    backTo={this.getBackLink()}
 
-                {this.props.is_recyclebin ?
-                    (<PageNav
-                        backBtnType="link"
-                        backBtnDescr="Tilbake til kunde"
-                        backTo={`/client/${this.props.match.params.client_id}/files`}
+                    backAction={this.upOneLevel}
+                    // backDescr={this.props.selected_folder.is_root ? "Tilbake til kunder" : "Tilbake et hakk"}
 
-                        hasCollapse="false"
+                    searchValue={this.props.search}
+                    searchAction={this.props.updateSearch}
+                    searchPlaceholder="Søk etter filer"
 
-                        searchValue={this.props.search}
-                        searchAction={this.props.updateSearch}
-                        searchPlaceholder="Søk etter filer" 
-                        
-                        buttons={buttonMenuRecycleBin} />
-                    ) : (
-                        <PageNav
-                            backAction={this.upOneLevel}
-                            backBtnDescr="Tilbake et hakk"
-                            backIsDisabled={this.props.selected_folder.is_root}
+                    buttons={buttonMenuFiles} />
+                 
+                <Row>
+                    <Col>
+                        <Table className="table table-hover">
+                            <thead className="thead-dark">
 
-                            searchValue={this.props.search}
-                            searchAction={this.props.updateSearch}
-                            searchPlaceholder="Søk etter filer"
-
-                            buttons={buttonMenuFiles} />
-                    )}
-
-                <Table className="table table-hover">
-                    <thead className="thead-dark">
-
-                        {/*  <tr>
+                                {/*  <tr>
                             <th>Type</th>
                             <th>Fil</th>
                             <th>Valg</th>
                         </tr> */}
-                    </thead>
-                    {
-                        this.props.is_searching ?
-                            <tr>
-                                <td colspan="4">
-                                    <Alert color="dark">
-                                        <h4>
-                                            Søkeresultat: {this.props.search}
-                                        </h4>
-                                    </Alert>
-                                </td>
-                            </tr>
-                            : ''
+                            </thead>
+                            {
+                                this.props.is_searching ?
+                                    <tr>
+                                        <td colspan="4">
+                                            <Alert color="dark">
+                                                <h4>
+                                                    Søkeresultat: {this.props.search}
+                                                </h4>
+                                            </Alert>
+                                        </td>
+                                    </tr>
+                                    : ''
 
-                    }
-                    {!this.props.is_searching && !this.props.is_loading && filteredFiles.length === 0 ?
-                        <tr>
-                            <td colspan="4">
-                                <Alert color="light">
-                                    <p className="text-center">
-                                        Her er det tomt.
+                            }
+                            {!this.props.is_searching && !this.props.is_loading && filteredFiles.length === 0 ?
+                                <tr>
+                                    <td colspan="4">
+                                        <Alert color="light">
+                                            <p className="text-center">
+                                                Her er det tomt.
                               </p>
-                                </Alert>
-                            </td>
-                        </tr>
-                        : this.props.is_loading ?
-                            <tr>
-                                <td colspan="4">
-                                    <Alert color="light">
-                                        <p className="text-center">
-                                            <Spinner color="dark" />
-                                        </p>
-                                    </Alert>
-                                </td>
-                            </tr>
-                            //Show all files
-                            : filteredFiles.map(file => {
-                                return <FileData file={file} key={file.id} />
-                            })
-                    }
-                </Table>
+                                        </Alert>
+                                    </td>
+                                </tr>
+                                : this.props.is_loading ?
+                                    <tr>
+                                        <td colspan="4">
+                                            <Alert color="light">
+                                                <p className="text-center">
+                                                    <Spinner color="dark" />
+                                                </p>
+                                            </Alert>
+                                        </td>
+                                    </tr>
+                                    //Show all files
+                                    : filteredFiles.map(file => {
+                                        return <FileData file={file} key={file.id} />
+                                    })
+                            }
+                        </Table>
 
 
+                        <NewFolderModal />
+                        <UploadModal />
+                        <MoveModal />
+                        <RenameModal />
+                        <EditorModal />
+                        <DeleteModal />
+                        <RecoverModal />
 
-                <NewFolderModal />
-                <UploadModal />
-                <MoveModal />
-                <RenameModal />
-                <EditorModal />
-                <DeleteModal />
-                <RecoverModal />
-
-                <TrailUpdater />
-
-            </div>
+                        <TrailUpdater />
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 
@@ -202,9 +194,9 @@ class Files extends Component {
     }
 
     /**
-     *  This is important, it will be called when the URL changes. That means user has clicked a folder, and we need to react to that. 
-     * @param {*} nextProps 
-     */
+     *  This is important, it will be called when the URL changes. That means user has clicked a folder, and we need to react to that.
+* @param {*} nextProps
+        */
 
     componentWillReceiveProps(nextProps) {
         const old_params = this.props.match.params
@@ -228,8 +220,8 @@ class Files extends Component {
 
     /**
      * Use this to clear the files reducer
-     * 
-     * We need to do this, to ensure that when a user goes into a new client, no remaining parts of the old client is visible. 
+     *
+     * We need to do this, to ensure that when a user goes into a new client, no remaining parts of the old client is visible.
      */
 
     componentWillUnmount() {
@@ -279,4 +271,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default withResizeDetector(withRouter(connect(mapStateToProps, mapDispatchToProps)(Files)))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Files))

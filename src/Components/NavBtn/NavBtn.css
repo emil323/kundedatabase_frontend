@@ -22,6 +22,16 @@
     display: none;
 }
 
+/*
+.btn-vector-descr:not(.btn-vector-descr-back) {
+    display: none;
+}
+*/
+
+.btn-vector-descr-back {
+    float:right;
+}
+
 .btn-vector-img {
     height: 2.5em;
 }

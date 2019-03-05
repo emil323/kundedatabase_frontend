@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navbar, Collapse, ButtonGroup, Input } from 'reactstrap'
+import { Container, Row, Col, Navbar, Collapse, ButtonGroup, Input } from 'reactstrap'
 import NavBtn from '../NavBtn/NavBtn'
 import { Link } from 'react-router-dom'
 import { withResizeDetector } from 'react-resize-detector';
@@ -56,24 +56,33 @@ class PageNav extends Component {
         return (
             <Navbar sticky="top" color="faded">
                 {/* Sub-pages need a Link-tag to go back to parent */}
-                {this.props.backBtnType === "link" ? (
+                {this.props.backIsLink === "true" ? (
                     <Link to={this.props.backTo}>
                         <NavBtn
-                            img="ArrowBack"
-                            descr={this.props.backBtnDescr}
+                            isBackBtn="true"
+                            img={this.props.backTo === "/" ? "Home" : "ArrowBack"}
+                            descr={this.props.backDescr}
                         />
                     </Link>
                 ) : (
                         <NavBtn
+                            isBackBtn="true"
                             action={this.props.backAction}
-                            img="ArrowBack"
-                            descr={this.props.backBtnDescr}
+                            img="ArrowPrevFolder"
+                            descr={this.props.backDescr}
                             isDisabled={this.props.backIsDisabled}
                         />)
                 }
 
+                {/* Collapase is open at all times in desktop mode and toggled in phonesm, and always open if a toggle is absent */}
+                <Collapse isOpen={this.props.width >= 768 || this.props.hasCollapseToggle === "false" ? "true" : this.state.isOpen}>
+                    <ButtonGroup>
+                        {btnMenu}
+                    </ButtonGroup>
+                </Collapse>
+
                 {/* Hides Collapse-toggler in desktop, or if prop is set to false */}
-                {this.props.hasCollapse || this.props.width >= 768 ? '' : (
+                {this.props.hasCollapseToggle || this.props.width >= 768 ? '' : (
                     <NavBtn
                         class="collapse"
                         action={this.toggle}
@@ -81,13 +90,6 @@ class PageNav extends Component {
                         descr={this.state.isOpen ? "Åpne meny" : "Lukk meny"}
                     />
                 )}
-
-                {/* Collapase is open at all times in desktop mode, and toggled in phones */}
-                <Collapse isOpen={this.props.width >= 768 ? "true" : this.state.isOpen}>
-                    <ButtonGroup>
-                        {btnMenu}
-                    </ButtonGroup>
-                </Collapse>
 
                 <Input
                     placeholder={this.props.searchPlaceholder}
