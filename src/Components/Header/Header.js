@@ -72,9 +72,9 @@ export default class Header extends React.Component {
 					<Link to={`/`}>
 					<button className="btn-vector"><img className="btn-vector-img" src="/img/ecit-logo.png" /></button></Link>
 					</NavbarBrand>
-					<Collapse isOpen={this.state.open} navbar>
+					<Collapse isOpen={this.state.open} onClick={this.toggleHamburger} navbar>
 						<Nav navbar >
-							<Menu closeHamburger={this.toggleHamburger}/>
+							<Menu />
 						</Nav>
 					</Collapse>
 				</Navbar>

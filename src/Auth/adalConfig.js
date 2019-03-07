@@ -2,6 +2,7 @@ import { AuthenticationContext, adalFetch, withAdalLogin } from 'react-adal';
  
 
 export const adalConfig = {
+  instance: 'https://login.microsoftonline.com/',
   tenant: 'bc758dd0-ab53-4372-9a7c-e98a9620862c',
   clientId: '36bdb668-3a4e-496d-bb39-b327fcfcaa32',
   endpoints: {
