@@ -1,12 +1,12 @@
 
-import { authContext } from '../../../Auth/adalConfig';
+import { authContext,hasRoles } from '../../../Auth/adalConfig';
 import {ADMIN_ROLE} from '../../../API/Settings'
 
 /**
  * Returns true if Admin
  */
 
-export const isAdmin = authContext.getCachedUser().profile.roles 
+export const isAdmin = hasRoles(authContext)
                         ? authContext.getCachedUser().profile.roles.includes(ADMIN_ROLE) //Check if admin role is defined
                         : false 
 

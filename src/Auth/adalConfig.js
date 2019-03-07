@@ -14,7 +14,14 @@ export const adalConfig = {
 };
  
 export const authContext = new AuthenticationContext(adalConfig);
- 
+
+
+export const hasRoles = (authContext) => {
+  const user = authContext.getCachedUser()
+  return user !== null && user.profile !== null && user.profile.roles !== undefined //WTF
+} 
+
+
 export const adalApiFetch = (fetch, url, options) =>
   adalFetch(authContext, adalConfig.endpoints.api, fetch, url, options);
  

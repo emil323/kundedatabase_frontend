@@ -16,7 +16,6 @@ class Menu extends Component {
     }
     
     componentDidMount() {
-        console.log('admin', isAdmin)
         this.setState({email: authContext.getCachedUser().userName,
                        name: authContext.getCachedUser().profile.name })
     }
