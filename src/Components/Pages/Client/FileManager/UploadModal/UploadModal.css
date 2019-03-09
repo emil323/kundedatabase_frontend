@@ -1,0 +1,34 @@
+
+
+
+.modalImage{
+    display:block;
+    margin:auto;
+    margin-top: 4em;
+}
+
+
+.modalP{
+    text-align: center;
+    font-size: 2em;
+    padding: 10px;
+    color:black;
+}
+
+.modalDiv{
+    color:green;
+    text-align: center;
+}
+.modalChosenFiles {
+    color:black;
+    font-size:1.4em;
+}
+
+.modalResetFiles {
+    text-align: center;
+    display:block;
+    margin:auto;
+    font-size:0.4em;
+    margin-bottom:4em;
+}
+

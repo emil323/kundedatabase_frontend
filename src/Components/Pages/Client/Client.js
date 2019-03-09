@@ -2,7 +2,7 @@ import React from 'react'
 import { Component } from 'react'
 import { connect } from "react-redux";
 import "./Client.css"
-import Files from "./Files/Files"
+import FileManager from "./FileManager/FileManager"
 import { fetchClientData } from '../../../Store/Actions/clientActions'
 import { Route, Switch } from 'react-router-dom'
 
@@ -12,8 +12,8 @@ class Client extends Component {
     render() {
         return (
             <Switch>
-                <Route path={`/client/:client_id/files/:selected_folder?`} render={(props) => <Files {...props} is_recyclebin={false} />} />
-                <Route path={`/client/:client_id/recyclebin/:selected_folder?`} render={(props) => <Files {...props} is_recyclebin={true} />} />
+                <Route path={`/client/:client_id/files/:selected_folder?`} render={(props) => <FileManager {...props} is_recyclebin={false} />} />
+                <Route path={`/client/:client_id/recyclebin/:selected_folder?`} render={(props) => <FileManager {...props} is_recyclebin={true} />} />
             </Switch>
         )
     }

@@ -1,0 +1,22 @@
+.jumboMenu  {
+ 
+}
+
+.searchFiles {
+    color: #000;
+}
+
+.table {
+    width: 90%;
+}
+
+.row{
+    margin-bottom: 20px;
+}
+
+.word_break {
+    word-break: break-word;
+}
+.btn-group-right {
+    float: right;
+}
