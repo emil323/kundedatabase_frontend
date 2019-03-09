@@ -5,7 +5,7 @@ import "./Clients.css"
 import { Table } from 'reactstrap';
 import { Container, Row, Col, ButtonGroup, Navbar, Alert, Input, Spinner } from 'reactstrap';
 import { setTrail } from '../../../Store/Actions/breadcrumbActions'
-import PageNav from '../../PageNav/PageNav'
+import PageNav from '../../Shared/PageNav/PageNav'
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
 import { deleteClient, fetchClientsData, updateSearch, toggleModal } from '../../../Store/Actions/clientsActions'

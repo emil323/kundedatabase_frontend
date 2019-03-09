@@ -3,7 +3,7 @@ import { Component } from 'react'
 import AccessLogData from './AccessLogData'
 import "./AccessLog.css"
 import { Container, Row, Col, Table, Alert, Spinner } from 'reactstrap';
-import PageNav from '../../PageNav/PageNav'
+import PageNav from '../../Shared/PageNav/PageNav'
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";

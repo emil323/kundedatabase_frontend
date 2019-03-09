@@ -1,10 +1,10 @@
 import React from 'react'
 import {Component} from 'react'
 import { BrowserRouter, Route } from "react-router-dom"
-import Header from '../Header/Header'
-import Sidebar from '../Sidebar/Sidebar'
-import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
-import MainContent from '../Wrappers/MainContent/MainContent'
+import Header from '../Navigation/Header/Header'
+import Sidebar from '../Navigation/Sidebar/Sidebar'
+import Breadcrumbs from '../Navigation/Breadcrumbs/Breadcrumbs'
+import MainContent from './MainContent/MainContent'
 
 import Home from "../Pages/Home/Home"
 import Clients from "../Pages/Clients/Clients"

@@ -2,7 +2,7 @@ import React from 'react'
 import { Component } from 'react'
 import { connect } from "react-redux";
 import "./Client.css"
-import Files from "../Files/Files"
+import Files from "./Files/Files"
 import { fetchClientData } from '../../../Store/Actions/clientActions'
 import { Route, Switch } from 'react-router-dom'
 

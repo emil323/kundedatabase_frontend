@@ -2,9 +2,9 @@ import React from 'react';
 import { Container, Row, Col, Table, Form } from 'reactstrap';
 import "./UserAccess.css"
 import UserAccessData from "./UserAccessData"
-import { authContext } from '../../../Auth/adalConfig'
+import { authContext } from '../../../API/Auth/adalConfig'
 import API from '../../../API/API';
-import PageNav from '../../PageNav/PageNav'
+import PageNav from '../../Shared/PageNav/PageNav'
 
 import { connect } from "react-redux";
 import { updateSearch, fetchUsersData } from '../../../Store/Actions/userActions'

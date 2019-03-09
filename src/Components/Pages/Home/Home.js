@@ -1,13 +1,20 @@
 import React from "react"
-import Welcome from '../../Jumbotron/Welcome';
-import Favorites from '../Favourites/Favourites';
+import Welcome from '../../Shared/Jumbotron/Welcome';
+import Favorites from './Favourites/Favourites';
 
 import { setTrail } from '../../../Store/Actions/breadcrumbActions'
 import { connect } from "react-redux";
 import { Container, Row, Col } from 'reactstrap'
+import api from '../../../API/API'
 
 class Home extends React.Component {
-
+    constructor(props) {
+        super(props)
+        this.state = {
+            filePath: ''
+        }
+    }
+    
     render() {
         return (
             <Container fluid>
@@ -22,6 +29,7 @@ class Home extends React.Component {
                         <Favorites />
                     </Col>
                 </Row>
+                <img src={this.state.filePath}/>
             </Container>
 
         )
@@ -32,7 +40,26 @@ class Home extends React.Component {
             title: 'Hjem',
             path: '/'
         }])
+
+        api.file('fef23556-7aac-43ee-84cd-a4f9e1c08c82').download().then(res => {
+            
+            const url = URL.createObjectURL(new Blob([res.data]));
+            
+            const link = document.createElement('a');
+            console.log(link)
+            link.href = url;
+
+            //link.setAttribute('download', 'lol.pdf');
+            document.body.appendChild(link);
+            this.setState({
+                filePath: url
+            })
+            
+           // link.click()
+        })
     }
+
+    
 }
 
 // Calls on a clientsReducer that bring props to the component
