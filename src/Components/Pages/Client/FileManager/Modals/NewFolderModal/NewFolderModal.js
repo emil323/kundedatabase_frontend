@@ -1,12 +1,12 @@
 import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Alert } from "reactstrap";
 import { connect } from "react-redux";
-import { fetchFilesData } from "../../../../../Store/Actions/filesActions";
-import { toggleNewFolderModal } from "../../../../../Store/Actions/modalActions";
+import { fetchFilesData } from "../../../../../../Store/Actions/filesActions";
+import { toggleNewFolderModal } from "../../../../../../Store/Actions/modalActions";
 import {FormGroup, Form, Input } from 'reactstrap'
 
 import './NewFolderModal.css'
-import API from "../../../../../API/API";
+import API from "../../../../../../API/API";
 
 class NewFolderModal extends React.Component {
   constructor(props) {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import ReactQuill from 'react-quill';
 import { connect } from 'react-redux'
-import { toggleEditorModal } from '../../../../../Store/Actions/modalActions';
+import { toggleEditorModal } from '../../../../../../Store/Actions/modalActions';
 import './EditorModal.css'
 
 class EditorModal extends Component {

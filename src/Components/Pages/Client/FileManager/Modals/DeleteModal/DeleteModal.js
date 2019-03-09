@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
-import { fetchFilesData } from "../../../../../Store/Actions/filesActions";
-import { toggleDeleteModal } from "../../../../../Store/Actions/modalActions";
+import { fetchFilesData } from "../../../../../../Store/Actions/filesActions";
+import { toggleDeleteModal } from "../../../../../../Store/Actions/modalActions";
 
-import API from "../../../../../API/API";
+import API from "../../../../../../API/API";
 
 class DeleteModal extends React.Component {
   constructor(props) {

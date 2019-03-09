@@ -1,11 +1,11 @@
 import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
-import { fetchFilesData} from "../../../../../Store/Actions/filesActions";
-import { toggleMoveModal} from "../../../../../Store/Actions/modalActions";
+import { fetchFilesData} from "../../../../../../Store/Actions/filesActions";
+import { toggleMoveModal} from "../../../../../../Store/Actions/modalActions";
 import {ListGroup, ListGroupItem  } from 'reactstrap'
 
-import API from "../../../../../API/API";
+import API from "../../../../../../API/API";
 
 class NewFolderModal extends React.Component {
 

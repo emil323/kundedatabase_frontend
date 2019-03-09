@@ -2,14 +2,14 @@ import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Spinner } from "reactstrap";
 import Dropzone from "react-dropzone";
 import classNames from "classnames";
-import API from "../../../../../API/API";
+import API from "../../../../../../API/API";
 import { connect } from "react-redux";
-import { fetchFilesData } from "../../../../../Store/Actions/filesActions";
-import { toggleUploadModal } from "../../../../../Store/Actions/modalActions";
-import {Mobile, Desktop} from '../../../../Helpers/Responsive/Responsive'
+import { fetchFilesData } from "../../../../../../Store/Actions/filesActions";
+import { toggleUploadModal } from "../../../../../../Store/Actions/modalActions";
+import {Mobile, Desktop} from '../../../../../Helpers/Responsive/Responsive'
 import "./UploadModal.css";
 
-import downloadIcon from "../../../../../Assets/Icons/download.png";
+import downloadIcon from "../../../../../../Assets/Icons/download.png";
 
 class UploadModal extends React.Component {
   constructor(props) {

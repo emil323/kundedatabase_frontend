@@ -13,13 +13,13 @@ import { withRouter } from "react-router-dom"
 import { connect } from "react-redux";
 import { fetchFilesData, selectFolder, updateSearch, clearFiles } from '../../../../Store/Actions/filesActions'
 import { toggleNewFolderModal, toggleUploadModal, toggleEditorModal } from '../../../../Store/Actions/modalActions'
-import UploadModal from './UploadModal/UploadModal';
-import NewFolderModal from './NewFolderModal/NewFolderModal';
-import MoveModal from './MoveModal/MoveModal';
-import RenameModal from './RenameModal/RenameModal';
-import EditorModal from './EditorModal/EditorModal'
-import DeleteModal from './DeleteModal/DeleteModal';
-import RecoverModal from './RecoverModal/RecoverModal';
+import UploadModal from './Modals/UploadModal/UploadModal';
+import NewFolderModal from './Modals/NewFolderModal/NewFolderModal';
+import MoveModal from './Modals/MoveModal/MoveModal';
+import RenameModal from './Modals/RenameModal/RenameModal';
+import EditorModal from './Modals/EditorModal/EditorModal'
+import DeleteModal from './Modals/DeleteModal/DeleteModal';
+import RecoverModal from './Modals/RecoverModal/RecoverModal';
 
 class FileManager extends Component {
 

@@ -1,12 +1,12 @@
 import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Alert } from "reactstrap";
 import { connect } from "react-redux";
-import { fetchFilesData } from "../../../../../Store/Actions/filesActions"
-import { toggleRenameModal } from "../../../../../Store/Actions/modalActions";
+import { fetchFilesData } from "../../../../../../Store/Actions/filesActions"
+import { toggleRenameModal } from "../../../../../../Store/Actions/modalActions";
 import {Form, FormGroup, Input} from 'reactstrap'
 
 
-import API from "../../../../../API/API";
+import API from "../../../../../../API/API";
 
 class RenameModal extends React.Component {
   constructor(props) {
