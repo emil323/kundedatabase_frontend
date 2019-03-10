@@ -1,0 +1,8 @@
+.file_viewer {
+    max-width:100%;
+}
+
+.file_viewer img {
+    max-width:100%;
+    height:auto;
+}

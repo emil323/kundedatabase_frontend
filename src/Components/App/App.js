@@ -2,9 +2,7 @@ import React from 'react'
 import {Component} from 'react'
 import { BrowserRouter, Route } from "react-router-dom"
 import Header from '../Navigation/Header/Header'
-import Sidebar from '../Navigation/Sidebar/Sidebar'
-import Breadcrumbs from '../Navigation/Breadcrumbs/Breadcrumbs'
-import MainContent from './MainContent/MainContent'
+
 
 import Home from "../Pages/Home/Home"
 import Clients from "../Pages/Clients/Clients"
@@ -23,7 +21,7 @@ class App extends Component {
                 <div>
                     <Header />
                     {/* <Sidebar /> */} 
-                        <MainContent>
+
                         <Route exact path="/" component={Home} />
                         <Route path="/clients" component={Clients}/>
                         <Route path="/client/:client_id" component={Client}/>
@@ -32,7 +30,7 @@ class App extends Component {
                         <Route path="/client/:client_id/accesslog" component={AccessLog}/>
                         <Route path="/file/:file_id" component={File}/>
 
-                    </MainContent>
+
                 </div>
             </BrowserRouter>
         )

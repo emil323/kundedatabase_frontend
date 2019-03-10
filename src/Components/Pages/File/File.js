@@ -7,6 +7,8 @@ import {setTrail, pushTrail} from '../../../Store/Actions/breadcrumbActions'
 import {connect} from "react-redux";
 import {Spinner} from 'reactstrap'
 import FileViewer from './FileViewer'
+import {isSupported} from './DriverFinder'
+
 
 class File extends Component {
     constructor(props) {
@@ -71,7 +73,7 @@ class File extends Component {
                 ? <this.Spinner text='Laster ned...'/>
                 : this.state.is_loading
                     ? <this.Spinner text='Vent litt..'/>
-                    : <FileViewer blob={this.state.blob} metadata={this.state.metadata}/>
+                    : <FileViewer blob={this.state.blob} metadata={this.state.metadata} download={this.download}/>
             }
         </div>)
     }
@@ -102,17 +104,26 @@ class File extends Component {
             this.props.pushTrail(this.state.metadata.file_name, '/file/'
                 + this.state.metadata.file_id)
 
+
+            const can_preview = isSupported(this.state.metadata.file_type)
+
             //TODO: Create a check for max filesize here, we don't want to preview a 5gb large file
             //Fetch file
-            api.file(this.state.metadata.file_id).download().then(res => {
-                if(!res.data.err) {
-                    //Update state with new blob, set is_loading to false
-                    this.setState({...this.state, is_loading:false, blob: new Blob([res.data])})
-                } else {
-                    this.setState({...this.state, is_loading:false})
-                    throw res.data.err
-                }
-            })
+            if(!can_preview) {
+                api.file(this.state.metadata.file_id).download().then(res => {
+                    if (!res.data.err) {
+                        //Update state with new blob, set is_loading to false
+                        this.setState({...this.state, is_loading: false, blob: new Blob([res.data])})
+                    } else {
+                        this.setState({...this.state, is_loading: false})
+                        throw res.data.err
+                    }
+                })
+            } else {
+                //Now supported
+                console.log('not supported')
+                this.setState({...this.state, is_loading: false})
+            }
         })
 
     }

@@ -19,3 +19,9 @@ export const getDriver = (mimetype) => {
         break
     }
 }
+
+export const isSupported = (mimetype) => {
+   return getDriver(mimetype).name === 'UnsupportedViewer'
+}
+
+//Export
