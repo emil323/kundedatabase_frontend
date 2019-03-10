@@ -34,15 +34,7 @@ class FilesTable extends Component {
                 : this.props.history.push('/client/' + file.client_id + "/files/" + file.id)
         }
         else //Download file
-            API.file(file.id).download().then(res => {
-                console.log(res)
-                const url = window.URL.createObjectURL(new Blob([res.data]));
-                const link = document.createElement('a');
-                link.href = url;
-                link.setAttribute('download', file.name);
-                document.body.appendChild(link);
-                link.click()
-            })
+            this.props.history.push('/file/' + file.id)
 
     }
 

@@ -90,13 +90,14 @@ class PageNav extends Component {
                         descr={this.state.isOpen ? "Åpne meny" : "Lukk meny"}
                     />
                 )}
-
-                <Input
-                    placeholder={this.props.searchPlaceholder}
-                    type="text" value={this.props.searchValue}
-                    onChange={this.props.searchAction}
-                />
-
+                { /* Check if searchAction is defined, or else render no search bar */
+                    this.props.searchAction &&
+                    <Input
+                        placeholder={this.props.searchPlaceholder}
+                        type="text" value={this.props.searchValue}
+                        onChange={this.props.searchAction}
+                    />
+                }
             </Navbar>
         )
     }

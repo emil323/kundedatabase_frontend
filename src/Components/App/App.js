@@ -11,7 +11,7 @@ import Clients from "../Pages/Clients/Clients"
 import Client from "../Pages/Client/Client"
 import UserAccess from '../Pages/UserAccess/UserAccess'
 import AccessLog from '../Pages/AccessLog/AccessLog'
-
+import File from '../Pages/File/File'
 import './App.css'
 
 
@@ -30,6 +30,7 @@ class App extends Component {
                         <Route path="/useraccess" component={UserAccess}/>
                         <Route path="/accesslog" component={AccessLog}/>
                         <Route path="/client/:client_id/accesslog" component={AccessLog}/>
+                        <Route path="/file/:file_id" component={File}/>
 
                     </MainContent>
                 </div>

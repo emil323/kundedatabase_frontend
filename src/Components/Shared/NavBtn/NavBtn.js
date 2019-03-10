@@ -16,6 +16,7 @@ import RecycleBin from '../../../Assets/Icons/recycle-bin.png'
 import Up from '../../../Assets/Icons/up.png'
 import Down from '../../../Assets/Icons/down.png'
 import Home from '../../../Assets/Icons/home.png'
+import Download from '../../../Assets/Icons/download-file.png'
 
 class NavBtn extends Component {
     constructor(props) {
@@ -54,7 +55,8 @@ class NavBtn extends Component {
                 return RecycleBin
             case 'Up':
                 return Up
-
+            case 'Download':
+                return Download
             default:
                 return null
         }

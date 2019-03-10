@@ -68,14 +68,17 @@ export default  {
    
     file: (file_id) => {
         return {
+            metadata: () => {
+                return axios().get('/file/' + file_id + '/metadata')
+            },
+            download: () => {
+                return axios().get('/file/' + file_id, {responseType: 'blob'})
+            },
             move: (new_parent_folder) => {
                 return axios().post('/file/' + file_id + '/move', {new_parent_folder})
             },
             rename(new_name) {
                 return axios().post('/file/' + file_id + '/rename/', {new_name})
-            },
-            download: () => {
-                return axios().get('/file/' + file_id, {responseType: 'blob'})
             },
             delete: () => {
                 return axios().delete('/file/' + file_id)

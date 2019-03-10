@@ -170,7 +170,7 @@ class FileManager extends Component {
                             }
                         </Table>
 
-
+                        {/*Not visible unless toggled*/}
                         <NewFolderModal />
                         <UploadModal />
                         <MoveModal />
@@ -179,6 +179,7 @@ class FileManager extends Component {
                         <DeleteModal />
                         <RecoverModal />
 
+                        {/* Returns null*/}
                         <TrailUpdater />
                     </Col>
                 </Row>
