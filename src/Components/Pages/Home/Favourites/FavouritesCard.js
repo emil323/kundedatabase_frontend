@@ -1,24 +1,31 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardBody,
-  CardTitle } from 'reactstrap';
+import {
+	Card, CardImg, CardBody, CardImgOverlay, CardTitle, CardLink, CardFooter, CardText, CardHeader
+} from 'reactstrap';
 import { Link } from "react-router-dom"
+import NavBtn from '../../../Shared/NavBtn/NavBtn'
+import PlaceholderWide from '../../../../Assets/ClientLogos/placeholder_wide.png'
 
 class FavouriteCard extends Component {
-  render(){
-    let {name, client_id} = this.props.favourite;
-    return (
-      <div>
-        <Card>
-          <Link to={"./client/" + client_id + "/files"}  style={{ textDecoration: 'none'}}>
-          {/*<CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />*/ }
-          <CardBody>
-            <CardTitle>{name}</CardTitle>
-          </CardBody>
-          </Link>
-        </Card>
-      </div>
-    );
-  };
+	render() {
+		let { name, client_id } = this.props.favourite;
+		return (
+
+			<Card>
+				{/* <CardHeader><h5>{name}</h5></CardHeader> */}
+				{/* <CardImg top width="100%" src={PlaceholderWide} /> */}
+
+				<CardBody>
+					<CardTitle><h5>{name}</h5></CardTitle>
+				</CardBody>
+				<CardFooter className="card-footer">
+					<Link to={"./client/" + client_id + "/files"}><NavBtn img="Folder" isCard /></Link>
+					<Link to={"./client/" + client_id + "/accesslog"}><NavBtn img="AccessLog" isCard /></Link>
+					<Link to={"./client/" + client_id + "/recyclebin"}><NavBtn img="RecycleBin" isCard /></Link>
+				</CardFooter>
+			</Card>
+		);
+	};
 }
 
 

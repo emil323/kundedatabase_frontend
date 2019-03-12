@@ -95,7 +95,7 @@ class FilesTable extends Component {
         return (
             <tbody  >
                 <tr>
-                    <td><img src={this.checkFileType(this.props.file.type)} alt="s" /></td>
+                    <td><img className="vector-img" src={this.checkFileType(this.props.file.type)} alt="s" /></td>
 
                     <td className="word_break"><Link to="" onClick={(e) => {
                         this.handleSelection(e)
