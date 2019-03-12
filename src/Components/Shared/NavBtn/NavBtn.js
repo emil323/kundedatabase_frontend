@@ -4,6 +4,7 @@ import './NavBtn.css'
 // Imports all icons
 import ArrowBack from '../../../Assets/Icons/arrow-back.png'
 import ArrowPrevFolder from '../../../Assets/Icons/arrow-prev-folder.png'
+import ArrowDropdownCircle from '../../../Assets/Icons/arrow-dropdown-circle.png'
 import UploadFile from '../../../Assets/Icons/upload-file.png'
 import NewClient from '../../../Assets/Icons/new-client.png'
 import NewFile from '../../../Assets/Icons/add.png'
@@ -30,6 +31,7 @@ class NavBtn extends Component {
         switch (name) {
             case 'AccessLog': return AccessLog
             case 'ArrowBack': return ArrowBack
+            case 'ArrowDropdownCircle': return ArrowDropdownCircle
             case 'ArrowPrevFolder': return ArrowPrevFolder
             case 'Down': return Down
             case 'Folder': return Folder

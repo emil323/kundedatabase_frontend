@@ -3,6 +3,7 @@ import { Component } from 'react'
 import TrailUpdater from './TrailUpdater'
 import FileData from './FileData'
 import PageNav from '../../../Shared/PageNav/PageNav'
+import StructuredDataHeader from '../../../Shared/StructuredDataHeader/StructuredDataHeader'
 
 import "./FileManager.css"
 import { Container, Row, Col, Spinner, Table, Alert, } from 'reactstrap';
@@ -105,6 +106,8 @@ class FileManager extends Component {
 
         return (
             <Container fluid>
+                <StructuredDataHeader clientName={this.props.client_name}/>
+
                 <PageNav
                     backIsLink={this.props.selected_folder.is_root || this.props.is_recyclebin ? "true" : "false"}
                     backTo={this.getBackLink()}
