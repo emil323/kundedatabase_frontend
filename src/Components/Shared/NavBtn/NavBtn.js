@@ -72,10 +72,10 @@ class NavBtn extends Component {
                     className="btn-vector-img"
                     src={this.getImg(this.props.img)}
                     alt={this.props.descr} />
-                <span
+                <p
                     className={this.props.isBackBtn ? "btn-vector-descr btn-vector-descr-back" : "btn-vector-descr"}>
                     {this.props.descr}
-                </span>
+                </p>
             </button>
         )
     }

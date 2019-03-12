@@ -11,6 +11,7 @@ import { setTrail } from '../../../Store/Actions/breadcrumbActions'
 import { fetchAccessLogData, updateSearch } from '../../../Store/Actions/accesslogActions'
 import { withRouter } from 'react-router-dom';
 
+
 class AccessLog extends Component {
 
     render() {
@@ -46,7 +47,7 @@ class AccessLog extends Component {
                     buttons={buttonMenu} />
                 <Row>
 
-                    <Col>
+                    <Col sm="12" xs="12" md="12" lg={{ size: '12'}} xl={{ size: '10', offset: 1 }}>
                         <Table id="accesslogTable" className="table table-hover">
                             <thead id="accesslogThead" className="thead-dark">
                                 <tr>

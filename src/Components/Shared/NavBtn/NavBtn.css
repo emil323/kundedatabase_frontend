@@ -22,11 +22,17 @@
     display: none;
 }
 
-/*
+
 .btn-vector-descr:not(.btn-vector-descr-back) {
-    display: none;
+    
+
 }
-*/
+
+.btn-vector:hover .btn-vector-descr{
+    display: block;
+    font-size: 0.5em;
+}
+
 
 .btn-vector-descr-back {
     float:right;
