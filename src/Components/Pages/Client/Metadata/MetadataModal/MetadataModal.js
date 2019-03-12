@@ -31,7 +31,7 @@ class MetadataModal extends React.Component {
         const data = this.props.has_metadata ? this.props.metadata : this.state.default_values
         const table = data ? data.map((d,i) => {
             return (
-                <tbody key={}>
+                <tbody key={i}>
                 <td></td>
                 <td></td>
                 </tbody>)
