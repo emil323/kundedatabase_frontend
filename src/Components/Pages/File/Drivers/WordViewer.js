@@ -1,5 +1,6 @@
 import React from 'react';
 import Mammoth  from 'mammoth'
+import SanitizedHTML from 'react-sanitized-html';
 
 export class WordViewer extends React.Component  {
     constructor(props) {
@@ -14,7 +15,7 @@ export class WordViewer extends React.Component  {
      * @returns {XML}
      */
     render() {
-        return <div>{this.state.html}</div>
+        return <SanitizedHTML html={this.state.html} />
     }
 
     /**
