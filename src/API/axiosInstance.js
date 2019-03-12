@@ -1,6 +1,6 @@
 import Axios from "axios"
 import { loadProgressBar } from 'axios-progress-bar'
-import {API_URL} from './Settings'
+import {API_URL} from '../Settings'
 
 
 

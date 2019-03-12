@@ -31,6 +31,7 @@ export const RENAME_MODAL = 'RENAME_MODAL'
 export const EDITOR_MODAL = 'EDITOR_MODAL'
 export const DELETE_MODAL = 'DELETE_MODAL'
 export const RECOVER_MODAL = 'RECOVER_MODAL'
+export const METADATA_MODAL = 'METADATA_MODAL'
 
 // Keys
 export const SEARCH_KEY = 'SEARCH_KEY'

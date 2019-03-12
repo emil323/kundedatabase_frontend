@@ -1,6 +1,6 @@
 
 import { authContext,hasRoles } from '../../../API/Auth/adalConfig';
-import {ADMIN_ROLE} from '../../../API/Settings'
+import {ADMIN_ROLE} from '../../../Settings'
 
 /**
  * Returns true if Admin

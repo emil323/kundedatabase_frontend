@@ -3,7 +3,6 @@ import { Component } from 'react'
 import TrailUpdater from './TrailUpdater'
 import FileData from './FileData'
 import PageNav from '../../../Shared/PageNav/PageNav'
-import StructuredDataHeader from '../../../Shared/StructuredDataHeader/StructuredDataHeader'
 
 import "./FileManager.css"
 import { Container, Row, Col, Spinner, Table, Alert, } from 'reactstrap';
@@ -105,9 +104,7 @@ class FileManager extends Component {
         const buttonMenuRecycleBin = []
 
         return (
-            <Container fluid>
-                <StructuredDataHeader clientName={this.props.client_name}/>
-
+            <div>
                 <PageNav
                     backIsLink={this.props.selected_folder.is_root || this.props.is_recyclebin ? "true" : "false"}
                     backTo={this.getBackLink()}
@@ -186,7 +183,7 @@ class FileManager extends Component {
                         <TrailUpdater />
                     </Col>
                 </Row>
-            </Container>
+            </div>
         )
     }
 
@@ -242,7 +239,6 @@ const mapStateToProps = (state, ownProps) => {
 
     //Create a variable that selects files that is viewable, based on if prop is set to recyclebin or not
     const viewable_files = ownProps.is_recyclebin ? deleted_files : files
-    console.log(files, deleted_files)
     return {
         client_id,
         client_name,

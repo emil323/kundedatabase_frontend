@@ -19,6 +19,8 @@ import Down from '../../../Assets/Icons/down.png'
 import Home from '../../../Assets/Icons/home.png'
 import Download from '../../../Assets/Icons/download-file.png'
 import Folder from '../../../Assets/Icons/folder.png'
+import Edit from '../../../Assets/Icons/edit.png'
+
 
 class NavBtn extends Component {
     constructor(props) {
@@ -46,6 +48,7 @@ class NavBtn extends Component {
             case 'RecycleBin': return RecycleBin
             case 'Up': return Up
             case 'Download': return Download
+            case 'Edit': return Edit
             default: return null
         }
     }
@@ -60,6 +63,7 @@ class NavBtn extends Component {
                     className={this.props.isCard ? "btn-vector-img btn-vector-img-card" : "btn-vector-img"}
                     src={this.getImg(this.props.img)}
                     alt={this.props.descr} />
+                {this.props.children}
                 {this.props.isCard ? '' : (<p
                     className={this.props.isBackBtn ? "btn-vector-descr btn-vector-descr-back" : "btn-vector-descr"}>
                     {this.props.descr}

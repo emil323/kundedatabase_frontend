@@ -1,8 +1,7 @@
-
 import axios from './axiosInstance'
 //import {API_URL} from './Settings'
 
-export default  {
+export default {
     client: (clientID) => {
         return {
             get() {
@@ -16,6 +15,12 @@ export default  {
             },
             delete() {
                 return axios().delete("/client/" + clientID + "/delete")
+            },
+            metadata() {
+                 return axios().get("/client/" + clientID + "/metadata")
+            },
+            update_metadata() {
+                return axios().post("/client/" + clientID + "/metadata")
             }
         }
     },
@@ -44,7 +49,7 @@ export default  {
             list(client_id) {
                 //Client ID is optional
                 const url = client_id === undefined ? '/accesslog' : '/accesslog/' + client_id
-                return axios().get(url) 
+                return axios().get(url)
             },
             create(data) {
                 return axios().post("/accesslog/create", data)
@@ -65,7 +70,7 @@ export default  {
             }
         }
     },
-   
+
     file: (file_id) => {
         return {
             metadata: () => {
@@ -84,7 +89,7 @@ export default  {
                 return axios().delete('/file/' + file_id)
             },
             recover: (new_parent_folder) => {
-                return axios().post('/file/' + file_id + '/recover',{new_parent_folder})
+                return axios().post('/file/' + file_id + '/recover', {new_parent_folder})
             }
         }
     },
@@ -93,7 +98,7 @@ export default  {
             upload(form_data) {
                 return axios().post('/folder/' + folder_id + "/upload", form_data, {
                     headers: {
-                      'Content-Type': 'multipart/form-data'
+                        'Content-Type': 'multipart/form-data'
                     }
                 })
             },
@@ -110,7 +115,7 @@ export default  {
                 return axios().delete('/folder/' + folder_id)
             },
             recover: (new_parent_folder) => {
-                return axios().post('/folder/' + folder_id + '/recover',{new_parent_folder})
+                return axios().post('/folder/' + folder_id + '/recover', {new_parent_folder})
             }
         }
     },
@@ -118,6 +123,13 @@ export default  {
         return {
             list(graph_token) {
                 return axios().get('/users/' + graph_token)
+            }
+        }
+    },
+    metadata: () => {
+        return {
+            default_values() {
+                return axios().get("/metadata/default_values")
             }
         }
     },

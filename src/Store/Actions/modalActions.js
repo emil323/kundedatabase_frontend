@@ -1,4 +1,7 @@
-import { UPLOAD_MODAL ,NEW_FOLDER_MODAL, MOVE_MODAL, RENAME_MODAL, EDITOR_MODAL, DELETE_MODAL, RECOVER_MODAL} from '../types'
+import {
+    UPLOAD_MODAL, NEW_FOLDER_MODAL, MOVE_MODAL, RENAME_MODAL, EDITOR_MODAL, DELETE_MODAL, RECOVER_MODAL,
+    METADATA_MODAL
+} from '../types'
 
 export const toggleEditorModal = () => {
     return {
@@ -43,5 +46,11 @@ export const toggleRenameModal = (file) => {
 export const toggleNewFolderModal = () => {
     return {
         type: NEW_FOLDER_MODAL
+    }
+}
+
+export const toggleMetadataModal = () => {
+    return {
+        type: METADATA_MODAL
     }
 }
