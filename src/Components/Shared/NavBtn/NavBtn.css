@@ -24,11 +24,9 @@
 
 
 .btn-vector-descr:not(.btn-vector-descr-back) {
-    
-
 }
 
-.btn-vector:hover .btn-vector-descr{
+.btn-vector:hover .btn-vector-descr {
     display: block;
     font-size: 0.5em;
 }
@@ -40,6 +38,10 @@
 
 .btn-vector-img {
     height: 2.5em;
+}
+
+.btn-vector-img-card {
+    height: 2em;
 }
 
 .btn-vector-kebab {
