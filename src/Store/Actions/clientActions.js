@@ -1,5 +1,11 @@
 import api from '../../API/API'
-import {FETCH_CLIENT, FETCH_METADATA, METADATA_LOADED} from '../types'
+import {CLEAR, FETCH_CLIENT, FETCH_METADATA, METADATA_LOADED} from '../types'
+
+export const clearClient = () => {
+    return {
+        type: CLEAR,
+    }
+}
 
 export const fetchClient = (client_id, name) => {
     return {

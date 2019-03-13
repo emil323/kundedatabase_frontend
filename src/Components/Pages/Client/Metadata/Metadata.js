@@ -2,7 +2,7 @@ import React, {Component } from 'react'
 import { Collapse, Jumbotron, Navbar, NavbarToggler, Spinner, Table , Alert,Button} from 'reactstrap'
 import {connect} from "react-redux";
 import NavBtn from '../../../Shared/NavBtn/NavBtn'
-import api from "../../../../API/API";
+
 
 import './Metadata.css'
 import {toggleMetadataModal} from "../../../../Store/Actions/modalActions";
@@ -18,8 +18,6 @@ class Metadata extends Component {
             isOpen: false,
         }
     }
-
-
 
     toggleCollapse() {
         this.setState({

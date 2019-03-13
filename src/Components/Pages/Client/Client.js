@@ -4,9 +4,10 @@ import { Container} from 'reactstrap';
 import { connect } from "react-redux";
 import "./Client.css"
 import FileManager from "./FileManager/FileManager"
-import { fetchClientData } from '../../../Store/Actions/clientActions'
+import {clearClient, fetchClientData} from '../../../Store/Actions/clientActions'
 import { Route, Switch } from 'react-router-dom'
 import Metadata from "./Metadata/Metadata";
+import {clearFiles} from "../../../Store/Actions/filesActions";
 
 
 class Client extends Component {
@@ -27,6 +28,10 @@ class Client extends Component {
         const { client_id } = this.props.match.params
         this.props.fetchClientData(client_id)
     }
+    componentWillUnmount() {
+        this.props.clearClient()
+        this.props.clearFiles()
+    }
 }
 
 // Calls on a clientsReducer that bring props to the component
@@ -38,7 +43,9 @@ const mapStateToProps = (state) => {
 // Create a dispatch which sends information to the reducer. In this case a client is being deleted
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchClientData: (client_id) => { dispatch(fetchClientData(client_id)) }
+        fetchClientData: (client_id) => { dispatch(fetchClientData(client_id)) },
+        clearClient: () => { dispatch(clearClient()) },
+        clearFiles:() => {dispatch(clearFiles())}
     }
 }
 

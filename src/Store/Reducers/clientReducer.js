@@ -1,5 +1,5 @@
 
-import {FETCH_CLIENT, METADATA_LOADED, FETCH_METADATA} from '../types'
+import {FETCH_CLIENT, METADATA_LOADED, FETCH_METADATA, CLEAR} from '../types'
 
 // A Reducer requires an initial state when running the application
 const initState = {
@@ -29,6 +29,8 @@ const clientsReducer = (state = initState, action) => {
                 ...state,
                 metadata_loaded: action.metadata_loaded
             }
+        case CLEAR:
+            return initState
         default:
             return state
     }

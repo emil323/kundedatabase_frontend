@@ -139,7 +139,7 @@ class MetadataModal extends React.Component {
      * Check if metadata is empty, we do this check to figure out if we need to load default values or not
      */
     componentWillReceiveProps(newProps) {
-        if(this.props !== newProps) {
+        if(newProps.metadata_modal) {
             newProps.has_metadata ? this.setState({
                 ...this.state,
                 is_loading: false,
