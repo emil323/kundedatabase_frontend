@@ -11,6 +11,8 @@ export const TOGGLE = 'TOGGLE'
 
 //Client
 export const FETCH_CLIENT = 'FETCH_CLIENT'
+export const FETCH_METADATA = 'FETCH_METADATA'
+export const METADATA_LOADED = 'METADATA_LOADED'
 
 //Breadcrumbs
 export const SET_TRAIL = 'SET_TRAIL'
@@ -32,6 +34,7 @@ export const EDITOR_MODAL = 'EDITOR_MODAL'
 export const DELETE_MODAL = 'DELETE_MODAL'
 export const RECOVER_MODAL = 'RECOVER_MODAL'
 export const METADATA_MODAL = 'METADATA_MODAL'
+export const DEFAULT_METADATA_MODAL = 'DEFAULT_METADATA_MODAL'
 
 // Keys
 export const SEARCH_KEY = 'SEARCH_KEY'

@@ -19,8 +19,8 @@ export default {
             metadata() {
                  return axios().get("/client/" + clientID + "/metadata")
             },
-            update_metadata() {
-                return axios().post("/client/" + clientID + "/metadata")
+            update_metadata(data) {
+                return axios().post("/client/" + clientID + "/metadata",{data})
             }
         }
     },
@@ -130,6 +130,9 @@ export default {
         return {
             default_values() {
                 return axios().get("/metadata/default_values")
+            },
+            update_default_values(default_values) {
+                return axios().put("/metadata/default_values",{default_values})
             }
         }
     },

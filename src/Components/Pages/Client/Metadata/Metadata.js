@@ -7,33 +7,19 @@ import api from "../../../../API/API";
 import './Metadata.css'
 import {toggleMetadataModal} from "../../../../Store/Actions/modalActions";
 import MetadataModal from "./MetadataModal/MetadataModal";
+import {requestMetadata} from "../../../../Store/Actions/clientActions";
 
 class Metadata extends Component {
     constructor(props) {
         super(props)
         this.toggleCollapse = this.toggleCollapse.bind(this)
-        this.loadMetadata = this.loadMetadata.bind(this)
 
         this.state = {
             isOpen: false,
-            has_loaded:false,
-            data:[{title:'',content:''}]
         }
     }
 
-    loadMetadata() {
-        api.client(this.props.client_id).metadata().then(res => {
-          if(res.data.err) {
-              console.log(res.data.err)
-          } else {
-              this.setState({
-                  ...this.state,
-                  has_loaded:true,
-                  data:res.data
-              })
-          }
-        })
-    }
+
 
     toggleCollapse() {
         this.setState({
@@ -41,12 +27,12 @@ class Metadata extends Component {
             isOpen: !this.state.isOpen
         })
         //Initiate loadMetadata if data isn't loaded yet, we make sure to only load when needed because of logging purpose
-        if(!this.state.has_loaded) this.loadMetadata()
+        if(!this.props.metadata_loaded) this.props.requestMetadata(this.props.client_id)
     }
 
     render() {
 
-        const metadata = this.state.data.map(e => {
+        const metadata = this.props.metadata.map(e => {
             return <tbody>
                 <tr>
                     <td>{e.title}</td>
@@ -55,13 +41,13 @@ class Metadata extends Component {
             </tbody>
         })
 
-        const has_data = this.state.data.length > 0
+        const has_data = this.props.metadata.length > 0
 
         return(<div className="metadata">
             <Jumbotron className='display-5' >
                 <h1>{this.props.client_name}</h1>
                 <Collapse isOpen={this.state.isOpen}>
-                    {this.state.has_loaded
+                    {this.props.metadata_loaded
                         ? has_data
                             ? <Table>{metadata}</Table>
                             : <Alert color='secondary'>Ingen data lagt til enda</Alert>
@@ -72,11 +58,11 @@ class Metadata extends Component {
                     <NavBtn img={this.state.isOpen ? 'Up' : 'Down'} action={this.toggleCollapse}>
                         {this.state.isOpen ? 'Skjul' : 'Vis skjult innhold'}
                     </NavBtn>
-                    {this.state.isOpen && this.state.has_loaded ? <NavBtn action={this.props.toggleMetadataModal} img='Edit'>Endre</NavBtn> : ''}
+                    {this.state.isOpen && this.props.metadata_loaded ? <NavBtn action={this.props.toggleMetadataModal} img='Edit'>Endre</NavBtn> : ''}
                 </p>
 
             </Jumbotron>
-            <MetadataModal metadata={this.state.data}/>
+            <MetadataModal />
             </div>
         )
     }
@@ -86,13 +72,15 @@ class Metadata extends Component {
 
 const mapStateToProps = state => {
     const {metadata_modal} = state.modalReducer;
-    return {metadata_modal}
+    const {metadata, metadata_loaded} = state.clientReducer
+    return {metadata_modal, metadata, metadata_loaded}
 }
 
 // Create a dispatch which sends information to the reducer. In this case a client is being deleted
 const mapDispatchToProps = dispatch => {
     return {
-        toggleMetadataModal:() => {dispatch(toggleMetadataModal())}
+        toggleMetadataModal:() => {dispatch(toggleMetadataModal())},
+        requestMetadata:(client_id) => {dispatch(requestMetadata(client_id))}
     }
 }
 

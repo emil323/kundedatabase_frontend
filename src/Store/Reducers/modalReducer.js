@@ -1,5 +1,8 @@
 
-import {UPLOAD_MODAL, NEW_FOLDER_MODAL, MOVE_MODAL, RENAME_MODAL, EDITOR_MODAL, DELETE_MODAL, RECOVER_MODAL,METADATA_MODAL} from '../types'
+import {
+    UPLOAD_MODAL, NEW_FOLDER_MODAL, MOVE_MODAL, RENAME_MODAL, EDITOR_MODAL, DELETE_MODAL, RECOVER_MODAL,
+    METADATA_MODAL, DEFAULT_METADATA_MODAL
+} from '../types'
 
 // A Reducer requires an initial state when running the application
 const initState = {
@@ -7,6 +10,7 @@ const initState = {
     upload_modal: false,
     editor_modal:false,
     metadata_modal:false,
+    default_metadata_moda:false,
     delete: {
         modal:false,
         file:{id:'',name:''}
@@ -83,6 +87,11 @@ const modalReducer = (state = initState, action) => {
             return {
                 ...state,
                 metadata_modal: !state.metadata_modal
+            }
+        case DEFAULT_METADATA_MODAL:
+            return {
+                ...state,
+                default_metadata_modal: !state.default_metadata_modal
             }
         default:
             return state

@@ -1,6 +1,6 @@
 import {
     UPLOAD_MODAL, NEW_FOLDER_MODAL, MOVE_MODAL, RENAME_MODAL, EDITOR_MODAL, DELETE_MODAL, RECOVER_MODAL,
-    METADATA_MODAL
+    METADATA_MODAL, DEFAULT_METADATA_MODAL
 } from '../types'
 
 export const toggleEditorModal = () => {
@@ -52,5 +52,11 @@ export const toggleNewFolderModal = () => {
 export const toggleMetadataModal = () => {
     return {
         type: METADATA_MODAL
+    }
+}
+
+export const toggleDefaultMetadataModal = () => {
+    return {
+        type: DEFAULT_METADATA_MODAL
     }
 }

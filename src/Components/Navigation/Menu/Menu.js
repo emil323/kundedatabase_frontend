@@ -31,7 +31,8 @@ class Menu extends Component {
                     <NavItem><Link to="/" ><NavLink>HJEM</NavLink></Link></NavItem>
                     <NavItem><Link to="/clients" ><NavLink>KUNDER</NavLink></Link></NavItem>
                     <NavItem><Link to="/useraccess" ><NavLink>BRUKERTILGANG</NavLink></Link></NavItem>
-                    <NavItem><Link to="/accesslog" ><NavLink className="lastElement">ADGANGSLOGG</NavLink></Link></NavItem>
+                    <NavItem><Link to="/accesslog" ><NavLink >ADGANGSLOGG</NavLink></Link></NavItem>
+                    <NavItem><Link to="/settings" ><NavLink className="lastElement">INSTILLINGER</NavLink></Link></NavItem>
                 </AdminUser>
                 {/** Vises kun dersom vanlig bruker */}
                 <RegularUser>

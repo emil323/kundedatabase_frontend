@@ -20,6 +20,7 @@ import Home from '../../../Assets/Icons/home.png'
 import Download from '../../../Assets/Icons/download-file.png'
 import Folder from '../../../Assets/Icons/folder.png'
 import Edit from '../../../Assets/Icons/edit.png'
+import Remove from '../../../Assets/Icons/remove.png'
 
 
 class NavBtn extends Component {
@@ -49,6 +50,8 @@ class NavBtn extends Component {
             case 'Up': return Up
             case 'Download': return Download
             case 'Edit': return Edit
+            case 'Remove': return Remove
+            case 'Add': return NewFile
             default: return null
         }
     }
