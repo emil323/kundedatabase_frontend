@@ -1,12 +1,13 @@
 
-import {FETCH_CLIENT, METADATA_LOADED, FETCH_METADATA, CLEAR} from '../types'
+import {FETCH_CLIENT, METADATA_LOADED, FETCH_METADATA, CLEAR, IS_LOADING} from '../types'
 
 // A Reducer requires an initial state when running the application
 const initState = {
     client_id : '',
     client_name : '',
     metadata_loaded : false,
-    metadata : []
+    metadata : [],
+    is_loading:true
 }
 
 // Reducers are called when a change happens. The reducers changes the initial state
@@ -28,6 +29,11 @@ const clientsReducer = (state = initState, action) => {
             return {
                 ...state,
                 metadata_loaded: action.metadata_loaded
+            }
+        case IS_LOADING:
+            return {
+                ...state,
+                is_loading:action.is_loading
             }
         case CLEAR:
             return initState

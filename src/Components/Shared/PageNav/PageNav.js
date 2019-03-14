@@ -56,7 +56,7 @@ class PageNav extends Component {
         return (
             <Navbar sticky="top" color="faded">
                 {/* Sub-pages need a Link-tag to go back to parent */}
-                {this.props.backIsLink === "true" ? (
+                {this.props.backIsLink === true ? (
                     <Link to={this.props.backTo}>
                         <NavBtn
                             isBackBtn="true"
@@ -82,7 +82,7 @@ class PageNav extends Component {
                 </Collapse>
 
                 {/* Hides Collapse-toggler in desktop, or if prop is set to false */}
-                {this.props.hasCollapseToggle || this.props.width >= 768 ? '' : (
+                {!this.props.hasCollapseToggle || this.props.width >= 768 ? '' : (
                     <NavBtn
                         class="collapse"
                         action={this.toggle}

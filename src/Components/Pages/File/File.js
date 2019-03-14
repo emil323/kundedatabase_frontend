@@ -20,6 +20,7 @@ class File extends Component {
                 file_id: '',
                 file_name: '',
                 file_type: '',
+                size:0,
                 folder_id: '',
                 folder_name: '',
                 parent_is_root: ''
@@ -105,11 +106,13 @@ class File extends Component {
                 + this.state.metadata.file_id)
 
 
-            const can_preview = isSupported(this.state.metadata.file_type)
+            const can_preview = isSupported(this.state.metadata)
 
             //TODO: Create a check for max filesize here, we don't want to preview a 5gb large file
+
             //Fetch file
-            if(!can_preview) {
+            if(!can_preview ) {
+                console.log('is supported')
                 api.file(this.state.metadata.file_id).download().then(res => {
                     if (!res.data.err) {
                         //Update state with new blob, set is_loading to false

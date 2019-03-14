@@ -27,9 +27,6 @@ class Settings extends React.Component {
     }
 }
 
-
-
-
 const mapStateToProps = (state) => {
     const {default_metadata_modal} = state.modalReducer;
 

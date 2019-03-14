@@ -1,33 +1,41 @@
 import React from 'react'
-import { Component } from 'react'
-import { Container} from 'reactstrap';
-import { connect } from "react-redux";
+import {Component} from 'react'
+import {Container} from 'reactstrap';
+import {connect} from "react-redux";
 import "./Client.css"
 import FileManager from "./FileManager/FileManager"
 import {clearClient, fetchClientData} from '../../../Store/Actions/clientActions'
-import { Route, Switch } from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import Metadata from "./Metadata/Metadata";
 import {clearFiles} from "../../../Store/Actions/filesActions";
 
 
 class Client extends Component {
 
+    constructor(props) {
+        super(props)
+    }
+
     render() {
         return (
             <Container fluid>
-            <Metadata client_name={this.props.client_name} client_id={this.props.client_id}/>
-            <Switch>
-                <Route path={`/client/:client_id/files/:selected_folder?`} render={(props) => <FileManager {...props} is_recyclebin={false} />} />
-                <Route path={`/client/:client_id/recyclebin/:selected_folder?`} render={(props) => <FileManager {...props} is_recyclebin={true} />} />
-            </Switch>
+                {this.props.is_loading ? '' :
+                <Metadata client_name={this.props.client_name} client_id={this.props.client_id}/>}
+                <Switch>
+                    <Route path={`/client/:client_id/files/:selected_folder?`}
+                           render={(props) => <FileManager {...props} is_recyclebin={false}/>}/>
+                    <Route path={`/client/:client_id/recyclebin/:selected_folder?`}
+                           render={(props) => <FileManager {...props} is_recyclebin={true}/>}/>
+                </Switch>
             </Container>
         )
     }
 
     componentDidMount() {
-        const { client_id } = this.props.match.params
+        const {client_id} = this.props.match.params
         this.props.fetchClientData(client_id)
     }
+
     componentWillUnmount() {
         this.props.clearClient()
         this.props.clearFiles()
@@ -36,16 +44,22 @@ class Client extends Component {
 
 // Calls on a clientsReducer that bring props to the component
 const mapStateToProps = (state) => {
-    const { client_name, client_id } = state.clientReducer
-    return { client_name, client_id }
+    const {client_name, client_id, is_loading} = state.clientReducer
+    return {client_name, client_id, is_loading}
 }
 
 // Create a dispatch which sends information to the reducer. In this case a client is being deleted
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchClientData: (client_id) => { dispatch(fetchClientData(client_id)) },
-        clearClient: () => { dispatch(clearClient()) },
-        clearFiles:() => {dispatch(clearFiles())}
+        fetchClientData: (client_id) => {
+            dispatch(fetchClientData(client_id))
+        },
+        clearClient: () => {
+            dispatch(clearClient())
+        },
+        clearFiles: () => {
+            dispatch(clearFiles())
+        }
     }
 }
 
