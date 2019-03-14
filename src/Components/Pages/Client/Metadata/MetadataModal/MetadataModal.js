@@ -92,7 +92,7 @@ class MetadataModal extends React.Component {
     handleAdd = () =>  {
         this.setState({
             ...this.state,
-            metadata: this.props.metadata.concat(({title:'',content:''}))
+            metadata: this.state.metadata.concat(({title:'',content:''}))
         })
     }
 
