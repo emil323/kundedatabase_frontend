@@ -46,10 +46,12 @@ export default {
     },
     accesslog: () => {
         return {
-            list(client_id) {
-                //Client ID is optional
-                const url = client_id === undefined ? '/accesslog' : '/accesslog/' + client_id
-                return axios().get(url)
+            sort_by: (type) => {
+                return {
+                    id(id) {
+                        return axios().get('/accesslog/' + type + '/' + id)
+                    }
+                }
             },
             create(data) {
                 return axios().post("/accesslog/create", data)

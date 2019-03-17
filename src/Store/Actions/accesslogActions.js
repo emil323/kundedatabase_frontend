@@ -30,10 +30,11 @@ export const setIsLoading = (is_loading) => {
     }
 }
 
-export const fetchAccessLogData = (client_id) => {
+export const fetchAccessLogData = (type,id) => {
+    console.log('fetchaccess', type,id)
     return (dispatch) => {
         dispatch(setIsLoading(true))
-        return api.accesslog().list(client_id)
+        return api.accesslog().sort_by(type).id(id)
             .then(response => {
                 dispatch(setIsLoading(false))
                 dispatch(fetchAccessLog(response.data))

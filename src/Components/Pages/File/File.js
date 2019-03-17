@@ -57,6 +57,12 @@ class File extends Component {
     render() {
         const nav_buttons = [{
                 btnKey: 0,
+                img: "AccessLog",
+                imgDescr: "Adgangslogg",
+                btnAction: () => {this.props.history.push('/accesslog/file/' + this.state.metadata.file_id)}
+            },
+            {
+                btnKey: 1,
                 img: "Download",
                 imgDescr: "Last ned",
                 btnAction: this.download

@@ -14,30 +14,60 @@ import { withRouter } from 'react-router-dom';
 
 class AccessLog extends Component {
 
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            type: 'all',
+            id:null
+        }
+    }
+
     render() {
-        console.log(this.props)
-        console.log(this.props.location.pathname)
+
+        const FILE = 'file'
+        const CLIENT = 'client'
+        const CONSULTANT = 'consultant'
+        const IP = 'ip'
+        
+
         let filteredAccessLog = this.props.accesslog.filter(log => {
             return log.client_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 ||
                 log.file_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
 
         })
-        /*
-        let clientFilteredAccessLog = this.props.accesslog.filter(log => {
-            if (log.client_id === this.props.match.params.client_id) {
-                return log.client_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
-            }
-        })
-        */
+
 
         const buttonMenu = []
+
+        let backDescr = 'Hjem'
+        let backTo = '/'
+
+        switch(this.state.type) {
+            case FILE:
+                backDescr = 'Tilbake til fil'
+                backTo = `/file/${this.state.id}`
+            break
+            case CLIENT: 
+                backDescr = 'Tilbake til kunde'
+                backTo = `/client/${this.state.id}/files`
+            break 
+            case CONSULTANT: 
+                backDescr = 'Tilbake til bruker'
+                backTo = `/profile/${this.state.id}`
+            break 
+            case IP: 
+                backDescr = 'Tilbake til adgangslogg'
+                backTo = `/accesslog`
+             break 
+        }
 
         return (
             <Container fluid>
                 <PageNav
-                    backIsLink="true"
-                    backDescr={!this.props.match.params.client_id ? "Hjem" : "Tilbake til kunde"}
-                    backTo={!this.props.match.params.client_id ? ('/') : (`/client/${this.props.match.params.client_id}/files`)}
+                    backIsLink={true}
+                    backDescr={backDescr}
+                    backTo={backTo}
 
                     searchValue={this.props.searchLog}
                     searchActtion={this.props.updateSearch.bind(this)}
@@ -89,8 +119,15 @@ class AccessLog extends Component {
 
     //Calls fetchAccessLogData() immedeatly when loading the component, this agains gets the data from the API
     componentDidMount() {
-        const { client_id } = this.props.match.params //Client ID can be undefined, api allows this
-        this.props.fetchAccessLogData(client_id)
+        const { id, type } = this.props.match.params 
+        console.log(this.props.match.params)
+        //Set default value for type and id
+        
+        //Set initial state
+        this.setState({type, id})
+
+        //Fetch data
+        this.props.fetchAccessLogData(type,id)
 
         this.props.setTrail([{
             title: 'Hjem',
@@ -100,6 +137,8 @@ class AccessLog extends Component {
             title: 'Adgangslogg',
             path: '/accesslog'
         }])
+
+        //TODO: push to breadcrumb 
     }
 }
 
@@ -116,7 +155,7 @@ const mapStateToProps = (state) => {
 // Create a dispatch which sends information to the reducer.
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchAccessLogData: (client_id) => { dispatch(fetchAccessLogData(client_id)) },
+        fetchAccessLogData: (type,id) => { dispatch(fetchAccessLogData(type,id)) },
         updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
         setTrail: (trail) => { dispatch(setTrail(trail)) }
     }

@@ -61,7 +61,7 @@ const FileNav = props => {
         {
             btnKey: 4,
             type: "link",
-            to: `/client/${props.match.params.client_id}/accesslog`,
+            to: `/accesslog/client/${props.match.params.client_id}`,
             img: "AccessLog",
             imgDescr: "Adgangslogg"
         }

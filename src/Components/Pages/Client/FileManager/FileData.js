@@ -89,6 +89,12 @@ class FilesTable extends Component {
                 isHeader: 0,
                 key: 2,
                 function: () => { this.props.toggleDeleteModal(this.props.file) }
+            },
+            {
+                tekst: 'Adgangslogg',
+                isHeader: 0,
+                key: 3,
+                function: () => { this.props.history.push('/accesslog/file/' + this.props.file.id) }
             }
         ]
 

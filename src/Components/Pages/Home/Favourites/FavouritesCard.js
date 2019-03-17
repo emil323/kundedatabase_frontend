@@ -20,7 +20,7 @@ class FavouriteCard extends Component {
 				</CardBody>
 				<CardFooter className="card-footer">
 					<Link to={"./client/" + client_id + "/files"}><NavBtn img="Folder" isCard /></Link>
-					<Link to={"./client/" + client_id + "/accesslog"}><NavBtn img="AccessLog" isCard /></Link>
+					<Link to={"./accesslog/client/" + client_id}><NavBtn img="AccessLog" isCard /></Link>
 					<Link to={"./client/" + client_id + "/recyclebin"}><NavBtn img="RecycleBin" isCard /></Link>
 				</CardFooter>
 			</Card>
