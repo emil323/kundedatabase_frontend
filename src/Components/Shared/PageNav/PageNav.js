@@ -56,7 +56,7 @@ class PageNav extends Component {
         return (
             <Navbar sticky="top" color="faded">
                 {/* Sub-pages need a Link-tag to go back to parent */}
-                {this.props.backIsLink === true ? (
+                {this.props.backIsLink ? (
                     <Link to={this.props.backTo}>
                         <NavBtn
                             isBackBtn="true"
@@ -75,7 +75,7 @@ class PageNav extends Component {
                 }
 
                 {/* Collapase is open at all times in desktop mode and toggled in phonesm, and always open if a toggle is absent */}
-                <Collapse isOpen={this.props.width >= 768 || this.props.hasCollapseToggle === "false" ? "true" : this.state.isOpen}>
+                <Collapse isOpen={this.props.width >= 768 || !this.props.hasCollapseToggle ? true : this.state.isOpen}>
                     <ButtonGroup>
                         {btnMenu}
                     </ButtonGroup>

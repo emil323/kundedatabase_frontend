@@ -1,5 +1,5 @@
 import { AuthenticationContext, adalFetch, withAdalLogin } from 'react-adal';
- 
+import { CALLBACK_URL } from '../../Settings';
 
 export const adalConfig = {
   instance: 'https://login.microsoftonline.com/',
@@ -8,7 +8,7 @@ export const adalConfig = {
   endpoints: {
     api: 'https://graph.microsoft.com',
   },
-  redirectUri: 'http://localhost:3000',
+  redirectUri: CALLBACK_URL,
   cacheLocation: 'localStorage',
   resource: 'https://graph.microsoft.com/'
 };

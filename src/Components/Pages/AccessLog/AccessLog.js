@@ -65,7 +65,7 @@ class AccessLog extends Component {
         return (
             <Container fluid>
                 <PageNav
-                    backIsLink={true}
+                    backIsLink
                     backDescr={backDescr}
                     backTo={backTo}
 
@@ -73,7 +73,6 @@ class AccessLog extends Component {
                     searchActtion={this.props.updateSearch.bind(this)}
                     searchPlaceholder="Søk i loggen"
 
-                    hasCollapseToggle="false"
                     buttons={buttonMenu} />
                 <Row>
 

@@ -25,9 +25,7 @@ class UserAccess extends React.Component {
         return (
             <Container fluid>
                 <PageNav
-                    hasCollapseToggle="false"
-
-                    backIsLink="true"
+                    backIsLink
                     backTo="/"
                     backDescr="Hjem"
 

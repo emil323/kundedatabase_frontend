@@ -11,9 +11,6 @@
     
 }
 
-
-
-
 .navbar-brand .btn-vector-img {
     height: 1.5em;
 }
@@ -30,7 +27,9 @@
 
 .breadcrumb {
     background-color: #002540;
-    /* transform: translate(0%, 30%); */
 }
 
  
+.hamburger {
+    cursor: pointer;
+}

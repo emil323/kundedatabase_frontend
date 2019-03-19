@@ -35,9 +35,7 @@ class Clients extends Component {
         return (
             <Container fluid>
                 <PageNav
-                    hasCollapseToggle="false"
-
-                    backIsLink="true"
+                    backIsLink
                     backDescr="Hjem"
                     backTo={'/'}
 
