@@ -5,7 +5,7 @@
   "engines": {
     "node": "10.14.1",
     "npm": "6.4.1"
-    },
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "axios-progress-bar": "^1.2.0",
@@ -33,7 +33,7 @@
     "sanitize-html": "^1.20.0"
   },
   "scripts": {
-    "start": "concurrently --kill-others \"react-scripts start\" \"nodemon --watch ../  --inspect ../kundedatabase_api/index.js\"",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
