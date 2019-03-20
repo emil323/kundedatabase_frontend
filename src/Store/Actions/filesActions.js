@@ -96,8 +96,8 @@ export const fetchFilesData = (client_id, selected, is_recyclebin) => {
             }
             
             //Dispatch to fetch_files
-            dispatch(setIsLoading(false)) //Toggle is loading to false
             dispatch(fetchFiles(newState))
+            dispatch(setIsLoading(false)) //Toggle is loading to false
         })
         .catch(error => {
             throw(error)
