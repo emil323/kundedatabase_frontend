@@ -38,7 +38,7 @@ export default class DropdownBtn extends Component {
         })
         return (
 
-            <UncontrolledDropdown size="md">
+            <UncontrolledDropdown size="md" direction="left">
                 <DropdownToggle
                     className="btn-vector btn-vector-kebab"
                     outline color="">

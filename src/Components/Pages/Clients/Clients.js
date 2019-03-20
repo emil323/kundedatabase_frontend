@@ -26,7 +26,7 @@ class Clients extends Component {
         const buttonMenu = [
             {
                 btnKey: 0,
-                img: "NewClient",
+                img: "Add",
                 imgDescr: "Ny kunde",
                 btnAction: () => { this.props.toggleModal() }
             }

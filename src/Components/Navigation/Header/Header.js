@@ -43,7 +43,7 @@ export default class Header extends React.Component {
 						menuClicked={this.toggleHamburger}
 						color='white'
 						width={30}
-						height={20}
+						height={15}
 						strokeWidth={3}
 						animationDuration={0.3}
 					/>

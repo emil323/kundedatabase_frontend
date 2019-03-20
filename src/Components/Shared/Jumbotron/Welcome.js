@@ -28,7 +28,7 @@ class Welcome extends React.Component {
                 <Jumbotron className="Jumbotron-Home">
                         <h1 className="display=3">Velkommmen {this.state.name}!</h1>
                         <hr className="my-2" />
-                        <h2 className="lead">{this.formatDate(curDate)}</h2>                    
+                        <p className="lead">{this.formatDate(curDate)}</p>                    
                 </Jumbotron>
     
             </div>

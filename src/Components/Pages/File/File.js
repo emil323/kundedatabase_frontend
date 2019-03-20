@@ -71,10 +71,8 @@ class File extends Component {
 
         return (<div>
             <PageNav
-                backIsLink={false}
-                backAction={() => {
-                    this.props.history.push('/client/' + this.state.metadata.client_id + "/files/" + this.state.metadata.folder_id)
-                }}
+                backIsLink
+                backTo={'/client/' + this.state.metadata.client_id + "/files/" + this.state.metadata.folder_id}
                 buttons={nav_buttons}/>
             {this.state.is_downloading
                 ? <this.Spinner text='Laster ned...'/>

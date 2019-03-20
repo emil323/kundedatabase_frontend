@@ -8,6 +8,7 @@ import './Metadata.css'
 import {toggleMetadataModal} from "../../../../Store/Actions/modalActions";
 import MetadataModal from "./MetadataModal/MetadataModal";
 import {requestMetadata} from "../../../../Store/Actions/clientActions";
+import {Mobile, Desktop} from '../../../Helpers/Responsive/Responsive'
 
 class Metadata extends Component {
     constructor(props) {
@@ -30,20 +31,30 @@ class Metadata extends Component {
 
     render() {
 
-        const metadata = this.props.metadata.map(e => {
+        const metadata =  this.props.metadata.map(e => {
             return <tbody>
                 <tr>
-                    <td>{e.title}</td>
-                    <td>{e.content}</td>
+                    <Mobile>
+                        <td className='word_break'>
+                            <strong>{e.title}</strong>
+                            <p>{e.content}</p>
+                        </td>
+                    </Mobile>
+                    <Desktop>
+                        <td className='word_break'>{e.title}</td><br/>
+                        <td className='word_break'>{e.content}</td>
+                    </Desktop>
                 </tr>
             </tbody>
         })
 
+
+
         const has_data = this.props.metadata.length > 0
 
         return(<div className="metadata">
-            <Jumbotron className='display-5' >
-                <h1>{this.props.client_name}</h1>
+            <Jumbotron className='display-6' >
+                    <h2>{this.props.client_name}</h2>
                 <Collapse isOpen={this.state.isOpen}>
                     {this.props.metadata_loaded
                         ? has_data

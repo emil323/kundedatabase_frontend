@@ -1,7 +1,7 @@
 import React from 'react'
 import { Component } from 'react'
 import FavouritesCard from "./FavouritesCard"
-import { CardGroup, Navbar, Input, Container, Row, Col } from 'reactstrap';
+import { CardGroup, Navbar, Input, Container, Row, Col, CardDeck } from 'reactstrap';
 import { fetchFavouritesData, updateSearch } from '../../../../Store/Actions/favouritesActions'
 import { connect } from "react-redux";
 import './Favourites.css'
@@ -24,20 +24,20 @@ class Favourites extends Component {
 
 		return (
 			<div className="favourites">
-
 				{/* TODO: Replace with PageNav component */}
 				<Navbar sticky="top">
 					<Input placeholder="Søk etter favoritt" type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this)} />
 				</Navbar>
 
 				<Container fluid>
-						<Row>
+						<CardDeck>
 							{
 								filteredFavourites.map(favourite => {
 									return <Col xl="3" lg="4" md="6" sm="6" xs="12"><FavouritesCard key={favourite.client_id} favourite={favourite} /></Col>
 								})
 							}
-						</Row>		
+							</CardDeck>
+								
 				</Container>
 
 
