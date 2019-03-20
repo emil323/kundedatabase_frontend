@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 class AccessLog extends React.Component {
 
@@ -10,14 +11,15 @@ class AccessLog extends React.Component {
 
     render() {
         
-        
+        const log = this.props.log 
+
         return (
             <tbody id="accesslogTbody">
                 <tr id="accesslogTr">
-                    <td class="accesslogTd">{this.props.log.client_name}</td>
-                    <td class="accesslogTd">{this.props.log.file_name.substring(0, 20)}</td>
-                    <td class="accesslogTd">{this.props.log.first_name} {this.props.log.last_name}</td>
-                    <td class="accesslogTd">{this.props.log.ip}</td>
+                    <td class="accesslogTd"><Link to={`/client/${log.client_id}/files`}> {log.client_name}</Link></td>
+                    <td class="accesslogTd"><Link to={`/file/${log.file_id}`}>{this.props.log.file_name.substring(0, 20)}</Link></td>
+                    <td class="accesslogTd"><Link to={`/accesslog/consultant/${log.consultant_id}`}>{this.props.log.first_name} {this.props.log.last_name}</Link></td>
+                    <td class="accesslogTd"><Link to={`/accesslog/ip/${log.ip}`}>{this.props.log.ip}</Link></td>
                     <td class="accesslogTd">{this.formatDate(this.props.log.timestamp)}</td>
                 </tr>
           

@@ -12,6 +12,7 @@ class TrailUpdater extends Component {
 
     //This is supposed to be valid use
     render() {
+       if(this.props.selected_folder.id !== '') this.updateTrail(this.props.selected_folder)
         return null
     }
 
@@ -37,12 +38,7 @@ class TrailUpdater extends Component {
         })
     }
 
-    componentWillReceiveProps(nextProps) {
-        //Check if selected folder has changed 
-        if(nextProps.selected_folder.id !== this.props.selected_folder.id) {
-            this.updateTrail(nextProps.selected_folder)
-        }
-    }
+
 
 
 }
