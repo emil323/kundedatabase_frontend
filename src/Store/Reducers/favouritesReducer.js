@@ -12,6 +12,7 @@ const favouritesReducer = (state = initState, action) => {
     switch(action.type){
         case FETCH_FAVOURITES:
             return { ...state, 
+                search:'',
                 favourites: action.favourites.favourites
             }
         case SEARCH_KEY:

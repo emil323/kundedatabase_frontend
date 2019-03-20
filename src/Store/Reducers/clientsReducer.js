@@ -19,7 +19,8 @@ const clientsReducer = (state = initState, action) => {
                 clients: [...state.clients, action.client.client]
             }
         case FETCH_CLIENTS:
-            return { ...state, 
+            return { ...state,
+                search:'', 
                 clients: action.clients.clients
             }
         case SEARCH_KEY:
