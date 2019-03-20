@@ -33,43 +33,16 @@ class AccessLog extends Component {
 
         })
 
-        let backDescr = 'Hjem'
-        let backTo = '/'
-
-        switch(this.state.type) {
-            case FILE:
-                backDescr = 'Tilbake til fil'
-                backTo = `/file/${this.state.id}`
-            break
-            case CLIENT: 
-                backDescr = 'Tilbake til kunde'
-                backTo = `/client/${this.state.id}/files`
-            break 
-            case CONSULTANT: 
-                backDescr = 'Tilbake til bruker'
-                backTo = `/profile/${this.state.id}`
-            break 
-            case IP: 
-                backDescr = 'Tilbake til adgangslogg'
-                backTo = `/accesslog`
-             break 
-        }
-
-        const staticMenuList = []
-        const collapseMenuList = []
 
         return (
             <Container fluid>
-             <PageNav
+                <PageNav
                     backIsLink
                     backDescr={this.state.backDescr}
                     backTo={this.state.backTo}
                     searchValue={this.props.searchLog}
-                    searchAction={this.props.updateSearch.bind(this)}
+                    searchActtion={this.props.updateSearch.bind(this)}
                     searchPlaceholder="Søk i loggen"
-
-                    staticMenuBtns={staticMenuList}
-                    collapseMenuBtns={collapseMenuList} />
                     buttons={[]} />
                 <Row>
 
@@ -235,7 +208,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AccessLog))
-
 
 
 
