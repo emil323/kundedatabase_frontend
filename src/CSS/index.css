@@ -120,6 +120,10 @@ Deer (brown)
 
 @media only screen and (min-width: 1200px) {}
 
+.container {
+    
+}
+
 h1 {
     font-family: 'Metropolis Extra Bold', Arial, Helvetica, sans-serif;
 }

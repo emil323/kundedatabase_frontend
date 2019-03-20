@@ -2,8 +2,8 @@
     background-color: transparent;
     border: transparent;
     transition: transform .2s;
-    padding: 1em;
     outline: none;
+    padding: 1rem;
 }
 
 .btn-vector:hover{
@@ -19,25 +19,11 @@
 }
 
 .btn-vector-descr {
-    display: none;
-}
-
-
-.btn-vector-descr:not(.btn-vector-descr-back) {
-}
-/* 
-.btn-vector:hover .btn-vector-descr {
-    display: block;
-    font-size: 0.5em;
-} */
-
-
-.btn-vector-descr-back {
-    float:right;
+   
 }
 
 .btn-vector-img {
-    height: 2.5em;
+    height: 2em;
 }
 
 .btn-vector-img-card {

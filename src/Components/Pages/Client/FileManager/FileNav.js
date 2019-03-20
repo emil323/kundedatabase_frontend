@@ -25,8 +25,9 @@ const FileNav = props => {
         }
     }
 
-   //Define buttons to be visible in filemanager
-    const buttonMenuFiles = [
+    //Define buttons to be visible in filemanager
+    const staticMenuList = []
+    const collapseMenuList = [
         {
             btnKey: 0,
             img: "UploadFile",
@@ -53,14 +54,14 @@ const FileNav = props => {
         },
         {
             btnKey: 3,
-            type: "link",
+            isLink: true,
             to: `/client/${props.match.params.client_id}/recyclebin`,
             img: "RecycleBin",
             imgDescr: "Søpplebøtte"
         },
         {
             btnKey: 4,
-            type: "link",
+            isLink: true,
             to: `/accesslog/client/${props.match.params.client_id}`,
             img: "AccessLog",
             imgDescr: "Adgangslogg"
@@ -68,24 +69,27 @@ const FileNav = props => {
     ]
 
     //Define buttons to be visible in rec
-    const buttonMenuRecycleBin = []
+    const collapseMenuListRec = []
 
     /**
      * Render PageNav
      */
 
     return <PageNav
+        staticMenuBtns={staticMenuList}
+        collapseMenuBtns={props.is_recyclebin ? collapseMenuListRec : collapseMenuList}
+        hasCollapse={props.is_recyclebin ? false : true}
+
         backIsLink={props.selected_folder.is_root ? true : false}
         backTo={getBackLink()}
-        hasCollapseToggle={props.is_recyclebin ? false: true}
+        hasCollapseToggle={props.is_recyclebin ? false : true}
         backAction={upOneLevel}
         // backDescr={props.selected_folder.is_root ? "Tilbake til kunder" : "Tilbake et hakk"}
 
         searchValue={props.search}
         searchAction={props.updateSearch}
         searchPlaceholder="Søk etter filer"
-
-        buttons={props.is_recyclebin ? buttonMenuRecycleBin : buttonMenuFiles}/>
+    />
 };
 
 export default FileNav;

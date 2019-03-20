@@ -37,9 +37,6 @@ class AccessLog extends Component {
 
         })
 
-
-        const buttonMenu = []
-
         let backDescr = 'Hjem'
         let backTo = '/'
 
@@ -62,18 +59,22 @@ class AccessLog extends Component {
              break 
         }
 
+        const staticMenuList = []
+        const collapseMenuList = []
+
         return (
             <Container fluid>
-                <PageNav
+             <PageNav
                     backIsLink
                     backDescr={backDescr}
                     backTo={backTo}
 
                     searchValue={this.props.searchLog}
-                    searchActtion={this.props.updateSearch.bind(this)}
+                    searchAction={this.props.updateSearch.bind(this)}
                     searchPlaceholder="Søk i loggen"
 
-                    buttons={buttonMenu} />
+                    staticMenuBtns={staticMenuList}
+                    collapseMenuBtns={collapseMenuList} />
                 <Row>
 
                     <Col sm="12" xs="12" md="12" lg={{ size: '12'}} xl={{ size: '10', offset: 1 }}>

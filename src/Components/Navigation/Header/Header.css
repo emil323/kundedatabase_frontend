@@ -1,15 +1,10 @@
 .navbar {
-    position: fixed;
-    top: 0;
-    z-index: 1;   
-
     background-color: #fff;  
 }
 
 .mainHeader {
     background-color: #002540;
     color:white;
-    
 }
 
 .navbar-brand .btn-vector-img {
@@ -30,7 +25,6 @@
     background-color: #002540;
 }
 
- 
 .hamburger {
     cursor: pointer;
 }

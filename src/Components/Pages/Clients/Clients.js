@@ -23,8 +23,10 @@ class Clients extends Component {
             return client.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
         })
 
-        const buttonMenu = [
+        const collapseMenuList = []
+        const staticMenuList = [
             {
+                isLink: false,
                 btnKey: 0,
                 img: "Add",
                 imgDescr: "Ny kunde",
@@ -35,6 +37,18 @@ class Clients extends Component {
         return (
             <Container fluid>
                 <PageNav
+                    staticMenuBtns={staticMenuList}
+                    collapseMenuBtns={collapseMenuList}
+
+                    backIsLink
+                    backDescr="Hjem"
+                    backTo={'/'}
+
+                    searchValue={this.props.search}
+                    searchAction={this.props.updateSearch.bind(this)}
+                    searchPlaceholder="Søk etter kunde" />
+
+                {/*  <PageNav
                     backIsLink
                     backDescr="Hjem"
                     backTo={'/'}
@@ -44,7 +58,8 @@ class Clients extends Component {
                     searchPlaceholder="Søk etter kunde"
 
                     buttons={buttonMenu}
-                />
+                /> */}
+
 
                 <Row>
                     <Col>

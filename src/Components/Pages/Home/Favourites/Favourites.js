@@ -5,7 +5,7 @@ import { CardGroup, Navbar, Input, Container, Row, Col, CardDeck } from 'reactst
 import { fetchFavouritesData, updateSearch } from '../../../../Store/Actions/favouritesActions'
 import { connect } from "react-redux";
 import './Favourites.css'
-
+import PageNav from '../../../Shared/PageNav/PageNav'
 
 
 
@@ -21,13 +21,21 @@ class Favourites extends Component {
 			return favourite.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
 		});
 
+		const staticMenuList = []
+        const collapseMenuList = []
 
 		return (
 			<div className="favourites">
-				{/* TODO: Replace with PageNav component */}
-				<Navbar sticky="top">
-					<Input placeholder="Søk etter favoritt" type="text" value={this.props.search} onChange={this.props.updateSearch.bind(this)} />
-				</Navbar>
+			
+				<PageNav
+					backIsDisabled 
+					searchPlaceholder={"Søk etter favoritt"}
+					searchValue={this.props.search}
+					searchAction={this.props.updateSearch.bind(this)}
+
+					staticMenuBtns={staticMenuList}
+                    collapseMenuBtns={collapseMenuList}
+				/> 
 
 				<Container fluid>
 						<CardDeck>
@@ -37,7 +45,6 @@ class Favourites extends Component {
 								})
 							}
 							</CardDeck>
-								
 				</Container>
 
 

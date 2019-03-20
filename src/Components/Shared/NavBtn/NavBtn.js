@@ -21,6 +21,8 @@ import Download from '../../../Assets/Icons/download-file.png'
 import Folder from '../../../Assets/Icons/folder.png'
 import Edit from '../../../Assets/Icons/edit.png'
 import Remove from '../../../Assets/Icons/remove.png'
+import Search from '../../../Assets/Icons/search.png'
+
 
 
 class NavBtn extends Component {
@@ -52,6 +54,7 @@ class NavBtn extends Component {
             case 'Edit': return Edit
             case 'Remove': return Remove
             case 'Add': return NewFile
+            case 'Search': return Search
             default: return null
         }
     }
@@ -59,7 +62,7 @@ class NavBtn extends Component {
     render() {
         return (
             <button
-                className={this.props.isBackBtn ? "btn-vector btn-vector-back" : "btn-vector"}
+                className={"btn-vector"}
                 onClick={this.props.action}
                 disabled={this.props.isDisabled}>
                 <img
@@ -67,10 +70,10 @@ class NavBtn extends Component {
                     src={this.getImg(this.props.img)}
                     alt={this.props.descr} />
                 {this.props.children}
-                {this.props.isCard ? '' : (<p
-                    className={this.props.isBackBtn ? "btn-vector-descr btn-vector-descr-back" : "btn-vector-descr"}>
+                {this.props.isCard || !this.props.isCollapseBtn ? '' : (<span
+                    className={"btn-vector-descr"}>
                     {this.props.descr}
-        </p>)}
+                </span>)}
             </button>
         )
     }

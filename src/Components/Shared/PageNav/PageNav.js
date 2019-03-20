@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Navbar, Collapse, ButtonGroup, Input } from 'reactstrap'
+import { Container, Row, Col, Navbar, Nav, NavItem, Collapse, ButtonGroup, Input } from 'reactstrap'
 import NavBtn from '../NavBtn/NavBtn'
 import { Link } from 'react-router-dom'
 import { withResizeDetector } from 'react-resize-detector';
-
+import { Mobile, Desktop } from '../../Helpers/Responsive/Responsive'
 
 import './PageNav.css'
 
@@ -11,17 +11,27 @@ class PageNav extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isOpen: false,
+            menuIsOpen: false,
+            searchIsOpen: false,
             width: window.innerWidth
         }
 
-        this.toggle = this.toggle.bind(this)
+        this.toggleMenu = this.toggleMenu.bind(this)
+        this.toggleSearch = this.toggleSearch.bind(this)
     }
 
     // Toggle Collapsible
-    toggle() {
+    toggleMenu() {
         this.setState({
-            isOpen: !this.state.isOpen
+            menuIsOpen: !this.state.menuIsOpen,
+            searchIsOpen: false
+        })
+    }
+
+    toggleSearch() {
+        this.setState({
+            searchIsOpen: !this.state.searchIsOpen,
+            menuIsOpen: false
         })
     }
 
@@ -30,74 +40,116 @@ class PageNav extends Component {
     }
 
     render() {
-        const { buttons } = this.props
-        const btnMenu = buttons.map(btn => {
-            // Some buttons uses a Router
-            switch (btn.type) {
-                case "link":
-                    return <Link to={btn.to}>
+        const { staticMenuBtns } = this.props
+        const { collapseMenuBtns } = this.props
+
+        const collapseMenu = collapseMenuBtns.map(btn => {
+            if (btn.isLink) {
+                return <NavItem>
+                    <Link to={btn.to}>
                         <NavBtn
+                            isCollapseBtn
                             key={btn.btnKey}
                             action={btn.btnAction}
                             img={btn.img}
                             descr={btn.imgDescr}
                         />
                     </Link>
-                default:
-                    return <NavBtn
+                </NavItem>
+            } else {
+                return <NavItem>
+                    <NavBtn
+                        isCollapseBtn
                         key={btn.btnKey}
                         action={btn.btnAction}
                         img={btn.img}
                         descr={btn.imgDescr}
                     />
+                </NavItem>
+            }
+        })
+
+        const staticMenu = staticMenuBtns.map(btn => {
+            if (btn.isLink) {
+                return <Link to={btn.to}>
+                    <NavBtn
+                        key={btn.btnKey}
+                        action={btn.btnAction}
+                        img={btn.img}
+                        descr={btn.imgDescr}
+                    />
+                </Link>
+            } else {
+                return <NavBtn
+                    key={btn.btnKey}
+                    action={btn.btnAction}
+                    img={btn.img}
+                    descr={btn.imgDescr}
+                />
             }
         })
 
         return (
-            <Navbar sticky="top" color="faded">
-                {/* Sub-pages need a Link-tag to go back to parent */}
-                {this.props.backIsLink ? (
-                    <Link to={this.props.backTo}>
-                        <NavBtn
-                            isBackBtn="true"
-                            img={this.props.backTo === "/" ? "Home" : "ArrowBack"}
-                            descr={this.props.backDescr}
-                        />
-                    </Link>
-                ) : (
-                        <NavBtn
-                            isBackBtn="true"
-                            action={this.props.backAction}
-                            img="ArrowPrevFolder"
-                            descr={this.props.backDescr}
-                            isDisabled={this.props.backIsDisabled}
-                        />)
-                }
 
-                {/* Collapase is open at all times in desktop mode and toggled in phonesm, and always open if a toggle is absent */}
-                <Collapse isOpen={this.props.width >= 768 || !this.props.hasCollapseToggle ? true : this.state.isOpen}>
-                    <ButtonGroup>
-                        {btnMenu}
-                    </ButtonGroup>
-                </Collapse>
+            <Navbar sticky="top" color="faded" className="page-nav">
+             
+                    <Collapse isOpen={this.state.menuIsOpen} navbar>
+                        <Nav navbar>
+                            {collapseMenu}
+                        </Nav>
+                    </Collapse>
 
-                {/* Hides Collapse-toggler in desktop, or if prop is set to false */}
-                {!this.props.hasCollapseToggle || this.props.width >= 768 ? '' : (
+                    <Collapse isOpen={this.state.searchIsOpen} navbar>
+                        { /* Check if searchAction is defined, or else render no search bar */
+                            this.props.searchAction &&
+                            <Input
+                                placeholder={this.props.searchPlaceholder}
+                                type="text" value={this.props.searchValue}
+                                onChange={this.props.searchAction}
+                            />
+                        }
+                    </Collapse>
+
+                    {!this.props.backIsDisabled ? (
+
+                        this.props.backIsLink ? (
+                            <Link to={this.props.backTo}>
+                                <NavBtn
+                                    isBackBtn="true"
+                                    img={this.props.backTo === "/" ? "Home" : "ArrowBack"}
+                                    descr={this.props.backDescr}
+                                />
+                            </Link>
+                        ) : (
+                                <NavBtn
+                                    isBackBtn="true"
+                                    action={this.props.backAction}
+                                    img="ArrowPrevFolder"
+                                    descr={this.props.backDescr}
+                                    isDisabled={this.props.backIsDisabled}
+                                />)
+
+                    ) : <NavBtn
+                            isDisabled
+                            img=""
+                        />}
+
+                    {this.props.hasCollapse ?
+                        <NavBtn
+                            class="collapse"
+                            action={this.toggleMenu}
+                            img={this.state.menuIsOpen ? "Up" : "Down"}
+                            descr={this.state.menuIsOpen ? "Åpne meny" : "Lukk meny"}
+                        /> : null}
+
+                    {staticMenu}
+
                     <NavBtn
                         class="collapse"
-                        action={this.toggle}
-                        img={this.state.isOpen ? "Up" : "Down"}
-                        descr={this.state.isOpen ? "Åpne meny" : "Lukk meny"}
+                        action={this.toggleSearch}
+                        img="Search"
+                        descr={this.props.searchPlaceholder}
                     />
-                )}
-                { /* Check if searchAction is defined, or else render no search bar */
-                    this.props.searchAction &&
-                    <Input
-                        placeholder={this.props.searchPlaceholder}
-                        type="text" value={this.props.searchValue}
-                        onChange={this.props.searchAction}
-                    />
-                }
             </Navbar>
         )
     }
