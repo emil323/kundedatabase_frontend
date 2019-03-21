@@ -1,10 +1,12 @@
 import React from 'react'
-import word from "../../../../Assets/Icons/word.png"
-import pdf from "../../../../Assets/Icons/pdf.png"
-import excel from "../../../../Assets/Icons/excel.png"
-import textDoc from "../../../../Assets/Icons/txt.png"
+import word from "../../../../Assets/Icons/Files/doc.png"
+import pdf from "../../../../Assets/Icons/Files/pdf.png"
+import excel from "../../../../Assets/Icons/Files/excel.png"
+import textDoc from "../../../../Assets/Icons/Files/txt.png"
+import powerp from "../../../../Assets/Icons/Files/powerp.png"
+import img from "../../../../Assets/Icons/Files/img.png"
 import folder from "../../../../Assets/Icons/folder.png"
-import horizontalDropdown from '../../../../Assets/Icons/horizontalDropdown.png'
+import Kebab from '../../../../Assets/Icons/kebab-hor.png'
 
 import { connect } from "react-redux";
 import { fetchFilesData } from '../../../../Store/Actions/filesActions'
@@ -49,9 +51,11 @@ class FilesTable extends Component {
             case "folder":
                 return folder
             case "image/png":
-                return pdf
+                return img
+            case "powerp":
+                return powerp
             default:
-                return textDoc
+                return word
         }
     }
 
@@ -112,7 +116,7 @@ class FilesTable extends Component {
 
                     {this.props.file.is_deleted
                         ? <td><Button onClick={() => this.props.toggleRecoverModal(this.props.file)}>Gjenopprett</Button></td>
-                        : <td className="DropDwnIcon"><DropdownBtn icon={horizontalDropdown} options={btnOptions} /></td>
+                        : <td className="DropDwnIcon"><DropdownBtn icon={Kebab} options={btnOptions} /></td>
                     }
                 </tr>
             </tbody>

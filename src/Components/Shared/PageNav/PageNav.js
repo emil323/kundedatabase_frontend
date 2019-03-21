@@ -90,9 +90,12 @@ class PageNav extends Component {
         })
 
         return (
-
-            <Navbar sticky="top" color="faded" className="page-nav">
-             
+            <div>
+        
+            
+            <Navbar fixed="bottom" color="faded" className="page-nav">
+            
+         
                     <Collapse isOpen={this.state.menuIsOpen} navbar>
                         <Nav navbar>
                             {collapseMenu}
@@ -138,19 +141,22 @@ class PageNav extends Component {
                         <NavBtn
                             class="collapse"
                             action={this.toggleMenu}
-                            img={this.state.menuIsOpen ? "Up" : "Down"}
+                            img={this.state.menuIsOpen ? "ExpandMoreWhite" : "ExpandLessWhite"}
                             descr={this.state.menuIsOpen ? "Åpne meny" : "Lukk meny"}
                         /> : null}
 
                     {staticMenu}
 
+                    {!this.props.disableSearch ? (
                     <NavBtn
                         class="collapse"
                         action={this.toggleSearch}
                         img="Search"
                         descr={this.props.searchPlaceholder}
-                    />
+                    />) : ("") }
+                   
             </Navbar>
+            </div>
         )
     }
 }

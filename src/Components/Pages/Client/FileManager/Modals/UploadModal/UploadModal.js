@@ -9,7 +9,7 @@ import { toggleUploadModal } from "../../../../../../Store/Actions/modalActions"
 import {Mobile, Desktop} from '../../../../../Helpers/Responsive/Responsive'
 import "./UploadModal.css";
 
-import downloadIcon from "../../../../../../Assets/Icons/download.png";
+import Upload from "../../../../../../Assets/Icons/upload-black.png";
 
 class UploadModal extends React.Component {
   constructor(props) {
@@ -128,7 +128,7 @@ class UploadModal extends React.Component {
                       "dropzone--isActive": isDragActive
                     })}
                   >
-                    <img className="modalImage" src={downloadIcon} alt=""/>
+                    <img className="modalImage" src={Upload} alt=""/>
                     <input {...getInputProps()} />
                     <Desktop>
                       {

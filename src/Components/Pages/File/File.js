@@ -1,13 +1,13 @@
 import React from 'react'
-import {Component} from 'react'
+import { Component } from 'react'
 import api from '../../../API/API'
 import PageNav from '../../Shared/PageNav/PageNav'
-import {setTrail, pushTrail} from '../../../Store/Actions/breadcrumbActions'
+import { setTrail, pushTrail } from '../../../Store/Actions/breadcrumbActions'
 
-import {connect} from "react-redux";
-import {Spinner} from 'reactstrap'
+import { connect } from "react-redux";
+import { Spinner } from 'reactstrap'
 import FileViewer from './FileViewer'
-import {isSupported} from './DriverFinder'
+import { isSupported } from './DriverFinder'
 
 
 class File extends Component {
@@ -20,7 +20,7 @@ class File extends Component {
                 file_id: '',
                 file_name: '',
                 file_type: '',
-                size:0,
+                size: 0,
                 folder_id: '',
                 folder_name: '',
                 parent_is_root: ''
@@ -34,7 +34,7 @@ class File extends Component {
 
     download() {
         //Update state to is_downloading
-        this.setState({...this.state, is_downloading:true})
+        this.setState({ ...this.state, is_downloading: true })
         //Download file from api
         api.file(this.state.metadata.file_id).download().then(res => {
             const url = window.URL.createObjectURL(new Blob([res.data]));
@@ -43,7 +43,7 @@ class File extends Component {
             link.setAttribute('download', this.state.metadata.file_name);
             document.body.appendChild(link);
             link.click()
-            this.setState({...this.state, is_downloading:false})
+            this.setState({ ...this.state, is_downloading: false })
         })
     }
 
@@ -54,42 +54,50 @@ class File extends Component {
         </p>
     }
 
+
     render() {
-        const nav_buttons = [{
-                btnKey: 0,
-                img: "AccessLog",
-                imgDescr: "Adgangslogg",
-                btnAction: () => {this.props.history.push('/accesslog/file/' + this.state.metadata.file_id)}
-            },
-            {
-                btnKey: 1,
-                img: "Download",
-                imgDescr: "Last ned",
-                btnAction: this.download
-            }]
+        const staticMenuList = [{
+            btnKey: 0,
+            img: "AccessLogWhite",
+            imgDescr: "Adgangslogg",
+            btnAction: () => { this.props.history.push('/accesslog/file/' + this.state.metadata.file_id) }
+        },
+        {
+            btnKey: 1,
+            img: "Download",
+            imgDescr: "Last ned",
+            btnAction: this.download
+        }]
+
+        const collapseMenuList = []
+
 
 
         return (<div>
             <PageNav
+                disableSearch
                 backIsLink
                 backTo={'/client/' + this.state.metadata.client_id + "/files/" + this.state.metadata.folder_id}
-                buttons={nav_buttons}/>
+
+                staticMenuBtns={staticMenuList}
+                collapseMenuBtns={collapseMenuList}
+            />
             {this.state.is_downloading
-                ? <this.Spinner text='Laster ned...'/>
+                ? <this.Spinner text='Laster ned...' />
                 : this.state.is_loading
-                    ? <this.Spinner text='Vent litt..'/>
-                    : <FileViewer blob={this.state.blob} metadata={this.state.metadata} download={this.download}/>
+                    ? <this.Spinner text='Vent litt..' />
+                    : <FileViewer blob={this.state.blob} metadata={this.state.metadata} download={this.download} />
             }
         </div>)
     }
 
 
     componentDidMount() {
-        const {file_id} = this.props.match.params
+        const { file_id } = this.props.match.params
 
         api.file(file_id).metadata().then(res => {
             console.log(res)
-            this.setState({...this.state,  metadata: res.data})
+            this.setState({ ...this.state, metadata: res.data })
 
             //Update breadcrumbs
             this.props.setTrail([
@@ -115,21 +123,21 @@ class File extends Component {
             //TODO: Create a check for max filesize here, we don't want to preview a 5gb large file
 
             //Fetch file
-            if(!can_preview ) {
+            if (!can_preview) {
                 console.log('is supported')
                 api.file(this.state.metadata.file_id).download().then(res => {
                     if (!res.data.err) {
                         //Update state with new blob, set is_loading to false
-                        this.setState({...this.state, is_loading: false, blob: new Blob([res.data])})
+                        this.setState({ ...this.state, is_loading: false, blob: new Blob([res.data]) })
                     } else {
-                        this.setState({...this.state, is_loading: false})
+                        this.setState({ ...this.state, is_loading: false })
                         throw res.data.err
                     }
                 })
             } else {
                 //Now supported
                 console.log('not supported')
-                this.setState({...this.state, is_loading: false})
+                this.setState({ ...this.state, is_loading: false })
             }
         })
 

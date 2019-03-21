@@ -33,6 +33,9 @@ class AccessLog extends Component {
 
         })
 
+        const staticMenuList = []
+        const collapseMenuList = []
+
 
         return (
             <Container fluid>
@@ -41,9 +44,10 @@ class AccessLog extends Component {
                     backDescr={this.state.backDescr}
                     backTo={this.state.backTo}
                     searchValue={this.props.searchLog}
-                    searchActtion={this.props.updateSearch.bind(this)}
+                    searchAction={this.props.updateSearch.bind(this)}
                     searchPlaceholder="Søk i loggen"
-                    buttons={[]} />
+                    staticMenuBtns={staticMenuList}
+                    collapseMenuBtns={collapseMenuList} />
                 <Row>
 
                     <Col sm="12" xs="12" md="12" lg={{ size: '12'}} xl={{ size: '10', offset: 1 }}>

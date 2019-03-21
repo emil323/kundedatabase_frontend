@@ -4,7 +4,6 @@ import {
 } from 'reactstrap';
 import { Link } from "react-router-dom"
 import NavBtn from '../../../Shared/NavBtn/NavBtn'
-import PlaceholderWide from '../../../../Assets/ClientLogos/placeholder_wide.png'
 
 class FavouriteCard extends Component {
 	render() {
@@ -20,8 +19,8 @@ class FavouriteCard extends Component {
 				</CardBody>
 				<CardFooter className="card-footer">
 					<Link to={"./client/" + client_id + "/files"}><NavBtn img="Folder" isCard /></Link>
-					<Link to={"./accesslog/client/" + client_id}><NavBtn img="AccessLog" isCard /></Link>
-					<Link to={"./client/" + client_id + "/recyclebin"}><NavBtn img="RecycleBin" isCard /></Link>
+					<Link to={"./accesslog/client/" + client_id}><NavBtn img="AccessLogBlack" isCard /></Link>
+					<Link to={"./client/" + client_id + "/recyclebin"}><NavBtn img="TrashBlack" isCard /></Link>
 				</CardFooter>
 			</Card>
 		);

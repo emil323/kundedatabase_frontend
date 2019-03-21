@@ -64,7 +64,7 @@ class Metadata extends Component {
 
                 </Collapse>
                 <p>
-                    <NavBtn img={this.state.isOpen ? 'Up' : 'Down'} action={this.toggleCollapse}>
+                    <NavBtn img={this.state.isOpen ? 'ExpandLessBlack' : 'ExpandMoreBlack'} action={this.toggleCollapse}>
                         {this.state.isOpen ? 'Skjul' : 'Vis skjult innhold'}
                     </NavBtn>
                     {this.state.isOpen && this.props.metadata_loaded ? <NavBtn action={this.props.toggleMetadataModal} img='Edit'>Endre</NavBtn> : ''}

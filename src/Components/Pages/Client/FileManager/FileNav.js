@@ -56,14 +56,14 @@ const FileNav = props => {
             btnKey: 3,
             isLink: true,
             to: `/client/${props.match.params.client_id}/recyclebin`,
-            img: "RecycleBin",
+            img: "TrashWhite",
             imgDescr: "Søpplebøtte"
         },
         {
             btnKey: 4,
             isLink: true,
             to: `/accesslog/client/${props.match.params.client_id}`,
-            img: "AccessLog",
+            img: "AccessLogWhite",
             imgDescr: "Adgangslogg"
         }
     ]
