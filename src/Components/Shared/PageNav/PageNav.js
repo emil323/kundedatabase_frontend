@@ -91,12 +91,12 @@ class PageNav extends Component {
 
         return (
             <div>
-        
-            
-            <Navbar fixed="bottom" color="faded" className="page-nav">
-            
-         
-                    <Collapse isOpen={this.state.menuIsOpen} navbar>
+
+
+                <Navbar fixed="bottom" color="faded" className="page-nav">
+
+
+                    <Collapse isOpen={this.state.menuIsOpen} onClick={this.toggleMenu} navbar>
                         <Nav navbar>
                             {collapseMenu}
                         </Nav>
@@ -114,7 +114,6 @@ class PageNav extends Component {
                     </Collapse>
 
                     {!this.props.backIsDisabled ? (
-
                         this.props.backIsLink ? (
                             <Link to={this.props.backTo}>
                                 <NavBtn
@@ -131,7 +130,6 @@ class PageNav extends Component {
                                     descr={this.props.backDescr}
                                     isDisabled={this.props.backIsDisabled}
                                 />)
-
                     ) : <NavBtn
                             isDisabled
                             img=""
@@ -147,15 +145,16 @@ class PageNav extends Component {
 
                     {staticMenu}
 
+
                     {!this.props.disableSearch ? (
-                    <NavBtn
-                        class="collapse"
-                        action={this.toggleSearch}
-                        img="Search"
-                        descr={this.props.searchPlaceholder}
-                    />) : ("") }
-                   
-            </Navbar>
+                        <NavBtn
+                            class="collapse"
+                            action={this.toggleSearch}
+                            img="Search"
+                            descr={this.props.searchPlaceholder}
+                        />) : ("")}
+
+                </Navbar>
             </div>
         )
     }

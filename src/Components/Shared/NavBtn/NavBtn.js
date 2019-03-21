@@ -24,7 +24,8 @@ import Download from '../../../Assets/Icons/download-white.png'
 import Folder from '../../../Assets/Icons/folder.png'
 import Edit from '../../../Assets/Icons/edit.png'
 import Search from '../../../Assets/Icons/search.png'
-
+import Apps from '../../../Assets/Icons/apps.png'
+import Restore from '../../../Assets/Icons/restore.png'
 
 
 class NavBtn extends Component {
@@ -40,6 +41,7 @@ class NavBtn extends Component {
             case 'AccessLogBlack': return AccessLogBlack
             case 'ArrowBack': return ArrowBack
             case 'ArrowPrevFolder': return ArrowPrevFolder
+            case 'Apps': return Apps
             case 'Folder': return Folder
             case 'Home': return Home
             case 'NewClient': return NewClient
@@ -59,6 +61,7 @@ class NavBtn extends Component {
             case 'ExpandLessWhite': return ExpandLessWhite
             case 'ExpandMoreBlack': return ExpandMoreBlack
             case 'ExpandLessBlack': return ExpandLessBlack
+            case 'Restore': return Restore
             default: return null
         }
     }
@@ -66,7 +69,7 @@ class NavBtn extends Component {
     render() {
         return (
             <button
-                className={"btn-vector"}
+                className={this.props.isCollapseBtn ? "btn-vector btn-menu" : "btn-vector"}
                 onClick={this.props.action}
                 disabled={this.props.isDisabled}>
                 <img
