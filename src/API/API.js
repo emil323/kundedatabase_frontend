@@ -50,6 +50,9 @@ export default {
                 return {
                     id(id) {
                         return axios().get('/accesslog/' + type + '/' + id)
+                    },
+                    export(id) {
+                        return axios().get('/accesslog/' + type + '/' + id + '?csv_export=true')
                     }
                 }
             },

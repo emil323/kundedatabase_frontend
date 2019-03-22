@@ -11,6 +11,7 @@ import { setTrail, pushTrail } from '../../../Store/Actions/breadcrumbActions'
 import { fetchAccessLogData, updateSearch } from '../../../Store/Actions/accesslogActions'
 import { withRouter } from 'react-router-dom';
 import { access } from 'fs';
+import API from '../../../API/API';
 
 
 class AccessLog extends Component {
@@ -22,8 +23,10 @@ class AccessLog extends Component {
             type: 'all',
             id:null,
             backTo:'',
-            backDescr:''
+            backDescr:'',
+            collapseMenuList: []
         }
+        this.csv_export = this.csv_export.bind(this)
     }
 
     render() {
@@ -32,9 +35,6 @@ class AccessLog extends Component {
                 log.file_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
 
         })
-
-        const staticMenuList = []
-        const collapseMenuList = []
 
 
         return (
@@ -46,8 +46,9 @@ class AccessLog extends Component {
                     searchValue={this.props.searchLog}
                     searchAction={this.props.updateSearch.bind(this)}
                     searchPlaceholder="Søk i loggen"
-                    staticMenuBtns={staticMenuList}
-                    collapseMenuBtns={collapseMenuList} />
+                    staticMenuBtns={[]}
+                    hasCollapse={true}
+                    collapseMenuBtns={this.state.collapseMenuList} />
                 <Row>
 
                     <Col sm="12" xs="12" md="12" lg={{ size: '12'}} xl={{ size: '10', offset: 1 }}>
@@ -86,12 +87,7 @@ class AccessLog extends Component {
                             </tr>
 
                             }
-                            {/*
-                        clientFilteredAccessLog.map(log => {
-                            return <AccessLogData log={log} key={log.id} />
-                        })
-                    */
-                            }
+                    
                         </Table>
                     </Col>
                 </Row>
@@ -122,8 +118,15 @@ class AccessLog extends Component {
             
             //Set default value for type and id
             
-            let backDescr = 'Hjem'
+            let backDescr = 'Tilbake til adgangslogg'
             let backTo = '/'
+            let collapseMenuList = [{
+                btnKey: 0,
+                btnAction:this.csv_export,
+                to: `/file/${nextProps.file_id}`,
+                img: "Download",
+                imgDescr: "Exporter til CSV dokument"
+            }]
     
             nextProps.setTrail([{
                 title: 'Hjem',
@@ -136,29 +139,71 @@ class AccessLog extends Component {
     
             switch(nextProps.match.params.type) {
                 case FILE:
-                    backDescr = 'Tilbake til fil'
-                    backTo = `/file/${nextProps.file_id}`
-                    nextProps.pushTrail(nextProps.file_name, backTo)
+                    nextProps.access_type === 'VIEW_FILE'
+                    ? nextProps.pushTrail(nextProps.file_name)  
+                    : nextProps.pushTrail(nextProps.client_name + ': Strukturert data')
+                    
+                    collapseMenuList.push(
+                        {
+                            btnKey: 1,
+                            isLink: true,
+                            to: `/client/${nextProps.client_id}/files/${nextProps.parent_id}`,
+                            img: "FolderWhite",
+                            imgDescr: "Gå til mappe"
+                        },
+                        {
+                            btnKey: 2,
+                            isLink: true,
+                            to: `/file/${nextProps.file_id}`,
+                            img: "ArrowRightWhite",
+                            imgDescr: "Gå til fil"
+                    })
                 break
                 case CLIENT: 
-                    backDescr = 'Tilbake til kunde'
-                    backTo = `/client/${nextProps.client_id}/files`
-                    nextProps.pushTrail(nextProps.client_name, backTo)
+                    nextProps.pushTrail(nextProps.client_name)
+                    collapseMenuList.push({
+                        btnKey: 1,
+                        isLink: true,
+                        to: `/client/${nextProps.client_id}/files`,
+                        img: "ArrowRightWhite",
+                        imgDescr: "Gå til kunde"
+                    })
                 break 
                 case CONSULTANT: 
-                    backDescr = 'Tilbake til adgangslogg'
-                    backTo = `/accesslog`
-                    nextProps.pushTrail(nextProps.consultant_name, backTo)
+                    nextProps.pushTrail(nextProps.consultant_name)
+                    collapseMenuList.push({
+                        btnKey: 1,
+                        isLink: true,
+                        to: `/client/${nextProps.client_id}`,
+                        img: "EasyReportWhite",
+                        imgDescr: "Forenklet rapport"
+                    })
                 break 
                 case IP: 
-                    backDescr = 'Tilbake til adgangslogg'
-                    backTo = `/accesslog`
-                    nextProps.pushTrail(nextProps.ip, backTo)
+                    nextProps.pushTrail(nextProps.ip)
                  break 
+                 default:
+                    backDescr = 'Hjem'
+                    backTo = '/'
+                 break;
             }
     
-            this.setState({...this.state,backDescr, backTo})
+            this.setState({...this.state,backDescr, backTo, collapseMenuList})
         }
+    }
+
+    csv_export() {
+        API.accesslog().sort_by(this.state.type).export(this.state.id).then(res => {
+
+            let element = document.createElement('a')
+            element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(res.data))
+            element.setAttribute('download', `adgangslogg.${Date.now()}.csv`)
+            element.style.display = 'none'
+            document.body.appendChild(element)
+        
+            element.click()
+            document.body.removeChild(element)
+        })
     }
 
 }
@@ -181,6 +226,8 @@ const mapStateToProps = (state) => {
     let file_id
     let consultant_id
     let client_id 
+    let access_type
+    let parent_id
 
     if(accesslog.length > 0 ) {
         const first = accesslog[0]
@@ -191,13 +238,15 @@ const mapStateToProps = (state) => {
         file_id = first.file_id 
         consultant_id = first.consultant_id
         client_id = first.client_id
+        access_type = first.type
+        parent_id = first.parent_id
     }
 
     return {
         accesslog,
         search: state.accesslogReducer.search,
         is_loading: state.accesslogReducer.is_loading,
-        ip,client_name, consultant_name, file_name, file_id, consultant_id, client_id
+        ip,client_name, consultant_name, file_name, file_id, consultant_id, client_id,access_type, parent_id
     }
 }
 

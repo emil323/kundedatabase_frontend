@@ -24,8 +24,9 @@ import Download from '../../../Assets/Icons/download-white.png'
 import Folder from '../../../Assets/Icons/folder.png'
 import Edit from '../../../Assets/Icons/edit.png'
 import Search from '../../../Assets/Icons/search.png'
-
-
+import ArrowRightWhite from '../../../Assets/Icons/arrow_right_white.png'
+import EasyReportWhite from '../../../Assets/Icons/easy_report_white.png'
+import FolderWhite from '../../../Assets/Icons/folder_white.png'
 
 class NavBtn extends Component {
     constructor(props) {
@@ -41,6 +42,7 @@ class NavBtn extends Component {
             case 'ArrowBack': return ArrowBack
             case 'ArrowPrevFolder': return ArrowPrevFolder
             case 'Folder': return Folder
+            case 'FolderWhite': return FolderWhite
             case 'Home': return Home
             case 'NewClient': return NewClient
             case 'NewFile': return NewFile
@@ -59,6 +61,8 @@ class NavBtn extends Component {
             case 'ExpandLessWhite': return ExpandLessWhite
             case 'ExpandMoreBlack': return ExpandMoreBlack
             case 'ExpandLessBlack': return ExpandLessBlack
+            case 'ArrowRightWhite': return ArrowRightWhite
+            case 'EasyReportWhite': return EasyReportWhite
             default: return null
         }
     }
