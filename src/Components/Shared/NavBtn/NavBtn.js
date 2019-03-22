@@ -27,6 +27,9 @@ import Search from '../../../Assets/Icons/search.png'
 import Apps from '../../../Assets/Icons/apps.png'
 import Restore from '../../../Assets/Icons/restore.png'
 import ArrowForward from '../../../Assets/Icons/arrow-forward.png'
+import Settings from '../../../Assets/Icons/settings.png'
+import Clients from '../../../Assets/Icons/clients.png'
+import UserAcces from '../../../Assets/Icons/user-access.png'
 
 
 class NavBtn extends Component {
@@ -34,6 +37,9 @@ class NavBtn extends Component {
         super(props)
 
         this.getImg = this.getImg.bind(this)
+        this.getBtnClass = this.getBtnClass.bind(this)
+        this.getImgClass = this.getImgClass.bind(this)
+
     }
 
     getImg(name) {
@@ -64,25 +70,55 @@ class NavBtn extends Component {
             case 'ExpandLessBlack': return ExpandLessBlack
             case 'Restore': return Restore
             case 'ArrowForward': return ArrowForward
+            case 'Settings': return Settings
+            case 'Clients': return Clients
+            case 'UserAccess': return UserAcces
             default: return null
+        }
+    }
+
+    getBtnClass(contextClass) {
+        switch (contextClass) {
+            case ("collapse"): return "btn-collapse btn-vector"
+            case ("navbar"): return "btn-navbar btn-vector"
+            case ("card"): return "btn-card btn-vector"
+            case ("pagenav"): return "btn-pagenav btn-vector"
+            case ("brand"): return "btn-brand btn-vector"
+            case ("kebab"): return "btn-kebab btn-vector"
+            default: return "btn-vector"
+        }
+    }
+
+    getImgClass(contextClass) {
+        switch (contextClass) {
+            case ("collapse"): return "btn-img-collapse btn-vector-img"
+            case ("navbar"): return "btn-img-navbar btn-vector-img"
+            case ("card"): return "btn-img-card btn-vector-img"
+            case ("pagenav"): return "btn-img-pagenav btn-vector-img"
+            case ("brand"): return "btn-img-brand btn-vector-img"
+            case ("kebab"): return "btn-img-kebab btn-vector-img"
+            default: return "btn-vector-img"
         }
     }
 
     render() {
         return (
             <button
-                className={this.props.isCollapseBtn ? "btn-vector btn-menu" : "btn-vector"}
+                className={this.getBtnClass(this.props.contextClass)}
                 onClick={this.props.action}
                 disabled={this.props.isDisabled}>
+
                 <img
-                    className={this.props.isCard ? "btn-vector-img btn-vector-img-card" : "btn-vector-img"}
+                    className={this.getImgClass(this.props.contextClass)}
                     src={this.getImg(this.props.img)}
                     alt={this.props.descr} />
+
                 {this.props.children}
-                {this.props.isCard || !this.props.isCollapseBtn ? '' : (<span
+
+                {this.props.showDescr ? (<p
                     className={"btn-vector-descr"}>
                     {this.props.descr}
-                </span>)}
+                </p>) : null}
             </button>
         )
     }

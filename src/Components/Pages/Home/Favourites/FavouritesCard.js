@@ -15,9 +15,9 @@ class FavouriteCard extends Component {
 					<CardTitle><Link to={"./client/" + client_id + "/files"}><h5>{name}</h5></Link></CardTitle>
 				</CardBody>
 				<CardFooter className="card-footer">
-					<Link to={"./client/" + client_id + "/files"}><NavBtn img="Folder" isCard /></Link>
-					<Link to={"./accesslog/client/" + client_id}><NavBtn img="AccessLogBlack" isCard /></Link>
-					<Link to={"./client/" + client_id + "/recyclebin"}><NavBtn img="TrashBlack" isCard /></Link>
+					<Link to={"./client/" + client_id + "/files"}><NavBtn img="Folder" contextClass="card" /></Link>
+					<Link to={"./accesslog/client/" + client_id}><NavBtn img="AccessLogBlack" contextClass="card" /></Link>
+					<Link to={"./client/" + client_id + "/recyclebin"}><NavBtn img="TrashBlack" contextClass="card" /></Link>
 				</CardFooter>
 			</Card>
 		);

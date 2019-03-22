@@ -28,16 +28,16 @@ class Menu extends Component {
                 <NavItem><p>{this.state.email} {isAdmin ? '(Administrator)' : ''}</p></NavItem>   
                 {/** Vises kun dersom administrator */}
                 <AdminUser>
-                    <NavItem><Link to="/" ><NavLink>HJEM</NavLink></Link></NavItem>
-                    <NavItem><Link to="/clients" ><NavLink>KUNDER</NavLink></Link></NavItem>
-                    <NavItem><Link to="/useraccess" ><NavLink>BRUKERTILGANG</NavLink></Link></NavItem>
-                    <NavItem><Link to="/accesslog" ><NavLink >ADGANGSLOGG</NavLink></Link></NavItem>
-                    <NavItem><Link to="/settings" ><NavLink className="lastElement">INSTILLINGER</NavLink></Link></NavItem>
+                    <NavItem><Link to="/" className="router-link-nav"><NavLink>Hjem</NavLink></Link></NavItem>
+                    <NavItem><Link to="/clients" className="router-link-nav"><NavLink>Kunder</NavLink></Link></NavItem>
+                    <NavItem><Link to="/useraccess" className="router-link-nav"><NavLink>Brukertilgang</NavLink></Link></NavItem>
+                    <NavItem><Link to="/accesslog" className="router-link-nav"><NavLink >Adgangslogg</NavLink></Link></NavItem>
+                    <NavItem><Link to="/settings" className="router-link-nav"><NavLink className="lastElement">Innstillinger</NavLink></Link></NavItem>
                 </AdminUser>
                 {/** Vises kun dersom vanlig bruker */}
                 <RegularUser>
-                    <NavItem><Link to="/" ><NavLink>HJEM</NavLink></Link></NavItem>
-                    <NavItem><Link to="/clients" ><NavLink>KUNDER</NavLink></Link></NavItem>
+                    <NavItem><Link to="/" className="router-link-nav"><NavLink>Hjem</NavLink></Link></NavItem>
+                    <NavItem><Link to="/clients" className="router-link-nav"><NavLink>Kunder</NavLink></Link></NavItem>
                 </RegularUser>
             </div>
             

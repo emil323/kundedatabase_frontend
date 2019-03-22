@@ -1,16 +1,6 @@
-.navbar {
-    background-color: #fff;  
-}
-
 .mainHeader {
     background-color: #002540;
-    color:white;
 }
-
-.navbar-brand .btn-vector-img {
-    height: 1.5em;
-}
-
 
 .navbar-brand .btn-vector:hover{
     transform: scale(1.2);

@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import ChangeDefaultMetadataValuesModal from "./Modals/ChangeDefaultMetadataValuesModal/ChangeDefaultMetadataValuesModal";
 import PageNav from '../../Shared/PageNav/PageNav'
 import NavBtn from '../../Shared/NavBtn/NavBtn'
+import MenuBtn from '../../Shared/MenuBtn/MenuBtn'
 
 
 class Settings extends React.Component {
@@ -32,36 +33,39 @@ class Settings extends React.Component {
                     staticMenuBtns={staticMenuList}
                     collapseMenuBtns={collapseMenuList}
                 />
+                          
                 <Row>
-                    <Col>
-                        <h2>Instillinger</h2>
-                    </Col>
+                    <Col><p className="lead">Alternativer</p></Col>
                 </Row>
+              
                 <Row>
-                    <Col>
-                        <hr />
-                    </Col>
+                    <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Endre standardverdier" /></Col>
                 </Row>
+                <hr />
                 <Row>
-                    <Col>
-                    <h2>Alternativer</h2>
-                    </Col>
+                    <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Placeholder 1" /></Col>
                 </Row>
+                <hr />
                 <Row>
-                    <Col xs="10"><p>Standard verdier for strukturert data</p></Col>
-                    <Col xs="2"><NavBtn action={this.props.toggleDefaultMetadataModal} img="ArrowForward" descr="Endre standardverdier" /></Col>
+                    <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Placeholder2" /></Col>
                 </Row>
-
+                <hr />
+                <br />
                 <Row>
-                    <Col>
-
-                        <hr />
-                    </Col>
+                    <Col><p className="lead">Alternativer 2</p></Col>
                 </Row>
+                
+                <Row>
+                    <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Placeholder 3" /></Col>
+                </Row>
+                <hr />
+                <Row>
+                    <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Placeholder 4" /></Col>
+                </Row>
+                <hr />
 
                 <Row>
                     <ChangeDefaultMetadataValuesModal />
-
                 </Row>
             </Container >
         )

@@ -41,7 +41,7 @@ export default class DropdownBtn extends Component {
                     onClick={this.toggle}
                     data-toggle="dropdown"
                     aria-expanded={this.state.dropdownOpen}>
-                    <NavBtn img="KebabVert" />
+                    <NavBtn img="KebabVert" contextClass="kebab"/>
                 </DropdownToggle>
                 <DropdownMenu>
                     {optionsList}

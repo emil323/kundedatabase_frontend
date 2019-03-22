@@ -1,11 +1,13 @@
 import React from 'react'
-import { Collapse, Nav, Navbar, NavItem, NavLink, NavbarBrand } from 'reactstrap'
-import {Link} from 'react-router-dom'
+import { Collapse, Nav, Navbar, NavItem, NavLink, NavbarToggler, NavbarBrand } from 'reactstrap'
+import { Link } from 'react-router-dom'
 import Hamburger from 'react-hamburger-menu'
 import './Header.css'
 import Menu from '../Menu/Menu'
 import NavBtn from '../../Shared/NavBtn/NavBtn'
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
+import { isAdmin, AdminUser, RegularUser } from '../../Helpers/AdminChecker/AdminChecker'
+import { Mobile, Desktop } from '../../Helpers/Responsive/Responsive'
 
 export default class Header extends React.Component {
 
@@ -37,32 +39,64 @@ export default class Header extends React.Component {
 	render() {
 		return (
 			<div>
-				<Navbar className="mainHeader">
-				<a href='https://www.office.com/apps?auth=2&home=1' target="_blank">
-				<NavBtn 
-					img="Apps"
-					action="https://www.office.com/apps?auth=2&home=1"
-				/>
-				</a>
+				<Navbar className="mainHeader" expand="md">
+					<Mobile>
 
-					
-					<NavbarBrand href="/" className="mx-auto">
-					<Link to={`/`}>
-					<button className="btn-vector"><img className="btn-vector-img" src="/img/ecit-logo.png" /></button></Link>
+						<a href='https://www.office.com/apps?auth=2&home=1' target="_blank">
+							<NavBtn
+								img="Apps"
+								action="https://www.office.com/apps?auth=2&home=1"
+							/>
+						</a>
+					</Mobile>
+
+					<NavbarBrand href="/">
+						<Link to={`/`}>
+							<button className="btn-vector btn-vector-brand"><img className="btn-vector-img btn-brand-img" src="/img/ecit-logo.png" /></button></Link>
 					</NavbarBrand>
-					<Hamburger
-						className="hamburger"
-						isOpen={this.state.open}
-						menuClicked={this.toggleHamburger}
-						color='white'
-						width={30}
-						height={15}
-						strokeWidth={3}
-						animationDuration={0.3}
-					/>
+
+					<Mobile>
+						<Hamburger
+							className="hamburger"
+							isOpen={this.state.open}
+							menuClicked={this.toggleHamburger}
+							color='white'
+							width={30}
+							height={15}
+							strokeWidth={3}
+							animationDuration={0.3} />
+					</Mobile>
+
 					<Collapse isOpen={this.state.open} onClick={this.toggleHamburger} navbar>
-						<Nav navbar >
-							<Menu />
+						<Nav className="ml-auto" navbar>
+							<Mobile>
+								<Menu />
+							</Mobile>
+
+							<Desktop>
+								{/** Vises kun dersom administrator */}
+								<AdminUser>
+									<NavItem><Link to="/" className="router-link-nav"><NavLink><NavBtn contextClass={"navbar"} img="Home" descr="Hjem" showDescr /></NavLink></Link></NavItem>
+									<NavItem><Link to="/clients" className="router-link-nav"><NavLink><NavBtn contextClass={"navbar"} img="Clients" descr="Kunder" showDescr /></NavLink></Link></NavItem>
+									<NavItem><Link to="/useraccess" className="router-link-nav"><NavLink><NavBtn contextClass={"navbar"} img="UserAccess" descr="Brukertilgang" showDescr /></NavLink></Link></NavItem>
+									<NavItem><Link to="/accesslog" className="router-link-nav"><NavLink ><NavBtn contextClass={"navbar"} img="AccessLogWhite" descr="Adgangslogg" showDescr /></NavLink></Link></NavItem>
+									<NavItem><Link to="/settings" className="router-link-nav"><NavLink className="lastElement"><NavBtn contextClass={"navbar"} img="Settings" descr="Innstillinger" showDescr /></NavLink></Link></NavItem>
+									<NavItem><NavLink><a href='https://www.office.com/apps?auth=2&home=1' target="_blank">
+										<NavBtn
+											img="Apps"
+											contextClass={"navbar"}
+											descr="Apps"
+											showDescr
+										/>
+									</a></NavLink></NavItem>
+								</AdminUser>
+								{/** Vises kun dersom vanlig bruker */}
+								<RegularUser>
+									<NavItem><Link to="/clients" className="router-link-nav"><NavLink><NavBtn contextClass={"navbar"} img="Home" descr="Hjem" showDescr /></NavLink></Link></NavItem>
+									<NavItem><Link to="/clients" className="router-link-nav"><NavLink><NavBtn contextClass={"navbar"} img="Clients" descr="Kunder" showDescr /></NavLink></Link></NavItem>
+
+								</RegularUser>
+							</Desktop>
 						</Nav>
 					</Collapse>
 				</Navbar>
