@@ -3,14 +3,16 @@ body {
 }
 
 #nprogress .bar {
-    background: white !important;
+    background: orange !important;
+
+    height:0.25em;
 }
 
 #nprogress .peg {
-    box-shadow: 0 0 10px white, 0 0 5px white !important;
+    
+    box-shadow: 0 0 0.3em orange, 0 0 0.1em white !important;
 }
 
 #nprogress .spinner-icon {
-    border-top-color: white !important;
-    border-left-color: white !important;
+    display: none;
 }

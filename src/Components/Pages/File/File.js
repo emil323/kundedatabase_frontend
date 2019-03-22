@@ -56,20 +56,19 @@ class File extends Component {
 
 
     render() {
-        const staticMenuList = [{
+        const collapseMenuList = [{
             btnKey: 0,
             img: "AccessLogWhite",
             imgDescr: "Adgangslogg",
             btnAction: () => { this.props.history.push('/accesslog/file/' + this.state.metadata.file_id) }
-        },
-        {
+        }]
+
+        const staticMenuList = [{
             btnKey: 1,
             img: "Download",
             imgDescr: "Last ned",
             btnAction: this.download
         }]
-
-        const collapseMenuList = []
 
 
 
@@ -77,6 +76,7 @@ class File extends Component {
             <PageNav
                 disableSearch
                 backIsLink
+                hasCollapse
                 backTo={'/client/' + this.state.metadata.client_id + "/files/" + this.state.metadata.folder_id}
 
                 staticMenuBtns={staticMenuList}
@@ -85,7 +85,7 @@ class File extends Component {
             {this.state.is_downloading
                 ? <this.Spinner text='Laster ned...' />
                 : this.state.is_loading
-                    ? <this.Spinner text='Vent litt..' />
+                    ? <this.Spinner text='Laster forhåndsvisning..' />
                     : <FileViewer blob={this.state.blob} metadata={this.state.metadata} download={this.download} />
             }
         </div>)

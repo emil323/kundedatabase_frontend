@@ -10,7 +10,6 @@ import { connect } from "react-redux";
 import { setTrail, pushTrail } from '../../../Store/Actions/breadcrumbActions'
 import { fetchAccessLogData, updateSearch } from '../../../Store/Actions/accesslogActions'
 import { withRouter } from 'react-router-dom';
-import { access } from 'fs';
 import API from '../../../API/API';
 
 
@@ -24,7 +23,8 @@ class AccessLog extends Component {
             id:null,
             backTo:'',
             backDescr:'',
-            collapseMenuList: []
+            collapseMenuList: [],
+            is_exporting: false 
         }
         this.csv_export = this.csv_export.bind(this)
     }
@@ -53,6 +53,19 @@ class AccessLog extends Component {
 
                     <Col sm="12" xs="12" md="12" lg={{ size: '12'}} xl={{ size: '10', offset: 1 }}>
                         <Table id="accesslogTable" className="table table-hover">
+                            {
+                                this.state.is_exporting 
+                                 ? <tr>
+                                 <td Colspan="5">
+                                     <Alert color="secondary">
+                                         <p className="text-center">
+                                             <Spinner color="dark" /><p>Genererer eksport, dette kan ta litt tid...</p> 
+                                         </p>
+                                     </Alert>
+                                 </td>
+                             </tr>
+                                 : ''
+                            }
                             <thead id="accesslogThead" className="thead-dark">
                                 <tr>
                                     <th>Kunde</th>
@@ -89,6 +102,9 @@ class AccessLog extends Component {
                             }
                     
                         </Table>
+                        {filteredAccessLog.length > 500 && !this.props.is_loading ? 
+                            <Alert color="secondary">Maksimalt 500 rader blir lastet, dersom du ønsker å se mer så må du kjøre en eksport.
+                        </Alert> : ''}
                     </Col>
                 </Row>
             </Container>
@@ -191,8 +207,14 @@ class AccessLog extends Component {
             this.setState({...this.state,backDescr, backTo, collapseMenuList})
         }
     }
-
+    /*
+        Request a comma separated values from api, and download
+    */
     csv_export() {
+        this.setState({...this.state, is_exporting:true})
+        document.documentElement.scrollTop = 0
+        document.body.scrollTop = 0;
+
         API.accesslog().sort_by(this.state.type).export(this.state.id).then(res => {
 
             let element = document.createElement('a')
@@ -203,6 +225,8 @@ class AccessLog extends Component {
         
             element.click()
             document.body.removeChild(element)
+            
+            this.setState({...this.state, is_exporting:false})
         })
     }
 
