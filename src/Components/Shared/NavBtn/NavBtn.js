@@ -26,6 +26,7 @@ import Edit from '../../../Assets/Icons/edit.png'
 import Search from '../../../Assets/Icons/search.png'
 import Apps from '../../../Assets/Icons/apps.png'
 import Restore from '../../../Assets/Icons/restore.png'
+import ArrowForward from '../../../Assets/Icons/arrow-forward.png'
 
 
 class NavBtn extends Component {
@@ -62,6 +63,7 @@ class NavBtn extends Component {
             case 'ExpandMoreBlack': return ExpandMoreBlack
             case 'ExpandLessBlack': return ExpandLessBlack
             case 'Restore': return Restore
+            case 'ArrowForward': return ArrowForward
             default: return null
         }
     }
