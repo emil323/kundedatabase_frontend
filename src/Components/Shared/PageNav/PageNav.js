@@ -48,6 +48,8 @@ class PageNav extends Component {
                 return <NavItem>
                     <Link to={btn.to}>
                         <NavBtn
+                            showDescr
+                            contextClass={"collapse"}
                             isCollapseBtn
                             key={btn.btnKey}
                             action={btn.btnAction}
@@ -59,7 +61,8 @@ class PageNav extends Component {
             } else {
                 return <NavItem>
                     <NavBtn
-                        isCollapseBtn
+                        showDescr
+                        contextClass={"collapse"}
                         key={btn.btnKey}
                         action={btn.btnAction}
                         img={btn.img}
@@ -117,6 +120,7 @@ class PageNav extends Component {
                         this.props.backIsLink ? (
                             <Link to={this.props.backTo}>
                                 <NavBtn
+                                    contextClass="pagenav"
                                     isBackBtn="true"
                                     img={this.props.backTo === "/" ? "Home" : "ArrowBack"}
                                     descr={this.props.backDescr}
@@ -124,6 +128,7 @@ class PageNav extends Component {
                             </Link>
                         ) : (
                                 <NavBtn
+                                    contextClass="pagenav"
                                     isBackBtn="true"
                                     action={this.props.backAction}
                                     img="ArrowPrevFolder"
@@ -137,7 +142,7 @@ class PageNav extends Component {
 
                     {this.props.hasCollapse ?
                         <NavBtn
-                            class="collapse"
+                            contextClass="pagenav"
                             action={this.toggleMenu}
                             img={this.state.menuIsOpen ? "ExpandMoreWhite" : "ExpandLessWhite"}
                             descr={this.state.menuIsOpen ? "Åpne meny" : "Lukk meny"}
@@ -148,7 +153,7 @@ class PageNav extends Component {
 
                     {!this.props.disableSearch ? (
                         <NavBtn
-                            class="collapse"
+                            contextClass="pagenav"
                             action={this.toggleSearch}
                             img="Search"
                             descr={this.props.searchPlaceholder}

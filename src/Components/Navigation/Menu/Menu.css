@@ -1,17 +1,18 @@
 .navName{
   font-size: 1.8em;
+  color: white;
 }
 
 .nav-item p{
   font-size: 1em;
-  padding-bottom: 1.5em;
+  color: white;
 }
 
 a{
   font-size: 1em;
   text-decoration: none;
   color: #00ACE6;
-  font-weight: bold;
+  color: white;
 }
 
 a:hover{
@@ -25,13 +26,14 @@ a:focus {
 
 .nav-item .nav-link{
   text-decoration: none;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  border-top: 1px solid;
-  border-color: #9B9B9B;
+  color: white;
+  
 }
 
-.nav-item .lastElement{
-  border-bottom: 1px solid;
-  border-color: #9B9B9B;
+.router-link-nav {
+  color: white;
+}
+
+.router-link-nav:hover {
+  color: white;
 }

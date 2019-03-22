@@ -1,10 +1,27 @@
-.btn-menu {
+.btn-collapse {
     padding:0.5em;
+}
+
+.btn-collapse .btn-vector-descr {
+    margin-left:1em;
+    float: right;
+    padding-top: 0.2em;
+}
+
+.btn-img-collapse {
+}
+
+.btn-navbar{
 
 }
 
-.btn-menu .btn-vector-descr {
-    margin-left:1em;
+.btn-navbar .btn-vector-img {
+    height: 1.5em;
+
+}
+
+.btn-navbar .btn-vector-descr {
+    display: block;
 }
 
 .btn-vector {
@@ -12,6 +29,11 @@
     border: transparent;
     transition: transform .2s;
     outline: none;
+    height: 2em;
+}
+
+.btn-vector-img {
+    height: 2em;
 }
 
 .btn-vector:hover{
@@ -23,36 +45,29 @@
 }
 
 .btn-vector:active {
-    transform: scale(2);
+    transform: scale(1.5);
 }
 
-.btn-vector-descr {
+.btn-navbar .btn-vector-descr {
     color: white;
-   
 }
 
-.btn-vector-img {
+.btn-navbar .btn-vector-descr {
+    font-size: 1em;
+}
+
+.btn-vector-img:not(.btn-brand-img, .btn-vector-img) {
     height: 2em;
 }
 
-.btn-vector-img-card {
+.btn-img-card {
     height: 2em;
 }
 
-.btn-vector-kebab {
+.btn-kebab {
     height: 2.5em;
 }
 
-.btn-vector-kebab-img {
-    height: 1.5em;
-}
-
-.btn-group-left {
-    position: fixed;
-    left: 0;
-}
-
-.btn-group-right {
-    position: fixed;
-    right: 0;
+.btn-img-kebab {
+    height: 2em;
 }

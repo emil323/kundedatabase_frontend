@@ -4,6 +4,20 @@
 
 .metadata  .jumbotron {
     margin:0;
-    padding-top:1.5em;
+    padding-top:0.5em;
     padding-bottom:0.5em;
+    background-color: transparent;
+}
+
+.metadata-title {
+    display: inline;
+}
+
+.btn-edit-metadata {
+
+}
+
+.jumboline {
+    display: inline;
+
 }
