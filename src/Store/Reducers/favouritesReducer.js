@@ -1,5 +1,5 @@
 
-import {SEARCH_KEY, FETCH_FAVOURITES} from '../types'
+import {SEARCH_KEY, FETCH_FAVOURITES, IS_LOADING} from '../types'
 
 // A Reducer requires an initial state when running the application
 const initState = {
@@ -20,6 +20,11 @@ const favouritesReducer = (state = initState, action) => {
                 ...state,
                 search: action.search_key    
             }
+        case IS_LOADING:
+            return {
+                ...state,
+                is_loading:action.is_loading
+            }    
         default:
             return state
     }

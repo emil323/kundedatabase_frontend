@@ -108,10 +108,13 @@ class FilesTable extends Component {
                 <tr>
                     <td><img className="vector-img" src={this.checkFileType(this.props.file.type)} alt={this.props.file.type} /></td>
 
-                    <td className="word_break"><Link to="" onClick={(e) => {
+                    <td className="word_break">
+                    {!this.props.file.is_deleted ?
+                    <Link disabled to="" onClick={(e) => {
                         this.handleSelection(e)
                     }}>{this.props.is_searching ? this.props.file.fullpath : this.props.file.name
-                        }</Link>
+                        }</Link> 
+                        : this.props.is_searching ? this.props.file.fullpath : this.props.file.name}
                         <br /><span className="date">{this.formatDate(this.props.file.last_changed)}</span>
                     </td>
 

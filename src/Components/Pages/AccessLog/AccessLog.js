@@ -52,8 +52,7 @@ class AccessLog extends Component {
                 <Row>
 
                     <Col sm="12" xs="12" md="12" lg={{ size: '12'}} xl={{ size: '10', offset: 1 }}>
-                        <Table id="accesslogTable" className="table table-hover">
-                            {
+                    {
                                 this.state.is_exporting 
                                  ? <tr>
                                  <td Colspan="5">
@@ -66,6 +65,8 @@ class AccessLog extends Component {
                              </tr>
                                  : ''
                             }
+                        <Table id="accesslogTable" className="table table-hover">
+                            
                             <thead id="accesslogThead" className="thead-dark">
                                 <tr>
                                     <th>Kunde</th>

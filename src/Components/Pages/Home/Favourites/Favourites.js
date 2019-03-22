@@ -1,9 +1,10 @@
 import React from 'react'
 import { Component } from 'react'
 import FavouritesCard from "./FavouritesCard"
-import { CardGroup, Navbar, Input, Container, Row, Col, CardDeck } from 'reactstrap';
+import { CardGroup, Navbar, Alert, Container, Row, Col, CardDeck } from 'reactstrap';
 import { fetchFavouritesData, updateSearch } from '../../../../Store/Actions/favouritesActions'
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom'
 import './Favourites.css'
 import PageNav from '../../../Shared/PageNav/PageNav'
 
@@ -17,12 +18,14 @@ class Favourites extends Component {
 	}
 
 	render() {
-		let filteredFavourites = this.props.favourites.filter(favourite => {
+
+		const filteredFavourites = this.props.favourites.filter(favourite => {
 			return favourite.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
 		});
 
 		const staticMenuList = []
         const collapseMenuList = []
+
 
 		return (
 			<div className="favourites">
@@ -39,10 +42,11 @@ class Favourites extends Component {
 
 				<Container fluid>
 						<CardDeck>
-							{
+							{ this.props.has_favourites ? 
 								filteredFavourites.map(favourite => {
 									return <Col xl="3" lg="4" md="6" sm="6" xs="12"><FavouritesCard key={favourite.client_id} favourite={favourite} /></Col>
 								})
+								: !this.props.is_loading && <Alert className='info_alert' color="light">Her kan du legge til kunder du besøker ofte. Gå til <Link to='/clients'>kundeoversikten</Link> for å legge til favoritter. </Alert>
 							}
 							</CardDeck>
 				</Container>
@@ -59,9 +63,18 @@ class Favourites extends Component {
 
 // Calls on a favouritesReducer that bring props to the component
 const mapStateToProps = (state) => {
+
+	const {favourites, search, is_loading} = state.favouritesReducer
+
+	const is_searching = search !== ''
+	const has_favourites = favourites.length > 0
+
 	return {
-		favourites: state.favouritesReducer.favourites,
-		search: state.favouritesReducer.search
+		favourites,
+		search,
+		is_searching,
+		has_favourites,
+		is_loading
 	}
 }
 

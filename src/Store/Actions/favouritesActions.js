@@ -1,5 +1,5 @@
 import api from '../../API/API'
-import {FETCH_FAVOURITES, SEARCH_KEY} from '../types'
+import {FETCH_FAVOURITES, SEARCH_KEY, IS_LOADING} from '../types'
 
 
 
@@ -17,12 +17,21 @@ export const fetchFavourites = (favourites) => {
     }
 }
 
+export const setIsLoading = (is_loading) => {
+    return {
+        type: IS_LOADING,
+        is_loading
+    }
+}
+
 
 export const fetchFavouritesData = () => {
     return (dispatch) => {
+        dispatch(setIsLoading(true))
         return api.favourites().list()
             .then(response => {
                 dispatch(fetchFavourites(response.data))
+                dispatch(setIsLoading(false))
             })
             .catch(error => {
                 throw(error)
