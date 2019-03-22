@@ -1,3 +1,12 @@
+.btn-menu {
+    padding:0.5em;
+
+}
+
+.btn-menu .btn-vector-descr {
+    margin-left:1em;
+}
+
 .btn-vector {
     background-color: transparent;
     border: transparent;

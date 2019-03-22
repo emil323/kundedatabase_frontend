@@ -11,9 +11,6 @@ class FavouriteCard extends Component {
 		return (
 
 			<Card>
-				{/* <CardHeader><h5>{name}</h5></CardHeader> */}
-				{/* <CardImg top width="100%" src={PlaceholderWide} /> */}
-
 				<CardBody>
 					<CardTitle><Link to={"./client/" + client_id + "/files"}><h5>{name}</h5></Link></CardTitle>
 				</CardBody>

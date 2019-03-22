@@ -27,6 +27,10 @@ import Search from '../../../Assets/Icons/search.png'
 import ArrowRightWhite from '../../../Assets/Icons/arrow_right_white.png'
 import EasyReportWhite from '../../../Assets/Icons/easy_report_white.png'
 import FolderWhite from '../../../Assets/Icons/folder_white.png'
+import Apps from '../../../Assets/Icons/apps.png'
+import Restore from '../../../Assets/Icons/restore.png'
+import ArrowForward from '../../../Assets/Icons/arrow-forward.png'
+
 
 class NavBtn extends Component {
     constructor(props) {
@@ -41,6 +45,7 @@ class NavBtn extends Component {
             case 'AccessLogBlack': return AccessLogBlack
             case 'ArrowBack': return ArrowBack
             case 'ArrowPrevFolder': return ArrowPrevFolder
+            case 'Apps': return Apps
             case 'Folder': return Folder
             case 'FolderWhite': return FolderWhite
             case 'Home': return Home
@@ -63,6 +68,8 @@ class NavBtn extends Component {
             case 'ExpandLessBlack': return ExpandLessBlack
             case 'ArrowRightWhite': return ArrowRightWhite
             case 'EasyReportWhite': return EasyReportWhite
+            case 'Restore': return Restore
+            case 'ArrowForward': return ArrowForward
             default: return null
         }
     }
@@ -70,7 +77,7 @@ class NavBtn extends Component {
     render() {
         return (
             <button
-                className={"btn-vector"}
+                className={this.props.isCollapseBtn ? "btn-vector btn-menu" : "btn-vector"}
                 onClick={this.props.action}
                 disabled={this.props.isDisabled}>
                 <img

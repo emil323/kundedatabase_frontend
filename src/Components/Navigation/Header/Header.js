@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import Hamburger from 'react-hamburger-menu'
 import './Header.css'
 import Menu from '../Menu/Menu'
+import NavBtn from '../../Shared/NavBtn/NavBtn'
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
 
 export default class Header extends React.Component {
@@ -37,6 +38,18 @@ export default class Header extends React.Component {
 		return (
 			<div>
 				<Navbar className="mainHeader">
+				<a href='https://www.office.com/apps?auth=2&home=1' target="_blank">
+				<NavBtn 
+					img="Apps"
+					action="https://www.office.com/apps?auth=2&home=1"
+				/>
+				</a>
+
+					
+					<NavbarBrand href="/" className="mx-auto">
+					<Link to={`/`}>
+					<button className="btn-vector"><img className="btn-vector-img" src="/img/ecit-logo.png" /></button></Link>
+					</NavbarBrand>
 					<Hamburger
 						className="hamburger"
 						isOpen={this.state.open}
@@ -47,10 +60,6 @@ export default class Header extends React.Component {
 						strokeWidth={3}
 						animationDuration={0.3}
 					/>
-					<NavbarBrand href="/" className="mx-auto">
-					<Link to={`/`}>
-					<button className="btn-vector"><img className="btn-vector-img" src="/img/ecit-logo.png" /></button></Link>
-					</NavbarBrand>
 					<Collapse isOpen={this.state.open} onClick={this.toggleHamburger} navbar>
 						<Nav navbar >
 							<Menu />

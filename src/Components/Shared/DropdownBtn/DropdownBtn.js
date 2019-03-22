@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { UncontrolledDropdown, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Dropdown, UncontrolledDropdown, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import './DropdownBtn.css'
-import KebabVert from '../../../Assets/Icons/kebab-vert.png'
+import NavBtn from '../NavBtn/NavBtn'
 
 export default class DropdownBtn extends Component {
     constructor(props) {
@@ -12,8 +12,6 @@ export default class DropdownBtn extends Component {
             dropdownOpen: false,
             tekst: ''
         };
-
-
     }
 
     toggle() {
@@ -37,18 +35,18 @@ export default class DropdownBtn extends Component {
 
         })
         return (
-
-            <UncontrolledDropdown size="md" direction="left">
+            <Dropdown toggle={this.toggle} isOpen={this.state.dropdownOpen} direction="left">
                 <DropdownToggle
-                    className="btn-vector btn-vector-kebab"
-                    outline color="">
-                    <img
-                        className="btn-vector-img btn-vector-kebab-img"
-                        src={KebabVert} /></DropdownToggle>
+                    tag="span"
+                    onClick={this.toggle}
+                    data-toggle="dropdown"
+                    aria-expanded={this.state.dropdownOpen}>
+                    <NavBtn img="KebabVert" />
+                </DropdownToggle>
                 <DropdownMenu>
                     {optionsList}
                 </DropdownMenu>
-            </UncontrolledDropdown>
+            </Dropdown >
 
         )
     }

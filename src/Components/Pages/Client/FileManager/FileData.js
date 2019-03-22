@@ -16,6 +16,7 @@ import { Component } from 'react'
 import DropdownBtn from '../../../Shared/DropdownBtn/DropdownBtn';
 import { Button } from 'reactstrap'
 import API from '../../../../API/API';
+import NavBtn from '../../../Shared/NavBtn/NavBtn';
 
 class FilesTable extends Component {
     constructor(props) {
@@ -44,7 +45,7 @@ class FilesTable extends Component {
         switch (type) {
             case "WORD":
                 return word
-            case "pdf":
+            case "PDF":
                 return pdf
             case "EXCEL":
                 return excel
@@ -103,29 +104,25 @@ class FilesTable extends Component {
         ]
 
         return (
-            <tbody  >
+            <tbody>
                 <tr>
-                    <td><img className="vector-img" src={this.checkFileType(this.props.file.type)} alt="s" /></td>
+                    <td><img className="vector-img" src={this.checkFileType(this.props.file.type)} alt={this.props.file.type} /></td>
 
                     <td className="word_break"><Link to="" onClick={(e) => {
                         this.handleSelection(e)
                     }}>{this.props.is_searching ? this.props.file.fullpath : this.props.file.name
                         }</Link>
-                        <br /><p className="date">{this.formatDate(this.props.file.last_changed)}</p>
+                        <br /><span className="date">{this.formatDate(this.props.file.last_changed)}</span>
                     </td>
 
                     {this.props.file.is_deleted
-                        ? <td><Button onClick={() => this.props.toggleRecoverModal(this.props.file)}>Gjenopprett</Button></td>
-                        : <td className="DropDwnIcon"><DropdownBtn icon={Kebab} options={btnOptions} /></td>
+                        ? <td><NavBtn img="Restore" action={() => this.props.toggleRecoverModal(this.props.file)} /></td>
+                        : <td><DropdownBtn icon={Kebab} options={btnOptions} /></td>
                     }
                 </tr>
             </tbody>
         )
-
-
     }
-
-
 }
 
 
