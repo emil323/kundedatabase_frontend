@@ -1,14 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {formatDate} from '../../Helpers/Formatting/DateHelper'
 
 class AccessLog extends React.Component {
-
-
-    formatDate(date) {
-        const format = {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric'};
-        return new Date(date).toLocaleString('no-NO', format)
-    }
-
     render() {
         
         const log = this.props.log 
@@ -23,7 +17,7 @@ class AccessLog extends React.Component {
                     }
                     <td class="accesslogTd"><Link to={`/accesslog/consultant/${log.consultant_id}`}>{this.props.log.first_name} {this.props.log.last_name}</Link></td>
                     <td class="accesslogTd"><Link to={`/accesslog/ip/${log.ip}`}>{this.props.log.ip}</Link></td>
-                    <td class="accesslogTd">{this.formatDate(this.props.log.timestamp)}</td>
+                    <td class="accesslogTd">{formatDate(this.props.log.timestamp)}</td>
                 </tr>
           
             </tbody>

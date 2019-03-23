@@ -46,18 +46,33 @@ export default {
     },
     accesslog: () => {
         return {
-            sort_by: (type) => {
+            filter: (type) => {
                 return {
                     id(id) {
                         return axios().get('/accesslog/' + type + '/' + id)
-                    },
-                    export(id) {
-                        return axios().get('/accesslog/' + type + '/' + id + '?csv_export=true')
                     }
                 }
             },
             create(data) {
                 return axios().post("/accesslog/create", data)
+            },
+            export:() => {
+                return {
+                    filter:(type) => {
+                        return {
+                            id(id) {
+                                return axios().get('/accesslog/' + type + '/' + id + '?csv_export=true')
+                            }
+                        }
+                    }
+                }
+            },
+            simpleReport:() => {
+                return {
+                    consultant(id) {
+                        return axios().get('/accesslog/report/client/' + id)
+                    }
+                }
             }
         }
     },

@@ -1,7 +1,7 @@
 
 import {
     UPLOAD_MODAL, NEW_FOLDER_MODAL, MOVE_MODAL, RENAME_MODAL, EDITOR_MODAL, DELETE_MODAL, RECOVER_MODAL,
-    METADATA_MODAL, DEFAULT_METADATA_MODAL
+    METADATA_MODAL, DEFAULT_METADATA_MODAL, ACCESSLOG_REPORT_MODAL
 } from '../types'
 
 // A Reducer requires an initial state when running the application
@@ -26,6 +26,10 @@ const initState = {
     rename: {
         modal:false,
         file: {id:'',name:''}
+    },
+    access_report : {
+        modal: false, 
+        consultant: {consultant_id:'', name:''}
     }
 }
 
@@ -92,6 +96,14 @@ const modalReducer = (state = initState, action) => {
             return {
                 ...state,
                 default_metadata_modal: !state.default_metadata_modal
+            }
+        case ACCESSLOG_REPORT_MODAL: 
+            return {
+                ...state,
+                access_report: {
+                    modal : !state.access_report.modal,
+                    consultant: action.consultant ? action.consultant: state.access_report.consultant
+                }
             }
         default:
             return state

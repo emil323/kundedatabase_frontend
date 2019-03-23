@@ -9,8 +9,10 @@ import PageNav from '../../Shared/PageNav/PageNav'
 import { connect } from "react-redux";
 import { setTrail, pushTrail } from '../../../Store/Actions/breadcrumbActions'
 import { fetchAccessLogData, updateSearch } from '../../../Store/Actions/accesslogActions'
+import {toggleAccesslogReportModal} from '../../../Store/Actions/modalActions'
 import { withRouter } from 'react-router-dom';
 import API from '../../../API/API';
+import ReportModal from './ReportModal/ReportModal';
 
 
 class AccessLog extends Component {
@@ -107,6 +109,7 @@ class AccessLog extends Component {
                         </Alert> : ''}
                     </Col>
                 </Row>
+                <ReportModal/>
             </Container>
         )
     }
@@ -142,7 +145,7 @@ class AccessLog extends Component {
                 btnAction: this.csv_export,
                 to: `/file/${nextProps.file_id}`,
                 img: "Download",
-                imgDescr: "Exporter til CSV dokument"
+                imgDescr: "Exporter som CSV dokument"
             }]
 
             nextProps.setTrail([{
@@ -198,7 +201,10 @@ class AccessLog extends Component {
                         contextId: "light-report",
                         to: `/client/${nextProps.client_id}`,
                         img: "EasyReportWhite",
-                        imgDescr: "Forenklet rapport"
+                        imgDescr: "Forenklet rapport",
+                        btnAction: () => {nextProps.toggleAccesslogReportModal({
+                            consultant_id: nextProps.consultant_id, 
+                            name: nextProps.consultant_name})}
                     })
                     break
                 case IP:
@@ -221,7 +227,7 @@ class AccessLog extends Component {
         document.documentElement.scrollTop = 0
         document.body.scrollTop = 0;
 
-        API.accesslog().sort_by(this.state.type).export(this.state.id).then(res => {
+        API.accesslog().export().filter(this.state.type).id(this.state.id).then(res => {
 
             let element = document.createElement('a')
             element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(res.data))
@@ -259,7 +265,8 @@ const mapStateToProps = (state) => {
     let access_type
     let parent_id
 
-    if (accesslog.length > 0) {
+
+    if(accesslog.length > 0 ) {
         const first = accesslog[0]
         ip = first.ip
         client_name = first.client_name
@@ -283,7 +290,8 @@ const mapStateToProps = (state) => {
 // Create a dispatch which sends information to the reducer.
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchAccessLogData: (type, id) => { dispatch(fetchAccessLogData(type, id)) },
+        fetchAccessLogData: (type,id) => { dispatch(fetchAccessLogData(type,id)) },
+        toggleAccesslogReportModal: (consultant) => {dispatch(toggleAccesslogReportModal(consultant))},
         updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
         setTrail: (trail) => { dispatch(setTrail(trail)) },
         pushTrail: (title, path) => { dispatch(pushTrail(title, path)) }
