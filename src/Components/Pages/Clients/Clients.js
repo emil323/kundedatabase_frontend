@@ -23,11 +23,11 @@ class Clients extends Component {
             return client.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
         })
 
-        const collapseMenuList = []
-        const staticMenuList = [
+        const menuList = [
             {
                 isLink: false,
                 btnKey: 0,
+                contextId: "new-client",
                 img: "Add",
                 imgDescr: "Ny kunde",
                 btnAction: () => { this.props.toggleModal() }
@@ -37,8 +37,7 @@ class Clients extends Component {
         return (
             <Container fluid>
                 <PageNav
-                    staticMenuBtns={staticMenuList}
-                    collapseMenuBtns={collapseMenuList}
+                    menuBtns={menuList}
 
                     backIsLink
                     backDescr="Hjem"
@@ -47,19 +46,6 @@ class Clients extends Component {
                     searchValue={this.props.search}
                     searchAction={this.props.updateSearch.bind(this)}
                     searchPlaceholder="Søk etter kunde" />
-
-                {/*  <PageNav
-                    backIsLink
-                    backDescr="Hjem"
-                    backTo={'/'}
-
-                    searchValue={this.props.search}
-                    searchAction={this.props.updateSearch.bind(this)}
-                    searchPlaceholder="Søk etter kunde"
-
-                    buttons={buttonMenu}
-                /> */}
-
 
                 <Row>
                     <Col>

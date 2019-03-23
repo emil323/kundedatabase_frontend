@@ -23,8 +23,7 @@ class Favourites extends Component {
 			return favourite.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
 		});
 
-		const staticMenuList = []
-        const collapseMenuList = []
+        const menuList = []
 
 
 		return (
@@ -36,8 +35,7 @@ class Favourites extends Component {
 					searchValue={this.props.search}
 					searchAction={this.props.updateSearch.bind(this)}
 
-					staticMenuBtns={staticMenuList}
-                    collapseMenuBtns={collapseMenuList}
+					menuBtns={menuList}
 				/> 
 
 				<Container fluid>

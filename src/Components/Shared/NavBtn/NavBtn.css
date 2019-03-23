@@ -1,35 +1,33 @@
 .btn-collapse {
-    padding:0.5em;
 }
 
-.btn-collapse .btn-vector-descr {
+.btn-collapse .btn-descr {
     margin-left:1em;
     float: right;
     padding-top: 0.2em;
+    color: white;
 }
+
 
 .btn-img-collapse {
 }
 
-.btn-navbar{
+.btn-navbar {
 
 }
 
 .btn-navbar .btn-vector-img {
-    height: 1.5em;
-
 }
 
-.btn-navbar .btn-vector-descr {
-    display: block;
+.btn-descr:not(.btn-collapse .btn.descr) {
+    display: none;
 }
 
-.btn-vector {
+.btn-vector  {
     background-color: transparent;
     border: transparent;
     transition: transform .2s;
-    outline: none;
-    height: 2em;
+    outline: none;  
 }
 
 .btn-vector-img {
@@ -56,10 +54,6 @@
     font-size: 1em;
 }
 
-.btn-vector-img:not(.btn-brand-img, .btn-vector-img) {
-    height: 2em;
-}
-
 .btn-img-card {
     height: 2em;
 }
@@ -70,4 +64,8 @@
 
 .btn-img-kebab {
     height: 2em;
+}
+
+#search {
+
 }

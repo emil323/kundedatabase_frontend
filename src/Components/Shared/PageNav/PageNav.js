@@ -40,42 +40,46 @@ class PageNav extends Component {
     }
 
     render() {
-        const { staticMenuBtns } = this.props
-        const { collapseMenuBtns } = this.props
+        const { menuBtns } = this.props
 
-        const collapseMenu = collapseMenuBtns.map(btn => {
-            if (btn.isLink) {
-                return <NavItem>
-                    <Link to={btn.to}>
-                        <NavBtn
-                            showDescr
-                            contextClass={"collapse"}
-                            isCollapseBtn
-                            key={btn.btnKey}
-                            action={btn.btnAction}
-                            img={btn.img}
-                            descr={btn.imgDescr}
-                        />
-                    </Link>
-                </NavItem>
-            } else {
-                return <NavItem>
-                    <NavBtn
-                        showDescr
-                        contextClass={"collapse"}
-                        key={btn.btnKey}
-                        action={btn.btnAction}
-                        img={btn.img}
-                        descr={btn.imgDescr}
-                    />
-                </NavItem>
-            }
-        })
+        /*   const collapseMenu = collapseMenuBtns.map(btn => {
+              if (btn.isLink) {
+                  return <NavItem>
+                      <Link to={btn.to}>
+                          <NavBtn
+                              hasTooltip
+                              contextId={btn.contextId}
+                              contextClass={this.state.width < 768 ? "collapse" : "navbar"}
+                              key={btn.btnKey}
+                              action={btn.btnAction}
+                              img={btn.img}
+                              descr={btn.imgDescr}
+                          />
+                      </Link>
+                  </NavItem>
+              } else {
+                  return <NavItem>
+                      <NavBtn
+                          hasTooltip
+                          contextId={btn.contextId}
+                          contextClass={this.state.width < 768 ? "collapse" : "navbar"}
+                          key={btn.btnKey}
+                          action={btn.btnAction}
+                          img={btn.img}
+                          descr={btn.imgDescr}
+                      />
+                  </NavItem>
+              }
+          }) */
 
-        const staticMenu = staticMenuBtns.map(btn => {
+        const pageMenu = menuBtns.map(btn => {
             if (btn.isLink) {
                 return <Link to={btn.to}>
                     <NavBtn
+                        showDescr
+                        hasTooltip
+                        contextId={btn.contextId}
+                        contextClass={"collapse"}
                         key={btn.btnKey}
                         action={btn.btnAction}
                         img={btn.img}
@@ -84,6 +88,10 @@ class PageNav extends Component {
                 </Link>
             } else {
                 return <NavBtn
+                    showDescr
+                    hasTooltip
+                    contextId={btn.contextId}
+                    contextClass={"collapse"}
                     key={btn.btnKey}
                     action={btn.btnAction}
                     img={btn.img}
@@ -94,16 +102,15 @@ class PageNav extends Component {
 
         return (
             <div>
-
-
                 <Navbar fixed="bottom" color="faded" className="page-nav">
 
-
-                    <Collapse isOpen={this.state.menuIsOpen} onClick={this.toggleMenu} navbar>
-                        <Nav navbar>
-                            {collapseMenu}
-                        </Nav>
-                    </Collapse>
+                    <Mobile>
+                        <Collapse isOpen={this.state.menuIsOpen} onClick={this.toggleMenu} navbar>
+                            <Nav navbar>
+                                {pageMenu}
+                            </Nav>
+                        </Collapse>
+                    </Mobile>
 
                     <Collapse isOpen={this.state.searchIsOpen} navbar>
                         { /* Check if searchAction is defined, or else render no search bar */
@@ -120,6 +127,8 @@ class PageNav extends Component {
                         this.props.backIsLink ? (
                             <Link to={this.props.backTo}>
                                 <NavBtn
+                                    hasTooltip
+                                    contextId="back"
                                     contextClass="pagenav"
                                     isBackBtn="true"
                                     img={this.props.backTo === "/" ? "Home" : "ArrowBack"}
@@ -128,6 +137,8 @@ class PageNav extends Component {
                             </Link>
                         ) : (
                                 <NavBtn
+                                    hasTooltip
+                                    contextId="back"
                                     contextClass="pagenav"
                                     isBackBtn="true"
                                     action={this.props.backAction}
@@ -140,19 +151,25 @@ class PageNav extends Component {
                             img=""
                         />}
 
-                    {this.props.hasCollapse ?
-                        <NavBtn
-                            contextClass="pagenav"
-                            action={this.toggleMenu}
-                            img={this.state.menuIsOpen ? "ExpandMoreWhite" : "ExpandLessWhite"}
-                            descr={this.state.menuIsOpen ? "Åpne meny" : "Lukk meny"}
-                        /> : null}
-
-                    {staticMenu}
-
+                    <Mobile>
+                        {this.props.hasCollapse===true ?
+                            <NavBtn
+                                hasTooltip
+                                contextId="collapse-toggle"
+                                contextClass="pagenav"
+                                action={this.toggleMenu}
+                                img={this.state.menuIsOpen ? "ExpandMoreWhite" : "ExpandLessWhite"}
+                                descr={!this.state.menuIsOpen ? "Åpne meny" : "Lukk meny"}
+                            /> : null}
+                    </Mobile>
+                    <Desktop>
+                        {pageMenu}
+                    </Desktop>
 
                     {!this.props.disableSearch ? (
                         <NavBtn
+                            hasTooltip
+                            contextId="search"
                             contextClass="pagenav"
                             action={this.toggleSearch}
                             img="Search"
@@ -160,6 +177,7 @@ class PageNav extends Component {
                         />) : ("")}
 
                 </Navbar>
+
             </div>
         )
     }

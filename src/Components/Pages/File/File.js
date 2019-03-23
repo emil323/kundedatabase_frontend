@@ -56,19 +56,22 @@ class File extends Component {
 
 
     render() {
-        const collapseMenuList = [{
-            btnKey: 0,
-            img: "AccessLogWhite",
-            imgDescr: "Adgangslogg",
-            btnAction: () => { this.props.history.push('/accesslog/file/' + this.state.metadata.file_id) }
-        }]
-
-        const staticMenuList = [{
-            btnKey: 1,
-            img: "Download",
-            imgDescr: "Last ned",
-            btnAction: this.download
-        }]
+        const menuList = [
+            {
+                btnKey: 0,
+                contextId: "download-file",
+                img: "Download",
+                imgDescr: "Last ned",
+                btnAction: this.download
+            },
+            {
+                btnKey: 1,
+                contextId: "accesslog-file",
+                img: "AccessLogWhite",
+                imgDescr: "Adgangslogg",
+                btnAction: () => { this.props.history.push('/accesslog/file/' + this.state.metadata.file_id) }
+            },
+        ]
 
 
 
@@ -78,9 +81,9 @@ class File extends Component {
                 backIsLink
                 hasCollapse
                 backTo={'/client/' + this.state.metadata.client_id + "/files/" + this.state.metadata.folder_id}
+                backDescr="Tilbake til filer"
 
-                staticMenuBtns={staticMenuList}
-                collapseMenuBtns={collapseMenuList}
+                menuBtns={menuList}
             />
             {this.state.is_downloading
                 ? <this.Spinner text='Laster ned...' />

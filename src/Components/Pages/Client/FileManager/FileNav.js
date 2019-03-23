@@ -12,7 +12,7 @@ const FileNav = props => {
     }
 
     /**
-     * Get back link
+     * Get back description
      * @returns {*}
      */
     const getBackLink = () => {
@@ -25,11 +25,28 @@ const FileNav = props => {
         }
     }
 
+      /**
+     * Get back link
+     * @returns {*}
+     */
+    const getBackDescr = () => {
+        if(props.is_recyclebin) {
+            return 'Tilbake til kunde'
+        }
+
+        if(props.selected_folder.is_root) {
+            return 'Tilbake til kunder'
+        } else {
+            return 'Tilbake ett hakk'
+        }
+    }
+
+
     //Define buttons to be visible in filemanager
-    const staticMenuList = []
-    const collapseMenuList = [
+    const menuList = [
         {
             btnKey: 0,
+            contextId: "upload",
             img: "UploadFile",
             imgDescr: "Filopplasting",
             btnAction: () => {
@@ -38,6 +55,7 @@ const FileNav = props => {
         },
         {
             btnKey: 1,
+            contextId: "editor",
             img: "OpenEditor",
             imgDescr: "Tekstbehandling",
             btnAction: () => {
@@ -46,6 +64,7 @@ const FileNav = props => {
         },
         {
             btnKey: 2,
+            contextId: "new-folder",
             img: "NewFolder",
             imgDescr: "Ny mappe",
             btnAction: () => {
@@ -54,6 +73,7 @@ const FileNav = props => {
         },
         {
             btnKey: 3,
+            contextId: "trash",
             isLink: true,
             to: `/client/${props.match.params.client_id}/recyclebin`,
             img: "TrashWhite",
@@ -61,6 +81,7 @@ const FileNav = props => {
         },
         {
             btnKey: 4,
+            contextId: "accesslog-client",
             isLink: true,
             to: `/accesslog/client/${props.match.params.client_id}`,
             img: "AccessLogWhite",
@@ -69,22 +90,20 @@ const FileNav = props => {
     ]
 
     //Define buttons to be visible in rec
-    const collapseMenuListRec = []
+    const menuListRec = []
 
     /**
      * Render PageNav
      */
 
     return <PageNav
-        staticMenuBtns={staticMenuList}
-        collapseMenuBtns={props.is_recyclebin ? collapseMenuListRec : collapseMenuList}
+        menuBtns={props.is_recyclebin ? menuListRec : menuList}
         hasCollapse={props.is_recyclebin ? false : true}
 
         backIsLink={props.selected_folder.is_root ? true : false}
         backTo={getBackLink()}
-        hasCollapseToggle={props.is_recyclebin ? false : true}
         backAction={upOneLevel}
-        // backDescr={props.selected_folder.is_root ? "Tilbake til kunder" : "Tilbake et hakk"}
+        backDescr={getBackDescr()}
 
         searchValue={props.search}
         searchAction={props.updateSearch}

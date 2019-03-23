@@ -74,7 +74,7 @@ class Metadata extends Component {
                             : <Alert color='secondary'>Ingen data lagt til enda</Alert>
                         : <Spinner color='secondary' />}
                 </Collapse>
-                {this.state.isOpen && this.props.metadata_loaded ? <NavBtn className="btn-edit-metadata" action={this.props.toggleMetadataModal} img='Edit'>Endre</NavBtn> : ''}
+                {this.state.isOpen && this.props.metadata_loaded ? <NavBtn hasTooltip contextId="edit-metadata" descr="Endre metadata" className="btn-edit-metadata" action={this.props.toggleMetadataModal} img='Edit' /> : ''}
 
 
             </Jumbotron>

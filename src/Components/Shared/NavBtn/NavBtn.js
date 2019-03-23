@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './NavBtn.css'
+import BtnTooltip from './BtnTooltip'
 
 // Imports all icons
 import ArrowBack from '../../../Assets/Icons/arrow-back.png'
@@ -39,10 +40,14 @@ class NavBtn extends Component {
     constructor(props) {
         super(props)
 
+        this.state = {
+            tooltipOpen: false
+        }
+
         this.getImg = this.getImg.bind(this)
         this.getBtnClass = this.getBtnClass.bind(this)
         this.getImgClass = this.getImgClass.bind(this)
-
+        this.toogleTooltip = this.toggleTooltip.bind(this)
     }
 
     getImg(name) {
@@ -107,25 +112,39 @@ class NavBtn extends Component {
         }
     }
 
+    toggleTooltip() {
+        this.setState({
+            tooltipOpen: !this.state.tooltipOpen
+        })
+    }
+
     render() {
         return (
-            <button
-                className={this.getBtnClass(this.props.contextClass)}
-                onClick={this.props.action}
-                disabled={this.props.isDisabled}>
+            <span>
+                <button
+                    className={this.getBtnClass(this.props.contextClass)}
+                    id={this.props.contextId ? this.props.contextId : null}
+                    onClick={this.props.action}
+                    disabled={this.props.isDisabled}>
 
-                <img
-                    className={this.getImgClass(this.props.contextClass)}
-                    src={this.getImg(this.props.img)}
-                    alt={this.props.descr} />
+                    <img
+                        className={this.getImgClass(this.props.contextClass)}
+                        src={this.getImg(this.props.img)}
+                        alt={this.props.descr} />
 
-                {this.props.children}
+                    {this.props.children}
 
-                {this.props.showDescr ? (<p
-                    className={"btn-vector-descr"}>
-                    {this.props.descr}
-                </p>) : null}
-            </button>
+                    {this.props.showDescr ? (<p
+                        className={"btn-descr"}>
+                        {this.props.descr}
+                    </p>) : null}
+                </button>
+
+               {this.props.hasTooltip ? (
+                    <BtnTooltip targetId={this.props.contextId} descr={this.props.descr} />
+                ) : null}
+            </span>
+
         )
     }
 }

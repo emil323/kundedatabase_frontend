@@ -102,6 +102,7 @@ Deer (brown)
       .nav-item .nav-link{
         padding-top: 1em;
         padding-bottom: 1em;
+        
         border-top: 1px solid;
         border-color: #9B9B9B;
       }
@@ -109,11 +110,17 @@ Deer (brown)
       .btn-vector-brand .btn-brand-img{
         height: 1em;
     }
+
+    .btn-tooltip {
+        display: none;
+    }
+
 }
 
 /* sm */
 
 @media only screen and (min-width: 577px) {
+   
 }
 
 /* md */
@@ -126,7 +133,15 @@ Deer (brown)
     */
 
     .btn-vector-brand .btn-brand-img {
-        height: 1em;
+        height: 2em;
+    }
+
+    .btn-collapse .btn-descr {
+        display: none;
+    }
+
+    .btn-navbar .btn-descr{
+        display: none;
     }
 }
 
@@ -134,11 +149,20 @@ Deer (brown)
 
 /* lg */
 
-@media only screen and (min-width: 992px) {}
+@media only screen and (min-width: 992px) {
+}
 
 /* xl */
 
-@media only screen and (min-width: 1200px) {}
+@media only screen and (min-width: 1200px) {
+    .btn-collapse .btn-descr {
+        display: block;
+    }
+
+    .btn-navbar .btn-descr {
+        display: block;
+    }
+}
 
 .container {
     margin-bottom: 3em;

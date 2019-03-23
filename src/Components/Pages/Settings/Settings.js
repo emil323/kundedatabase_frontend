@@ -20,19 +20,17 @@ class Settings extends React.Component {
     }
 
     render() {
-
-        const staticMenuList = []
-        const collapseMenuList = []
+        const menuList = []
 
         return (
             <Container fluid>
                 <PageNav
                     backIsLink
                     backTo={'/'}
+                    backDescr="Hjem"
 
                     disableSearch
-                    staticMenuBtns={staticMenuList}
-                    collapseMenuBtns={collapseMenuList}
+                    menuBtns={menuList}
                 />
                           
                 <Row>

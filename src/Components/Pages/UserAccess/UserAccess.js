@@ -20,9 +20,7 @@ class UserAccess extends React.Component {
             return user.first_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
         })
 
-        const staticMenuList = []
-        const collapseMenuList = []
-
+        const menuList = []
 
         return (
             <Container fluid>
@@ -35,8 +33,7 @@ class UserAccess extends React.Component {
                     searchAction={this.props.updateSearch.bind(this)}
                     searchPlaceholder="Søk etter bruker"
 
-                    staticMenuBtns={staticMenuList}
-                    collapseMenuBtns={collapseMenuList}
+                    menuBtns={menuList}
                 /> 
 
                 <Row>
