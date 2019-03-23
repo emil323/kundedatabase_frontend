@@ -24,6 +24,7 @@ class Settings extends React.Component {
 
         return (
             <Container fluid>
+            <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
                 <PageNav
                     backIsLink
                     backTo={'/'}
@@ -66,6 +67,7 @@ class Settings extends React.Component {
                 <Row>
                     <ChangeDefaultMetadataValuesModal />
                 </Row>
+                </Col>
             </Container >
         )
     }
