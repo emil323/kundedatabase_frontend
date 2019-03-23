@@ -11,9 +11,6 @@ import { updateSearch, fetchUsersData } from '../../../Store/Actions/userActions
 
 class UserAccess extends React.Component {
 
-    toggleCheckbox = () => {
-
-    }
 
     render() {
         let filteredUsers = this.props.users.filter(user => {
@@ -42,12 +39,8 @@ class UserAccess extends React.Component {
                             <Table className="table table-hover">
                                 <thead className="thead-dark">
                                     <tr>
-                                        <th>Email</th>
-                                        <th>Fornavn</th>
-                                        <th>Etternavn</th>
-                                        <th>Har adgang</th>
-                                        <th>Administrator</th>
-                                        <th>Superadmin</th>
+                                        <th>Navn</th>
+                                        <th>E-post</th>
                                     </tr>
                                 </thead>
                                 {
@@ -66,14 +59,7 @@ class UserAccess extends React.Component {
     //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
 
     componentDidMount() {
-
         this.props.fetchUsersData()
-
-        authContext.acquireToken('https://graph.microsoft.com', (message, token, msg) => {
-            API.consultants().list(token)
-                .then(res => console.log(res))
-        })
-
     }
 }
 

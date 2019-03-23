@@ -42,7 +42,6 @@ class AccessLog extends Component {
         return (
             <Container fluid>
                 <PageNav
-                    hasCollapse
                     backIsLink
                     backDescr={this.state.backDescr}
                     backTo={this.state.backTo}
@@ -159,9 +158,10 @@ class AccessLog extends Component {
 
             switch (nextProps.match.params.type) {
                 case FILE: 
+                    nextProps.pushTrail(nextProps.client_name, `/accesslog/client/${nextProps.client_id}`)
                     nextProps.access_type === 'VIEW_FILE'
                         ? nextProps.pushTrail(nextProps.file_name)
-                        : nextProps.pushTrail(nextProps.client_name + ': Strukturert data')
+                        : nextProps.pushTrail('Strukturert data')
 
                         
                     menuList.push(
@@ -197,9 +197,7 @@ class AccessLog extends Component {
                     nextProps.pushTrail(nextProps.consultant_name)
                     menuList.push({
                         btnKey: 1,
-                        isLink: true,
                         contextId: "light-report",
-                        to: `/client/${nextProps.client_id}`,
                         img: "EasyReportWhite",
                         imgDescr: "Forenklet rapport",
                         btnAction: () => {nextProps.toggleAccesslogReportModal({
