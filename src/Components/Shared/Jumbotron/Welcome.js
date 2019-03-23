@@ -2,7 +2,7 @@ import React from 'react';
 import { Jumbotron, Button } from 'reactstrap';
 import './Jumbotron.css';
 import { authContext } from '../../../API/Auth/adalConfig';
-
+import {formatDate} from '../../Helpers/Formatting/DateHelper'
 
 
 class Welcome extends React.Component {
@@ -12,14 +12,8 @@ class Welcome extends React.Component {
             email: null,
             name: null
         }
-
-        this.formatDate = this.formatDate.bind(this)
     }
 
-    formatDate(date) {
-        const format = {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric'};
-        return new Date(date).toLocaleString('no-NO', format)
-    }
 
     render(){
         var curDate = Date();
@@ -28,7 +22,7 @@ class Welcome extends React.Component {
                 <Jumbotron className="Jumbotron-Home">
                         <h1 className="display=3">Velkommmen {this.state.name}!</h1>
                         <hr className="my-2" />
-                        <p className="lead">{this.formatDate(curDate)}</p>                    
+                        <p className="lead">{formatDate(curDate)}</p>                    
                 </Jumbotron>
     
             </div>

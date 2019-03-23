@@ -34,7 +34,7 @@ export const fetchAccessLogData = (type,id) => {
     console.log('fetchaccess', type,id)
     return (dispatch) => {
         dispatch(setIsLoading(true))
-        return api.accesslog().sort_by(type).id(id)
+        return api.accesslog().filter(type).id(id)
             .then(response => {
                 dispatch(setIsLoading(false))
                 dispatch(fetchAccessLog(response.data))

@@ -17,13 +17,12 @@ import DropdownBtn from '../../../Shared/DropdownBtn/DropdownBtn';
 import { Button } from 'reactstrap'
 import API from '../../../../API/API';
 import NavBtn from '../../../Shared/NavBtn/NavBtn';
+import {formatDate} from '../../../Helpers/Formatting/DateHelper'
 
 class FilesTable extends Component {
     constructor(props) {
         super(props)
         this.handleSelection = this.handleSelection.bind(this)
-        this.formatDate = this.formatDate.bind(this)
-        this.formatTitle = this.formatTitle.bind(this)
     }
 
     handleSelection = (e) => {
@@ -60,19 +59,7 @@ class FilesTable extends Component {
         }
     }
 
-    formatDate(date) {
-        const format = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric' };
-        return new Date(date).toLocaleString('no-NO', format)
-    }
 
-    formatTitle(title) {
-        const length = 20;
-        if (title.length > length) {
-            return title.substring(0, 20) + "..."
-        } else {
-            return title
-        }
-    }
 
     render() {
 
@@ -115,7 +102,7 @@ class FilesTable extends Component {
                     }}>{this.props.is_searching ? this.props.file.fullpath : this.props.file.name
                         }</Link> 
                         : this.props.is_searching ? this.props.file.fullpath : this.props.file.name}
-                        <br /><span className="date">{this.formatDate(this.props.file.last_changed)}</span>
+                        <br /><span className="date">{formatDate(this.props.file.last_changed)}</span>
                     </td>
 
                     {this.props.file.is_deleted
