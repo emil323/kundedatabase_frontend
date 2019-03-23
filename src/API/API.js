@@ -1,5 +1,4 @@
 import axios from './axiosInstance'
-//import {API_URL} from './Settings'
 
 export default {
     client: (clientID) => {
@@ -141,8 +140,8 @@ export default {
     },
     consultants: () => {
         return {
-            list(graph_token) {
-                return axios().get('/users/' + graph_token)
+            list() {
+                return axios().get('/users/')
             }
         }
     },

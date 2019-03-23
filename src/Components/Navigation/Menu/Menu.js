@@ -30,7 +30,7 @@ class Menu extends Component {
                 <AdminUser>
                     <NavItem><Link to="/" className="router-link-nav"><NavLink>Hjem</NavLink></Link></NavItem>
                     <NavItem><Link to="/clients" className="router-link-nav"><NavLink>Kunder</NavLink></Link></NavItem>
-                    <NavItem><Link to="/useraccess" className="router-link-nav"><NavLink>Brukertilgang</NavLink></Link></NavItem>
+                    <NavItem><Link to="/users" className="router-link-nav"><NavLink>Brukere</NavLink></Link></NavItem>
                     <NavItem><Link to="/accesslog" className="router-link-nav"><NavLink >Adgangslogg</NavLink></Link></NavItem>
                     <NavItem><Link to="/settings" className="router-link-nav"><NavLink className="lastElement">Innstillinger</NavLink></Link></NavItem>
                 </AdminUser>

@@ -78,7 +78,7 @@ export default class Header extends React.Component {
 								<AdminUser>
 									<NavItem><Link to="/" className="router-link-nav"><NavLink><NavBtn hasTooltip contextId="home" contextClass={"navbar"} img="Home" descr="Hjem" showDescr /></NavLink></Link></NavItem>
 									<NavItem><Link to="/clients" className="router-link-nav"><NavLink><NavBtn hasTooltip contextId="clients" contextClass={"navbar"} img="Clients" descr="Kunder" showDescr /></NavLink></Link></NavItem>
-									<NavItem><Link to="/useraccess" className="router-link-nav"><NavLink><NavBtn hasTooltip contextId="user-access" contextClass={"navbar"} img="UserAccess" descr="Brukertilgang" showDescr /></NavLink></Link></NavItem>
+									<NavItem><Link to="/users" className="router-link-nav"><NavLink><NavBtn hasTooltip contextId="user-access" contextClass={"navbar"} img="UserAccess" descr="Brukere" showDescr /></NavLink></Link></NavItem>
 									<NavItem><Link to="/accesslog" className="router-link-nav"><NavLink ><NavBtn hasTooltip contextId="accesslog-navbar" contextClass={"navbar"} img="AccessLogWhite" descr="Adgangslogg" showDescr /></NavLink></Link></NavItem>
 									<NavItem><Link to="/settings" className="router-link-nav"><NavLink className="lastElement"><NavBtn hasTooltip contextId="settings" contextClass={"navbar"} img="Settings" descr="Innstillinger" showDescr /></NavLink></Link></NavItem>
 									<NavItem><NavLink><a href='https://www.office.com/apps?auth=2&home=1' target="_blank">

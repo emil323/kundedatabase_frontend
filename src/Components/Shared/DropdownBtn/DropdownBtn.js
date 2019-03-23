@@ -14,7 +14,8 @@ export default class DropdownBtn extends Component {
         };
     }
 
-    toggle() {
+    toggle(e) {
+        e.preventDefault()
         this.setState({
             dropdownOpen: !this.state.dropdownOpen
         });

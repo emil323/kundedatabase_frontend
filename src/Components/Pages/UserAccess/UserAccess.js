@@ -8,6 +8,7 @@ import PageNav from '../../Shared/PageNav/PageNav'
 
 import { connect } from "react-redux";
 import { updateSearch, fetchUsersData } from '../../../Store/Actions/userActions'
+import {setTrail} from '../../../Store/Actions/breadcrumbActions'
 
 class UserAccess extends React.Component {
 
@@ -15,9 +16,12 @@ class UserAccess extends React.Component {
     render() {
         let filteredUsers = this.props.users.filter(user => {
             return user.first_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
+                    || user.email.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
         })
 
         const menuList = []
+
+
 
         return (
             <Container fluid>
@@ -38,12 +42,6 @@ class UserAccess extends React.Component {
                     <Col>
                         <Form class="customRadio">
                             <Table className="table table-hover">
-                                <thead className="thead-dark">
-                                    <tr>
-                                        <th>Navn</th>
-                                        <th>E-post</th>
-                                    </tr>
-                                </thead>
                                 {
                                     filteredUsers.map(user => {
                                         return <UserAccessData user={user} key={user.id} />
@@ -61,6 +59,15 @@ class UserAccess extends React.Component {
     //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
 
     componentDidMount() {
+        this.props.setTrail([
+            {
+                title: 'Hjem',
+                path: '/'
+            },
+            {
+                title: 'Brukere'
+            }
+        ])
         this.props.fetchUsersData()
     }
 }
@@ -79,7 +86,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchUsersData: () => { dispatch(fetchUsersData()) },
-        updateSearch: (search_key) => { dispatch(updateSearch(search_key)) }
+        updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
+        setTrail:(trail) => {dispatch(setTrail(trail))}
     }
 }
 

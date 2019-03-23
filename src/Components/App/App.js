@@ -26,7 +26,7 @@ class App extends Component {
                     <Route exact path="/" component={Home} />
                     <Route path="/clients" component={Clients} />
                     <Route path="/client/:client_id" component={Client} />
-                    <Route path="/useraccess" component={UserAccess} />
+                    <Route path="/users" component={UserAccess} />
                     <Route path="/accesslog/:type/:id" component={AccessLog} />
                     <Route exact path="/accesslog" component={AccessLog} />
                     <Route path="/file/:file_id" component={File} />

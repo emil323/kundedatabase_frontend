@@ -1,17 +1,32 @@
 import React from 'react'
 import { Input, Label } from 'reactstrap';
-
+import Kebab from '../../../Assets/Icons/kebab-hor.png'
+import DropdownBtn from '../../Shared/DropdownBtn/DropdownBtn'
+import {withRouter} from "react-router-dom"
 
 
 class UserAccessData extends React.Component {
 
     render() {
+
+        const btnOptions = [
+            {
+                tekst: 'Adgangslogg',
+                isHeader: 0,
+                key: 0,
+                function: (e) => { this.props.history.push('/accesslog/consultant/' + this.props.user.id) }
+            }
+        ]
        
         return (
-            <tbody>                      
+            <tbody key={this.props.user.id}>                      
                 <tr>
-                    <td>{this.props.user.email}</td>
-                    <td>{this.props.user.first_name} {this.props.user.last_name}</td>
+                    <td>
+                    <strong>{this.props.user.first_name} {this.props.user.last_name}</strong><br/>
+                    {this.props.user.email}<br/>
+                    <em>{this.props.user.is_admin ? 'Administrator' : ''}</em>
+                    </td>
+                    <td><DropdownBtn icon={Kebab} options={btnOptions} /></td>
                 </tr>
             </tbody>
         )
@@ -19,4 +34,4 @@ class UserAccessData extends React.Component {
 }
 
 
-export default UserAccessData
+export default withRouter(UserAccessData)

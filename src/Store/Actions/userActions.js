@@ -26,7 +26,7 @@ export const fetchUsers = (users) => {
 
 export const fetchUsersData = () => {
     return (dispatch) => {
-        return api.users().list()
+        return api.consultants().list()
             .then(response => {
                 dispatch(fetchUsers(response.data))
             })

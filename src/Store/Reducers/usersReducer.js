@@ -12,7 +12,7 @@ const usersReducer = (state = initState, action) => {
     switch(action.type){
         case FETCH_USERS:
             return { ...state, 
-                users: action.users.users
+                users: action.users
             }
         case SEARCH_KEY:
             return {

@@ -132,7 +132,6 @@ class FileManager extends Component {
         }
         //Check if mode (url) is toggled to recyclebin
         if (this.props.is_recyclebin !== nextProps.is_recyclebin) {
-            console.log('mode change')
             //Refetch inventory
             this.props.fetchFilesData(new_params.client_id, new_params.selected_folder, nextProps.is_recyclebin)
         }
