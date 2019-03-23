@@ -36,6 +36,7 @@ class Clients extends Component {
 
         return (
             <Container fluid>
+                <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
                 <PageNav
                     menuBtns={menuList}
 
@@ -83,6 +84,7 @@ class Clients extends Component {
 
                     </Col>
                 </Row>
+                </Col>
             </Container>
         )
     }
