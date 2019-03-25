@@ -76,7 +76,7 @@ class PageNav extends Component {
             if (btn.isLink) {
                 return <Link to={btn.to}>
                     <NavBtn
-                        showDescr
+                        showDescr={this.props.hasCollapse ? true : false}
                         hasTooltip
                         contextId={btn.contextId}
                         contextClass={"collapse"}
@@ -88,7 +88,7 @@ class PageNav extends Component {
                 </Link>
             } else {
                 return <NavBtn
-                    showDescr
+                    showDescr={this.props.hasCollapse ? true : false}
                     hasTooltip
                     contextId={btn.contextId}
                     contextClass={"collapse"}
@@ -101,8 +101,7 @@ class PageNav extends Component {
         })
 
         return (
-            <div>
-                <Navbar fixed="bottom" color="faded" className="page-nav">
+                <Navbar sticky={this.props.width > 1200 ? "top" : null } fixed={this.props.width < 1200 ? "bottom" : null} color="faded" className="page-nav">
 
                     <Mobile>
                         <Collapse isOpen={this.state.menuIsOpen} onClick={this.toggleMenu} navbar>
@@ -152,7 +151,7 @@ class PageNav extends Component {
                         />}
 
                     <Mobile>
-                        {this.props.hasCollapse===true ?
+                        {this.props.hasCollapse === true ?
                             <NavBtn
                                 hasTooltip
                                 contextId="collapse-toggle"
@@ -160,7 +159,7 @@ class PageNav extends Component {
                                 action={this.toggleMenu}
                                 img={this.state.menuIsOpen ? "ExpandMoreWhite" : "ExpandLessWhite"}
                                 descr={!this.state.menuIsOpen ? "Åpne meny" : "Lukk meny"}
-                            /> : null}
+                            /> : <div>{pageMenu}</div>}
                     </Mobile>
                     <Desktop>
                         {pageMenu}
@@ -177,8 +176,6 @@ class PageNav extends Component {
                         />) : ("")}
 
                 </Navbar>
-
-            </div>
         )
     }
 }

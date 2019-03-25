@@ -42,6 +42,7 @@ class AccessLog extends Component {
         return (
             <Container fluid>
                 <PageNav
+                    hasCollapse
                     backIsLink
                     backDescr={this.state.backDescr}
                     backTo={this.state.backTo}

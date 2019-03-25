@@ -55,8 +55,8 @@ class Metadata extends Component {
         const has_data = this.props.metadata.length > 0
 
         return (<div className="metadata">
-            <Jumbotron>
-                <Navbar color="dark">
+         
+                <Navbar color="dark" dark>
                         <NavbarBrand className="mr-auto">
                             {this.props.client_name}</NavbarBrand>
                         <Nav navbar>
@@ -74,10 +74,10 @@ class Metadata extends Component {
                             : <Alert color='secondary'>Ingen data lagt til enda</Alert>
                         : <Spinner color='secondary' />}
                 </Collapse>
-                {this.state.isOpen && this.props.metadata_loaded ? <NavBtn hasTooltip contextId="edit-metadata" descr="Endre metadata" className="btn-edit-metadata" action={this.props.toggleMetadataModal} img='Edit' /> : ''}
+                {this.state.isOpen && this.props.metadata_loaded ? <NavBtn hasTooltip showDescr contextId="edit-metadata" descr="Endre metadata" className="btn-edit-metadata" action={this.props.toggleMetadataModal} img='Edit' /> : ''}
 
 
-            </Jumbotron>
+          
             <MetadataModal />
         </div>
         )
