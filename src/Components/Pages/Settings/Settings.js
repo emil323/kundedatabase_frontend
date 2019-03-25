@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import "./Settings.css"
 import { toggleDefaultMetadataModal } from "../../../Store/Actions/modalActions";
-import { setTrail,pushTrail } from "../../../Store/Actions/breadcrumbActions";
+import { setTrail, pushTrail } from "../../../Store/Actions/breadcrumbActions";
 import { connect } from "react-redux";
 import ChangeDefaultMetadataValuesModal from "./Modals/ChangeDefaultMetadataValuesModal/ChangeDefaultMetadataValuesModal";
 import PageNav from '../../Shared/PageNav/PageNav'
@@ -23,8 +23,7 @@ class Settings extends React.Component {
         const menuList = []
 
         return (
-            <Container fluid>
-            <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
+            <div>
                 <PageNav
                     backIsLink
                     backTo={'/'}
@@ -33,53 +32,56 @@ class Settings extends React.Component {
                     disableSearch
                     menuBtns={menuList}
                 />
-                          
-                <Row>
-                    <Col><p className="lead">Alternativer</p></Col>
-                </Row>
-              
-                <Row>
-                    <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Endre standardverdier" /></Col>
-                </Row>
-                <hr />
-                <Row>
-                    <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Placeholder 1" /></Col>
-                </Row>
-                <hr />
-                <Row>
-                    <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Placeholder2" /></Col>
-                </Row>
-                <hr />
-                <br />
-                <Row>
-                    <Col><p className="lead">Alternativer 2</p></Col>
-                </Row>
-                
-                <Row>
-                    <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Placeholder 3" /></Col>
-                </Row>
-                <hr />
-                <Row>
-                    <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Placeholder 4" /></Col>
-                </Row>
-                <hr />
+                <Container fluid>
+                    <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
 
-                <Row>
-                    <ChangeDefaultMetadataValuesModal />
-                </Row>
-                </Col>
-            </Container >
+                        <Row>
+                            <Col><p className="lead">Alternativer</p></Col>
+                        </Row>
+
+                        <Row>
+                            <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Endre standardverdier" /></Col>
+                        </Row>
+                        <hr />
+                        <Row>
+                            <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Placeholder 1" /></Col>
+                        </Row>
+                        <hr />
+                        <Row>
+                            <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Placeholder2" /></Col>
+                        </Row>
+                        <hr />
+                        <br />
+                        <Row>
+                            <Col><p className="lead">Alternativer 2</p></Col>
+                        </Row>
+
+                        <Row>
+                            <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Placeholder 3" /></Col>
+                        </Row>
+                        <hr />
+                        <Row>
+                            <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Placeholder 4" /></Col>
+                        </Row>
+                        <hr />
+
+                        <Row>
+                            <ChangeDefaultMetadataValuesModal />
+                        </Row>
+                    </Col>
+                </Container >
+            </div>
         )
     }
 
     componentDidMount() {
         this.props.setTrail([{
-                title:'Hjem',
-                path:'/'
-            },
-            {
-                title:'Instillinger'
-            }])
+            title: 'Hjem',
+            path: '/'
+        },
+        {
+            title: 'Instillinger'
+        }])
     }
 }
 
@@ -95,7 +97,7 @@ const mapDispatchToProps = dispatch => {
     return {
         toggleDefaultMetadataModal: () => { dispatch(toggleDefaultMetadataModal()) },
         setTrail: (trail) => { dispatch(setTrail(trail)) },
-        pushTrail: (title, path) => {dispatch(pushTrail(title, path))}
+        pushTrail: (title, path) => { dispatch(pushTrail(title, path)) }
     }
 }
 

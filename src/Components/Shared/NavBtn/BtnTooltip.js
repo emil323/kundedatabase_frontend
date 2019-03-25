@@ -21,7 +21,7 @@ class BtnTooltip extends Component {
     render() {
         return (
             <Desktop>
-                <Tooltip placement="auto-end" isOpen={this.state.open} target={this.props.targetId} toggle={this.toggle}>
+                <Tooltip hideArrow delay={1000} placement="auto-end" isOpen={this.state.open} target={this.props.targetId} toggle={this.toggle}>
                     {this.props.descr}
                 </Tooltip>
             </Desktop>

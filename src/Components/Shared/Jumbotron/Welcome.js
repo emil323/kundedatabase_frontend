@@ -18,14 +18,11 @@ class Welcome extends React.Component {
     render(){
         var curDate = Date();
         return (
-            <div>
                 <Jumbotron className="Jumbotron-Home">
                         <h1 className="display=3">Velkommmen {this.state.name}!</h1>
                         <hr className="my-2" />
                         <p className="lead">{formatDate(curDate)}</p>                    
                 </Jumbotron>
-    
-            </div>
         )
     }
     componentDidMount() {

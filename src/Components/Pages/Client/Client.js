@@ -18,8 +18,7 @@ class Client extends Component {
 
     render() {
         return (
-            <Container fluid>
-                <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
+            <div>
                 {this.props.client_loading ? '' :
                 <div><Metadata client_name={this.props.client_name} client_id={this.props.client_id}/><TrailUpdater/></div>}
                 <Switch>
@@ -28,8 +27,7 @@ class Client extends Component {
                     <Route path={`/client/:client_id/recyclebin/:selected_folder?`}
                            render={(props) => <FileManager {...props} is_recyclebin={true}/>}/>
                 </Switch>
-                </Col>
-            </Container>
+            </div>
         )
     }
 

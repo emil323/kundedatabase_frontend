@@ -35,8 +35,7 @@ class Clients extends Component {
         ]
 
         return (
-            <Container fluid>
-                <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
+            <div>
                 <PageNav
                     menuBtns={menuList}
 
@@ -47,45 +46,46 @@ class Clients extends Component {
                     searchValue={this.props.search}
                     searchAction={this.props.updateSearch.bind(this)}
                     searchPlaceholder="Søk etter kunde" />
+                <Container fluid>
+                    <Row>
+                        <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
 
-                <Row>
-                    <Col>
-                        <Table className="table table-hover">
-                            <thead className="thead-dark">
+                            <Table className="table table-hover">
+                                <thead className="thead-dark">
+                                    {
+                                        //Ser det finere ut uten?
+                                        /*
+                                        <tr>
+                                            <th>Firmanavn</th>
+                                            <th>Favoritt</th>
+                                        </tr>
+                                        */
+                                    }
+                                </thead>
                                 {
-                                    //Ser det finere ut uten?
-                                    /*
-                                    <tr>
-                                        <th>Firmanavn</th>
-                                        <th>Favoritt</th>
-                                    </tr>
-                                    */
+                                    this.props.is_loading ?
+                                        <tr>
+                                            <td colspan="4">
+                                                <Alert color="light">
+                                                    <p className="text-center">
+                                                        <Spinner color="dark" />
+                                                    </p>
+                                                </Alert>
+                                            </td>
+                                        </tr>
+                                        : filteredClients.map(client => {
+                                            return <ClientData client={client}
+                                                fetchClientsData={this.props.fetchClientsData}
+                                                key={client.id} />
+                                        })
                                 }
-                            </thead>
-                            {
-                                this.props.is_loading ?
-                                    <tr>
-                                        <td colspan="4">
-                                            <Alert color="light">
-                                                <p className="text-center">
-                                                    <Spinner color="dark" />
-                                                </p>
-                                            </Alert>
-                                        </td>
-                                    </tr>
-                                    : filteredClients.map(client => {
-                                        return <ClientData client={client}
-                                            fetchClientsData={this.props.fetchClientsData}
-                                            key={client.id} />
-                                    })
-                            }
-                        </Table>
-                        <AddClient />
+                            </Table>
+                            <AddClient />
 
-                    </Col>
-                </Row>
-                </Col>
+                        </Col>
+                    </Row>
             </Container>
+             </div >
         )
     }
 
