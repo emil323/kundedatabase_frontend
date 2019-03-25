@@ -9,10 +9,8 @@ import * as serviceWorker from './serviceWorker'
 import { Provider } from "react-redux"
 import store from './Store/store'
 
-
 import './CSS/index.css';
 import './CSS/modal.css';
-
 
 //
 //Set this to true to ignore authentication
