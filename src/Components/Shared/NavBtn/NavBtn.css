@@ -64,6 +64,11 @@
 
 .btn-img-kebab {
     height: 2em;
+    opacity: 0.2;
+}
+
+.btn-kebab:hover .btn-img-kebab {
+    opacity: 1;
 }
 
 #search {

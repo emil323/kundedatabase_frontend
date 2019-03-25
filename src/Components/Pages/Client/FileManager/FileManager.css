@@ -17,18 +17,24 @@
 .word_break {
     word-break: break-word;
 }
-.btn-group-right {
-    float: right;
-}
 
 .vector-img {
-    height: 2.5em;
+    width: 2em;
 }
 
-.file-kebab {
-    display: none;
-}
 
 .file-tr:hover .file-kebab{
     display: block;
+}
+
+.td-btn {
+    width: 2em;
+}
+
+.td-file-title {
+
+}
+
+.td-file-icon {
+    width: 2em;
 }

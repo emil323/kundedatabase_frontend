@@ -36,7 +36,7 @@ export default class DropdownBtn extends Component {
 
         })
         return (
-            <Dropdown toggle={this.toggle} isOpen={this.state.dropdownOpen} direction="left">
+            <Dropdown className="" toggle={this.toggle} isOpen={this.state.dropdownOpen} direction="left">
                 <DropdownToggle
                     tag="span"
                     onClick={this.toggle}

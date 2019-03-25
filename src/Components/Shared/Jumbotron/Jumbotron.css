@@ -9,7 +9,7 @@
 }
 
 .Jumbotron-Home {
-    background-image: linear-gradient(to bottom, #002540 0%, #002540 0%, transparent), url('../../../Assets/Jumbotron/placeholder-jumbotron-home.png');
+    background-image: linear-gradient(to bottom, #002540 0%, #002540 0%, transparent), url('../../../Assets/Img/norway.jpg');
 }
 
 .Jumbotron-Client {

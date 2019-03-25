@@ -106,9 +106,9 @@ class FilesTable extends Component {
         return (
             <tbody>
                 <tr className="file-tr">
-                    <td><img className="vector-img" src={this.checkFileType(this.props.file.type)} alt={this.props.file.type} /></td>
+                    <td className="td-file-icon"><img className="vector-img" src={this.checkFileType(this.props.file.type)} alt={this.props.file.type} /></td>
 
-                    <td className="word_break">
+                    <td className="word_break td-file-title">
                     {!this.props.file.is_deleted ?
                     <Link disabled to="" onClick={(e) => {
                         this.handleSelection(e)
@@ -119,8 +119,8 @@ class FilesTable extends Component {
                     </td>
 
                     {this.props.file.is_deleted
-                        ? <td><NavBtn img="Restore" action={() => this.props.toggleRecoverModal(this.props.file)} /></td>
-                        : <td><DropdownBtn className="file-kebab" icon={Kebab} options={btnOptions} /></td>
+                        ? <td className="td-btn"><NavBtn img="Restore" action={() => this.props.toggleRecoverModal(this.props.file)} /></td>
+                        : <td className="td-btn"><DropdownBtn icon={Kebab} options={btnOptions} /></td>
                     }
                 </tr>
             </tbody>

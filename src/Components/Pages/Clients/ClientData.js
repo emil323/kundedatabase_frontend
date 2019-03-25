@@ -4,6 +4,7 @@ import API from '../../../API/API';
 import {Button} from 'reactstrap'
 import star_filled from '../../../Assets/Icons/star_filled.png'
 import star_border from '../../../Assets/Icons/star_border.png'
+import NavBtn from '../../Shared/NavBtn/NavBtn'
 
 
 class ClientsData extends React.Component {
@@ -38,7 +39,7 @@ class ClientsData extends React.Component {
                 <tr>
                     <Link  to={"./client/" + this.props.client.id + '/files'}><td>{this.props.client.name}</td></Link>
                     <td className='text-right'>  
-                        <button class="btn-vector" onClick={this.updateFavourites} ><img className="btn-vector-img" id={this.props.client.id} src={this.props.client.is_favourite ? star_filled : star_border}></img></button>
+                        <NavBtn action={this.updateFavourites} img={this.props.client.is_favourite ? "StarFilled" : "StarBorder"} descr="Angi som favoritt" />
                     </td>
                 </tr>
             </tbody>

@@ -34,6 +34,8 @@ import ArrowForward from '../../../Assets/Icons/arrow-forward.png'
 import Settings from '../../../Assets/Icons/settings.png'
 import Clients from '../../../Assets/Icons/clients.png'
 import UserAcces from '../../../Assets/Icons/user-access.png'
+import StarFilled from '../../../Assets/Icons/star_filled.png'
+import StarBorder from '../../../Assets/Icons/star_border.png'
 
 
 class NavBtn extends Component {
@@ -84,6 +86,8 @@ class NavBtn extends Component {
             case 'Settings': return Settings
             case 'Clients': return Clients
             case 'UserAccess': return UserAcces
+            case 'StarFilled': return StarFilled
+            case 'StarBorder': return StarBorder
             default: return null
         }
     }
@@ -144,7 +148,6 @@ class NavBtn extends Component {
                     <BtnTooltip targetId={this.props.contextId} descr={this.props.descr} />
                 ) : null}
             </span>
-
         )
     }
 }
