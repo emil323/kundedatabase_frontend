@@ -24,3 +24,11 @@
 .vector-img {
     height: 2.5em;
 }
+
+.file-kebab {
+    display: none;
+}
+
+.file-tr:hover .file-kebab{
+    display: block;
+}

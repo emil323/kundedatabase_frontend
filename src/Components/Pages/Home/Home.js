@@ -12,24 +12,18 @@ class Home extends React.Component {
         super(props)
 
     }
-    
+
     render() {
         return (
-            <Container fluid>
-                <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
-                    <Row>
-                        <Col>
-                            <Welcome />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <hr />
-                            <Favorites />
-                        </Col>
-                    </Row>
-                </Col>
-            </Container>
+            <div>
+                <Row>
+                    <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
+                        <Welcome />
+                    </Col>
+                </Row>
+                <hr />
+                <Favorites />
+            </div>
 
         )
     }
@@ -41,7 +35,7 @@ class Home extends React.Component {
         }])
     }
 
-    
+
 }
 
 // Calls on a clientsReducer that bring props to the component

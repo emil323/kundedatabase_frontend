@@ -40,7 +40,7 @@ class AccessLog extends Component {
 
 
         return (
-            <Container fluid>
+            <div>
                 <PageNav
                     hasCollapse
                     backIsLink
@@ -50,8 +50,9 @@ class AccessLog extends Component {
                     searchAction={this.props.updateSearch.bind(this)}
                     searchPlaceholder="Søk i loggen"
                     menuBtns={this.state.menuList} />
-                <Row>
 
+            <Container fluid>
+                <Row>
                     <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
                         {
                             this.state.is_exporting
@@ -111,6 +112,7 @@ class AccessLog extends Component {
                 </Row>
                 <ReportModal/>
             </Container>
+            </div>
         )
     }
 

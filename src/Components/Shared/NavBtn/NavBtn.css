@@ -27,8 +27,7 @@
     background-color: transparent;
     border: transparent;
     transition: transform .2s;
-    outline: none;  
-  
+    outline: none;    
 }
 
 .btn-vector-img {

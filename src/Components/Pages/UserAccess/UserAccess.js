@@ -8,7 +8,7 @@ import PageNav from '../../Shared/PageNav/PageNav'
 
 import { connect } from "react-redux";
 import { updateSearch, fetchUsersData } from '../../../Store/Actions/userActions'
-import {setTrail} from '../../../Store/Actions/breadcrumbActions'
+import { setTrail } from '../../../Store/Actions/breadcrumbActions'
 
 class UserAccess extends React.Component {
 
@@ -16,7 +16,7 @@ class UserAccess extends React.Component {
     render() {
         let filteredUsers = this.props.users.filter(user => {
             return user.first_name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
-                    || user.email.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
+                || user.email.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
         })
 
         const menuList = []
@@ -24,9 +24,8 @@ class UserAccess extends React.Component {
 
 
         return (
-            <Container fluid>
-            <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
-               <PageNav
+            <div>
+                <PageNav
                     backIsLink
                     backTo="/"
                     backDescr="Hjem"
@@ -36,23 +35,25 @@ class UserAccess extends React.Component {
                     searchPlaceholder="Søk etter bruker"
 
                     menuBtns={menuList}
-                /> 
+                />
 
-                <Row>
-                    <Col>
-                        <Form class="customRadio">
-                            <Table className="table table-hover">
-                                {
-                                    filteredUsers.map(user => {
-                                        return <UserAccessData user={user} key={user.id} />
-                                    })
-                                }
-                            </Table>
-                        </Form>
-                    </Col>
-                </Row>
-                </Col>
-            </Container>
+                <Container fluid>
+                    <Row>
+                        <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
+                            <Form class="customRadio">
+                                <Table className="table table-hover">
+                                    {
+                                        filteredUsers.map(user => {
+                                            return <UserAccessData user={user} key={user.id} />
+                                        })
+                                    }
+                                </Table>
+                            </Form>
+                        </Col>
+                    </Row>
+                </Container>
+            </div >
+
         );
     }
 
@@ -87,7 +88,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchUsersData: () => { dispatch(fetchUsersData()) },
         updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
-        setTrail:(trail) => {dispatch(setTrail(trail))}
+        setTrail: (trail) => { dispatch(setTrail(trail)) }
     }
 }
 

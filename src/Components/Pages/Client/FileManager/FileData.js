@@ -4,6 +4,7 @@ import pdf from "../../../../Assets/Icons/Files/pdf.png"
 import excel from "../../../../Assets/Icons/Files/excel.png"
 import textDoc from "../../../../Assets/Icons/Files/txt.png"
 import powerp from "../../../../Assets/Icons/Files/powerp.png"
+import file from "../../../../Assets/Icons/Files/file.png"
 import img from "../../../../Assets/Icons/Files/img.png"
 import folder from "../../../../Assets/Icons/folder.png"
 import Kebab from '../../../../Assets/Icons/kebab-hor.png'
@@ -42,20 +43,32 @@ class FilesTable extends Component {
 
     checkFileType = (type) => {
         switch (type) {
-            case "WORD":
+            case "application/msword":
+            case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
                 return word
-            case "PDF":
+
+            case "application/pdf":
                 return pdf
-            case "EXCEL":
+
+            case "application/vnd.ms-excel":
+            case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+            case "application/vnd.openxmlformats-officedocument.spreadsheetml.template":
                 return excel
+
             case "folder":
                 return folder
+
             case "image/png":
+            case "image/jpg":
+            case "image/jpeg":
                 return img
-            case "powerp":
+
+            case "application/vnd.ms-powerpoint":
+            case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
                 return powerp
+
             default:
-                return word
+                return file
         }
     }
 
@@ -92,7 +105,7 @@ class FilesTable extends Component {
 
         return (
             <tbody>
-                <tr>
+                <tr className="file-tr">
                     <td><img className="vector-img" src={this.checkFileType(this.props.file.type)} alt={this.props.file.type} /></td>
 
                     <td className="word_break">
@@ -107,7 +120,7 @@ class FilesTable extends Component {
 
                     {this.props.file.is_deleted
                         ? <td><NavBtn img="Restore" action={() => this.props.toggleRecoverModal(this.props.file)} /></td>
-                        : <td><DropdownBtn icon={Kebab} options={btnOptions} /></td>
+                        : <td><DropdownBtn className="file-kebab" icon={Kebab} options={btnOptions} /></td>
                     }
                 </tr>
             </tbody>
