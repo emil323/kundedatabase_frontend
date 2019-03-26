@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Navbar, Nav, NavItem, Collapse, ButtonGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Label } from 'reactstrap'
+import { Navbar, Nav, NavItem, Collapse, Input, Form } from 'reactstrap'
 import NavBtn from '../NavBtn/NavBtn'
 import { Link } from 'react-router-dom'
 import { withResizeDetector } from 'react-resize-detector';
@@ -7,7 +7,7 @@ import { Mobile, Desktop } from '../../Helpers/Responsive/Responsive'
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 import { updateSearch } from '../../../Store/Actions/navActions'
-
+import Breadcrumbs from '../../Navigation/Breadcrumbs/Breadcrumbs'
 import './PageNav.css'
 
 class PageNav extends Component {
@@ -50,10 +50,13 @@ class PageNav extends Component {
         const isTablet = this.props.width < 1200
         const isDesktop = this.props.width > 1200
 
+        const buttons_white = isDesktop ? false : true
+
         const pageMenu = menuBtns.map(btn => {
             if (btn.isLink) {
                 return <NavItem><Link to={btn.to}>
                     <NavBtn
+                        white={buttons_white}
                         showDescr={this.props.hasCollapse && isMobile ? true : false}
                         hasTooltip
                         contextId={btn.contextId}
@@ -67,6 +70,7 @@ class PageNav extends Component {
             } else {
                 return <NavItem>
                     <NavBtn
+                        white={buttons_white}
                         showDescr={this.props.hasCollapse && isMobile ? true : false}
                         hasTooltip
                         contextId={btn.contextId}
@@ -78,11 +82,21 @@ class PageNav extends Component {
                     /> </NavItem>
             }
         })
+
+        const pagenav_style = isDesktop ? 'page-nav-desktop' : 'page-nav-mobile'
         
-        const pagenav_style = isDesktop ?  'page-nav-desktop' : 'page-nav-mobile'
 
         return (
+            <div>
+            {
+            /** Show breadscrumbs here if not desktop */
+             !isDesktop &&  <Breadcrumbs  />
+            }
             <Navbar sticky={isDesktop ? "top" : null} fixed={isTablet ? "bottom" : null} color="faded" className={pagenav_style}>
+                {
+                    isDesktop && <Breadcrumbs className="breadcrumb-desktop"/>
+                }
+                    
                 <Mobile>
                     <Collapse isOpen={this.state.menuIsOpen} onClick={this.toggleMenu} navbar>
                         <Nav className="ml-auto" navbar>
@@ -94,7 +108,7 @@ class PageNav extends Component {
                 <Mobile>
                     <Collapse isOpen={this.state.searchIsOpen} navbar>
                         { /* Check if searchAction is defined, or else render no search bar */
-                            
+
                             <Form inline>
                                 <Input
                                     placeholder={this.props.searchPlaceholder}
@@ -105,55 +119,64 @@ class PageNav extends Component {
                     </Collapse>
                 </Mobile>
 
-                {!this.props.backIsDisabled ? (
-                    this.props.backIsLink ? (
-                        <NavItem>
-                            <Link to={this.props.backTo}>
-                                <NavBtn
-                                    contextId="back"
-                                    contextClass="pagenav"
-                                    isBackBtn="true"
-                                    img={this.props.backTo === "/" ? "Home" : "ArrowBack"}
-                                    descr={this.props.backDescr}
-                                />
-                            </Link>
-                        </NavItem>
-                    ) : (
+                <Mobile>
+                    {!this.props.backIsDisabled ? (
+                        this.props.backIsLink ? (
                             <NavItem>
-                                <NavBtn
-                                    contextId="back"
-                                    contextClass="pagenav"
-                                    isBackBtn="true"
-                                    action={this.props.backAction}
-                                    img="ArrowPrevFolder"
-                                    descr={this.props.backDescr}
-                                    isDisabled={this.props.backIsDisabled}
-                                />
-                            </NavItem>)
-                ) : <NavBtn
-                        isDisabled
-                        img=""
-                    />}
+                                <Link to={this.props.backTo}>
+                                    <NavBtn
+                                        white={buttons_white}
+                                        contextId="back"
+                                        contextClass="pagenav"
+                                        isBackBtn="true"
+                                        img={this.props.backTo === "/" ? "Home" : "ArrowBack"}
+                                        descr={this.props.backDescr}
+                                    />
+                                </Link>
+                            </NavItem>
+                        ) : (
+                                <NavItem>
+                                    <NavBtn
+                                        white={buttons_white}
+                                        contextId="back"
+                                        contextClass="pagenav"
+                                        isBackBtn="true"
+                                        action={this.props.backAction}
+                                        img="ArrowPrevFolder"
+                                        descr={this.props.backDescr}
+                                        isDisabled={this.props.backIsDisabled}
+                                    />
+                                </NavItem>)
+                    ) : <NavBtn
+                            isDisabled
+                            img=""
+                        />}
+                </Mobile>
 
                 <Mobile>
                     {this.props.hasCollapse === true ?
                         <NavItem>
                             <NavBtn
+                                white={buttons_white}
                                 contextId="collapse-toggle"
                                 contextClass="pagenav"
                                 action={this.toggleMenu}
-                                img={this.state.menuIsOpen ? "ExpandMoreWhite" : "ExpandLessWhite"}
+                                img={this.state.menuIsOpen ? "ExpandMore" : "ExpandLess"}
                                 descr={!this.state.menuIsOpen ? "Åpne meny" : "Lukk meny"}
                             /></NavItem> : <div>{pageMenu}</div>}
                 </Mobile>
+
                 <Desktop>
-                    {pageMenu}
+                    <Nav className="ml-auto">
+                        {pageMenu}
+                    </Nav>
                 </Desktop>
 
                 <Mobile>
                     {!this.props.disableSearch ? (
                         <NavItem>
                             <NavBtn
+                                white={buttons_white}
                                 contextId="search"
                                 contextClass="pagenav"
                                 action={this.toggleSearch}
@@ -171,6 +194,7 @@ class PageNav extends Component {
                         /></Form>
                 </Desktop>
             </Navbar>
+            </div>
         )
     }
 }
@@ -181,7 +205,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateSearch:(key) => {dispatch(updateSearch(key))}
+        updateSearch: (key) => { dispatch(updateSearch(key)) }
     }
 }
 

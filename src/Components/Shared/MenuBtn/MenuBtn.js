@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import ArrowForward from '../../../Assets/Icons/arrow-forward.png'
+import ArrowForwardBlack from '../../../Assets/Icons/arrow-forward-black.png'
+import ArrowForwardWhite from '../../../Assets/Icons/arrow-forward-white.png'
+
 import './MenuBtn.css'
 
 class MenuBtn extends Component {
