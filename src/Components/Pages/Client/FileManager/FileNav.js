@@ -94,11 +94,18 @@ class FileNav extends React.Component {
         ]
     
         //Define buttons to be visible in recyclebin ??
-        const menuListRec = []
+        const menuListRec = [{
+            btnKey: 3,
+            contextId: "trash",
+            isLink: true,
+            to: `/client/${newProps.match.params.client_id}/files`,
+            img: "ArrowPrevFolder",
+            imgDescr: "Gå ut av papirkurv"
+        }]
         if(props.selected_folder.id !== newProps.selected_folder.id) {
             props.setNav({
                 menuBtns: newProps.is_recyclebin ? menuListRec : menuList,
-                hasCollapse: newProps.is_recyclebin ? false : true,
+                hasCollapse: true,
                 backIsLink: newProps.selected_folder.is_root ? true : false,
                 backTo:getBackLink(),
                 backAction:upOneLevel,

@@ -103,7 +103,7 @@ class MetadataModal extends React.Component {
                 <tbody key={i}>
                     <td valign='middle'><Input value={d.title} onChange={this.handleTitleChange(i)} /></td>
                     <td valign='middle'><Input value={d.content} onChange={this.handleContentChange(i)} /></td>
-                    <td valign='middle'><NavBtn img='Remove' action={this.handleRemove(i)} /></td>
+                    <td valign='middle'><NavBtn img='Trash' action={this.handleRemove(i)} /></td>
                 </tbody>)
         })
 
