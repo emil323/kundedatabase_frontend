@@ -104,7 +104,7 @@ class File extends Component {
                 {
                     btnKey: 1,
                     contextId: "accesslog-file",
-                    img: "AccessLogWhite",
+                    img: "AccessLog",
                     imgDescr: "Adgangslogg",
                     btnAction: () => { this.props.history.push('/accesslog/file/' + this.state.metadata.file_id) }
                 },

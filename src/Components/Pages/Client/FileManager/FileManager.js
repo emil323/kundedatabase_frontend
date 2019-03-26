@@ -44,8 +44,7 @@ class FileManager extends Component {
         return (
             <div>
                 <FileNav {...this.props}/>
-                <Row>
-                <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
+                
                         <Table className="table table-hover">
                             {
                                 //Display is searching message
@@ -101,8 +100,7 @@ class FileManager extends Component {
 
                         {/* Returns null, is only used to update breadcrumbs*/}
                         <TrailUpdater/>
-                    </Col>
-                </Row>
+
             </div>
         )
     }

@@ -60,19 +60,10 @@ class FileNav extends React.Component {
             {
                 btnKey: 0,
                 contextId: "upload",
-                img: "UploadFile",
+                img: "Upload",
                 imgDescr: "Filopplasting",
                 btnAction: () => {
                     newProps.toggleUploadModal()
-                }
-            },
-            {
-                btnKey: 1,
-                contextId: "editor",
-                img: "OpenEditor",
-                imgDescr: "Tekstbehandling",
-                btnAction: () => {
-                    newProps.toggleEditorModal()
                 }
             },
             {
@@ -89,7 +80,7 @@ class FileNav extends React.Component {
                 contextId: "trash",
                 isLink: true,
                 to: `/client/${newProps.match.params.client_id}/recyclebin`,
-                img: "TrashWhite",
+                img: "Trash",
                 imgDescr: "Søpplebøtte"
             },
             {
@@ -97,7 +88,7 @@ class FileNav extends React.Component {
                 contextId: "accesslog-client",
                 isLink: true,
                 to: `/accesslog/client/${newProps.match.params.client_id}`,
-                img: "AccessLogWhite",
+                img: "AccessLog",
                 imgDescr: "Adgangslogg"
             }
         ]

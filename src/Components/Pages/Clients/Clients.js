@@ -90,6 +90,7 @@ class Clients extends Component {
             backIsLink:true,
             backDescr:"Hjem",
             backTo:'/',
+            hasCollapse:true,
             searchValue:this.props.search,
             searchAction:this.props.updateSearch.bind(this),
             searchPlaceholder:'Søk etter kunde'

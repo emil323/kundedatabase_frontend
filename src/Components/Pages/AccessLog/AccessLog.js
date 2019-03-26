@@ -163,7 +163,7 @@ class AccessLog extends Component {
                             isLink: true,
                             contextId: "goto-folder",
                             to: `/client/${nextProps.client_id}/files/${nextProps.parent_id}`,
-                            img: "FolderWhite",
+                            img: "Folder",
                             imgDescr: "Gå til mappe"
                         },
                         {
@@ -171,7 +171,7 @@ class AccessLog extends Component {
                             contextId: "goto-file",
                             isLink: true,
                             to: `/file/${nextProps.file_id}`,
-                            img: "ArrowRightWhite",
+                            img: "ArrowRight",
                             imgDescr: "Gå til fil"
                         })
                     break
@@ -182,7 +182,7 @@ class AccessLog extends Component {
                         isLink: true,
                         contextId: "goto-client",
                         to: `/client/${nextProps.client_id}/files`,
-                        img: "ArrowRightWhite",
+                        img: "ArrowRight",
                         imgDescr: "Gå til kunde"
                     })
                     break
@@ -191,7 +191,7 @@ class AccessLog extends Component {
                     menuList.push({
                         btnKey: 1,
                         contextId: "light-report",
-                        img: "EasyReportWhite",
+                        img: "EasyReport",
                         imgDescr: "Forenklet rapport",
                         btnAction: () => {nextProps.toggleAccesslogReportModal({
                             consultant_id: nextProps.consultant_id, 

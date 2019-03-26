@@ -19,7 +19,7 @@ class Breadcrumbs extends React.Component {
     render() {
         console.log(this.props.trail)
         return (
-            <div>
+            <Breadcrumb className={this.props.className}>
                     {
                     this.props.trail.map((crumb, i, trail) => {
                         return trail.length - 1 !== i //Tenary operation on if the item is the last in map or not
@@ -27,7 +27,7 @@ class Breadcrumbs extends React.Component {
                             : <BreadcrumbItem tag="a" href="" onClick={(e) => this.open(e, crumb.path)}>{crumb.title}</BreadcrumbItem>
                     })
                 }
-            </div>
+            </Breadcrumb>
         )
     }
 }
