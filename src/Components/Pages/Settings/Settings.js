@@ -8,6 +8,7 @@ import ChangeDefaultMetadataValuesModal from "./Modals/ChangeDefaultMetadataValu
 import PageNav from '../../Shared/PageNav/PageNav'
 import NavBtn from '../../Shared/NavBtn/NavBtn'
 import MenuBtn from '../../Shared/MenuBtn/MenuBtn'
+import { setNav } from '../../../Store/Actions/navActions'
 
 
 class Settings extends React.Component {
@@ -24,14 +25,6 @@ class Settings extends React.Component {
 
         return (
             <div>
-                <PageNav
-                    backIsLink
-                    backTo={'/'}
-                    backDescr="Hjem"
-
-                    disableSearch
-                    menuBtns={menuList}
-                />
                 <Container fluid>
                     <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
 
@@ -82,6 +75,13 @@ class Settings extends React.Component {
         {
             title: 'Instillinger'
         }])
+        this.props.setNav({
+            backIsLink:true,
+            backTo:"/",
+            backDescr:"Hjem",
+            menuBtns:[],
+            disableSearch:true
+        })
     }
 }
 
@@ -97,7 +97,8 @@ const mapDispatchToProps = dispatch => {
     return {
         toggleDefaultMetadataModal: () => { dispatch(toggleDefaultMetadataModal()) },
         setTrail: (trail) => { dispatch(setTrail(trail)) },
-        pushTrail: (title, path) => { dispatch(pushTrail(title, path)) }
+        pushTrail: (title, path) => { dispatch(pushTrail(title, path)) },
+        setNav:(options) => {dispatch(setNav(options))}
     }
 }
 

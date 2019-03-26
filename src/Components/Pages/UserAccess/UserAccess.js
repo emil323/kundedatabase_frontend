@@ -9,6 +9,7 @@ import PageNav from '../../Shared/PageNav/PageNav'
 import { connect } from "react-redux";
 import { updateSearch, fetchUsersData } from '../../../Store/Actions/userActions'
 import { setTrail } from '../../../Store/Actions/breadcrumbActions'
+import { setNav } from '../../../Store/Actions/navActions'
 
 class UserAccess extends React.Component {
 
@@ -19,24 +20,8 @@ class UserAccess extends React.Component {
                 || user.email.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
         })
 
-        const menuList = []
-
-
-
         return (
             <div>
-                <PageNav
-                    backIsLink
-                    backTo="/"
-                    backDescr="Hjem"
-
-                    searchValue={this.props.search}
-                    searchAction={this.props.updateSearch.bind(this)}
-                    searchPlaceholder="Søk etter bruker"
-
-                    menuBtns={menuList}
-                />
-
                 <Container fluid>
                     <Row>
                         <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
@@ -69,6 +54,15 @@ class UserAccess extends React.Component {
                 title: 'Brukere'
             }
         ])
+        this.props.setNav({
+            backIsLink:true,
+            backTo:"/",
+            backDescr:"Hjem",
+            searchValue:this.props.search,
+            searchAction:this.props.updateSearch.bind(this),
+            searchPlaceholder:"Søk etter bruker",
+            menuBtns:[]
+        })
         this.props.fetchUsersData()
     }
 }
@@ -88,7 +82,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchUsersData: () => { dispatch(fetchUsersData()) },
         updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
-        setTrail: (trail) => { dispatch(setTrail(trail)) }
+        setTrail: (trail) => { dispatch(setTrail(trail)) },
+        setNav:(options) => {dispatch(setNav(options))}
     }
 }
 

@@ -3,13 +3,14 @@ import { Component } from 'react'
 import AccessLogData from './AccessLogData'
 import "./AccessLog.css"
 import { Container, Row, Col, Table, Alert, Spinner } from 'reactstrap';
-import PageNav from '../../Shared/PageNav/PageNav'
+
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
 import { setTrail, pushTrail } from '../../../Store/Actions/breadcrumbActions'
 import { fetchAccessLogData, updateSearch } from '../../../Store/Actions/accesslogActions'
 import {toggleAccesslogReportModal} from '../../../Store/Actions/modalActions'
+import { setNav } from '../../../Store/Actions/navActions'
 import { withRouter } from 'react-router-dom';
 import API from '../../../API/API';
 import ReportModal from './ReportModal/ReportModal';
@@ -23,9 +24,6 @@ class AccessLog extends Component {
         this.state = {
             type: 'all',
             id: null,
-            backTo: '',
-            backDescr: '',
-            menuList: [],
             is_exporting: false,
         }
         this.csv_export = this.csv_export.bind(this)
@@ -41,16 +39,7 @@ class AccessLog extends Component {
 
         return (
             <div>
-                <PageNav
-                    hasCollapse
-                    backIsLink
-                    backDescr={this.state.backDescr}
-                    backTo={this.state.backTo}
-                    searchValue={this.props.searchLog}
-                    searchAction={this.props.updateSearch.bind(this)}
-                    searchPlaceholder="Søk i loggen"
-                    menuBtns={this.state.menuList} />
-
+      
             <Container fluid>
                 <Row>
                     <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
@@ -159,6 +148,7 @@ class AccessLog extends Component {
                 path: '/accesslog'
             }])
 
+            
             switch (nextProps.match.params.type) {
                 case FILE: 
                     nextProps.pushTrail(nextProps.client_name, `/accesslog/client/${nextProps.client_id}`)
@@ -217,7 +207,17 @@ class AccessLog extends Component {
                     break;
             }
 
-            this.setState({ ...this.state, backDescr, backTo, menuList })
+            this.props.setNav({
+                hasCollapse:true,
+                backIsLink:true,
+                backDescr:backDescr,
+                backTo:backTo,
+                searchValue:this.props.searchLog,
+                searchAction:this.props.updateSearch.bind(this),
+                searchPlaceholder:"Søk i loggen",
+                menuBtns:menuList 
+            })
+
         }
     }
     /*
@@ -295,7 +295,8 @@ const mapDispatchToProps = (dispatch) => {
         toggleAccesslogReportModal: (consultant) => {dispatch(toggleAccesslogReportModal(consultant))},
         updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
         setTrail: (trail) => { dispatch(setTrail(trail)) },
-        pushTrail: (title, path) => { dispatch(pushTrail(title, path)) }
+        pushTrail: (title, path) => { dispatch(pushTrail(title, path)) },
+        setNav:(options) => {dispatch(setNav(options))}
     }
 }
 

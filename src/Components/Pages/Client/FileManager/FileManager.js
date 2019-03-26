@@ -109,6 +109,7 @@ class FileManager extends Component {
 
     //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
     componentDidMount() {
+        
         //Initial fetch of data
         const folder = this.props.match.params.selected_folder
         this.props.fetchFilesData(this.props.match.params.client_id, folder, this.props.is_recyclebin)
@@ -119,7 +120,12 @@ class FileManager extends Component {
      * @param {*} nextProps
      */
 
+    componentDidUpdate() {
+        console.log('updated')
+    }
+
     componentWillReceiveProps(nextProps) {
+        console.log('will')
         const old_params = this.props.match.params
         const new_params = nextProps.match.params
 
