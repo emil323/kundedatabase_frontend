@@ -17,10 +17,10 @@ class FileNav extends React.Component {
         const props = this.props 
 
         const upOneLevel = () => {
-            if (!props.selected_folder.is_root) {
-                props.is_recyclebin
-                    ? props.history.push('/client/' + props.match.params.client_id + "/recyclebin/" + props.selected_folder.parent_id)
-                    : props.history.push('/client/' + props.match.params.client_id + "/files/" + props.selected_folder.parent_id)
+            if (!newProps.selected_folder.is_root) {
+                newProps.is_recyclebin
+                    ? newProps.history.push('/client/' + newProps.match.params.client_id + "/recyclebin/" + newProps.selected_folder.parent_id)
+                    : newProps.history.push('/client/' + newProps.match.params.client_id + "/files/" + newProps.selected_folder.parent_id)
             }
         }
     

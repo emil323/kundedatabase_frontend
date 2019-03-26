@@ -121,8 +121,6 @@ class File extends Component {
             
             const can_preview = isSupported(this.state.metadata)
 
-            //TODO: Create a check for max filesize here, we don't want to preview a 5gb large file
-
             //Fetch file
             if (!can_preview) {
                 console.log('is supported')

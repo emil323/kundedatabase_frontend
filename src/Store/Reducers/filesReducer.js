@@ -36,11 +36,6 @@ const filesReducer = (state = initState, action) => {
                         ? state.recyclebin_root //Default to correct root folder
                         : state.root_folder
             }    
-        case SEARCH_KEY:
-            return {
-                ...state,
-                search: action.search_key    
-            }
         case IS_LOADING: 
             return {
                 ...state, 

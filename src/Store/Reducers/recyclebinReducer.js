@@ -38,11 +38,6 @@ const recyclebinReducer = (state = initState, action) => {
                     ? new_selected_folder
                     : state.root_folder
             }    
-        case SEARCH_KEY:
-            return {
-                ...state,
-                search: action.search_key    
-            }
         default:
             return state
     }
