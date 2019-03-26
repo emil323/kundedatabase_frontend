@@ -44,8 +44,6 @@ class FileManager extends Component {
         return (
             <Container fluid>
                 <FileNav {...this.props} />
-                <Row>
-                    <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
                         <Table className="table table-hover">
                             {
                                 //Display is searching message
@@ -89,8 +87,6 @@ class FileManager extends Component {
                                     })
                             }
                         </Table>
-                    </Col>
-                </Row>
 
                 {/*Not visible unless toggled*/}
                 <NewFolderModal />
