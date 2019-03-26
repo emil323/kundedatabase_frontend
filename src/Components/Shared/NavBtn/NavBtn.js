@@ -3,11 +3,17 @@ import './NavBtn.css'
 import BtnTooltip from './BtnTooltip'
 
 // Imports all icons
+import AddBlack from '../../../Assets/Icons/add-black.png'
+import AddWhite from '../../../Assets/Icons/add-white.png'
 import ArrowBack from '../../../Assets/Icons/arrow-back.png'
-import ArrowPrevFolder from '../../../Assets/Icons/arrow-prev-folder.png'
+import ArrowPrevFolderWhite from '../../../Assets/Icons/arrow-prev-folder-white.png'
+import ArrowPrevFolderBlack from '../../../Assets/Icons/arrow-prev-folder-black.png'
+import ArrowNextFolderWhite from '../../../Assets/Icons/arrow-next-folder-white.png'
+import ArrowNextFolderBlack from '../../../Assets/Icons/arrow-next-folder-black.png'
+import ArrowForwardBlack from '../../../Assets/Icons/arrow-forward-black.png'
+import ArrowForwardWhite from '../../../Assets/Icons/arrow-forward-white.png'
 import UploadFile from '../../../Assets/Icons/upload-white.png'
 import NewClient from '../../../Assets/Icons/new-client.png'
-import NewFile from '../../../Assets/Icons/add.png'
 import NewFolder from '../../../Assets/Icons/new-folder.png'
 import KebabVert from '../../../Assets/Icons/kebab-vert.png'
 import KebabHor from '../../../Assets/Icons/kebab-hor.png'
@@ -30,12 +36,18 @@ import EasyReportWhite from '../../../Assets/Icons/easy_report_white.png'
 import FolderWhite from '../../../Assets/Icons/folder_white.png'
 import Apps from '../../../Assets/Icons/apps.png'
 import Restore from '../../../Assets/Icons/restore.png'
-import ArrowForward from '../../../Assets/Icons/arrow-forward.png'
 import Settings from '../../../Assets/Icons/settings.png'
 import Clients from '../../../Assets/Icons/clients.png'
 import UserAcces from '../../../Assets/Icons/user-access.png'
 import StarFilled from '../../../Assets/Icons/star_filled.png'
 import StarBorder from '../../../Assets/Icons/star_border.png'
+/* 
+import  from '../../../Assets/Icons/'
+import  from '../../../Assets/Icons/'
+import  from '../../../Assets/Icons/'
+import  from '../../../Assets/Icons/'
+ */
+
 
 
 class NavBtn extends Component {
@@ -57,13 +69,17 @@ class NavBtn extends Component {
             case 'AccessLogWhite': return AccessLogWhite
             case 'AccessLogBlack': return AccessLogBlack
             case 'ArrowBack': return ArrowBack
-            case 'ArrowPrevFolder': return ArrowPrevFolder
+            case 'ArrowPrevFolderBlack': return ArrowPrevFolderBlack
+            case 'ArrowPrevFolderWhite': return ArrowPrevFolderWhite
+            case 'ArrowNextFolderBlack': return ArrowNextFolderBlack
+            case 'ArrowNextFolderWhite': return ArrowNextFolderWhite
+            case 'ArrowForwardBlack': return ArrowForwardBlack
+            case 'ArrowForwardWhite': return ArrowForwardWhite
             case 'Apps': return Apps
             case 'Folder': return Folder
             case 'FolderWhite': return FolderWhite
             case 'Home': return Home
             case 'NewClient': return NewClient
-            case 'NewFile': return NewFile
             case 'NewFolder': return NewFolder
             case 'KebabHor': return KebabHor
             case 'KebabVert': return KebabVert
@@ -73,7 +89,6 @@ class NavBtn extends Component {
             case 'TrashBlack': return TrashBlack
             case 'Download': return Download
             case 'Edit': return Edit
-            case 'Add': return NewFile
             case 'Search': return Search
             case 'ExpandMoreWhite': return ExpandMoreWhite
             case 'ExpandLessWhite': return ExpandLessWhite
@@ -82,7 +97,6 @@ class NavBtn extends Component {
             case 'ArrowRightWhite': return ArrowRightWhite
             case 'EasyReportWhite': return EasyReportWhite
             case 'Restore': return Restore
-            case 'ArrowForward': return ArrowForward
             case 'Settings': return Settings
             case 'Clients': return Clients
             case 'UserAccess': return UserAcces

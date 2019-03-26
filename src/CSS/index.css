@@ -150,6 +150,7 @@ Deer (brown)
 /* lg */
 
 @media only screen and (min-width: 992px) {
+    
 }
 
 /* xl */
@@ -161,6 +162,10 @@ Deer (brown)
 
     .btn-navbar .btn-descr {
         display: block;
+    }
+
+    .page-nav {
+        background-color: #e9ecef;
     }
 }
 

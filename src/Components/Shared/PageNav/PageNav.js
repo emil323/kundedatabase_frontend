@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Navbar, Nav, NavItem, Collapse, ButtonGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Label } from 'reactstrap'
+import { Navbar, Nav, NavItem, Collapse, Input, Form } from 'reactstrap'
 import NavBtn from '../NavBtn/NavBtn'
 import { Link } from 'react-router-dom'
 import { withResizeDetector } from 'react-resize-detector';
@@ -7,7 +7,7 @@ import { Mobile, Desktop } from '../../Helpers/Responsive/Responsive'
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 import { updateSearch } from '../../../Store/Actions/navActions'
-
+import Breadcrumbs from '../../Navigation/Breadcrumbs/Breadcrumbs'
 import './PageNav.css'
 
 class PageNav extends Component {
@@ -75,9 +75,13 @@ class PageNav extends Component {
                     /> </NavItem>
             }
         })
-        
+
         return (
-            <Navbar sticky={this.props.width > 1200 ? "top" : null} fixed={this.props.width < 1200 ? "bottom" : null} color="faded" className="page-nav">
+            <Navbar sticky={this.props.width > 1200 ? "top" : null} fixed={this.props.width < 1199 ? "bottom" : null} color="faded" className="page-nav">
+                <Desktop>
+                    <Breadcrumbs />
+                </Desktop>
+
                 <Mobile>
                     <Collapse isOpen={this.state.menuIsOpen} onClick={this.toggleMenu} navbar>
                         <Nav className="ml-auto" navbar>
@@ -89,7 +93,7 @@ class PageNav extends Component {
                 <Mobile>
                     <Collapse isOpen={this.state.searchIsOpen} navbar>
                         { /* Check if searchAction is defined, or else render no search bar */
-                            
+
                             <Form inline>
                                 <Input
                                     placeholder={this.props.searchPlaceholder}
@@ -100,35 +104,37 @@ class PageNav extends Component {
                     </Collapse>
                 </Mobile>
 
-                {!this.props.backIsDisabled ? (
-                    this.props.backIsLink ? (
-                        <NavItem>
-                            <Link to={this.props.backTo}>
-                                <NavBtn
-                                    contextId="back"
-                                    contextClass="pagenav"
-                                    isBackBtn="true"
-                                    img={this.props.backTo === "/" ? "Home" : "ArrowBack"}
-                                    descr={this.props.backDescr}
-                                />
-                            </Link>
-                        </NavItem>
-                    ) : (
+                <Mobile>
+                    {!this.props.backIsDisabled ? (
+                        this.props.backIsLink ? (
                             <NavItem>
-                                <NavBtn
-                                    contextId="back"
-                                    contextClass="pagenav"
-                                    isBackBtn="true"
-                                    action={this.props.backAction}
-                                    img="ArrowPrevFolder"
-                                    descr={this.props.backDescr}
-                                    isDisabled={this.props.backIsDisabled}
-                                />
-                            </NavItem>)
-                ) : <NavBtn
-                        isDisabled
-                        img=""
-                    />}
+                                <Link to={this.props.backTo}>
+                                    <NavBtn
+                                        contextId="back"
+                                        contextClass="pagenav"
+                                        isBackBtn="true"
+                                        img={this.props.backTo === "/" ? "Home" : "ArrowBack"}
+                                        descr={this.props.backDescr}
+                                    />
+                                </Link>
+                            </NavItem>
+                        ) : (
+                                <NavItem>
+                                    <NavBtn
+                                        contextId="back"
+                                        contextClass="pagenav"
+                                        isBackBtn="true"
+                                        action={this.props.backAction}
+                                        img="ArrowPrevFolder"
+                                        descr={this.props.backDescr}
+                                        isDisabled={this.props.backIsDisabled}
+                                    />
+                                </NavItem>)
+                    ) : <NavBtn
+                            isDisabled
+                            img=""
+                        />}
+                </Mobile>
 
                 <Mobile>
                     {this.props.hasCollapse === true ?
@@ -141,8 +147,11 @@ class PageNav extends Component {
                                 descr={!this.state.menuIsOpen ? "Åpne meny" : "Lukk meny"}
                             /></NavItem> : <div>{pageMenu}</div>}
                 </Mobile>
+
                 <Desktop>
-                    {pageMenu}
+                    <Nav className="ml-auto">
+                        {pageMenu}
+                    </Nav>
                 </Desktop>
 
                 <Mobile>
@@ -176,7 +185,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateSearch:(key) => {dispatch(updateSearch(key))}
+        updateSearch: (key) => { dispatch(updateSearch(key)) }
     }
 }
 

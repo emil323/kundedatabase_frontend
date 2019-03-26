@@ -111,7 +111,6 @@ export default class Header extends React.Component {
 						</Nav>
 					</Collapse>
 				</Navbar>
-				<Breadcrumbs />
 			</div>
 		)
 	}
