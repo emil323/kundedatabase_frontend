@@ -45,13 +45,16 @@ class PageNav extends Component {
     render() {
 
         const { menuBtns } = this.props
-        console.log('navbtns', this.props)
+
+        const isMobile = this.props.width < 768
+        const isTablet = this.props.width < 1200
+        const isDesktop = this.props.width > 1200
 
         const pageMenu = menuBtns.map(btn => {
             if (btn.isLink) {
                 return <NavItem><Link to={btn.to}>
                     <NavBtn
-                        showDescr={this.props.hasCollapse && this.props.width < 768 ? true : false}
+                        showDescr={this.props.hasCollapse && isMobile ? true : false}
                         hasTooltip
                         contextId={btn.contextId}
                         contextClass={"collapse"}
@@ -64,7 +67,7 @@ class PageNav extends Component {
             } else {
                 return <NavItem>
                     <NavBtn
-                        showDescr={this.props.hasCollapse && this.props.width < 768 ? true : false}
+                        showDescr={this.props.hasCollapse && isMobile ? true : false}
                         hasTooltip
                         contextId={btn.contextId}
                         contextClass={"collapse"}
@@ -76,8 +79,10 @@ class PageNav extends Component {
             }
         })
         
+        const pagenav_style = isDesktop ?  'page-nav-desktop' : 'page-nav-mobile'
+
         return (
-            <Navbar sticky={this.props.width > 1200 ? "top" : null} fixed={this.props.width < 1200 ? "bottom" : null} color="faded" className="page-nav">
+            <Navbar sticky={isDesktop ? "top" : null} fixed={isTablet ? "bottom" : null} color="faded" className={pagenav_style}>
                 <Mobile>
                     <Collapse isOpen={this.state.menuIsOpen} onClick={this.toggleMenu} navbar>
                         <Nav className="ml-auto" navbar>
