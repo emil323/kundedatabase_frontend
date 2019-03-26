@@ -45,14 +45,6 @@ import Clients from '../../../Assets/Icons/clients.png'
 import UserAcces from '../../../Assets/Icons/user-access.png'
 import StarFilled from '../../../Assets/Icons/star_filled.png'
 import StarBorder from '../../../Assets/Icons/star_border.png'
-/* 
-import  from '../../../Assets/Icons/'
-import  from '../../../Assets/Icons/'
-import  from '../../../Assets/Icons/'
-import  from '../../../Assets/Icons/'
- */
-
-
 
 class NavBtn extends Component {
     constructor(props) {

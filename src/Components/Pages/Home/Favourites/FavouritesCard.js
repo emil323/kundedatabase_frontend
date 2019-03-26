@@ -9,7 +9,6 @@ class FavouriteCard extends Component {
 	render() {
 		let { name, client_id } = this.props.favourite;
 		return (
-
 			<Card>
 				<CardBody>
 					<CardTitle><Link to={"./client/" + client_id + "/files"}><h5>{name}</h5></Link></CardTitle>

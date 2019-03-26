@@ -15,16 +15,20 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div>
+            <Container fluid>
                 <Row>
                     <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
                         <Welcome />
                     </Col>
                 </Row>
-                <hr />
-                <Favorites />
-            </div>
+                <Row>
+                    <Col>
+                        <hr />
 
+                    </Col>
+                </Row>
+                <Favorites />
+            </Container>
         )
     }
 

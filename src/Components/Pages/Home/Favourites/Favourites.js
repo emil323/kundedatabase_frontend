@@ -50,7 +50,7 @@ class Favourites extends Component {
 							<CardDeck>
 								{this.props.has_favourites ?
 									filteredFavourites.map(favourite => {
-										return <Col xl="3" lg="4" md="6" sm="6" xs="12"><FavouritesCard key={favourite.client_id} favourite={favourite} /></Col>
+										return <Col xl="4" lg="4" md="6" sm="6" xs="12"><FavouritesCard key={favourite.client_id} favourite={favourite} /></Col>
 									})
 									: !this.props.is_loading && <Alert className='info_alert' color="light">Her kan du legge til kunder du besøker ofte. Gå til <Link to='/clients'>kundeoversikten</Link> for å legge til favoritter. </Alert>
 								}
