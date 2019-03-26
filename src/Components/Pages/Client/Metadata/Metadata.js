@@ -61,7 +61,7 @@ class Metadata extends Component {
                             {this.props.client_name}</NavbarBrand>
                         <Nav navbar>
                             <NavItem>
-                                <NavBtn img={this.state.isOpen ? 'ExpandLessBlack' : 'ExpandMoreBlack'} action={this.toggleCollapse} />
+                                <NavBtn img={this.state.isOpen ? 'ExpandLess' : 'ExpandMore'} action={this.toggleCollapse} />
                             </NavItem>
                         </Nav>              
                 </Navbar>

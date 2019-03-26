@@ -26,7 +26,7 @@ class UserAccessData extends React.Component {
                     {this.props.user.email}<br/>
                     <em>{this.props.user.is_admin ? 'Administrator' : ''}</em>
                     </td>
-                    <td><DropdownBtn icon={Kebab} options={btnOptions} /></td>
+                    <td className="td-btn"><DropdownBtn icon={Kebab} options={btnOptions} /></td>
                 </tr>
             </tbody>
         )

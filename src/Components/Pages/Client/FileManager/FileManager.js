@@ -1,17 +1,17 @@
 import React from 'react'
-import {Component} from 'react'
+import { Component } from 'react'
 import TrailUpdater from './TrailUpdater'
 import FileData from './FileData'
 
 import "./FileManager.css"
-import {Container, Row, Col, Spinner, Table, Alert,} from 'reactstrap';
-import {withRouter} from "react-router-dom"
+import { Container, Row, Col, Spinner, Table, Alert, } from 'reactstrap';
+import { withRouter } from "react-router-dom"
 
 
 // Import connect, which lets us export data to the reducer
-import {connect} from "react-redux";
-import {fetchFilesData, selectFolder, updateSearch, clearFiles} from '../../../../Store/Actions/filesActions'
-import {toggleNewFolderModal, toggleUploadModal, toggleEditorModal} from '../../../../Store/Actions/modalActions'
+import { connect } from "react-redux";
+import { fetchFilesData, selectFolder, updateSearch, clearFiles } from '../../../../Store/Actions/filesActions'
+import { toggleNewFolderModal, toggleUploadModal, toggleEditorModal } from '../../../../Store/Actions/modalActions'
 import UploadModal from './Modals/UploadModal/UploadModal';
 import NewFolderModal from './Modals/NewFolderModal/NewFolderModal';
 import MoveModal from './Modals/MoveModal/MoveModal';
@@ -42,9 +42,10 @@ class FileManager extends Component {
          * Render filemanager
          * */
         return (
-            <div>
-                <FileNav {...this.props}/>
-                
+            <Container fluid>
+                <FileNav {...this.props} />
+                <Row>
+                    <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
                         <Table className="table table-hover">
                             {
                                 //Display is searching message
@@ -77,37 +78,39 @@ class FileManager extends Component {
                                         <td colspan="4">
                                             <Alert color="light">
                                                 <p className="text-center">
-                                                    <Spinner color="dark"/>
+                                                    <Spinner color="dark" />
                                                 </p>
                                             </Alert>
                                         </td>
                                     </tr>
                                     //Show all files
                                     : filteredFiles.map(file => {
-                                        return <FileData file={file} key={file.id}/>
+                                        return <FileData file={file} key={file.id} />
                                     })
                             }
                         </Table>
+                    </Col>
+                </Row>
 
-                        {/*Not visible unless toggled*/}
-                        <NewFolderModal/>
-                        <UploadModal/>
-                        <MoveModal/>
-                        <RenameModal/>
-                        <EditorModal/>
-                        <DeleteModal/>
-                        <RecoverModal/>
+                {/*Not visible unless toggled*/}
+                <NewFolderModal />
+                <UploadModal />
+                <MoveModal />
+                <RenameModal />
+                <EditorModal />
+                <DeleteModal />
+                <RecoverModal />
 
-                        {/* Returns null, is only used to update breadcrumbs*/}
-                        <TrailUpdater/>
+                {/* Returns null, is only used to update breadcrumbs*/}
+                <TrailUpdater />
+            </Container>
 
-            </div>
         )
     }
 
     //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
     componentDidMount() {
-        
+
         //Initial fetch of data
         const folder = this.props.match.params.selected_folder
         this.props.fetchFilesData(this.props.match.params.client_id, folder, this.props.is_recyclebin)
@@ -145,9 +148,9 @@ class FileManager extends Component {
 
 // Calls on a clientsReducer that bring props to the component
 const mapStateToProps = (state, ownProps) => {
-    const {search} = state.navReducer
-    const {files, deleted_files, root_folder, recyclebin_root, selected_folder, is_loading} = state.filesReducer
-    const {client_id, client_name} = state.clientReducer
+    const { search } = state.navReducer
+    const { files, deleted_files, root_folder, recyclebin_root, selected_folder, is_loading } = state.filesReducer
+    const { client_id, client_name } = state.clientReducer
 
     //Create a variable that selects files that is viewable, based on if prop is set to recyclebin or not
     const viewable_files = ownProps.is_recyclebin ? deleted_files : files
