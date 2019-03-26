@@ -3,13 +3,14 @@ import { Component } from 'react'
 import AccessLogData from './AccessLogData'
 import "./AccessLog.css"
 import { Container, Row, Col, Table, Alert, Spinner } from 'reactstrap';
-import PageNav from '../../Shared/PageNav/PageNav'
+
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
 import { setTrail, pushTrail } from '../../../Store/Actions/breadcrumbActions'
 import { fetchAccessLogData, updateSearch } from '../../../Store/Actions/accesslogActions'
 import {toggleAccesslogReportModal} from '../../../Store/Actions/modalActions'
+import { setNav } from '../../../Store/Actions/navActions'
 import { withRouter } from 'react-router-dom';
 import API from '../../../API/API';
 import ReportModal from './ReportModal/ReportModal';
@@ -23,9 +24,6 @@ class AccessLog extends Component {
         this.state = {
             type: 'all',
             id: null,
-            backTo: '',
-            backDescr: '',
-            menuList: [],
             is_exporting: false,
         }
         this.csv_export = this.csv_export.bind(this)
@@ -41,16 +39,7 @@ class AccessLog extends Component {
 
         return (
             <div>
-                <PageNav
-                    hasCollapse
-                    backIsLink
-                    backDescr={this.state.backDescr}
-                    backTo={this.state.backTo}
-                    searchValue={this.props.searchLog}
-                    searchAction={this.props.updateSearch.bind(this)}
-                    searchPlaceholder="Søk i loggen"
-                    menuBtns={this.state.menuList} />
-
+      
             <Container fluid>
                 <Row>
                     <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
@@ -105,7 +94,7 @@ class AccessLog extends Component {
                             }
 
                         </Table>
-                        {filteredAccessLog.length > 500 && !this.props.is_loading ?
+                        {filteredAccessLog.length >= 500 && !this.props.is_loading ?
                             <Alert color="secondary">Maksimalt 500 rader blir lastet, dersom du ønsker å se mer så må du kjøre en eksport.
                         </Alert> : ''}
                     </Col>
@@ -159,6 +148,7 @@ class AccessLog extends Component {
                 path: '/accesslog'
             }])
 
+            
             switch (nextProps.match.params.type) {
                 case FILE: 
                     nextProps.pushTrail(nextProps.client_name, `/accesslog/client/${nextProps.client_id}`)
@@ -173,7 +163,7 @@ class AccessLog extends Component {
                             isLink: true,
                             contextId: "goto-folder",
                             to: `/client/${nextProps.client_id}/files/${nextProps.parent_id}`,
-                            img: "FolderWhite",
+                            img: "Folder",
                             imgDescr: "Gå til mappe"
                         },
                         {
@@ -181,7 +171,7 @@ class AccessLog extends Component {
                             contextId: "goto-file",
                             isLink: true,
                             to: `/file/${nextProps.file_id}`,
-                            img: "ArrowRightWhite",
+                            img: "ArrowRight",
                             imgDescr: "Gå til fil"
                         })
                     break
@@ -192,7 +182,7 @@ class AccessLog extends Component {
                         isLink: true,
                         contextId: "goto-client",
                         to: `/client/${nextProps.client_id}/files`,
-                        img: "ArrowRightWhite",
+                        img: "ArrowRight",
                         imgDescr: "Gå til kunde"
                     })
                     break
@@ -201,7 +191,7 @@ class AccessLog extends Component {
                     menuList.push({
                         btnKey: 1,
                         contextId: "light-report",
-                        img: "EasyReportWhite",
+                        img: "EasyReport",
                         imgDescr: "Forenklet rapport",
                         btnAction: () => {nextProps.toggleAccesslogReportModal({
                             consultant_id: nextProps.consultant_id, 
@@ -217,7 +207,15 @@ class AccessLog extends Component {
                     break;
             }
 
-            this.setState({ ...this.state, backDescr, backTo, menuList })
+            this.props.setNav({
+                hasCollapse:true,
+                backIsLink:true,
+                backDescr:backDescr,
+                backTo:backTo,
+                searchPlaceholder:"Søk i loggen",
+                menuBtns:menuList 
+            })
+
         }
     }
     /*
@@ -282,7 +280,7 @@ const mapStateToProps = (state) => {
 
     return {
         accesslog,
-        search: state.accesslogReducer.search,
+        search: state.navReducer.search,
         is_loading: state.accesslogReducer.is_loading,
         ip, client_name, consultant_name, file_name, file_id, consultant_id, client_id, access_type, parent_id
     }
@@ -293,9 +291,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchAccessLogData: (type,id) => { dispatch(fetchAccessLogData(type,id)) },
         toggleAccesslogReportModal: (consultant) => {dispatch(toggleAccesslogReportModal(consultant))},
-        updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
         setTrail: (trail) => { dispatch(setTrail(trail)) },
-        pushTrail: (title, path) => { dispatch(pushTrail(title, path)) }
+        pushTrail: (title, path) => { dispatch(pushTrail(title, path)) },
+        setNav:(options) => {dispatch(setNav(options))}
     }
 }
 

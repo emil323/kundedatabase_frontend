@@ -13,6 +13,7 @@ import File from '../Pages/File/File'
 import './App.css'
 import Settings from "../Pages/Settings/Settings";
 import Footer from "../Navigation/Footer/Footer"
+import PageNav from '../Shared/PageNav/PageNav';
 
 
 
@@ -23,6 +24,7 @@ class App extends Component {
                 <div>
                     <Header />
                     {/* <Sidebar /> */}
+                    <PageNav/>
                     <Route exact path="/" component={Home} />
                     <Route path="/clients" component={Clients} />
                     <Route path="/client/:client_id" component={Client} />

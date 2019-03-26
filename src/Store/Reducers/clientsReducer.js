@@ -5,7 +5,6 @@ import {DELETE_CLIENT, SEARCH_KEY, FETCH_CLIENTS, ADD_CLIENT, TOGGLE_MODAL, IS_L
 const initState = {
     clients: [],
     accesslog: [],
-    search: '',
     modal: false,
     is_loading: false
 }
@@ -22,11 +21,6 @@ const clientsReducer = (state = initState, action) => {
             return { ...state,
                 search:'', 
                 clients: action.clients.clients
-            }
-        case SEARCH_KEY:
-            return {
-                ...state,
-                search: action.search_key    
             }
         case TOGGLE_MODAL:
             return {

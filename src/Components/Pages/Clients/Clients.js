@@ -10,6 +10,7 @@ import PageNav from '../../Shared/PageNav/PageNav'
 import { connect } from "react-redux";
 import { deleteClient, fetchClientsData, updateSearch, toggleModal } from '../../../Store/Actions/clientsActions'
 import AddClient from './AddClient';
+import { setNav } from '../../../Store/Actions/navActions'
 import { IS_LOADING } from '../../../Store/types';
 
 class Clients extends Component {
@@ -23,29 +24,10 @@ class Clients extends Component {
             return client.name.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
         })
 
-        const menuList = [
-            {
-                isLink: false,
-                btnKey: 0,
-                contextId: "new-client",
-                img: "Add",
-                imgDescr: "Ny kunde",
-                btnAction: () => { this.props.toggleModal() }
-            }
-        ]
+
 
         return (
             <div>
-                <PageNav
-                    menuBtns={menuList}
-
-                    backIsLink
-                    backDescr="Hjem"
-                    backTo={'/'}
-
-                    searchValue={this.props.search}
-                    searchAction={this.props.updateSearch.bind(this)}
-                    searchPlaceholder="Søk etter kunde" />
                 <Container fluid>
                     <Row>
                         <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
@@ -91,8 +73,30 @@ class Clients extends Component {
 
     //Calls fetchClientsData() immedeatly when loading the component, this agains gets the data from the API
     componentDidMount() {
-        this.props.fetchClientsData()
 
+        const menuList = [
+            {
+                isLink: false,
+                btnKey: 0,
+                contextId: "new-client",
+                img: "Add",
+                imgDescr: "Ny kunde",
+                btnAction: () => { this.props.toggleModal() }
+            }
+        ]
+
+        this.props.setNav({
+            menuBtns: menuList,
+            backIsLink:true,
+            backDescr:"Hjem",
+            backTo:'/',
+            hasCollapse:true,
+            searchValue:this.props.search,
+            searchAction:this.props.updateSearch.bind(this),
+            searchPlaceholder:'Søk etter kunde'
+        })
+
+        
         this.props.setTrail([{
             title: 'Hjem',
             path: '/'
@@ -101,6 +105,8 @@ class Clients extends Component {
             title: 'Kunder',
             path: '/clients'
         }])
+
+        this.props.fetchClientsData()
     }
 }
 
@@ -109,7 +115,7 @@ class Clients extends Component {
 const mapStateToProps = (state) => {
     return {
         clients: state.clientsReducer.clients,
-        search: state.clientsReducer.search,
+        search: state.navReducer.search,
         is_loading: state.clientsReducer.is_loading
     }
 }
@@ -122,6 +128,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchClientsData: () => { dispatch(fetchClientsData()) },
         updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
         setTrail: (trail) => { dispatch(setTrail(trail)) },
+        setNav:(options) => {dispatch(setNav(options))}
     }
 }
 

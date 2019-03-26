@@ -1,9 +1,17 @@
 .breadcrumb {
+    display:block!important;
     width: 100%;
+    background-color:#e9ebee;
+    
+}
+
+.breadcrumb-desktop .breadcrumb{
+    margin:0!important;
 }
 
 .breadcrumb-item {
     color: #000;
+    vertical-align: middle!important;
 }
 
 .breadcrumb-item:hover {

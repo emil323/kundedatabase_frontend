@@ -56,26 +56,27 @@ class Metadata extends Component {
 
         return (<div className="metadata">
          
-                <Navbar color="faded">
+                <Navbar color="faded"  onClick={this.toggleCollapse}>
                         <NavbarBrand className="mr-auto">
                             {this.props.client_name}</NavbarBrand>
                         <Nav navbar>
                             <NavItem>
-                                <NavBtn img={this.state.isOpen ? 'ExpandLessBlack' : 'ExpandMoreBlack'} action={this.toggleCollapse} />
+                                <NavBtn img={this.state.isOpen ? 'ExpandLess' : 'ExpandMore'} white={false} action={this.toggleCollapse} >{this.state.isOpen ? 'Skjul' : 'Vis mer'}</NavBtn>
                             </NavItem>
                         </Nav>              
                 </Navbar>
-
-
+                
                 <Collapse isOpen={this.state.isOpen}>
-                    {this.props.metadata_loaded
+                <div className='metadata-content'> 
+                {this.props.metadata_loaded
                         ? has_data
                             ? <Table>{metadata}</Table>
                             : <Alert color='secondary'>Ingen data lagt til enda</Alert>
                         : <Spinner color='secondary' />}
+                        {this.state.isOpen && this.props.metadata_loaded ? <NavBtn hasTooltip contextId="edit-metadata" descr="Endre" className="btn-edit-metadata" action={this.props.toggleMetadataModal} img='Edit'>Endre</NavBtn> : ''}          
+                        </div>                
                 </Collapse>
-                {this.state.isOpen && this.props.metadata_loaded ? <NavBtn hasTooltip contextId="edit-metadata" descr="Endre metadata" className="btn-edit-metadata" action={this.props.toggleMetadataModal} img='Edit'>Rediger</NavBtn> : ''}          
-            <MetadataModal />
+           <MetadataModal />
         </div>
         )
     }

@@ -11,7 +11,7 @@ export const adalConfig = {
   redirectUri: CALLBACK_URL,
   cacheLocation: 'localStorage',
   resource: 'https://graph.microsoft.com/'
-};
+}
  
 export const authContext = new AuthenticationContext(adalConfig);
 

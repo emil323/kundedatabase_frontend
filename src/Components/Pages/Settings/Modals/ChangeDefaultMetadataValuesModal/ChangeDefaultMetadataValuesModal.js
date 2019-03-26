@@ -86,7 +86,7 @@ class ChangeDefaultMetadataValuesModal extends React.Component {
             return (
                 <tbody key={i}>
                 <td valign='middle'><Input value={d.title} onChange={this.handleChange(i)} /></td>
-                <td valign='middle'><NavBtn img='Remove' action={this.handleRemove(i)} /></td>
+                <td valign='middle'><NavBtn img='Trash' action={this.handleRemove(i)} /></td>
                 </tbody>)
         })
 

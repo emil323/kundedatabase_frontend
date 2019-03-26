@@ -15,11 +15,6 @@ const favouritesReducer = (state = initState, action) => {
                 search:'',
                 favourites: action.favourites.favourites
             }
-        case SEARCH_KEY:
-            return {
-                ...state,
-                search: action.search_key    
-            }
         case IS_LOADING:
             return {
                 ...state,

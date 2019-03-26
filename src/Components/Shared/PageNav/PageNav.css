@@ -1,5 +1,13 @@
-.page-nav {
+.page-nav-mobile {
     background-color: #002540;
+}
+
+.page-nav-desktop {
+    background-color:#e9ebee;
+    padding:0!important;
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+    margin-bottom:1.5em;
 }
 
 .collapse {

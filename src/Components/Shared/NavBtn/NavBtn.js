@@ -3,15 +3,22 @@ import './NavBtn.css'
 import BtnTooltip from './BtnTooltip'
 
 // Imports all icons
+import AddBlack from '../../../Assets/Icons/add-black.png'
+import AddWhite from '../../../Assets/Icons/add-white.png'
 import ArrowBack from '../../../Assets/Icons/arrow-back.png'
-import ArrowPrevFolder from '../../../Assets/Icons/arrow-prev-folder.png'
-import UploadFile from '../../../Assets/Icons/upload-white.png'
+import ArrowPrevFolderWhite from '../../../Assets/Icons/arrow-prev-folder-white.png'
+import ArrowPrevFolderBlack from '../../../Assets/Icons/arrow-prev-folder-black.png'
+import ArrowNextFolderWhite from '../../../Assets/Icons/arrow-next-folder-white.png'
+import ArrowNextFolderBlack from '../../../Assets/Icons/arrow-next-folder-black.png'
+import ArrowForwardBlack from '../../../Assets/Icons/arrow-forward-black.png'
+import ArrowForwardWhite from '../../../Assets/Icons/arrow-forward-white.png'
+import UploadWhite from '../../../Assets/Icons/upload-white.png'
+import UploadBlack from '../../../Assets/Icons/upload-black.png'
 import NewClient from '../../../Assets/Icons/new-client.png'
-import NewFile from '../../../Assets/Icons/add.png'
-import NewFolder from '../../../Assets/Icons/new-folder.png'
+import NewFolderBlack from '../../../Assets/Icons/new-folder-black.png'
+import NewFolderWhite from '../../../Assets/Icons/new-folder-white.png'
 import KebabVert from '../../../Assets/Icons/kebab-vert.png'
 import KebabHor from '../../../Assets/Icons/kebab-hor.png'
-import OpenEditor from '../../../Assets/Icons/new-doc.png'
 import AccessLogWhite from '../../../Assets/Icons/accesslog-white.png'
 import AccessLogBlack from '../../../Assets/Icons/accesslog-black.png'
 import TrashWhite from '../../../Assets/Icons/trash-white.png'
@@ -21,22 +28,23 @@ import ExpandMoreWhite from '../../../Assets/Icons/expand-more-white.png'
 import ExpandLessBlack from '../../../Assets/Icons/expand-less-black.png'
 import ExpandMoreBlack from '../../../Assets/Icons/expand-more-black.png'
 import Home from '../../../Assets/Icons/home.png'
-import Download from '../../../Assets/Icons/download-white.png'
+import DownloadWhite from '../../../Assets/Icons/download-white.png'
+import DownloadBlack from '../../../Assets/Icons/download-black.png'
 import Folder from '../../../Assets/Icons/folder.png'
 import Edit from '../../../Assets/Icons/edit.png'
 import Search from '../../../Assets/Icons/search.png'
 import ArrowRightWhite from '../../../Assets/Icons/arrow_right_white.png'
-import EasyReportWhite from '../../../Assets/Icons/easy_report_white.png'
+import ArrowRightBlack from '../../../Assets/Icons/arrow-right-black.png'
+import EasyReportWhite from '../../../Assets/Icons/easy-report-white.png'
+import EasyReportBlack from '../../../Assets/Icons/easy-report-black.png'
 import FolderWhite from '../../../Assets/Icons/folder_white.png'
 import Apps from '../../../Assets/Icons/apps.png'
 import Restore from '../../../Assets/Icons/restore.png'
-import ArrowForward from '../../../Assets/Icons/arrow-forward.png'
 import Settings from '../../../Assets/Icons/settings.png'
 import Clients from '../../../Assets/Icons/clients.png'
 import UserAcces from '../../../Assets/Icons/user-access.png'
 import StarFilled from '../../../Assets/Icons/star_filled.png'
 import StarBorder from '../../../Assets/Icons/star_border.png'
-
 
 class NavBtn extends Component {
     constructor(props) {
@@ -52,37 +60,31 @@ class NavBtn extends Component {
         this.toogleTooltip = this.toggleTooltip.bind(this)
     }
 
-    getImg(name) {
+    getImg(name, white) {
         switch (name) {
-            case 'AccessLogWhite': return AccessLogWhite
-            case 'AccessLogBlack': return AccessLogBlack
+            case 'AccessLog': return white ? AccessLogWhite : AccessLogBlack
             case 'ArrowBack': return ArrowBack
-            case 'ArrowPrevFolder': return ArrowPrevFolder
+            case 'ArrowPrevFolder': return white ? ArrowPrevFolderWhite : ArrowPrevFolderBlack
+            case 'ArrowNextFolder': return white ? ArrowNextFolderWhite : ArrowNextFolderBlack
+            case 'ArrowForward': return white ? ArrowForwardBlack : ArrowForwardWhite
             case 'Apps': return Apps
-            case 'Folder': return Folder
-            case 'FolderWhite': return FolderWhite
+            case 'Folder': return white ?  FolderWhite : Folder
+            case 'Add': return white ? AddWhite : AddBlack
             case 'Home': return Home
             case 'NewClient': return NewClient
-            case 'NewFile': return NewFile
-            case 'NewFolder': return NewFolder
+            case 'NewFolder': return white ? NewFolderWhite : NewFolderBlack
             case 'KebabHor': return KebabHor
             case 'KebabVert': return KebabVert
-            case 'OpenEditor': return OpenEditor
-            case 'UploadFile': return UploadFile
-            case 'TrashWhite': return TrashWhite
-            case 'TrashBlack': return TrashBlack
-            case 'Download': return Download
+            case 'Upload': return white ? UploadWhite : UploadBlack
+            case 'Trash': return white ? TrashWhite : TrashBlack
+            case 'Download': return white ? DownloadWhite : DownloadBlack
             case 'Edit': return Edit
-            case 'Add': return NewFile
             case 'Search': return Search
-            case 'ExpandMoreWhite': return ExpandMoreWhite
-            case 'ExpandLessWhite': return ExpandLessWhite
-            case 'ExpandMoreBlack': return ExpandMoreBlack
-            case 'ExpandLessBlack': return ExpandLessBlack
-            case 'ArrowRightWhite': return ArrowRightWhite
-            case 'EasyReportWhite': return EasyReportWhite
+            case 'ExpandMore': return white ? ExpandMoreWhite : ExpandMoreBlack
+            case 'ExpandLess': return white ? ExpandLessWhite : ExpandLessBlack
+            case 'ArrowRight': return white ? ArrowRightWhite : ArrowRightBlack
+            case 'EasyReport': return white ?  EasyReportWhite : EasyReportBlack
             case 'Restore': return Restore
-            case 'ArrowForward': return ArrowForward
             case 'Settings': return Settings
             case 'Clients': return Clients
             case 'UserAccess': return UserAcces
@@ -133,7 +135,7 @@ class NavBtn extends Component {
 
                     <img
                         className={this.getImgClass(this.props.contextClass)}
-                        src={this.getImg(this.props.img)}
+                        src={this.getImg(this.props.img, this.props.white)}
                         alt={this.props.descr} />
 
                     {this.props.children}
@@ -144,9 +146,9 @@ class NavBtn extends Component {
                     </p>) : null}
                 </button>
 
-               {this.props.hasTooltip ? (
+               {/*this.props.hasTooltip === true ? (
                     <BtnTooltip targetId={this.props.contextId} descr={this.props.descr} />
-                ) : null}
+               ) : null*/ }
             </span>
         )
     }

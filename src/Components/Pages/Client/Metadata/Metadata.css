@@ -1,10 +1,11 @@
-.metadata  .jumbotron {
+.metadata  {
     margin:0;
-    padding-top:0.5em;
-    padding-bottom:0.5em;
-    background-color: transparent;
+    background-color:blanchedalmond
 }
 
+.metadata-content {
+    padding:2em;
+}
 .btn-edit-metadata {
 
 }

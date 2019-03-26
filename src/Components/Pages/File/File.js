@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { Spinner } from 'reactstrap'
 import FileViewer from './FileViewer'
 import { isSupported } from './DriverFinder'
-
+import { setNav } from '../../../Store/Actions/navActions'
 
 class File extends Component {
     constructor(props) {
@@ -56,35 +56,7 @@ class File extends Component {
 
 
     render() {
-        const menuList = [
-            {
-                btnKey: 0,
-                contextId: "download-file",
-                img: "Download",
-                imgDescr: "Last ned",
-                btnAction: this.download
-            },
-            {
-                btnKey: 1,
-                contextId: "accesslog-file",
-                img: "AccessLogWhite",
-                imgDescr: "Adgangslogg",
-                btnAction: () => { this.props.history.push('/accesslog/file/' + this.state.metadata.file_id) }
-            },
-        ]
-
-
-
         return (<div>
-            <PageNav
-                disableSearch
-                backIsLink
-                hasCollapse
-                backTo={'/client/' + this.state.metadata.client_id + "/files/" + this.state.metadata.folder_id}
-                backDescr="Tilbake til filer"
-
-                menuBtns={menuList}
-            />
             {this.state.is_downloading
                 ? <this.Spinner text='Laster ned...' />
                 : this.state.is_loading
@@ -120,10 +92,34 @@ class File extends Component {
             this.props.pushTrail(this.state.metadata.file_name, '/file/'
                 + this.state.metadata.file_id)
 
+            //Add pagenav
+            const menuList = [
+                {
+                    btnKey: 0,
+                    contextId: "download-file",
+                    img: "Download",
+                    imgDescr: "Last ned",
+                    btnAction: this.download
+                },
+                {
+                    btnKey: 1,
+                    contextId: "accesslog-file",
+                    img: "AccessLog",
+                    imgDescr: "Adgangslogg",
+                    btnAction: () => { this.props.history.push('/accesslog/file/' + this.state.metadata.file_id) }
+                },
+            ]
 
+            this.props.setNav({
+                disableSearch:true, 
+                backIsLink:true,
+                hasCollapse:true,
+                backTo:'/client/' + this.state.metadata.client_id + "/files/" + this.state.metadata.folder_id,
+                backDescr:"Tilbake til filer",
+                menuBtns:menuList
+            })
+            
             const can_preview = isSupported(this.state.metadata)
-
-            //TODO: Create a check for max filesize here, we don't want to preview a 5gb large file
 
             //Fetch file
             if (!can_preview) {
@@ -156,7 +152,8 @@ const mapDispatchToProps = (dispatch) => {
         },
         pushTrail: (title, path) => {
             dispatch(pushTrail(title, path))
-        }
+        },
+        setNav:(options) => {dispatch(setNav(options))}
     }
 }
 
