@@ -6,6 +6,7 @@ import { withResizeDetector } from 'react-resize-detector';
 import { Mobile, Desktop } from '../../Helpers/Responsive/Responsive'
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
+import { updateSearch } from '../../../Store/Actions/navActions'
 
 import './PageNav.css'
 
@@ -88,12 +89,12 @@ class PageNav extends Component {
                 <Mobile>
                     <Collapse isOpen={this.state.searchIsOpen} navbar>
                         { /* Check if searchAction is defined, or else render no search bar */
-                            this.props.searchAction &&
+                            
                             <Form inline>
                                 <Input
                                     placeholder={this.props.searchPlaceholder}
-                                    type="text" value={this.props.searchValue}
-                                    onChange={this.props.searchAction}
+                                    type="text" value={this.props.search}
+                                    onChange={this.props.updateSearch}
                                 />   </Form>
                         }
                     </Collapse>
@@ -160,8 +161,8 @@ class PageNav extends Component {
                     <Form inline>
                         <Input
                             placeholder={this.props.searchPlaceholder}
-                            type="text" value={this.props.searchValue}
-                            onChange={this.props.searchAction}
+                            type="text" value={this.props.search}
+                            onChange={this.props.updateSearch}
                         /></Form>
                 </Desktop>
             </Navbar>
@@ -175,7 +176,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        //Not in use atm
+        updateSearch:(key) => {dispatch(updateSearch(key))}
     }
 }
 

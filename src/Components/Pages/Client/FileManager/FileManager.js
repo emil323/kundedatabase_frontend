@@ -147,11 +147,13 @@ class FileManager extends Component {
 
 // Calls on a clientsReducer that bring props to the component
 const mapStateToProps = (state, ownProps) => {
-    const {files, deleted_files, root_folder, recyclebin_root, selected_folder, search, is_loading} = state.filesReducer
+    const {search} = state.navReducer
+    const {files, deleted_files, root_folder, recyclebin_root, selected_folder, is_loading} = state.filesReducer
     const {client_id, client_name} = state.clientReducer
 
     //Create a variable that selects files that is viewable, based on if prop is set to recyclebin or not
     const viewable_files = ownProps.is_recyclebin ? deleted_files : files
+
     return {
         client_id,
         client_name,
@@ -165,7 +167,7 @@ const mapStateToProps = (state, ownProps) => {
         recyclebin_root,
         selected_folder,
         search,
-        is_searching: search !== '',
+        is_searching: search != '',
         is_loading
     }
 }

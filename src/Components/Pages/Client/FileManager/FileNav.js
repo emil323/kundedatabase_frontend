@@ -1,6 +1,6 @@
 import React from 'react'
 import PageNav from "../../../Shared/PageNav/PageNav";
-import { setNav } from '../../../../Store/Actions/navActions'
+import { setNav, updateSearch } from '../../../../Store/Actions/navActions'
 import { connect } from "react-redux";
 
 class FileNav extends React.Component {
@@ -112,8 +112,6 @@ class FileNav extends React.Component {
                 backTo:getBackLink(),
                 backAction:upOneLevel,
                 backDescr: getBackDescr(),
-                searchValue:props.search,
-                searchAction:props.updateSearch,
                 searchPlaceholder:"Søk etter filer"
             })
         }
@@ -125,7 +123,8 @@ class FileNav extends React.Component {
 // Create a dispatch which sends information to the reducer.
 const mapDispatchToProps = (dispatch) => {
 	return {
-		setNav:(options) => {dispatch(setNav(options))}
+        setNav:(options) => {dispatch(setNav(options))},
+        updateSearch:(key) => {dispatch(updateSearch(key))}
 	}
 }
 

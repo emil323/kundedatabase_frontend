@@ -29,8 +29,6 @@ class Favourites extends Component {
 		this.props.setNav({
 			backIsDisabled: true, 
 			searchPlaceholder:'Søk etter favoritt',
-			searchValue:this.props.search, 
-			searchAction:this.props.updateSearch.bind(this),
 			menuBtns: []
 		})
 
@@ -74,8 +72,8 @@ class Favourites extends Component {
 
 // Calls on a favouritesReducer that bring props to the component
 const mapStateToProps = (state) => {
-
-	const { favourites, search, is_loading } = state.favouritesReducer
+	const {search} =  state.navReducer
+ 	const { favourites, is_loading } = state.favouritesReducer
 
 	const is_searching = search !== ''
 	const has_favourites = favourites.length > 0
@@ -93,7 +91,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchFavouritesData: () => { dispatch(fetchFavouritesData()) },
-		updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
 		setNav:(options) => {dispatch(setNav(options))}
 	}
 }

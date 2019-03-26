@@ -73,7 +73,7 @@ class UserAccess extends React.Component {
 const mapStateToProps = (state) => {
     return {
         users: state.usersReducer.users,
-        search: state.usersReducer.search
+        search: state.navReducer.search
     }
 }
 

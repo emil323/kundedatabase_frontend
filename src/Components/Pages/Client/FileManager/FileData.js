@@ -131,7 +131,8 @@ class FilesTable extends Component {
 
 // Calls on a clientsReducer that bring props to the component
 const mapStateToProps = (state) => {
-    const { root_folder, selected_folder, search } = state.filesReducer
+    const {search} = state.navReducer
+    const { root_folder, selected_folder } = state.filesReducer
     return {
         root_folder,
         selected_folder,

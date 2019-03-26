@@ -94,7 +94,7 @@ class AccessLog extends Component {
                             }
 
                         </Table>
-                        {filteredAccessLog.length > 500 && !this.props.is_loading ?
+                        {filteredAccessLog.length >= 500 && !this.props.is_loading ?
                             <Alert color="secondary">Maksimalt 500 rader blir lastet, dersom du ønsker å se mer så må du kjøre en eksport.
                         </Alert> : ''}
                     </Col>
@@ -212,8 +212,6 @@ class AccessLog extends Component {
                 backIsLink:true,
                 backDescr:backDescr,
                 backTo:backTo,
-                searchValue:this.props.searchLog,
-                searchAction:this.props.updateSearch.bind(this),
                 searchPlaceholder:"Søk i loggen",
                 menuBtns:menuList 
             })
@@ -282,7 +280,7 @@ const mapStateToProps = (state) => {
 
     return {
         accesslog,
-        search: state.accesslogReducer.search,
+        search: state.navReducer.search,
         is_loading: state.accesslogReducer.is_loading,
         ip, client_name, consultant_name, file_name, file_id, consultant_id, client_id, access_type, parent_id
     }
@@ -293,7 +291,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchAccessLogData: (type,id) => { dispatch(fetchAccessLogData(type,id)) },
         toggleAccesslogReportModal: (consultant) => {dispatch(toggleAccesslogReportModal(consultant))},
-        updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
         setTrail: (trail) => { dispatch(setTrail(trail)) },
         pushTrail: (title, path) => { dispatch(pushTrail(title, path)) },
         setNav:(options) => {dispatch(setNav(options))}

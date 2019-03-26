@@ -104,7 +104,7 @@ class Clients extends Component {
             title: 'Kunder',
             path: '/clients'
         }])
-        
+
         this.props.fetchClientsData()
     }
 }
@@ -114,7 +114,7 @@ class Clients extends Component {
 const mapStateToProps = (state) => {
     return {
         clients: state.clientsReducer.clients,
-        search: state.clientsReducer.search,
+        search: state.navReducer.search,
         is_loading: state.clientsReducer.is_loading
     }
 }
