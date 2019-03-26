@@ -25,6 +25,8 @@ export const SELECT_FOLDER = 'SELECT_FOLDER'
 //Recycle bin
 export const FETCH_DELETED_FILES = 'FETCH_DELETED_FILES'
 
+//Nav
+export const UPDATE_NAV = 'UPDATE_NAV'
 //MODALS
 export const NEW_FOLDER_MODAL = 'NEW_FOLDER_MODAL'
 export const UPLOAD_MODAL = 'UPLOAD_MODAL'

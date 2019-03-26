@@ -30,7 +30,7 @@ class Breadcrumbs extends React.Component {
                     }
                 </Breadcrumb>
             </div>
-        );
+        )
     }
 }
 

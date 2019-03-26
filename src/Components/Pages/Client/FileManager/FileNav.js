@@ -1,5 +1,7 @@
 import React from 'react'
 import PageNav from "../../../Shared/PageNav/PageNav";
+import { setNav } from '../../../../Store/Actions/navActions'
+import { connect } from "react-redux";
 
 const FileNav = props => {
 
@@ -95,6 +97,8 @@ const FileNav = props => {
     /**
      * Render PageNav
      */
+
+     
 
     return <PageNav
         menuBtns={props.is_recyclebin ? menuListRec : menuList}

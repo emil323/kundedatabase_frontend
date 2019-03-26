@@ -4,6 +4,8 @@ import NavBtn from '../NavBtn/NavBtn'
 import { Link } from 'react-router-dom'
 import { withResizeDetector } from 'react-resize-detector';
 import { Mobile, Desktop } from '../../Helpers/Responsive/Responsive'
+import { connect } from "react-redux"
+import { withRouter } from "react-router-dom"
 
 import './PageNav.css'
 
@@ -40,7 +42,9 @@ class PageNav extends Component {
     }
 
     render() {
+
         const { menuBtns } = this.props
+        console.log('navbtns', this.props)
 
         const pageMenu = menuBtns.map(btn => {
             if (btn.isLink) {
@@ -70,7 +74,7 @@ class PageNav extends Component {
                     /> </NavItem>
             }
         })
-
+        
         return (
             <Navbar sticky={this.props.width > 1200 ? "top" : null} fixed={this.props.width < 1200 ? "bottom" : null} color="faded" className="page-nav">
                 <Mobile>
@@ -100,7 +104,6 @@ class PageNav extends Component {
                         <NavItem>
                             <Link to={this.props.backTo}>
                                 <NavBtn
-                                    hasTooltip
                                     contextId="back"
                                     contextClass="pagenav"
                                     isBackBtn="true"
@@ -112,7 +115,6 @@ class PageNav extends Component {
                     ) : (
                             <NavItem>
                                 <NavBtn
-                                    hasTooltip
                                     contextId="back"
                                     contextClass="pagenav"
                                     isBackBtn="true"
@@ -131,7 +133,6 @@ class PageNav extends Component {
                     {this.props.hasCollapse === true ?
                         <NavItem>
                             <NavBtn
-                                hasTooltip
                                 contextId="collapse-toggle"
                                 contextClass="pagenav"
                                 action={this.toggleMenu}
@@ -147,7 +148,6 @@ class PageNav extends Component {
                     {!this.props.disableSearch ? (
                         <NavItem>
                             <NavBtn
-                                hasTooltip
                                 contextId="search"
                                 contextClass="pagenav"
                                 action={this.toggleSearch}
@@ -169,4 +169,15 @@ class PageNav extends Component {
     }
 }
 
-export default withResizeDetector(PageNav)
+const mapStateToProps = (state) => {
+    return state.navReducer
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        //Not in use atm
+    }
+}
+
+
+export default withRouter(withResizeDetector(connect(mapStateToProps, mapDispatchToProps)(PageNav)))

@@ -30,6 +30,10 @@ const initState = {
     access_report : {
         modal: false, 
         consultant: {consultant_id:'', name:''}
+    }, 
+    editor: {
+        modal: false,
+        file:{id:'',name:''}
     }
 }
 

@@ -3,6 +3,7 @@ import { Component } from 'react'
 import FavouritesCard from "./FavouritesCard"
 import { CardGroup, Navbar, Alert, Container, Row, Col, CardDeck } from 'reactstrap';
 import { fetchFavouritesData, updateSearch } from '../../../../Store/Actions/favouritesActions'
+import { setNav } from '../../../../Store/Actions/navActions'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
 import './Favourites.css'
@@ -25,17 +26,25 @@ class Favourites extends Component {
 
 		const menuList = []
 
+		this.props.setNav({
+			backIsDisabled: true, 
+			searchPlaceholder:'Søk etter favoritt',
+			searchValue:this.props.search, 
+			searchAction:this.props.updateSearch.bind(this),
+			menuBtns: []
+		})
 
 		return (
 			<div className="favourites">
+			{/*
 				<PageNav
 					backIsDisabled
 					searchPlaceholder={"Søk etter favoritt"}
 					searchValue={this.props.search}
-					searchAction={this.props.updateSearch.bind(this)}
+					searchAction={}
 
 					menuBtns={menuList}
-				/>
+				/>*/}
 
 				<Container fluid>
 					<Row>
@@ -84,7 +93,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchFavouritesData: () => { dispatch(fetchFavouritesData()) },
-		updateSearch: (search_key) => { dispatch(updateSearch(search_key)) }
+		updateSearch: (search_key) => { dispatch(updateSearch(search_key)) },
+		setNav:(options) => {dispatch(setNav(options))}
 	}
 }
 

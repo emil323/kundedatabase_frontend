@@ -12,7 +12,6 @@ class EditorModal extends Component {
             backdrop: true,
             text: ''
         }
-
         this.handleChange = this.handleChange.bind(this)
     }
 
