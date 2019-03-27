@@ -9,6 +9,7 @@ import { Spinner } from 'reactstrap'
 import FileViewer from './FileViewer'
 import { isSupported } from './DriverFinder'
 import { setNav } from '../../../Store/Actions/navActions'
+import {isAdmin} from '../../Helpers/AdminChecker/AdminChecker'
 
 class File extends Component {
     constructor(props) {
@@ -101,14 +102,18 @@ class File extends Component {
                     imgDescr: "Last ned",
                     btnAction: this.download
                 },
-                {
+                
+            ]
+
+            if(isAdmin) {
+                menuList.push({
                     btnKey: 1,
                     contextId: "accesslog-file",
                     img: "AccessLog",
                     imgDescr: "Adgangslogg",
                     btnAction: () => { this.props.history.push('/accesslog/file/' + this.state.metadata.file_id) }
-                },
-            ]
+                })
+            }
 
             this.props.setNav({
                 disableSearch:true, 

@@ -19,6 +19,7 @@ import { Button } from 'reactstrap'
 import API from '../../../../API/API';
 import NavBtn from '../../../Shared/NavBtn/NavBtn';
 import {formatDate} from '../../../Helpers/Formatting/DateHelper'
+import {isAdmin} from '../../../Helpers/AdminChecker/AdminChecker'
 
 class FilesTable extends Component {
     constructor(props) {
@@ -97,14 +98,17 @@ class FilesTable extends Component {
                 isHeader: 0,
                 key: 2,
                 function: () => { this.props.toggleDeleteModal(this.props.file) }
-            },
-            {
+            }
+        ]
+
+        if(isAdmin) {
+            btnOptions.push({
                 tekst: 'Adgangslogg',
                 isHeader: 0,
                 key: 3,
                 function: () => { this.props.history.push('/accesslog/file/' + this.props.file.id) }
-            }
-        ]
+            })
+        }
 
         return (
             <tbody>

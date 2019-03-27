@@ -1,10 +1,11 @@
 import { AuthenticationContext, adalFetch, withAdalLogin } from 'react-adal';
-import { CALLBACK_URL } from '../../Settings';
+import { CALLBACK_URL, TENANT_ID,APP_ID } from '../../Settings';
+
 
 export const adalConfig = {
   instance: 'https://login.microsoftonline.com/',
-  tenant: 'bc758dd0-ab53-4372-9a7c-e98a9620862c',
-  clientId: '36bdb668-3a4e-496d-bb39-b327fcfcaa32',
+  tenant: TENANT_ID,
+  clientId: APP_ID,
   endpoints: {
     api: 'https://graph.microsoft.com',
   },

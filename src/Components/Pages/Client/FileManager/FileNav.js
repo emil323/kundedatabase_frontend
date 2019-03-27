@@ -2,6 +2,7 @@ import React from 'react'
 import PageNav from "../../../Shared/PageNav/PageNav";
 import { setNav, updateSearch } from '../../../../Store/Actions/navActions'
 import { connect } from "react-redux";
+import {isAdmin} from '../../../Helpers/AdminChecker/AdminChecker'
 
 class FileNav extends React.Component {
 
@@ -82,16 +83,19 @@ class FileNav extends React.Component {
                 to: `/client/${newProps.match.params.client_id}/recyclebin`,
                 img: "Trash",
                 imgDescr: "Søpplebøtte"
-            },
-            {
+            }
+        ]
+
+        if(isAdmin) {
+            menuList.push({
                 btnKey: 4,
                 contextId: "accesslog-client",
                 isLink: true,
                 to: `/accesslog/client/${newProps.match.params.client_id}`,
                 img: "AccessLog",
                 imgDescr: "Adgangslogg"
-            }
-        ]
+            })
+        }
     
         //Define buttons to be visible in recyclebin ??
         const menuListRec = [{
