@@ -29,7 +29,8 @@ class Favourites extends Component {
 		this.props.setNav({
 			backIsDisabled: true, 
 			searchPlaceholder:'Søk etter favoritt',
-			menuBtns: []
+			menuBtns: [],
+			disableSearch: true
 		})
 
 		return (

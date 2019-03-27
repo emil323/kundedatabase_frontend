@@ -47,7 +47,7 @@ class PageNav extends Component {
         const { menuBtns } = this.props
 
         const isMobile = this.props.width < 768
-        const isTablet = this.props.width < 1200
+        const isTablet = this.props.width < 1200 && this.props.width > 768
         const isDesktop = this.props.width > 1200
 
         const buttons_white = isDesktop ? false : true
@@ -84,116 +84,122 @@ class PageNav extends Component {
         })
 
         const pagenav_style = isDesktop ? 'page-nav-desktop' : 'page-nav-mobile'
-        
+
 
         return (
             <div>
-            {
-            /** Show breadscrumbs here if not desktop */
-             !isDesktop &&  <Breadcrumbs  />
-            }
-            <Navbar sticky={isDesktop ? "top" : null} fixed={isTablet ? "bottom" : null} color="faded" className={pagenav_style}>
                 {
-                    isDesktop && <Breadcrumbs className="breadcrumb-desktop"/>
+                    /** Show breadscrumbs here if not desktop */
+                    !isDesktop && <Breadcrumbs />
                 }
-                    
-                <Mobile>
-                    <Collapse isOpen={this.state.menuIsOpen} onClick={this.toggleMenu} navbar>
-                        <Nav className="ml-auto" navbar>
+                <Navbar sticky={isDesktop ? "top" : null} fixed={isTablet || isMobile ? "bottom" : null} color="faded" className={pagenav_style}>
+                    {
+                        isDesktop && <Breadcrumbs className="breadcrumb-desktop" />
+                    }
+
+                    <Mobile>
+                        <Collapse isOpen={this.state.menuIsOpen} onClick={this.toggleMenu} navbar>
+                            <Nav className="ml-auto" navbar>
+                                {pageMenu}
+                            </Nav>
+                        </Collapse>
+                    </Mobile>
+
+                    <Mobile>
+                        <Collapse isOpen={this.state.searchIsOpen} navbar>
+                            { /* Check if searchAction is defined, or else render no search bar */
+
+                                <Form inline>
+                                    <Input
+                                        placeholder={this.props.searchPlaceholder}
+                                        type="text" value={this.props.search}
+                                        onChange={this.props.updateSearch}
+                                    />   </Form>
+                            }
+                        </Collapse>
+                    </Mobile>
+
+                    <Mobile>
+                        {!this.props.backIsDisabled ? (
+                            this.props.backIsLink ? (
+                                <NavItem>
+                                    <Link to={this.props.backTo}>
+                                        <NavBtn
+                                            white={buttons_white}
+                                            contextId="back"
+                                            contextClass="pagenav"
+                                            isBackBtn="true"
+                                            img={this.props.backTo === "/" ? "Home" : "ArrowBack"}
+                                            descr={this.props.backDescr}
+                                        />
+                                    </Link>
+                                </NavItem>
+                            ) : (
+                                    <NavItem>
+                                        <NavBtn
+                                            white={buttons_white}
+                                            contextId="back"
+                                            contextClass="pagenav"
+                                            isBackBtn="true"
+                                            action={this.props.backAction}
+                                            img="ArrowPrevFolder"
+                                            descr={this.props.backDescr}
+                                            isDisabled={this.props.backIsDisabled}
+                                        />
+                                    </NavItem>)
+                        ) : <NavBtn
+                                isDisabled
+                                img=""
+                            />}
+                    </Mobile>
+
+                    <Mobile>
+                        {this.props.hasCollapse === true ?
+                            <NavItem>
+                                <NavBtn
+                                    white={buttons_white}
+                                    contextId="collapse-toggle"
+                                    contextClass="pagenav"
+                                    action={this.toggleMenu}
+                                    img={this.state.menuIsOpen ? "ExpandMore" : "ExpandLess"}
+                                    descr={!this.state.menuIsOpen ? "Åpne meny" : "Lukk meny"}
+                                /></NavItem> : <div>{pageMenu}</div>}
+                    </Mobile>
+
+                    {isTablet ?
+                        pageMenu : null
+                    }
+
+                    {isDesktop ?
+                        <Nav className="ml-auto">
                             {pageMenu}
-                        </Nav>
-                    </Collapse>
-                </Mobile>
+                        </Nav> : null}
 
-                <Mobile>
-                    <Collapse isOpen={this.state.searchIsOpen} navbar>
-                        { /* Check if searchAction is defined, or else render no search bar */
+                    {!this.props.disableSearch ? (
+                        <div>
 
+                        <Mobile>
+                            <NavItem>
+                                <NavBtn
+                                    white={buttons_white}
+                                    contextId="search"
+                                    contextClass="pagenav"
+                                    action={this.toggleSearch}
+                                    img="Search"
+                                    descr={this.props.searchPlaceholder}
+                                /></NavItem>
+                        </Mobile>
+
+                        <Desktop>
                             <Form inline>
                                 <Input
                                     placeholder={this.props.searchPlaceholder}
                                     type="text" value={this.props.search}
                                     onChange={this.props.updateSearch}
-                                />   </Form>
-                        }
-                    </Collapse>
-                </Mobile>
-
-                <Mobile>
-                    {!this.props.backIsDisabled ? (
-                        this.props.backIsLink ? (
-                            <NavItem>
-                                <Link to={this.props.backTo}>
-                                    <NavBtn
-                                        white={buttons_white}
-                                        contextId="back"
-                                        contextClass="pagenav"
-                                        isBackBtn="true"
-                                        img={this.props.backTo === "/" ? "Home" : "ArrowBack"}
-                                        descr={this.props.backDescr}
-                                    />
-                                </Link>
-                            </NavItem>
-                        ) : (
-                                <NavItem>
-                                    <NavBtn
-                                        white={buttons_white}
-                                        contextId="back"
-                                        contextClass="pagenav"
-                                        isBackBtn="true"
-                                        action={this.props.backAction}
-                                        img="ArrowPrevFolder"
-                                        descr={this.props.backDescr}
-                                        isDisabled={this.props.backIsDisabled}
-                                    />
-                                </NavItem>)
-                    ) : <NavBtn
-                            isDisabled
-                            img=""
-                        />}
-                </Mobile>
-
-                <Mobile>
-                    {this.props.hasCollapse === true ?
-                        <NavItem>
-                            <NavBtn
-                                white={buttons_white}
-                                contextId="collapse-toggle"
-                                contextClass="pagenav"
-                                action={this.toggleMenu}
-                                img={this.state.menuIsOpen ? "ExpandMore" : "ExpandLess"}
-                                descr={!this.state.menuIsOpen ? "Åpne meny" : "Lukk meny"}
-                            /></NavItem> : <div>{pageMenu}</div>}
-                </Mobile>
-
-                <Desktop>
-                    <Nav className="ml-auto">
-                        {pageMenu}
-                    </Nav>
-                </Desktop>
-
-                <Mobile>
-                    {!this.props.disableSearch ? (
-                        <NavItem>
-                            <NavBtn
-                                white={buttons_white}
-                                contextId="search"
-                                contextClass="pagenav"
-                                action={this.toggleSearch}
-                                img="Search"
-                                descr={this.props.searchPlaceholder}
-                            /></NavItem>) : ("")}
-                </Mobile>
-
-                <Desktop>
-                    <Form inline>
-                        <Input
-                            placeholder={this.props.searchPlaceholder}
-                            type="text" value={this.props.search}
-                            onChange={this.props.updateSearch}
-                        /></Form>
-                </Desktop>
-            </Navbar>
+                                /></Form>
+                        </Desktop>
+                        </div>) : <NavBtn isDisabled/>}
+                </Navbar>
             </div>
         )
     }

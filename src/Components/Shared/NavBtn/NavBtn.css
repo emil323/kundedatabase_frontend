@@ -42,6 +42,14 @@
     outline: none;
 }
 
+.btn-kebab:focus {
+    transform: scale(1.5);
+}
+
+.btn-kebab:focus .btn-img-kebab {
+    opacity: 1;
+}
+
 .btn-vector:active {
     transform: scale(1.5);
 }

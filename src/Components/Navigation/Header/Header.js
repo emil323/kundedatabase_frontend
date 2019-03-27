@@ -41,7 +41,6 @@ export default class Header extends React.Component {
 			<div>
 				<Navbar className="mainHeader" expand="md">
 					<Mobile>
-
 						<a href='https://www.office.com/apps?auth=2&home=1' target="_blank">
 							<NavBtn
 								img="Apps"
