@@ -33,11 +33,13 @@ class Menu extends Component {
                     <NavItem><Link to="/users" className="router-link-nav"><NavLink>Brukere</NavLink></Link></NavItem>
                     <NavItem><Link to="/accesslog" className="router-link-nav"><NavLink >Adgangslogg</NavLink></Link></NavItem>
                     <NavItem><Link to="/settings" className="router-link-nav"><NavLink className="lastElement">Innstillinger</NavLink></Link></NavItem>
+                    <NavItem><Link to="/logout" className="router-link-nav"><NavLink>Logg ut</NavLink></Link></NavItem>
                 </AdminUser>
                 {/** Vises kun dersom vanlig bruker */}
                 <RegularUser>
                     <NavItem><Link to="/" className="router-link-nav"><NavLink>Hjem</NavLink></Link></NavItem>
                     <NavItem><Link to="/clients" className="router-link-nav"><NavLink>Kunder</NavLink></Link></NavItem>
+                    <NavItem><Link to="/logout" className="router-link-nav"><NavLink>Logg ut</NavLink></Link></NavItem>
                 </RegularUser>
             </div>
             

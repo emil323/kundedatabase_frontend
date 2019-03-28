@@ -80,31 +80,13 @@ export default class Header extends React.Component {
 									<NavItem><Link to="/users" className="router-link-nav"><NavLink><NavBtn hasTooltip contextId="user-access" contextClass={"navbar"} img="UserAccess" descr="Brukere"  /></NavLink></Link></NavItem>
 									<NavItem><Link to="/accesslog" className="router-link-nav"><NavLink ><NavBtn hasTooltip contextId="accesslog-navbar" contextClass={"navbar"} img="AccessLog" white={true} descr="Adgangslogg"  /></NavLink></Link></NavItem>
 									<NavItem><Link to="/settings" className="router-link-nav"><NavLink className="lastElement"><NavBtn hasTooltip contextId="settings" contextClass={"navbar"} img="Settings" descr="Innstillinger"  /></NavLink></Link></NavItem>
-									<NavItem><NavLink><a href='https://www.office.com/apps?auth=2&home=1' target="_blank">
-										<NavBtn
-											hasTooltip
-											contextId="apps"
-											img="Apps"
-											contextClass={"navbar"}
-											descr="Apps"
-											
-										/>
-									</a></NavLink></NavItem>
+									<NavItem><Link to="/logout" className="router-link-nav"><NavLink><NavBtn hasTooltip contextId="clients" contextClass={"navbar"} img="Logout" descr="Logg ut" /></NavLink></Link></NavItem>
 								</AdminUser>
 								{/** Vises kun dersom vanlig bruker */}
 								<RegularUser>
-									<NavItem><Link to="/clients" className="router-link-nav"><NavLink><NavBtn hasTooltip contextId="home" contextClass={"navbar"} img="Home" descr="Hjem" showDescr /></NavLink></Link></NavItem>
+									<NavItem><Link to="/" className="router-link-nav"><NavLink><NavBtn hasTooltip contextId="home" contextClass={"navbar"} img="Home" descr="Hjem" showDescr /></NavLink></Link></NavItem>
 									<NavItem><Link to="/clients" className="router-link-nav"><NavLink><NavBtn hasTooltip contextId="clients" contextClass={"navbar"} img="Clients" descr="Kunder" showDescr /></NavLink></Link></NavItem>
-									<NavItem><NavLink><a href='https://www.office.com/apps?auth=2&home=1' target="_blank">
-										<NavBtn
-											hasTooltip
-											contextId="apps"
-											img="Apps"
-											contextClass={"navbar"}
-											descr="Apps"
-											showDescr
-										/>
-									</a></NavLink></NavItem>
+									<NavItem><Link to="/logout" className="router-link-nav"><NavLink><NavBtn hasTooltip contextId="clients" contextClass={"navbar"} img="Logout" descr="Logg ut" showDescr /></NavLink></Link></NavItem>
 								</RegularUser>
 							</Desktop>
 						</Nav>

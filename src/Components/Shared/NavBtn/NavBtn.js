@@ -45,6 +45,7 @@ import Clients from '../../../Assets/Icons/clients.png'
 import UserAcces from '../../../Assets/Icons/user-access.png'
 import StarFilled from '../../../Assets/Icons/star_filled.png'
 import StarBorder from '../../../Assets/Icons/star_border.png'
+import LogoutWhite from '../../../Assets/Icons/logout_white.png'
 
 class NavBtn extends Component {
     constructor(props) {
@@ -90,6 +91,7 @@ class NavBtn extends Component {
             case 'UserAccess': return UserAcces
             case 'StarFilled': return StarFilled
             case 'StarBorder': return StarBorder
+            case 'Logout': return LogoutWhite
             default: return null
         }
     }
