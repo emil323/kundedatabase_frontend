@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Collapse, Jumbotron, Navbar, NavbarBrand, Nav, NavItem, Spinner, Table, Alert } from 'reactstrap'
+import { Collapse, Navbar, NavbarBrand, Nav, NavItem, Spinner, Table, Alert } from 'reactstrap'
 import { connect } from "react-redux";
 import NavBtn from '../../../Shared/NavBtn/NavBtn'
 

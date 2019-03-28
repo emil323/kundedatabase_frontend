@@ -2,7 +2,6 @@ import React from 'react'
 import word from "../../../../Assets/Icons/Files/doc.png"
 import pdf from "../../../../Assets/Icons/Files/pdf.png"
 import excel from "../../../../Assets/Icons/Files/excel.png"
-import textDoc from "../../../../Assets/Icons/Files/txt.png"
 import powerp from "../../../../Assets/Icons/Files/powerp.png"
 import file from "../../../../Assets/Icons/Files/file.png"
 import img from "../../../../Assets/Icons/Files/img.png"
@@ -15,8 +14,6 @@ import { toggleMoveModal, toggleRenameModal, toggleDeleteModal, toggleRecoverMod
 import { Link, withRouter } from "react-router-dom";
 import { Component } from 'react'
 import DropdownBtn from '../../../Shared/DropdownBtn/DropdownBtn';
-import { Button } from 'reactstrap'
-import API from '../../../../API/API';
 import NavBtn from '../../../Shared/NavBtn/NavBtn';
 import {formatDate} from '../../../Helpers/Formatting/DateHelper'
 import {isAdmin} from '../../../Helpers/AdminChecker/AdminChecker'

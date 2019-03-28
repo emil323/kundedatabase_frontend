@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { connect } from "react-redux";
 import "./Clients.css"
 import { fetchClientsData, toggleModal} from '../../../Store/Actions/clientsActions'
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Label, Input } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Input } from 'reactstrap';
 
 import API from "../../../API/API";
 

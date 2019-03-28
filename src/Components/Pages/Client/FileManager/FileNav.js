@@ -1,5 +1,4 @@
 import React from 'react'
-import PageNav from "../../../Shared/PageNav/PageNav";
 import { setNav, updateSearch } from '../../../../Store/Actions/navActions'
 import { connect } from "react-redux";
 import {isAdmin} from '../../../Helpers/AdminChecker/AdminChecker'

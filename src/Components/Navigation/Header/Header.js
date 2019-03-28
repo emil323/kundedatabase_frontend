@@ -1,12 +1,11 @@
 import React from 'react'
-import { Collapse, Nav, Navbar, NavItem, NavLink, NavbarToggler, NavbarBrand } from 'reactstrap'
+import { Collapse, Nav, Navbar, NavItem, NavLink, NavbarBrand } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import Hamburger from 'react-hamburger-menu'
 import './Header.css'
 import Menu from '../Menu/Menu'
 import NavBtn from '../../Shared/NavBtn/NavBtn'
-import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
-import { isAdmin, AdminUser, RegularUser } from '../../Helpers/AdminChecker/AdminChecker'
+import { AdminUser, RegularUser } from '../../Helpers/AdminChecker/AdminChecker'
 import { Mobile, Desktop } from '../../Helpers/Responsive/Responsive'
 
 export default class Header extends React.Component {
@@ -27,7 +26,7 @@ export default class Header extends React.Component {
 	}
 
 	closeNav() {
-		if (this.state.open == true) {
+		if (this.state.open === true) {
 			this.toggleHamburger()
 		}
 	}
@@ -51,7 +50,7 @@ export default class Header extends React.Component {
 
 					<NavbarBrand href="/">
 						<Link to={`/`}>
-							<button className="btn-vector btn-vector-brand"><img className="btn-vector-img btn-brand-img" src="/img/ecit-logo.png" /></button></Link>
+							<button className="btn-vector btn-vector-brand"><img className="btn-vector-img btn-brand-img" src="/img/ecit-logo.png" alt="Header image"/></button></Link>
 					</NavbarBrand>
 
 					<Mobile>

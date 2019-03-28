@@ -1,7 +1,6 @@
 import React from 'react'
 import { Component } from 'react'
 import api from '../../../API/API'
-import PageNav from '../../Shared/PageNav/PageNav'
 import { setTrail, pushTrail } from '../../../Store/Actions/breadcrumbActions'
 
 import { connect } from "react-redux";

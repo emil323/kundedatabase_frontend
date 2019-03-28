@@ -1,12 +1,10 @@
 import React from 'react';
-import { Container, Row, Col, Button } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import "./Settings.css"
 import { toggleDefaultMetadataModal } from "../../../Store/Actions/modalActions";
 import { setTrail, pushTrail } from "../../../Store/Actions/breadcrumbActions";
 import { connect } from "react-redux";
 import ChangeDefaultMetadataValuesModal from "./Modals/ChangeDefaultMetadataValuesModal/ChangeDefaultMetadataValuesModal";
-import PageNav from '../../Shared/PageNav/PageNav'
-import NavBtn from '../../Shared/NavBtn/NavBtn'
 import MenuBtn from '../../Shared/MenuBtn/MenuBtn'
 import { setNav } from '../../../Store/Actions/navActions'
 
@@ -21,8 +19,6 @@ class Settings extends React.Component {
     }
 
     render() {
-        const menuList = []
-
         return (
             <div>
                 <Container fluid>

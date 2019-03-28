@@ -1,5 +1,4 @@
 import React from 'react'
-import { Input, Label } from 'reactstrap';
 import Kebab from '../../../Assets/Icons/kebab-hor.png'
 import DropdownBtn from '../../Shared/DropdownBtn/DropdownBtn'
 import {withRouter} from "react-router-dom"

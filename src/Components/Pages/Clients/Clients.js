@@ -3,15 +3,13 @@ import { Component } from 'react'
 import ClientData from './ClientData'
 import "./Clients.css"
 import { Table } from 'reactstrap';
-import { Container, Row, Col, ButtonGroup, Navbar, Alert, Input, Spinner } from 'reactstrap';
+import { Container, Row, Col, Alert, Spinner } from 'reactstrap';
 import { setTrail } from '../../../Store/Actions/breadcrumbActions'
-import PageNav from '../../Shared/PageNav/PageNav'
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
 import { deleteClient, fetchClientsData, updateSearch, toggleModal } from '../../../Store/Actions/clientsActions'
 import AddClient from './AddClient';
 import { setNav } from '../../../Store/Actions/navActions'
-import { IS_LOADING } from '../../../Store/types';
 
 class Clients extends Component {
     constructor(props) {

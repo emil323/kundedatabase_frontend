@@ -1,5 +1,5 @@
 import React from 'react';
-import { Jumbotron, Button } from 'reactstrap';
+import { Jumbotron } from 'reactstrap';
 import './Jumbotron.css';
 import { authContext } from '../../../API/Auth/adalConfig';
 import {formatDate} from '../../Helpers/Formatting/DateHelper'
