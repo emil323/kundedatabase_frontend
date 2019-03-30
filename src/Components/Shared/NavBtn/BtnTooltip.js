@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Tooltip } from 'reactstrap'
 import { Mobile, Desktop } from '../../Helpers/Responsive/Responsive'
+import './NavBtn.css'
 
 class BtnTooltip extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class BtnTooltip extends Component {
     render() {
         return (
             <Desktop>
-                <Tooltip hideArrow delay={1000} placement="auto-end" isOpen={this.state.open} target={this.props.targetId} toggle={this.toggle}>
+                <Tooltip className="tooltiptest" hideArrow placement="auto-end" isOpen={this.state.open} target={this.props.targetId} toggle={this.toggle}>
                     {this.props.descr}
                 </Tooltip>
             </Desktop>

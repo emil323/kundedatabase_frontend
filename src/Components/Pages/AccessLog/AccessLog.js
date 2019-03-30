@@ -38,8 +38,6 @@ class AccessLog extends Component {
 
 
         return (
-            <div>
-      
             <Container fluid>
                 <Row>
                     <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
@@ -101,7 +99,7 @@ class AccessLog extends Component {
                 </Row>
                 <ReportModal/>
             </Container>
-            </div>
+         
         )
     }
 

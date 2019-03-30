@@ -117,7 +117,7 @@ class File extends Component {
             this.props.setNav({
                 disableSearch:true, 
                 backIsLink:true,
-                hasCollapse:true,
+                
                 backTo:'/client/' + this.state.metadata.client_id + "/files/" + this.state.metadata.folder_id,
                 backDescr:"Tilbake til filer",
                 menuBtns:menuList

@@ -147,10 +147,10 @@ class NavBtn extends Component {
                         {this.props.descr}
                     </p>) : null}
                 </button>
-
-               {/*this.props.hasTooltip === true ? (
+{/* 
+              {this.props.hasTooltip === true ? (
                     <BtnTooltip targetId={this.props.contextId} descr={this.props.descr} />
-               ) : null*/ }
+               ) : null} */}
             </span>
         )
     }

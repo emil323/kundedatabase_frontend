@@ -48,7 +48,7 @@ export default class Header extends React.Component {
 						</a>
 					</Mobile>
 
-					<NavbarBrand href="/">
+					<NavbarBrand href="/" onClick={this.toggleHamburger} >
 						<Link to={`/`}>
 							<button className="btn-vector btn-vector-brand"><img className="btn-vector-img btn-brand-img" src="/img/ecit-logo.png" alt="Header image"/></button></Link>
 					</NavbarBrand>
@@ -79,13 +79,13 @@ export default class Header extends React.Component {
 									<NavItem><Link to="/users" className="router-link-nav"><NavLink><NavBtn hasTooltip contextId="user-access" contextClass={"navbar"} img="UserAccess" descr="Brukere"  /></NavLink></Link></NavItem>
 									<NavItem><Link to="/accesslog" className="router-link-nav"><NavLink ><NavBtn hasTooltip contextId="accesslog-navbar" contextClass={"navbar"} img="AccessLog" white={true} descr="Adgangslogg"  /></NavLink></Link></NavItem>
 									<NavItem><Link to="/settings" className="router-link-nav"><NavLink className="lastElement"><NavBtn hasTooltip contextId="settings" contextClass={"navbar"} img="Settings" descr="Innstillinger"  /></NavLink></Link></NavItem>
-									<NavItem><Link to="/logout" className="router-link-nav"><NavLink><NavBtn hasTooltip contextId="clients" contextClass={"navbar"} img="Logout" descr="Logg ut" /></NavLink></Link></NavItem>
+									<NavItem><Link to="/logout" className="router-link-nav"><NavLink><NavBtn hasTooltip contextId="logut" contextClass={"navbar"} img="Logout" descr="Logg ut" /></NavLink></Link></NavItem>
 								</AdminUser>
 								{/** Vises kun dersom vanlig bruker */}
 								<RegularUser>
 									<NavItem><Link to="/" className="router-link-nav"><NavLink><NavBtn hasTooltip contextId="home" contextClass={"navbar"} img="Home" descr="Hjem" showDescr /></NavLink></Link></NavItem>
 									<NavItem><Link to="/clients" className="router-link-nav"><NavLink><NavBtn hasTooltip contextId="clients" contextClass={"navbar"} img="Clients" descr="Kunder" showDescr /></NavLink></Link></NavItem>
-									<NavItem><Link to="/logout" className="router-link-nav"><NavLink><NavBtn hasTooltip contextId="clients" contextClass={"navbar"} img="Logout" descr="Logg ut" showDescr /></NavLink></Link></NavItem>
+									<NavItem><Link to="/logout" className="router-link-nav"><NavLink><NavBtn hasTooltip contextId="logut" contextClass={"navbar"} img="Logout" descr="Logg ut" showDescr /></NavLink></Link></NavItem>
 								</RegularUser>
 							</Desktop>
 						</Nav>

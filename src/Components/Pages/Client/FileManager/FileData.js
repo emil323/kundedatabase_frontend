@@ -79,21 +79,27 @@ class FilesTable extends Component {
 
         const btnOptions = [
             {
-                tekst: 'Endre navn',
+                tekst: 'Vis',
                 isHeader: 0,
                 key: 0,
+                function: (e) => { this.handleSelection(e) }
+            },
+            {
+                tekst: 'Endre navn',
+                isHeader: 0,
+                key: 1,
                 function: () => { this.props.toggleRenameModal(this.props.file) }
             },
             {
                 tekst: 'Flytt',
                 isHeader: 0,
-                key: 1,
+                key: 2,
                 function: () => { this.props.toggleMoveModal(this.props.file) }
             },
             {
                 tekst: 'Slett',
                 isHeader: 0,
-                key: 2,
+                key: 3,
                 function: () => { this.props.toggleDeleteModal(this.props.file) }
             }
         ]

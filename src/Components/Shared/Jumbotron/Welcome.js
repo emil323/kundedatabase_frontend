@@ -21,11 +21,10 @@ class Welcome extends React.Component {
         const hour = this.state.time.getHours()
 
         if(hour >= 18) { return "God kveld, "}
-        if(hour >= 15) { return "God dag, " }
         if(hour >= 12) { return "God ettermiddag, " }
-        if(hour >= 10) { return "God formiddag, " }
-        if(hour >= 5) { return "God morgen, " }
-        if(hour < 5) { return "God natt," }        
+        if(hour >= 9) { return "God formiddag, " }
+        if(hour >= 6) { return "God morgen, " }
+        if(hour < 6) { return "God natt," }        
     }
 
 

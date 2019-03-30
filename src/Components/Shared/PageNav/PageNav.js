@@ -119,8 +119,8 @@ class PageNav extends Component {
                         </Collapse>
                     </Mobile>
 
-                    <Mobile>
-                        {!this.props.backIsDisabled ? (
+                    {isMobile ||isTablet ? ( 
+                        !this.props.backIsDisabled ? (
                             this.props.backIsLink ? (
                                 <NavItem>
                                     <Link to={this.props.backTo}>
@@ -150,11 +150,11 @@ class PageNav extends Component {
                         ) : <NavBtn
                                 isDisabled
                                 img=""
-                            />}
-                    </Mobile>
+                            />
+                            ) : null }
 
                     <Mobile>
-                        {this.props.hasCollapse === true ?
+                        {this.props.hasCollapse ?
                             <NavItem>
                                 <NavBtn
                                     white={buttons_white}
@@ -163,7 +163,7 @@ class PageNav extends Component {
                                     action={this.toggleMenu}
                                     img={this.state.menuIsOpen ? "ExpandMore" : "ExpandLess"}
                                     descr={!this.state.menuIsOpen ? "Åpne meny" : "Lukk meny"}
-                                /></NavItem> : <div>{pageMenu}</div>}
+                                /></NavItem> : pageMenu}
                     </Mobile>
 
                     {isTablet ?
@@ -198,7 +198,7 @@ class PageNav extends Component {
                                     onChange={this.props.updateSearch}
                                 /></Form>
                         </Desktop>
-                        </div>) : <NavBtn isDisabled/>}
+                        </div>) : null}
                 </Navbar>
             </div>
         )

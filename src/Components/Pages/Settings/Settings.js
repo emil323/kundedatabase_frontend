@@ -32,29 +32,7 @@ class Settings extends React.Component {
                             <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Endre standardverdier" /></Col>
                         </Row>
                         <hr />
-                        <Row>
-                            <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Placeholder 1" /></Col>
-                        </Row>
-                        <hr />
-                        <Row>
-                            <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Placeholder2" /></Col>
-                        </Row>
-                        <hr />
-                        <br />
-                        <Row>
-                            <Col><p className="lead">Alternativer 2</p></Col>
-                        </Row>
-
-                        <Row>
-                            <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Placeholder 3" /></Col>
-                        </Row>
-                        <hr />
-                        <Row>
-                            <Col xs="12"><MenuBtn action={this.props.toggleDefaultMetadataModal} text="Placeholder 4" /></Col>
-                        </Row>
-                        <hr />
-
-                        <Row>
+                                                <Row>
                             <ChangeDefaultMetadataValuesModal />
                         </Row>
                     </Col>

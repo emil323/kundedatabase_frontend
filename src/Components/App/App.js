@@ -12,7 +12,6 @@ import AccessLog from '../Pages/AccessLog/AccessLog'
 import File from '../Pages/File/File'
 import './App.css'
 import Settings from "../Pages/Settings/Settings";
-import Footer from "../Navigation/Footer/Footer"
 import PageNav from '../Shared/PageNav/PageNav';
 import Logout from '../Pages/Logout/Logout';
 
@@ -24,8 +23,7 @@ class App extends Component {
             <BrowserRouter>
                 <div>
                     <Header />
-                    {/* <Sidebar /> */}
-                    <PageNav/>
+                    <PageNav />
                     <Route exact path="/" component={Home} />
                     <Route path="/clients" component={Clients} />
                     <Route path="/client/:client_id" component={Client} />
@@ -35,7 +33,6 @@ class App extends Component {
                     <Route path="/file/:file_id" component={File} />
                     <Route path="/settings" component={Settings} />
                     <Route path="/logout" component={Logout} />
-                    <Footer />
                 </div>
             </BrowserRouter>
         )
