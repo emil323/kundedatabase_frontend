@@ -21,6 +21,7 @@ export const PUSH_TRAIL = 'PUSH_TRAIL'
 // Files
 export const FETCH_FILES = 'FETCH_FILES'
 export const SELECT_FOLDER = 'SELECT_FOLDER'
+export const SELECT_FILE = 'SELECT_FILE'
 
 //Recycle bin
 export const FETCH_DELETED_FILES = 'FETCH_DELETED_FILES'

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Spinner} from "reactstrap";
 import { connect } from "react-redux";
 import { fetchFilesData} from "../../../../../../Store/Actions/filesActions";
 import { toggleMoveModal} from "../../../../../../Store/Actions/modalActions";
@@ -9,7 +9,13 @@ import API from "../../../../../../API/API";
 
 class NewFolderModal extends React.Component {
 
-
+constructor(props) {
+    super(props)
+    this.state = {
+        is_loading:false
+    }
+    this.handleMove = this.handleMove.bind(this)
+}
 
 /**
  * Handle moving file
@@ -28,8 +34,10 @@ handleMove(new_parent) {
           : API.file(file.id).move(new_parent.id).then(res)
     }
 
+    this.setState({is_loading:true})
     //Do request
     request(res => {
+        this.setState({is_loading:false})
         this.props.fetchFilesData(this.props.client_id, this.props.selected_folder.id)
         this.props.toggleMoveModal()
     })
@@ -67,6 +75,7 @@ handleMove(new_parent) {
             </ListGroup>
           </ModalBody>
           <ModalFooter>
+              {this.state.is_loading && <Spinner/>}
             <Button color="secondary" onClick={this.props.toggleMoveModal}>Lukk</Button>
           </ModalFooter>
         </Modal>

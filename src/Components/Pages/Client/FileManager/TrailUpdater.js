@@ -36,6 +36,10 @@ class TrailUpdater extends Component {
             if(!f.is_root)
                 this.props.pushTrail(f.name, '/client/' + this.props.client_id + "/files/" + f.id)
         })
+
+        if(this.props.selected_file) {
+            this.props.pushTrail(this.props.selected_file.name)
+        }
     }
 
 
@@ -48,6 +52,7 @@ class TrailUpdater extends Component {
 const mapStateToProps = (state) => {
     return { 
         selected_folder : state.filesReducer.selected_folder,
+        selected_file : state.filesReducer.selected_file,
         client_id : state.clientReducer.client_id,
         client_name : state.clientReducer.client_name 
      }

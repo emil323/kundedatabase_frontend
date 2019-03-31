@@ -3,11 +3,11 @@ import {ImageViewer, PDFViewer, UnsupportedViewer, WordViewer, TooBigViewer} fro
 //define max filesize for preview
 const MAX_SIZE = 25000000
 
-export const getDriver = ({file_type, size}) => {
-    console.log('get_driver', file_type, size)
+export const getDriver = ({type, size}) => {
+    console.log('get_driver', type, size)
     if (size > MAX_SIZE) return TooBigViewer
 
-    switch (file_type) {
+    switch (type) {
         case 'image/jpeg':
         case 'image/png':
         case 'image/gif':
@@ -27,7 +27,8 @@ export const getDriver = ({file_type, size}) => {
 
 export const isSupported = (metadata) => {
     const class_name = getDriver(metadata).name
-    return class_name === 'UnsupportedViewer' || class_name === 'TooBigViewer'
+    console.log(class_name)
+    return class_name !== 'UnsupportedViewer' && class_name !== 'TooBigViewer'
 }
 
 //Export

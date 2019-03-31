@@ -1,5 +1,5 @@
 
-import {SEARCH_KEY, FETCH_FILES,SELECT_FOLDER, CLEAR, IS_LOADING} from '../types'
+import {SEARCH_KEY, FETCH_FILES, SELECT_FOLDER, CLEAR, IS_LOADING, SELECT_FILE} from '../types'
 
 // A Reducer requires an initial state when running the application
 const initState = {
@@ -8,6 +8,7 @@ const initState = {
     root_folder: {id:'', name:''},
     recyclebin_root: {id:'', name:''},
     selected_folder: {id:'', name:''},
+    selected_file:null,
     client_id:'',
     is_recyclebin: false,
     search: '',
@@ -22,8 +23,12 @@ const initState = {
 const filesReducer = (state = initState, action) => {
     switch(action.type){
         case FETCH_FILES:
-            console.log(action)
-            return action.newState 
+            return action.newState
+        case SELECT_FILE:
+            return {
+                ...state,
+                selected_file: state.files.find(f => f.id === action.file_id)
+            }
         case SELECT_FOLDER:
             const new_selected_folder = state.is_recyclebin //Find reference based on if deleted or not
                     ? state.deleted_files.find(f=>  f.id === action.folder_id ) 

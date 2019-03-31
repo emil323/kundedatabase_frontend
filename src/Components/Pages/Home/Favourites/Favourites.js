@@ -7,7 +7,7 @@ import { setNav } from '../../../../Store/Actions/navActions'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
 import './Favourites.css'
-import PageNav from '../../../Shared/PageNav/PageNav'
+import PageNav from '../../../Navigation/PageNav/PageNav'
 
 
 

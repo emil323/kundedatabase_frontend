@@ -4,7 +4,7 @@ import "./UserAccess.css"
 import UserAccessData from "./UserAccessData"
 import { authContext } from '../../../API/Auth/adalConfig'
 import API from '../../../API/API';
-import PageNav from '../../Shared/PageNav/PageNav'
+import PageNav from '../../Navigation/PageNav/PageNav'
 
 import { connect } from "react-redux";
 import { updateSearch, fetchUsersData } from '../../../Store/Actions/userActions'

@@ -13,7 +13,7 @@ import File from '../Pages/File/File'
 import './App.css'
 import Settings from "../Pages/Settings/Settings";
 import Footer from "../Navigation/Footer/Footer"
-import PageNav from '../Shared/PageNav/PageNav';
+import PageNav from '../Navigation/PageNav/PageNav';
 
 
 

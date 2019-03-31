@@ -1,6 +1,7 @@
 
 import api from '../../API/API'
-import {FETCH_FILES, SEARCH_KEY,SELECT_FOLDER, CLEAR, IS_LOADING} from '../types'
+import {FETCH_FILES, SEARCH_KEY, SELECT_FOLDER, CLEAR, IS_LOADING, SELECT_FILE} from '../types'
+import { clearClient, fetchClientData } from './clientActions'
 
 
 export const updateSearch = (e) => {
@@ -16,6 +17,14 @@ export const selectFolder = (folder_id) => {
         folder_id
     }
 }
+
+export const selectFile = (file_id) => {
+    return {
+        type: SELECT_FILE,
+        file_id
+    }
+}
+
 
 export const clearFiles = () => {
     return {
@@ -37,8 +46,20 @@ export const setIsLoading = (is_loading) => {
     }
 }
 
+export const fetchFilesDataByFileID = (file_id) => {
+    return dispatch => {
+        dispatch(setIsLoading(true)) //Toggle is loading
+        /*Make API request for file metadata*/
+        api.file(file_id).metadata().then(response => {
+            console.log('fileid',file_id)
 
-export const fetchFilesData = (client_id, selected, is_recyclebin) => {
+            const {folder_id, client_id} = response.data
+            dispatch(fetchFilesData(client_id, folder_id, {selected_file:file_id}))
+        })
+    }
+}
+
+export const fetchFilesData = (client_id, selected, options) => {
     
     /**
      * Recursive function to generate full path for each file and folde
@@ -46,10 +67,21 @@ export const fetchFilesData = (client_id, selected, is_recyclebin) => {
      * @param {*} file 
      * @param {*} path 
      */
-
+    //Default options
+    if(options === undefined) {
+        options = {
+            is_recyclebin:false,
+            selected_file:null
+        }
+    }
 
     return (dispatch) => {
+        /* Dispatch to clear client and fetch client data */
+        dispatch(clearClient)
+        dispatch(fetchClientData(client_id))
         dispatch(setIsLoading(true)) //Toggle is loading
+
+        //Load from API
         return api.client(client_id).files().then(response => {
             //Create files array and deleted files array
             const files = response.data.filter(file => !file.is_deleted)
@@ -74,7 +106,8 @@ export const fetchFilesData = (client_id, selected, is_recyclebin) => {
             //Determine what folder to set as selected, based on selected_folder input and recycle_bin is true or false
             let selected_folder
 
-            if(is_recyclebin) {
+            //Determine selected_folder
+            if(options.is_recyclebin) {
                 //Selected folder is in recyclebin
                 selected_folder = deleted_files.find((file) => {return file.id === selected && file.is_directory}) 
                 selected_folder = selected_folder != null ? selected_folder : recyclebin_root
@@ -84,17 +117,27 @@ export const fetchFilesData = (client_id, selected, is_recyclebin) => {
                 selected_folder = selected_folder != null ? selected_folder : root_folder
             }
 
+            let selected_file
+
+            //Find selected file
+            if(options.selected_file) {
+                    selected_file = files.find(f => {return f.id === options.selected_file})
+            }
+            console.log('options', options)
+
             const newState = {
                 files,
                 deleted_files,
                 root_folder,
                 recyclebin_root, 
                 selected_folder,
+                selected_file,
                 client_id,
-                is_recyclebin,
+                is_recyclebin: options.is_recyclebin ? true : false,
                 search: ''
             }
-            
+            console.log('newState', newState)
+
             //Dispatch to fetch_files
             dispatch(fetchFiles(newState))
             dispatch(setIsLoading(false)) //Toggle is loading to false

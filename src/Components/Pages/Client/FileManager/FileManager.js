@@ -115,7 +115,7 @@ class FileManager extends Component {
 
         //Initial fetch of data
         const folder = this.props.match.params.selected_folder
-        this.props.fetchFilesData(this.props.match.params.client_id, folder, this.props.is_recyclebin)
+        this.props.fetchFilesData(this.props.match.params.client_id, folder, {is_recyclebin:this.props.is_recyclebin})
     }
 
     /**
@@ -142,7 +142,7 @@ class FileManager extends Component {
         //Check if mode (url) is toggled to recyclebin
         if (this.props.is_recyclebin !== nextProps.is_recyclebin) {
             //Refetch inventory
-            this.props.fetchFilesData(new_params.client_id, new_params.selected_folder, nextProps.is_recyclebin)
+            this.props.fetchFilesData(new_params.client_id, new_params.selected_folder, {is_recyclebin:nextProps.is_recyclebin})
         }
     }
 }
@@ -178,8 +178,8 @@ const mapStateToProps = (state, ownProps) => {
 // Create a dispatch which sends information to the reducer. In this case a client is being deleted
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchFilesData: (client_id, selected_folder, is_recyclebin) => {
-            dispatch(fetchFilesData(client_id, selected_folder, is_recyclebin))
+        fetchFilesData: (client_id, selected_folder, options) => {
+            dispatch(fetchFilesData(client_id, selected_folder, options))
         },
         selectFolder: (folder_id) => {
             dispatch(selectFolder(folder_id))

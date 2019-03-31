@@ -1,5 +1,5 @@
 import React from 'react'
-import PageNav from "../../../Shared/PageNav/PageNav";
+import PageNav from "../../../Navigation/PageNav/PageNav";
 import { setNav, updateSearch } from '../../../../Store/Actions/navActions'
 import { connect } from "react-redux";
 import {isAdmin} from '../../../Helpers/AdminChecker/AdminChecker'
@@ -12,6 +12,8 @@ class FileNav extends React.Component {
     render() {
         return null 
     }
+
+    comp
 
     componentWillReceiveProps(newProps) {
 
@@ -106,7 +108,7 @@ class FileNav extends React.Component {
             img: "ArrowPrevFolder",
             imgDescr: "Gå ut av papirkurv"
         }]
-        if(props.selected_folder.id !== newProps.selected_folder.id) {
+        if(props.selected_folder.id !== newProps.selected_folder.id || props.match.params !== newProps.match.params) {
             props.setNav({
                 menuBtns: newProps.is_recyclebin ? menuListRec : menuList,
                 hasCollapse: true,
@@ -118,7 +120,11 @@ class FileNav extends React.Component {
             })
         }
     }
+
+
 }
+
+
 
 
 

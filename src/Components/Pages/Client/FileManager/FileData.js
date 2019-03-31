@@ -10,7 +10,7 @@ import folder from "../../../../Assets/Icons/folder.png"
 import Kebab from '../../../../Assets/Icons/kebab-hor.png'
 
 import { connect } from "react-redux";
-import { fetchFilesData } from '../../../../Store/Actions/filesActions'
+import {fetchFilesData, selectFile} from '../../../../Store/Actions/filesActions'
 import { toggleMoveModal, toggleRenameModal, toggleDeleteModal, toggleRecoverModal } from '../../../../Store/Actions/modalActions'
 import { Link, withRouter } from "react-router-dom";
 import { Component } from 'react'
@@ -31,7 +31,7 @@ class FilesTable extends Component {
         e.preventDefault()
 
         const { file } = this.props
-        console.log(file)
+        console.log('FILE SELECTED',file)
         if (file.is_directory) {
             this.props.file.is_deleted
                 ? this.props.history.push('/client/' + file.client_id + "/recyclebin/" + file.id)
@@ -39,10 +39,11 @@ class FilesTable extends Component {
         }
         else if(file.is_deleted && !file.is_directory) { 
             this.props.toggleRecoverModal(this.props.file)
-        } else
-        //Download file
+        } else {
+            //Naviagte to file
+            this.props.selectFile(file.id)
             this.props.history.push('/file/' + file.id)
-        
+        }
     }
 
     checkFileType = (type) => {
@@ -84,19 +85,19 @@ class FilesTable extends Component {
             {
                 tekst: 'Endre navn',
                 isHeader: 0,
-                key: 0,
+                key: 1,
                 function: () => { this.props.toggleRenameModal(this.props.file) }
             },
             {
                 tekst: 'Flytt',
                 isHeader: 0,
-                key: 1,
+                key: 2,
                 function: () => { this.props.toggleMoveModal(this.props.file) }
             },
             {
                 tekst: 'Slett',
                 isHeader: 0,
-                key: 2,
+                key: 3,
                 function: () => { this.props.toggleDeleteModal(this.props.file) }
             }
         ]
@@ -154,7 +155,8 @@ const mapDispatchToProps = (dispatch) => {
         toggleMoveModal: (file) => { dispatch(toggleMoveModal(file)) },
         toggleRenameModal: (file) => { dispatch(toggleRenameModal(file)) },
         toggleDeleteModal: (file) => { dispatch(toggleDeleteModal(file)) },
-        toggleRecoverModal: (file) => { dispatch(toggleRecoverModal(file)) }
+        toggleRecoverModal: (file) => { dispatch(toggleRecoverModal(file)) },
+        selectFile:(file_id) => {dispatch(selectFile(file_id))}
     }
 }
 

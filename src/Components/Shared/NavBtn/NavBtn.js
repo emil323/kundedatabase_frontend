@@ -31,7 +31,8 @@ import Home from '../../../Assets/Icons/home.png'
 import DownloadWhite from '../../../Assets/Icons/download-white.png'
 import DownloadBlack from '../../../Assets/Icons/download-black.png'
 import Folder from '../../../Assets/Icons/folder.png'
-import Edit from '../../../Assets/Icons/edit.png'
+import EditWhite from '../../../Assets/Icons/edit-white.png'
+import EditBlack from '../../../Assets/Icons/edit-black.png'
 import Search from '../../../Assets/Icons/search.png'
 import ArrowRightWhite from '../../../Assets/Icons/arrow_right_white.png'
 import ArrowRightBlack from '../../../Assets/Icons/arrow-right-black.png'
@@ -78,7 +79,7 @@ class NavBtn extends Component {
             case 'Upload': return white ? UploadWhite : UploadBlack
             case 'Trash': return white ? TrashWhite : TrashBlack
             case 'Download': return white ? DownloadWhite : DownloadBlack
-            case 'Edit': return Edit
+            case 'Edit': return white? EditWhite : EditBlack
             case 'Search': return Search
             case 'ExpandMore': return white ? ExpandMoreWhite : ExpandMoreBlack
             case 'ExpandLess': return white ? ExpandLessWhite : ExpandLessBlack

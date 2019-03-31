@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Navbar, Nav, NavItem, Collapse, Input, Form } from 'reactstrap'
-import NavBtn from '../NavBtn/NavBtn'
+import NavBtn from '../../Shared/NavBtn/NavBtn'
 import { Link } from 'react-router-dom'
 import { withResizeDetector } from 'react-resize-detector';
 import { Mobile, Desktop } from '../../Helpers/Responsive/Responsive'
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 import { updateSearch } from '../../../Store/Actions/navActions'
-import Breadcrumbs from '../../Navigation/Breadcrumbs/Breadcrumbs'
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
 import './PageNav.css'
 
 class PageNav extends Component {

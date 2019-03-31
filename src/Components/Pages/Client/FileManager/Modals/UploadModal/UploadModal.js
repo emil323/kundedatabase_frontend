@@ -225,7 +225,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchFilesData: (client_id, selected_folder) => {
-      dispatch(fetchFilesData(client_id, selected_folder));
+      dispatch(fetchFilesData(client_id, selected_folder, {is_recyclebin:false}));
     },
     toggleUploadModal: () => {
       dispatch(toggleUploadModal())
