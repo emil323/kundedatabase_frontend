@@ -2,6 +2,7 @@ import React from 'react'
 import { Component } from 'react'
 import TrailUpdater from './TrailUpdater'
 import FileData from './FileData'
+
 import "./FileManager.css"
 import { Container, Row, Col, Spinner, Table, Alert, } from 'reactstrap';
 import { withRouter } from "react-router-dom"
@@ -9,7 +10,7 @@ import { withRouter } from "react-router-dom"
 
 // Import connect, which lets us export data to the reducer
 import { connect } from "react-redux";
-import { fetchFilesData, selectFolder, updateSearch } from '../../../../Store/Actions/filesActions'
+import { fetchFilesData, selectFolder, updateSearch, clearFiles } from '../../../../Store/Actions/filesActions'
 import { toggleNewFolderModal, toggleUploadModal, toggleEditorModal } from '../../../../Store/Actions/modalActions'
 import UploadModal from './Modals/UploadModal/UploadModal';
 import NewFolderModal from './Modals/NewFolderModal/NewFolderModal';
@@ -169,7 +170,7 @@ const mapStateToProps = (state, ownProps) => {
         recyclebin_root,
         selected_folder,
         search,
-        is_searching: search !== '',
+        is_searching: search != '',
         is_loading
     }
 }
@@ -177,8 +178,8 @@ const mapStateToProps = (state, ownProps) => {
 // Create a dispatch which sends information to the reducer. In this case a client is being deleted
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchFilesData: (client_id, selected_folder, options) => {
-            dispatch(fetchFilesData(client_id, selected_folder, options))
+        fetchFilesData: (client_id, selected_folder, is_recyclebin) => {
+            dispatch(fetchFilesData(client_id, selected_folder, is_recyclebin))
         },
         selectFolder: (folder_id) => {
             dispatch(selectFolder(folder_id))

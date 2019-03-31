@@ -12,7 +12,6 @@ import AccessLog from '../Pages/AccessLog/AccessLog'
 import File from '../Pages/File/File'
 import './App.css'
 import Settings from "../Pages/Settings/Settings";
-import Footer from "../Navigation/Footer/Footer"
 import PageNav from '../Navigation/PageNav/PageNav';
 
 
@@ -33,7 +32,6 @@ class App extends Component {
                     <Route exact path="/accesslog" component={AccessLog} />
                     <Route path="/file/:file_id" component={File} />
                     <Route path="/settings" component={Settings} />
-                    <Footer />
                 </div>
             </BrowserRouter>
         )
