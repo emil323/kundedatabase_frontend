@@ -1,9 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 import API from '../../../API/API';
-import {Button} from 'reactstrap'
-import star_filled from '../../../Assets/Icons/star_filled.png'
-import star_border from '../../../Assets/Icons/star_border.png'
 import NavBtn from '../../Shared/NavBtn/NavBtn'
 
 

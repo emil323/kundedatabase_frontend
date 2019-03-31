@@ -10,6 +10,7 @@ export const adalConfig = {
     api: 'https://graph.microsoft.com',
   },
   redirectUri: CALLBACK_URL,
+  postLogoutRedirectUri: CALLBACK_URL,
   cacheLocation: 'localStorage',
   resource: 'https://graph.microsoft.com/'
 }

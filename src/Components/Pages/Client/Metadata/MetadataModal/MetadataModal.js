@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Spinner, Alert,Input, Table} from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Spinner,Input, Table} from "reactstrap";
 
 
 import {toggleMetadataModal} from "../../../../../Store/Actions/modalActions";

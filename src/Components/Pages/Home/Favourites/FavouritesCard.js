@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
-	Card, CardImg, CardBody, CardImgOverlay, CardTitle, CardLink, CardFooter, CardText, CardHeader
-} from 'reactstrap';
+	Card, CardBody, CardTitle, CardFooter } from 'reactstrap';
 import { Link } from "react-router-dom"
 import NavBtn from '../../../Shared/NavBtn/NavBtn'
 

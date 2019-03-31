@@ -5,7 +5,6 @@ import Favorites from './Favourites/Favourites';
 import { setTrail } from '../../../Store/Actions/breadcrumbActions'
 import { connect } from "react-redux";
 import { Container, Row, Col } from 'reactstrap'
-import api from '../../../API/API'
 
 class Home extends React.Component {
     constructor(props) {
