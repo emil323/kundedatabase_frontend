@@ -201,7 +201,6 @@ class PageNav extends Component {
                         <div>
 
                         <Mobile>
-                            <NavItem>
                                 <NavBtn
                                     white={buttons_white}
                                     contextId="search"
@@ -209,7 +208,7 @@ class PageNav extends Component {
                                     action={this.toggleSearch}
                                     img="Search"
                                     descr={this.props.searchPlaceholder}
-                                /></NavItem>
+                                />
                         </Mobile>
 
                         <Desktop>

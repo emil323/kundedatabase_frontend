@@ -1,6 +1,6 @@
 import {ImageViewer, PDFViewer, UnsupportedViewer, WordViewer, TooBigViewer} from "./Drivers";
 
-//define max filesize for preview
+//define max filesize in bytes for preview
 const MAX_SIZE = 25000000
 
 export const getDriver = ({type, size}) => {
@@ -21,14 +21,12 @@ export const getDriver = ({type, size}) => {
             return WordViewer
         default:
             return UnsupportedViewer
-            break
     }
 }
 
 export const isSupported = (metadata) => {
-    const class_name = getDriver(metadata).name
-    console.log(class_name)
-    return class_name !== 'UnsupportedViewer' && class_name !== 'TooBigViewer'
+    const type = getDriver(metadata).prototype
+    return type !== UnsupportedViewer.prototype && type !== TooBigViewer.prototype
 }
 
 //Export
