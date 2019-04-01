@@ -52,6 +52,9 @@ class RenameModal extends React.Component {
         })
     }
 
+    handleFocus = e => {
+        e.target.select()
+    }
 
     render() {
 
@@ -88,7 +91,7 @@ class RenameModal extends React.Component {
                         }
                         <Form id="rename_form" onSubmit={this.create_folder}>
                             <FormGroup>
-                                <Input type="text" name="rename" id="rename" value={this.state.value}
+                                <Input type="text" onFocus={this.handleFocus} name="rename" id="rename" value={this.state.value}
                                        onChange={this.handleChange}></Input>
                             </FormGroup>
                         </Form>

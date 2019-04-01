@@ -119,6 +119,10 @@ class File extends Component {
             hasCollapse:true,
             backTo:'/client/' + this.props.client_id + "/files/" + this.props.selected_folder.id,
             backDescr:"Tilbake til filer",
+            alternativeMobileRightBtn:true,
+            alternativeMobileRightDesc:'Last ned',
+            alternativeMobileRightAction: this.download, 
+            alternativeMobileRightImg:'Download',
             menuBtns:menuList
         })
 

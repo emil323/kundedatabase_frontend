@@ -83,9 +83,20 @@ class PageNav extends Component {
             }
         })
 
+
         const pagenav_style = isDesktop ? 'page-nav-desktop' : 'page-nav-mobile'
 
+        /**
+         * Check if we dont't have anything to render in pagenav, and disable it on mobile and tablet, while still showing breadcrumbs at top
+         */
+        if(!isDesktop && this.props.backIsDisabled && this.props.disableSearch && menuBtns.length === 0) {
+            return <Breadcrumbs/>
+        }
 
+
+        /**
+         * Normal render
+         */
         return (
             <div>
                 {
@@ -122,7 +133,7 @@ class PageNav extends Component {
                     {isMobile ||isTablet ? ( 
                         !this.props.backIsDisabled ? (
                             this.props.backIsLink ? (
-                                <NavItem>
+                                
                                     <Link to={this.props.backTo}>
                                         <NavBtn
                                             white={buttons_white}
@@ -133,7 +144,7 @@ class PageNav extends Component {
                                             descr={this.props.backDescr}
                                         />
                                     </Link>
-                                </NavItem>
+                                
                             ) : (
                                     <NavItem>
                                         <NavBtn
@@ -155,7 +166,7 @@ class PageNav extends Component {
 
                     <Mobile>
                         {this.props.hasCollapse ?
-                            <NavItem>
+                            
                                 <NavBtn
                                     white={buttons_white}
                                     contextId="collapse-toggle"
@@ -163,7 +174,18 @@ class PageNav extends Component {
                                     action={this.toggleMenu}
                                     img={this.state.menuIsOpen ? "ExpandMore" : "ExpandLess"}
                                     descr={!this.state.menuIsOpen ? "Åpne meny" : "Lukk meny"}
-                                /></NavItem> : pageMenu}
+                                /> : pageMenu}
+                        {
+                            /** Alternative mobile button */
+                            this.props.alternativeMobileRightBtn && <NavBtn
+                            white={buttons_white}
+                            contextId="collapse-toggle"
+                            contextClass="pagenav"
+                            action={this.props.alternativeMobileRightAction}
+                            img={this.props.alternativeMobileRightImg}
+                            descr={this.props.alternativeMobileRightDesc}
+                        />
+                        }
                     </Mobile>
 
                     {isTablet ?

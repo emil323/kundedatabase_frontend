@@ -106,7 +106,7 @@ class FilesTable extends Component {
             btnOptions.push({
                 tekst: 'Adgangslogg',
                 isHeader: 0,
-                key: 3,
+                key: 4,
                 function: () => { this.props.history.push('/accesslog/file/' + this.props.file.id) }
             })
         }

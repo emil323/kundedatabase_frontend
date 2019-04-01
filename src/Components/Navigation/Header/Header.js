@@ -48,7 +48,7 @@ export default class Header extends React.Component {
 						</a>
 					</Mobile>
 
-					<NavbarBrand href="/" onClick={this.toggleHamburger} >
+					<NavbarBrand href="/" >
 						<Link to={`/`}>
 							<button className="btn-vector btn-vector-brand"><img className="btn-vector-img btn-brand-img" src="/img/ecit-logo.png" alt="Header image"/></button></Link>
 					</NavbarBrand>
