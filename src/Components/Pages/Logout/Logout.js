@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 
 import { setNav } from '../../../Store/Actions/navActions'
 import {authContext} from '../../../API/Auth/adalConfig'
+import NavBtn from "../../Shared/NavBtn/NavBtn";
+import ContentWrapper from "../../Shared/ContentWrapper/ContentWrapper";
 
 
 class Logout extends React.Component {
@@ -17,18 +19,25 @@ class Logout extends React.Component {
     render() {
 
         return (
-            <div>
-                <Container fluid>
-                    <Col sm="12" xs="12" md="12" lg={{ size: '12' }} xl={{ size: '10', offset: 1 }}>
-                    <p>Logger ut...</p>
-                    </Col>
-                </Container >
-            </div>
+            <ContentWrapper>
+                    <p className="text-center">
+                        <p>
+                            Det kan være en god ide å lukke nettleservinduet etter å ha logget ut.
+                        </p>
+                        <Button onClick={() => authContext.logOut()}>Logg meg ut</Button>
+                    </p>
+
+            </ContentWrapper>
         )
     }
 
     componentDidMount() {
-        authContext.logOut()
+        this.props.setTrail([{
+            title:'Hjem',
+            path:'/'
+        },{
+            title:'Logg ut'
+        }])
     }
 }
 

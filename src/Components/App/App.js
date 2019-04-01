@@ -13,6 +13,7 @@ import File from '../Pages/File/File'
 import './App.css'
 import Settings from "../Pages/Settings/Settings";
 import PageNav from '../Navigation/PageNav/PageNav';
+import Logout from "../Pages/Logout/Logout";
 
 
 
@@ -32,6 +33,7 @@ class App extends Component {
                     <Route exact path="/accesslog" component={AccessLog} />
                     <Route path="/file/:file_id" component={File} />
                     <Route path="/settings" component={Settings} />
+                    <Route path="/logout" component={Logout} />
                 </div>
             </BrowserRouter>
         )
