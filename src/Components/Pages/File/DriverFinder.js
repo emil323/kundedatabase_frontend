@@ -1,12 +1,9 @@
 import {ImageViewer, PDFViewer, UnsupportedViewer, WordViewer, TooBigViewer} from "./Drivers";
+import {MAX_FILE_PREVIEW_SIZE} from "../../../Settings"
 
-//define max filesize in bytes for preview
-const MAX_SIZE = 25000000
 
 export const getDriver = ({type, size}) => {
-    console.log('get_driver', type, size)
-    if (size > MAX_SIZE) return TooBigViewer
-
+    if (size > MAX_FILE_PREVIEW_SIZE) return TooBigViewer
     switch (type) {
         case 'image/jpeg':
         case 'image/png':

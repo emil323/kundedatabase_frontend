@@ -51,8 +51,6 @@ export const fetchFilesDataByFileID = (file_id) => {
         dispatch(setIsLoading(true)) //Toggle is loading
         /*Make API request for file metadata*/
         api.file(file_id).metadata().then(response => {
-            console.log('fileid',file_id)
-
             const {folder_id, client_id} = response.data
             dispatch(fetchFilesData(client_id, folder_id, {selected_file:file_id}))
         })
@@ -77,9 +75,9 @@ export const fetchFilesData = (client_id, selected, options) => {
 
     return (dispatch) => {
         /* Dispatch to clear client and fetch client data */
+        dispatch(setIsLoading(true)) //Toggle is loading
         dispatch(clearClient)
         dispatch(fetchClientData(client_id))
-        dispatch(setIsLoading(true)) //Toggle is loading
 
         //Load from API
         return api.client(client_id).files().then(response => {
@@ -133,7 +131,7 @@ export const fetchFilesData = (client_id, selected, options) => {
                 selected_folder,
                 selected_file,
                 client_id,
-                is_recyclebin: options.is_recyclebin ? true : false,
+                is_recyclebin: options.is_recyclebin,
                 search: ''
             }
             console.log('newState', newState)
