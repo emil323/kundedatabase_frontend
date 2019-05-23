@@ -146,7 +146,7 @@ class PageNav extends Component {
                                     </Link>
                                 
                             ) : (
-                                    <NavItem>
+                                    
                                         <NavBtn
                                             white={buttons_white}
                                             contextId="back"
@@ -157,7 +157,7 @@ class PageNav extends Component {
                                             descr={this.props.backDescr}
                                             isDisabled={this.props.backIsDisabled}
                                         />
-                                    </NavItem>)
+                                    )
                         ) : <NavBtn
                                 isDisabled
                                 img=""
