@@ -17,7 +17,8 @@ const clientsReducer = (state = initState, action) => {
             return {
                 ...state,
                 client_id: action.client_id,
-                client_name: action.name
+                client_name: action.name,
+                metadata_loaded:false //Set metadata loaded to false, because it indicates that we have changed client, and want to reset metadata
             }
         case FETCH_METADATA:
             return {

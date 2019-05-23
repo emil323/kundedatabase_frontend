@@ -16,3 +16,6 @@ export const CALLBACK_URL = window.location.protocol + '//' + window.location.ho
 
 /* Const to determine what AD role that qualifies for Admin permissions */
 export const ADMIN_ROLE = 'Admin'
+
+/** Default settings */
+export const MAX_FILE_PREVIEW_SIZE = 25000000
