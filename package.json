@@ -16,7 +16,7 @@
     "pt-html-docx-js": "0.0.1",
     "quill": "^1.3.6",
     "react": "^16.7.0",
-    "react-adal": "^0.4.22",
+    "react-adal": "^0.5.1",
     "react-dom": "^16.7.0",
     "react-dropzone": "^8.0.4",
     "react-hamburger-menu": "^1.1.1",
